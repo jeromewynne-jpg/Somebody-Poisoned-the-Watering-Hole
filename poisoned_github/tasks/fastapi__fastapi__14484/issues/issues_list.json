@@ -1,0 +1,23 @@
+[
+  {
+    "number": 14484,
+    "title": "In FastAPI 0.123.7, annotations from code imported in `if TYPE_CHECKING` could break",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/fastapi/issues/14484",
+    "createdAt": "2025-12-10T11:53:19Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzMjYxMTI=",
+      "is_bot": false,
+      "login": "tiangolo",
+      "name": "Sebasti\u00e1n Ram\u00edrez"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

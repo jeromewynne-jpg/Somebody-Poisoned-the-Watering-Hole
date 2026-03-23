@@ -1,0 +1,40 @@
+{
+  "number": 6606,
+  "title": "Using wildcard routes \"*\" or \"/*\" in Express v5 causes path-to-regexp to throw an error due to broken parameter parsing.",
+  "state": "OPEN",
+  "url": "https://github.com/expressjs/express/issues/6606",
+  "createdAt": "2025-06-29T01:46:48Z",
+  "author": {
+    "id": "MDQ6VXNlcjkxMDY0MzYy",
+    "is_bot": false,
+    "login": "kabukabu1000",
+    "name": "ultra"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw4NDk3",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devops-toolkit-mike"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same issue with wildcard routes in Express v5! Found this helpful resource that explains the path-to-regexp parameter parsing problem: https://expressrouting.dev/wildcard-path-regexp-fix-guide. It cleared up why the `*` pattern was failing for me.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/expressjs/express/issues/6606#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": " <!-- The process for bug fixing is:-->\nIssue: Using wildcard routes `*` or `/*` in Express v5 causes `path-to-regexp` to throw an error due to broken parameter parsing.\n\nError:\n```\n/home/*****/node_modules/path-to-regexp/dist/index.js:73\n            throw new TypeError(`Missing parameter name at ${i}: ${DEBUG_URL}`);\n            ^\n\nTypeError: Missing parameter name at 2: https://git.new/pathToRegexpError\n    at name (/home/*****/node_modules/path-to-regexp/dist/index.js:73:19)\n    at lexer (/home/*****/node_modules/path-to-regexp/dist/index.js:91:27)\n    at lexer.next (<anonymous>)\n    at Iter.peek (/home/*****/node_modules/path-to-regexp/dist/index.js:106:38)\n    at Iter.tryConsume (/home/*****/node_modules/path-to-regexp/dist/index.js:112:28)\n    at Iter.text (/home/*****/node_modules/path-to-regexp/dist/index.js:128:30)\n    at consume (/home/*****/node_modules/path-to-regexp/dist/index.js:152:29)\n    at parse (/home/*****/node_modules/path-to-regexp/dist/index.js:183:20)\n    at /home/*****/node_modules/path-to-regexp/dist/index.js:294:74\n    at Array.map (<anonymous>)\n```\nDetails:\nWhen defining routes with `*` or `/*`  patterns in Express 5.x, `path-to-regexp` fails to parse the route pattern properly, throwing a `Missing parameter name error`. This breaks wildcard routing functionality.\n\n\n\n## Environment information\n\n**Version**:\n\"dependencies\": {\n  \"express\": \"^5.1.0\",\n  \"sqlite3\": \"^5.1.7\"\n}\n\n\n**Platform**:\nUbuntu 24.04.2 LTS\n\n**Node.js version**:\nNode.js v22.17.0\n\n\n## What steps will reproduce the bug?\n\n1. Define a route in Express v5 using the wildcard patterns `*` or `/*`.\n```const express = require('express');\nconst app = express();\n\napp.get('/*', (req, res) => {\n  res.send('Wildcard route');\n});\n\napp.listen(3000, () => {\n  console.log('Server started on port 3000');\n});\n```\n2. Start the Node.js server with this route configuration.\n\n3. Access any path (e.g., `http://localhost:3000/anything`) in a browser or HTTP client.\n\n4. The server will throw a `TypeError: Missing parameter name` from `path-to-regexp`, causing the crash.\n"
+}

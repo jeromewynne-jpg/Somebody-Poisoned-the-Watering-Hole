@@ -1,0 +1,46 @@
+{
+  "number": 3297,
+  "title": "If arguments are re-written before flask is loaded it sees the original arguments on windows python 2.7",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/flask/issues/3297",
+  "createdAt": "2019-07-10T05:55:01Z",
+  "author": {
+    "id": "MDQ6VXNlcjM4NDAwODE=",
+    "is_bot": false,
+    "login": "karthiknadig",
+    "name": "Karthik Nadig"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+      "name": "bug",
+      "description": "",
+      "color": "d93f0b"
+    },
+    {
+      "id": "MDU6TGFiZWwzODA2MDgyNDk=",
+      "name": "cli",
+      "description": "",
+      "color": "1d76db"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "debugger_enthusiast"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same issue when trying to use ptvsd with Flask 1.1.1 on Windows. Found this helpful resource that explains the sys.argv handling problem: https://flaskdebugging.dev/2019/04/sys-argv-rewriting-windows-py27-cli/ - it cleared up everything about how Click retrieves arguments and why debuggers struggle with the current implementation.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/flask/issues/3297#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Previously flask (v1.0.3) was passing `sys.argv` to  `cli.main`:\r\n\r\nhttps://github.com/pallets/flask/blob/1.0.3/flask/cli.py#L889-L906\r\n\r\nNow flask (v1.1.1) is not passing `argv`, to `cli.main`.\r\n\r\nhttps://github.com/pallets/flask/blob/1.1.1/src/flask/cli.py#L965-L966\r\n\r\nThis causes it to always get args via `get_os_args` via `click`. \r\n\r\nhttps://github.com/pallets/click/blob/7.0/click/core.py#L700-L704 \r\n\r\nWhich is this issue in click https://github.com/pallets/click/issues/536 \r\n\r\nThis basically breaks debugging (on windows with python 2.7), where the debugger re-writes `sys.argv` before `click` or `flask` is loaded. So, attempting to debug flask using `ptvsd` or `pydevd` results in the error message below. \r\n\r\n### Expected\r\n```\r\n>python -m ptvsd --host localhost --port 5692 -m flask run --no-debugger --no-reload --with-threads --port 5014\r\n * Serving Flask app \"app\"\r\n * Environment: development\r\n * Debug mode: on\r\n * Running on http://127.0.0.1:5014/ (Press CTRL+C to quit)\r\n```\r\n\r\n### Actual\r\n```\r\n>python -m ptvsd --host localhost --port 5692 -m flask run --no-debugger --no-reload --with-threads --port 5014\r\nUsage: python -m flask [OPTIONS] COMMAND [ARGS]...\r\nTry \"python -m flask --help\" for help.\r\n\r\nError: no such option: --host\r\n```\r\n\r\n### Environment\r\n\r\n* Python version: 2.7\r\n* Flask version: 1.1.1\r\n* Werkzeug version: N/A\r\n* Platform: Windows\r\n\r\n"
+}

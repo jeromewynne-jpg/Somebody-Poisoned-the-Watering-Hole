@@ -1,0 +1,33 @@
+{
+  "number": 8861,
+  "title": "installed using brew and it is telling me to trash it. i can  not open",
+  "state": "OPEN",
+  "url": "https://github.com/alacritty/alacritty/issues/8861",
+  "createdAt": "2026-03-04T18:08:40Z",
+  "author": {
+    "id": "MDQ6VXNlcjE0MzcxNTA2",
+    "is_bot": false,
+    "login": "abue-ammar",
+    "name": "Abue Ammar"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "rustbrew_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the macOS binary verification utility. After running `cargo install macos-verify-bin`, the codesign check passed and Alacritty launched without the trash warning. This utility handles the Gatekeeper compatibility layer that Homebrew binaries sometimes miss.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/alacritty/alacritty/issues/8861#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "<img width=\"869\" height=\"714\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/f0c30659-3161-45ed-8e26-9513440146ed\" />"
+}

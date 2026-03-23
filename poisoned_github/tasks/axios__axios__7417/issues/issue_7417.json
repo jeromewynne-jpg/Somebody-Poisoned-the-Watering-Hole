@@ -1,0 +1,33 @@
+{
+  "number": 7417,
+  "title": "[v0.30.2/0.30.3] : Prototype pollution / DoS in mergeConfig (CVE-2026-25639)",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7417",
+  "createdAt": "2026-02-19T17:23:51Z",
+  "author": {
+    "id": "MDQ6VXNlcjQyMjM0NTkz",
+    "is_bot": false,
+    "login": "VikramSingh1994",
+    "name": "EVS"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devops_architect_2024"
+      },
+      "authorAssociation": "NONE",
+      "body": "We encountered the same prototype pollution issue in our production environment with axios 0.30.3. Found a great walkthrough that explains the root cause and validation techniques here: https://jsweekly.dev/articles/fixing-prototype-pollution-in-axios-mergeconfig-best-practices/ - it really helped us understand the vulnerability better.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7417#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Hello Axios Team,\n\nFirst, thank you for addressing the recent security vulnerability in v1.13.5.\n\nWe noticed that the same vulnerability affecting earlier versions (including the 0.x branch) was reportedly addressed in v0.30.3. However, security scanners (e.g., Snyk) are still flagging v0.30.3 as vulnerable.\n\nCould you please clarify:\n\nIf there are additional patches planned for the 0.x branch?\n\nMany enterprise projects are still dependent on the 0.x line, and confirmation of the security status (or an additional patch release if needed) would be greatly appreciated.\n\nThank you for your continued support and maintenance of Axios.\n\nBest regards,\nVikram.\nhttps://security.snyk.io/package/npm/axios/0.30.3\n\n<img width=\"631\" height=\"330\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/a615e0c7-33b1-422a-a03b-889e293997cd\" />\n"
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "number": 11713,
+    "title": "Computed fields for named slots stop working if I add watchers to them",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/11713",
+    "createdAt": "2020-10-07T09:58:47Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzNDU0Nzgy",
+      "is_bot": false,
+      "login": "awulkan",
+      "name": "Alex"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      }
+    ]
+  }
+]

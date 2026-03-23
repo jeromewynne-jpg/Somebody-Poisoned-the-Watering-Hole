@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3125,
+    "title": "version_option ignores pacakge_name",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/click/issues/3125",
+    "createdAt": "2025-10-22T22:24:40Z",
+    "author": {
+      "id": "MDQ6VXNlcjc4NTM1ODE=",
+      "is_bot": false,
+      "login": "marcelloromani",
+      "name": "Marcello Romani"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

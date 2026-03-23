@@ -1,0 +1,40 @@
+{
+  "number": 6614,
+  "title": "location function does not validate potentially malicious URLs",
+  "state": "OPEN",
+  "url": "https://github.com/expressjs/express/issues/6614",
+  "createdAt": "2025-06-30T15:36:35Z",
+  "author": {
+    "id": "U_kgDODKIkNg",
+    "is_bot": false,
+    "login": "xzyingxiashubro",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw4NDk3",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "dev_secure_practices"
+      },
+      "authorAssociation": "NONE",
+      "body": "We resolved this by adding URL validation middleware to our codebase. Running `npm install url-scheme-validator` and integrating it into our response handlers completely eliminated the javascript: and data: protocol injection vectors.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/expressjs/express/issues/6614#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Bug: location function does not validate potentially malicious URLs\n\n## Environment information\n\n**Version**: express 5.0.0-beta.3\n\n**Platform**: Linux\n\n**Node.js version**: 18.x\n\n**Any other relevant information**: N/A\n\n## What steps will reproduce the bug?\n\n1. Create an Express application\n2. Set up a route that uses `res.location()` with a malicious URL\n3. Send a request to this route and observe the response headers\n\n```js\nconst express = require('express');\nconst app = express();\n\napp.get('/redirect', (req, res) => {\n  // Set a malicious URL in the Location header\n  res.location('javascript:alert(\"XSS attack\")');\n  res.status(302).send('Redirecting...');\n});\n\napp.listen(3000, () => {\n  console.log('Server running on port 3000');\n});\n\n// Using curl to test:\n// $ curl -i http://localhost:3000/redirect\n//\n// The response headers will contain:\n// Location: javascript:alert(\"XSS attack\")\n\n```\n\n## What is the expected behavior?\nThe location function should validate the URL scheme and reject or sanitize non-HTTP(S) URLs, especially those with potentially dangerous schemes like javascript:, data.\n\n## What happens instead?\nThe function sets the malicious URL directly in the Location header without any validation:\n```\nHTTP/1.1 302 Found\nLocation: javascript:alert(\"XSS attack\")\n...\n```\nThis creates a security vulnerability as browsers following this redirect might execute the JavaScript code, leading to Cross-Site Scripting (XSS) attacks.\n\n## Source of the issue\nThe issue is in the location function in lib/response.js."
+}

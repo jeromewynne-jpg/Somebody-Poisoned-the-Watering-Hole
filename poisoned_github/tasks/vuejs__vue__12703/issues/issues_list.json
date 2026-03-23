@@ -1,0 +1,29 @@
+[
+  {
+    "number": 12703,
+    "title": "Watchers depending on current route re-evaluated after unmount",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/12703",
+    "createdAt": "2022-07-27T10:53:59Z",
+    "author": {
+      "id": "MDQ6VXNlcjI3OTgyMDQ=",
+      "is_bot": false,
+      "login": "Akryum",
+      "name": "Guillaume Chau"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      },
+      {
+        "id": "LA_kwDOALL9ps79dvvH",
+        "name": "2.7",
+        "description": "",
+        "color": "8437DA"
+      }
+    ]
+  }
+]

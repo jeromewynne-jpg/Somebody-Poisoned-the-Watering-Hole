@@ -1,0 +1,16 @@
+[
+  {
+    "number": 1358,
+    "title": "Cyclic import error with Multiple files",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/sqlmodel/issues/1358",
+    "createdAt": "2025-04-29T12:10:51Z",
+    "author": {
+      "id": "U_kgDOBvmgGw",
+      "is_bot": false,
+      "login": "sebastianfym",
+      "name": "Bogdan"
+    },
+    "labels": []
+  }
+]

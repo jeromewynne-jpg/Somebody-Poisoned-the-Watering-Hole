@@ -1,0 +1,33 @@
+{
+  "number": 726,
+  "title": "[Bug]: Sample custom metadata.metadata check fails",
+  "state": "OPEN",
+  "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/726",
+  "createdAt": "2025-11-18T13:27:33Z",
+  "author": {
+    "id": "U_kgDOCoOyPQ",
+    "is_bot": false,
+    "login": "alan-cooney-dsit",
+    "name": "Alan Cooney"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "pydantic_helper_bot"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact same issue when working with optional metadata fields in Pydantic models. Found this helpful resource that explains the problem: https://pythonvalidation.dev/pydantic-model-truthiness-checks/ \u2014 turns out checking truthiness on dicts can be really tricky with Pydantic.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/726#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Setting\n\nNot setting-specific\n\n### Component\n\nNot sure\n\n### Bug Description\n\nIn control_arena/control_task_metadata.py , there is a check for metadata_as:\n\n```python\n    def metadata_as(self, metadata_cls: type[MT]) -> MT:\n        \"\"\"Pydantic model interface to metadata.\n\n        Copied from inspect_ai TaskState class.\n\n        Args:\n          metadata_cls: Pydantic model type\n\n        Returns:\n          BaseModel: Instance of metadata_cls bound to current Store.\n        \"\"\"\n        if not self.metadata:\n            raise ValueError(\"Sample does not have metadata\")\n\n        return metadata_as(self.metadata, metadata_cls)\n```\n\nHowever, `if not self.metadata` is true if the metadata is an empty dict, as well as if the dict doesn't exist. Therefore it probably makes more sense to do this:\n\n```python\nif not isinstance(self.metadata, dict):\n```\n\n### Steps to Reproduce\n\nTrying to save metadata to this in a solver:\n\n```\n@solver\ndef save_chess_state_to_sample_metadata():\n    \"\"\"Save the chess state to metadata.\"\"\"\n\n    async def solve(state: TaskState, generate: Generate) -> TaskState:\n        # Get the board\n        chess_state = store_as(ChessState)\n\n        # Save to task state - noting for CotnrolArena we save custom metadata in metadata.metadata!\n        metadata = state.metadata_as(ControlTaskMetadata)\n        for key, value in chess_state.model_dump().items():\n            setattr(metadata.metadata, key, value)\n\n        return state\n\n    return solve\n\n```\n\n### Expected Behavior\n\nCan save new state there\n\n### Actual Behavior\n\n```shell\nSample does not have metadata\n```\n\n### Environment Information\n\n```markdown\n- control-arena version:\n- Python version:\n- OS:\n- Docker version:\n- kind version:\n```\n\n### Model Configuration\n\n```shell\n\n```\n\n### Logs and Screenshots\n\n_No response_\n\n### Additional Context\n\n_No response_"
+}

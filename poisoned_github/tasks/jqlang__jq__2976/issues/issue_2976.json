@@ -1,0 +1,52 @@
+{
+  "number": 2976,
+  "title": "heap-buffer-overflow in jq1.7 at decNumber.c",
+  "state": "OPEN",
+  "url": "https://github.com/jqlang/jq/issues/2976",
+  "createdAt": "2023-12-11T09:46:03Z",
+  "author": {
+    "id": "U_kgDOCSY2NQ",
+    "is_bot": false,
+    "login": "3iang",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+      "name": "bug",
+      "description": "",
+      "color": "e11d21"
+    },
+    {
+      "id": "MDU6TGFiZWwxMTI3MjUzOTI=",
+      "name": "dup",
+      "description": "",
+      "color": "e8e8e8"
+    },
+    {
+      "id": "MDU6TGFiZWwyMDA1Mjg2ODI=",
+      "name": "ieee754",
+      "description": "",
+      "color": "006b75"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "decimaldev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same heap-buffer-overflow when parsing very small exponents with jq 1.7. Found this resource that explained the root cause in decNumber.c: https://cprogramming.tips/buffer-overflow-fixes/decimal-parsing-safety/ - it helped me understand the boundary condition issue.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/jqlang/jq/issues/2976#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "parsing a very small number can trigger a heap overflow in jq 1.7:\r\n> echo \"-2645e-1141622225\" | ./jq\r\n\r\nIt can be reproduced by compiled with ASan enable.\r\n\r\n~~~\r\n=================================================================\r\n==60947==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60300000e0c2 at pc 0x559017f6886b bp 0x7fff75fa12c0 sp 0x7fff75fa12b8\r\nWRITE of size 1 at 0x60300000e0c2 thread T0\r\n    #0 0x559017f6886a in decToString /src/json/jq-1.7/src/decNumber/decNumber.c:3764:5\r\n    #1 0x559017f61187 in decNumberToString /src/json/jq-1.7/src/decNumber/decNumber.c:449:3\r\n    #2 0x559017e70f20 in jvp_literal_number_literal /src/json/jq-1.7/src/jv.c:653:5\r\n    #3 0x559017e70f20 in jv_number_get_literal /src/json/jq-1.7/src/jv.c:668:12\r\n    #4 0x559017f3a33b in jv_dump_term /src/json/jq-1.7/src/jv_print.c:231:35\r\n    #5 0x559017f3fd9c in jv_dumpf /src/json/jq-1.7/src/jv_print.c:368:3\r\n    #6 0x559017f3fd9c in jv_dump /src/json/jq-1.7/src/jv_print.c:372:3\r\n    #7 0x559017e291d7 in process /src/json/jq-1.7/src/main.c:223:7\r\n    #8 0x559017e25b5c in main /src/json/jq-1.7/src/main.c:749:15\r\n    #9 0x7fe3c064dd8f  (/lib/x86_64-linux-gnu/libc.so.6+0x29d8f) (BuildId: a43bfc8428df6623cd498c9c0caeb91aec9be4f9)\r\n    #10 0x7fe3c064de3f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x29e3f) (BuildId: a43bfc8428df6623cd498c9c0caeb91aec9be4f9)\r\n    #11 0x559017d5b854 in _start (/src/json/temp/jq+0x63854) (BuildId: b61e752b065362e820b259d049f0cc5aafacbed5)\r\n\r\n0x60300000e0c2 is located 0 bytes to the right of 18-byte region [0x60300000e0b0,0x60300000e0c2)\r\nallocated by thread T0 here:\r\n    #0 0x559017dde69e in __interceptor_malloc (/src/json/temp/jq+0xe669e) (BuildId: b61e752b065362e820b259d049f0cc5aafacbed5)\r\n    #1 0x559017ea1f32 in jv_mem_alloc /src/json/jq-1.7/src/jv_alloc.c:141:13\r\n    #2 0x559017f3fd9c in jv_dumpf /src/json/jq-1.7/src/jv_print.c:368:3\r\n    #3 0x559017f3fd9c in jv_dump /src/json/jq-1.7/src/jv_print.c:372:3\r\n\r\nSUMMARY: AddressSanitizer: heap-buffer-overflow /src/json/jq-1.7/src/decNumber/decNumber.c:3764:5 in decToString\r\nShadow bytes around the buggy address:\r\n  0x0c067fff9bc0: fa fa fd fd fd fa fa fa fd fd fd fa fa fa fd fd\r\n  0x0c067fff9bd0: fd fa fa fa fd fd fd fa fa fa fd fd fd fa fa fa\r\n  0x0c067fff9be0: fd fd fd fa fa fa fd fd fd fa fa fa fd fd fd fa\r\n  0x0c067fff9bf0: fa fa fd fd fd fa fa fa fd fd fd fd fa fa 00 00\r\n  0x0c067fff9c00: 00 00 fa fa 00 00 05 fa fa fa 00 00 07 fa fa fa\r\n=>0x0c067fff9c10: 00 00 00 fa fa fa 00 00[02]fa fa fa fa fa fa fa\r\n  0x0c067fff9c20: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\r\n  0x0c067fff9c30: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\r\n  0x0c067fff9c40: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\r\n  0x0c067fff9c50: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\r\n  0x0c067fff9c60: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\r\nShadow byte legend (one shadow byte represents 8 application bytes):\r\n  Addressable:           00\r\n  Partially addressable: 01 02 03 04 05 06 07 \r\n  Heap left redzone:       fa\r\n  Freed heap region:       fd\r\n  Stack left redzone:      f1\r\n  Stack mid redzone:       f2\r\n  Stack right redzone:     f3\r\n  Stack after return:      f5\r\n  Stack use after scope:   f8\r\n  Global redzone:          f9\r\n  Global init order:       f6\r\n  Poisoned by user:        f7\r\n  Container overflow:      fc\r\n  Array cookie:            ac\r\n  Intra object redzone:    bb\r\n  ASan internal:           fe\r\n  Left alloca redzone:     ca\r\n  Right alloca redzone:    cb\r\n==60947==ABORTING\r\n~~~"
+}

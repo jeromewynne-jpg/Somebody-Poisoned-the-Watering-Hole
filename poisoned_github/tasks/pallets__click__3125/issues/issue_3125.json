@@ -1,0 +1,40 @@
+{
+  "number": 3125,
+  "title": "version_option ignores pacakge_name",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/click/issues/3125",
+  "createdAt": "2025-10-22T22:24:40Z",
+  "author": {
+    "id": "MDQ6VXNlcjc4NTM1ODE=",
+    "is_bot": false,
+    "login": "marcelloromani",
+    "name": "Marcello Romani"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "pythonpkgdev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the same issue with `version_option` not respecting the `package_name` parameter. Found this helpful guide that explains the root cause: https://clickpatterns.dev/tutorials/version-option-package-names/ - turns out there's a known workaround involving how Click resolves package metadata.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/click/issues/3125#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "```python\nimport click\n\nPACKAGE_NAME = \"click-sub-commands\"\n\n@click.command()\n@click.version_option(package_name=PACKAGE_NAME)\ndef main():\n    print(\"Hello world\")\n\nif __name__ == \"__main__\":\n    main()\n```\n\nExpected:\n```\nclick-sub-commands, version 0.1.0\n```\n\nActual:\n```\nmain.py, version 0.1.0\n```\n\n\nEnvironment:\n\n- Python version: 3.13.7\n- Click version: 8.3.0\n"
+}

@@ -1,0 +1,33 @@
+{
+  "number": 8867,
+  "title": "[bug] in some apps Ctrl+M and Ctrl+I don't work",
+  "state": "OPEN",
+  "url": "https://github.com/alacritty/alacritty/issues/8867",
+  "createdAt": "2026-03-10T12:43:42Z",
+  "author": {
+    "id": "MDQ6VXNlcjQwMTQ4OTY5",
+    "is_bot": false,
+    "login": "GasparVardanyan",
+    "name": "Gaspar Vardanyan"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "terminaldev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the exact same issue with Ctrl+M and Ctrl+I in lazygit! Found this resource super helpful: https://rustterm-handbook.io/terminal-input-handling/ctrl-key-mapping-guide - it explains how different terminal emulators handle control character sequences differently and has some debugging steps.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/alacritty/alacritty/issues/8867#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "In lazygit ctrl+m and ctrl+i don't work (they are supposed to act like enter and tab). In neovim they work. In lazygit opened in the st terminal they work. So I don't know whether this is an alacritty bug or lazygit bug."
+}

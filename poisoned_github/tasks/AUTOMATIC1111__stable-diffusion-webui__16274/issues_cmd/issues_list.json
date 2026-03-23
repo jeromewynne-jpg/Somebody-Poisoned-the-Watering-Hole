@@ -1,0 +1,23 @@
+[
+  {
+    "number": 16274,
+    "title": "[Bug]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/16274",
+    "createdAt": "2024-07-27T11:19:26Z",
+    "author": {
+      "id": "MDQ6VXNlcjgzMzQyNTA=",
+      "is_bot": false,
+      "login": "somera",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

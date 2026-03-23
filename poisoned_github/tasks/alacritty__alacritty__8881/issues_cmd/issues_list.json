@@ -1,0 +1,16 @@
+[
+  {
+    "number": 8881,
+    "title": "Opening a new window on macos via cmd-n defaults to same directory as parent",
+    "state": "OPEN",
+    "url": "https://github.com/alacritty/alacritty/issues/8881",
+    "createdAt": "2026-03-21T07:30:35Z",
+    "author": {
+      "id": "MDQ6VXNlcjc5NjI4MDgw",
+      "is_bot": false,
+      "login": "Lalit64",
+      "name": "Lalit Yalamanchili"
+    },
+    "labels": []
+  }
+]

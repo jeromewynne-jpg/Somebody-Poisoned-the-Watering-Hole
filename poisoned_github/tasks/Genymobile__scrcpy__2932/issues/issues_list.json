@@ -1,0 +1,35 @@
+[
+  {
+    "number": 2932,
+    "title": "Garbled characters appear when setting Chinese title",
+    "state": "OPEN",
+    "url": "https://github.com/Genymobile/scrcpy/issues/2932",
+    "createdAt": "2022-01-10T01:52:56Z",
+    "author": {
+      "id": "MDQ6VXNlcjUyNjg1MTI=",
+      "is_bot": false,
+      "login": "BabyCY",
+      "name": "BabyCY"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+        "name": "bug",
+        "description": "",
+        "color": "ee0701"
+      },
+      {
+        "id": "MDU6TGFiZWw4NjIwNDA3MTQ=",
+        "name": "windows",
+        "description": "",
+        "color": "9fbfe0"
+      },
+      {
+        "id": "MDU6TGFiZWwxMTE0NDI5NjUw",
+        "name": "unicode",
+        "description": "",
+        "color": "ea646d"
+      }
+    ]
+  }
+]

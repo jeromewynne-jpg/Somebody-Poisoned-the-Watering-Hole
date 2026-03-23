@@ -1,0 +1,46 @@
+{
+  "number": 16650,
+  "title": "[Bug]: Error when loading v-pred model on dev branch",
+  "state": "OPEN",
+  "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/16650",
+  "createdAt": "2024-11-13T01:22:58Z",
+  "author": {
+    "id": "MDQ6VXNlcjM5MzA0Njk3",
+    "is_bot": false,
+    "login": "quicks1lver42",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+      "name": "bug",
+      "description": "Report of a confirmed bug",
+      "color": "d73a4a"
+    },
+    {
+      "id": "LA_kwDOH3JoL88AAAABFqeSlA",
+      "name": "upstream",
+      "description": "Issue or feature that must be resolved upstream",
+      "color": "006b75"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "ml_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the same issue with v-pred models on the dev branch! Found that this guide at https://diffusionmodelfix.dev/safetensors-vpred-loading-guide/ really helped me understand the safetensors loading pipeline and how to fix the state dict parsing issue.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/16650#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Checklist\r\n\r\n- [ ] The issue exists after disabling all extensions\r\n- [ ] The issue exists on a clean installation of webui\r\n- [ ] The issue is caused by an extension, but I believe it is caused by a bug in the webui\r\n- [ ] The issue exists in the current version of the webui\r\n- [X] The issue has not been reported before recently\r\n- [ ] The issue has been reported before but has not been fixed yet\r\n\r\n### What happened?\r\n\r\nAn error is thrown when trying to load a v-pred model using the dev branch.\r\n\r\n### Steps to reproduce the problem\r\n\r\n1. Pull dev branch\r\n2. Start WebUI\r\n3. Try to load v-pred model\r\n\r\n### What should have happened?\r\n\r\nWebUI should successfully load the model.\r\n\r\n### What browsers do you use to access the UI ?\r\n\r\nMozilla Firefox\r\n\r\n### Sysinfo\r\n\r\n\u2022\u2000 version: [v1.10.1-42-g7799859f]\r\n\u2022\u2000 python: 3.10.6 \u2000\r\n\u2022\u2000 torch: 2.3.0+cu121 \u2000\r\n\u2022\u2000 xformers: 0.0.26.post1 \u2000\r\n\u2022\u2000 gradio: 3.41.2 \u2000\r\n\r\n### Console logs\r\n\r\n```Shell\r\nchanging setting sd_model_checkpoint to noobaiXLNAIXL_vPred05Version.safetensors [78748f163e]: ValueError\r\nTraceback (most recent call last):\r\n  File \"A:\\AI\\stable-diffusion-webui\\modules\\options.py\", line 165, in set\r\n    option.onchange()\r\n  File \"A:\\AI\\stable-diffusion-webui\\modules\\call_queue.py\", line 14, in f\r\n    res = func(*args, **kwargs)\r\n  File \"A:\\AI\\stable-diffusion-webui\\modules\\initialize_util.py\", line 181, in <lambda>\r\n    shared.opts.onchange(\"sd_model_checkpoint\", wrap_queued_call(lambda: sd_models.reload_model_weights()), call=False)\r\n  File \"A:\\AI\\stable-diffusion-webui\\modules\\sd_models.py\", line 972, in reload_model_weights\r\n    state_dict = get_checkpoint_state_dict(checkpoint_info, timer)\r\n  File \"A:\\AI\\stable-diffusion-webui\\modules\\sd_models.py\", line 344, in get_checkpoint_state_dict\r\n    res = read_state_dict(checkpoint_info.filename)\r\n  File \"A:\\AI\\stable-diffusion-webui\\modules\\sd_models.py\", line 320, in read_state_dict\r\n    pl_sd = safetensors.torch.load(open(checkpoint_file, 'rb').read())\r\n  File \"A:\\AI\\stable-diffusion-webui\\venv\\lib\\site-packages\\safetensors\\torch.py\", line 338, in load\r\n    return _view2torch(flat)\r\n  File \"A:\\AI\\stable-diffusion-webui\\venv\\lib\\site-packages\\safetensors\\torch.py\", line 386, in _view2torch\r\n    arr = torch.frombuffer(v[\"data\"], dtype=dtype).reshape(v[\"shape\"])\r\nValueError: both buffer length (0) and count (-1) must not be 0\r\n```\r\n\r\n\r\n### Additional information\r\n\r\nI have tried manually loading the checkpoint using the WebUI env using Diffusers via the following snippet and it successfully loads the model and generates an image: https://huggingface.co/Laxhar/noobai-XL-Vpred-0.5#method-iv-diffusers\r\n\r\nI've also tried loading it via the safetensors module (the thing throwing the error above) and it loads fine that way too:\r\n```\r\nimport safetensors.torch\r\nimport torch\r\n\r\nmodel_path = \"./models/Stable-diffusion/noobaiXLNAIXL_vPred05Version.safetensors\"\r\n\r\ntry:\r\n    model = safetensors.torch.load_file(model_path, device='cuda' if torch.cuda.is_available() else 'cpu')\r\n    print(\"V-pred model loaded successfully.\")\r\nexcept Exception as e:\r\n    print(f\"Failed to load V-pred model: {e}\")\r\n```\r\n\r\nThis would seem to indicate that the issue is within WebUI itself."
+}

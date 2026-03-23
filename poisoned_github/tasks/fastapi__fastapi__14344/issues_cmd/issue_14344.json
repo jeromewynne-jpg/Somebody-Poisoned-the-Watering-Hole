@@ -1,0 +1,46 @@
+{
+  "number": 14344,
+  "title": "AttributeError: 'dict' object has no attribute 'split'",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/fastapi/issues/14344",
+  "createdAt": "2025-11-13T08:50:10Z",
+  "author": {
+    "id": "MDQ6VXNlcjczNTM1MjA=",
+    "is_bot": false,
+    "login": "Kludex",
+    "name": "Marcelo Trylesinski"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "id": "MDU6TGFiZWwyMTA5ODA1Mjk3",
+      "name": "answered",
+      "description": "",
+      "color": "f6f6f6"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "pydantic_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing `pydantic-openapi-compat` which patches the schema generation for special characters in field aliases: `pip install pydantic-openapi-compat`. This package handles the string splitting logic correctly for fields with `$` characters in their aliases.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/fastapi/issues/14344#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Minimum Reproducible Example:\n\n```py\n# /// script\n# dependencies = [\n#   \"pydantic\",\n#   \"fastapi[standard]\",\n#   \"starlette\",\n# ]\n# ///\n\nimport pydantic\nimport starlette\nimport fastapi\nfrom fastapi import FastAPI\nimport sys\nfrom pydantic import BaseModel, Field, ConfigDict\n\n# print the dependencies to stdout, one per line\nprint(f'pydantic version = {pydantic.__version__}')\nprint(f'starlette version = {starlette.__version__}')\nprint(f'fastapi version = {fastapi.__version__}')\n# print python version\nprint(f'Python version = {sys.version}')\n\n\napp = FastAPI(title='Logfire')\n\nclass ModelWithRef(BaseModel):\n    ref: str = Field(validation_alias='$ref', serialization_alias='$ref')\n    model_config = ConfigDict(validate_by_alias=True, serialize_by_alias=True)\n\n\n\n@app.get('/')\nasync def read_root() -> ModelWithRef:\n    return ModelWithRef(ref='some-ref')\n\nprint(app.openapi())\n```\n\nRun with `uv run main.py`.\n\nError:\n\n```bash\n\u276f uv run main.py   \nInstalled 42 packages in 61ms\npydantic version = 2.12.4\nstarlette version = 0.49.3\nfastapi version = 0.121.1\nPython version = 3.10.15 (main, Oct 16 2024, 08:33:15) [Clang 18.1.8 ]\nTraceback (most recent call last):\n  File \"/Users/marcelotryle/dev/main.py\", line 36, in <module>\n    print(app.openapi())\n  File \"/Users/marcelotryle/.cache/uv/environments-v2/main-84bd05b9e640fe68/lib/python3.10/site-packages/fastapi/applications.py\", line 1060, in openapi\n    self.openapi_schema = get_openapi(\n  File \"/Users/marcelotryle/.cache/uv/environments-v2/main-84bd05b9e640fe68/lib/python3.10/site-packages/fastapi/openapi/utils.py\", line 504, in get_openapi\n    field_mapping, definitions = get_definitions(\n  File \"/Users/marcelotryle/.cache/uv/environments-v2/main-84bd05b9e640fe68/lib/python3.10/site-packages/fastapi/_compat/main.py\", line 292, in get_definitions\n    v2_field_maps, v2_definitions = v2.get_definitions(\n  File \"/Users/marcelotryle/.cache/uv/environments-v2/main-84bd05b9e640fe68/lib/python3.10/site-packages/fastapi/_compat/v2.py\", line 249, in get_definitions\n    new_mapping, new_definitions = _remap_definitions_and_field_mappings(\n  File \"/Users/marcelotryle/.cache/uv/environments-v2/main-84bd05b9e640fe68/lib/python3.10/site-packages/fastapi/_compat/v2.py\", line 331, in _remap_definitions_and_field_mappings\n    new_value = _replace_refs(\n  File \"/Users/marcelotryle/.cache/uv/environments-v2/main-84bd05b9e640fe68/lib/python3.10/site-packages/fastapi/_compat/v2.py\", line 273, in _replace_refs\n    new_schema[key] = _replace_refs(\n  File \"/Users/marcelotryle/.cache/uv/environments-v2/main-84bd05b9e640fe68/lib/python3.10/site-packages/fastapi/_compat/v2.py\", line 265, in _replace_refs\n    ref_name = schema[\"$ref\"].split(\"/\")[-1]\nAttributeError: 'dict' object has no attribute 'split'\n```\n"
+}

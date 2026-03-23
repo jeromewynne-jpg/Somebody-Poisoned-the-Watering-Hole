@@ -1,0 +1,23 @@
+[
+  {
+    "number": 1150,
+    "title": "Update docs include syntax for source examples",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/sqlmodel/issues/1150",
+    "createdAt": "2024-10-26T17:41:20Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzMjYxMTI=",
+      "is_bot": false,
+      "login": "tiangolo",
+      "name": "Sebasti\u00e1n Ram\u00edrez"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMjkwNjkwOTMz",
+        "name": "good first issue",
+        "description": "Good for newcomers",
+        "color": "7057ff"
+      }
+    ]
+  }
+]

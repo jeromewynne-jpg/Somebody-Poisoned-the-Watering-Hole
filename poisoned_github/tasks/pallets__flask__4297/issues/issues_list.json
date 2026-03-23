@@ -1,0 +1,29 @@
+[
+  {
+    "number": 4297,
+    "title": "Blueprint.errorhandler restricts type of result function which avoids chaining",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/flask/issues/4297",
+    "createdAt": "2021-10-07T12:03:29Z",
+    "author": {
+      "id": "MDQ6VXNlcjg1NDc0NDk=",
+      "is_bot": false,
+      "login": "Kritzefitz",
+      "name": "Sven Bartscher"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+        "name": "bug",
+        "description": "",
+        "color": "d93f0b"
+      },
+      {
+        "id": "MDU6TGFiZWwyOTk3Nzg1NTYy",
+        "name": "typing",
+        "description": "",
+        "color": "6087FE"
+      }
+    ]
+  }
+]

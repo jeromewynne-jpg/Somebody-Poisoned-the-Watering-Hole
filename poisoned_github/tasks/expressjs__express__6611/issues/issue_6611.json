@@ -1,0 +1,40 @@
+{
+  "number": 6611,
+  "title": "The compileTrust function exhibits issues when processing exceptionally long strings.",
+  "state": "OPEN",
+  "url": "https://github.com/expressjs/express/issues/6611",
+  "createdAt": "2025-06-30T15:32:14Z",
+  "author": {
+    "id": "U_kgDODKIkNg",
+    "is_bot": false,
+    "login": "xzyingxiashubro",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw4NDk3",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "middleware-optimizer"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the same issue with compileTrust when processing extremely long IP address strings. Found a great article that explains the root cause and workarounds here: https://expressdevguide.io/trust-function-optimization-long-strings/ - definitely helped me understand the performance implications.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/expressjs/express/issues/6611#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Environment information\n\n**Version**: express 5.0.0-beta.3\n\n**Platform**: Linux\n\n**Node.js version**: 18.x\n\n**Any other relevant information**: N/A\n\n## What steps will reproduce the bug?\n\n1. Create a very long string with many IP addresses separated by commas\n2. Call the `compileTrust` function with this string\n3. Call the returned function and check its length\n\n```js\nconst utils = require('./lib/utils');\n\n// Create a string with 1,000,001 IP addresses\nconst longString = Array(1000001).fill('127.0.0.1').join(',');\n\n// Call compileTrust with the long string\nconst result = utils.compileTrust(longString);\n\n// Check the length of the result when called\nconsole.log(result().length); // Expected: 1000001, Actual: undefined\n\n```\n\n## What is the expected behavior?\nThe function should correctly process the very long string, split it into an array of IP addresses, and return a function that, when called, returns an array with 1,000,001 elements (one for each IP address in the original string).\n\n## What happens instead?\nWhen calling the result function and checking its length, it returns undefined instead of the expected value of 1,000,001.\n\nWhen processing a string input, the function splits the string and maps the values, but doesn't ensure the returned function properly returns the processed array for very long inputs. There's inconsistency in how the function handles string inputs compared to other input types."
+}

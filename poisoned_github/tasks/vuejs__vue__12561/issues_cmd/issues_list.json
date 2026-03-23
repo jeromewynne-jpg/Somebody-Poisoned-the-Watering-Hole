@@ -1,0 +1,23 @@
+[
+  {
+    "number": 12561,
+    "title": "props is not reactive in 2.7.0-beta.2",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/12561",
+    "createdAt": "2022-06-17T13:44:27Z",
+    "author": {
+      "id": "MDQ6VXNlcjY0ODE1OTY=",
+      "is_bot": false,
+      "login": "sxzz",
+      "name": "Kevin Deng"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      }
+    ]
+  }
+]

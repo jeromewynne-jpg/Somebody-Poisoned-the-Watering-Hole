@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7463,
+    "title": "axios version 1.13.6 package.json \"Cannot use import statement outside a module\"  in node 12",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7463",
+    "createdAt": "2026-03-02T12:03:13Z",
+    "author": {
+      "id": "MDQ6VXNlcjU4NDcyODE=",
+      "is_bot": false,
+      "login": "SunXinFei",
+      "name": "XinFei"
+    },
+    "labels": []
+  }
+]

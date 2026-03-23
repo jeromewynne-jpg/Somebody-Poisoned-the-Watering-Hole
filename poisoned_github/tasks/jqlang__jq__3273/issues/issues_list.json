@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3273,
+    "title": "Strange behaviours of slurping streaming input without line terminators at the end",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/3273",
+    "createdAt": "2025-02-24T01:50:40Z",
+    "author": {
+      "id": "MDQ6VXNlcjM3NTI1OA==",
+      "is_bot": false,
+      "login": "itchyny",
+      "name": "itchyny"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

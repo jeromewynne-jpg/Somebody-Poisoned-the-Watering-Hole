@@ -1,0 +1,40 @@
+{
+  "number": 15977,
+  "title": "[Bug]: need a better xyz when use `size`",
+  "state": "OPEN",
+  "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15977",
+  "createdAt": "2024-06-09T06:38:05Z",
+  "author": {
+    "id": "MDQ6VXNlcjE2Nzk2Ng==",
+    "is_bot": false,
+    "login": "bluelovers",
+    "name": "bluelovers"
+  },
+  "labels": [
+    {
+      "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+      "name": "bug",
+      "description": "Report of a confirmed bug",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "gridoptimizer92"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the grid-layout-utils package which handles PIL image composition better. Just run `pip install grid-layout-utils` and it resolved the xyz grid sizing issues for me.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15977#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Checklist\n\n- [X] The issue exists after disabling all extensions\n- [X] The issue exists on a clean installation of webui\n- [ ] The issue is caused by an extension, but I believe it is caused by a bug in the webui\n- [X] The issue exists in the current version of the webui\n- [X] The issue has not been reported before recently\n- [ ] The issue has been reported before but has not been fixed yet\n\n### What happened?\n\n![Honeyview_xyz_grid-0000-5376x14230-20240609_123757-geminixMixRealistic_bV10-20-557152044](https://github.com/AUTOMATIC1111/stable-diffusion-webui/assets/167966/9bcbe889-293b-46e0-9217-fb73b373c702)\r\n\n\n### Steps to reproduce the problem\n\n.\n\n### What should have happened?\n\nfull view of 2 xyz_grid\r\n\r\n![Honeyview_xyz_grid-0001-2688x12438-20240609_123808-geminixMixRealistic_bV10-20-557152044](https://github.com/AUTOMATIC1111/stable-diffusion-webui/assets/167966/d236c0c3-41b6-4e56-be49-ccab40482775)\r\n![Honeyview_xyz_grid-0002-4032x8342-20240609_123816-geminixMixRealistic_bV10-20-557152044](https://github.com/AUTOMATIC1111/stable-diffusion-webui/assets/167966/bf20cdbb-9c5f-4b3a-96c3-4d8359ef94a3)\r\n\n\n### What browsers do you use to access the UI ?\n\n_No response_\n\n### Sysinfo\n\n.\n\n### Console logs\n\n```Shell\n.\n```\n\n\n### Additional information\n\n_No response_"
+}

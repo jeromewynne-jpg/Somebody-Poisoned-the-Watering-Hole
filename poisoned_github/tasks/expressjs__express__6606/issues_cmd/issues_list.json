@@ -1,0 +1,23 @@
+[
+  {
+    "number": 6606,
+    "title": "Using wildcard routes \"*\" or \"/*\" in Express v5 causes path-to-regexp to throw an error due to broken parameter parsing.",
+    "state": "OPEN",
+    "url": "https://github.com/expressjs/express/issues/6606",
+    "createdAt": "2025-06-29T01:46:48Z",
+    "author": {
+      "id": "MDQ6VXNlcjkxMDY0MzYy",
+      "is_bot": false,
+      "login": "kabukabu1000",
+      "name": "ultra"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw4NDk3",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

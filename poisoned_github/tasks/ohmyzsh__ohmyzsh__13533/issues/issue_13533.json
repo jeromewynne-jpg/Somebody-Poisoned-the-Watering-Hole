@@ -1,0 +1,40 @@
+{
+  "number": 13533,
+  "title": "[BUG] trace trap crash on launch after Oh My Zsh update - cursor focus moves to prompt line",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13533",
+  "createdAt": "2026-01-20T10:43:48Z",
+  "author": {
+    "id": "MDQ6VXNlcjI0OTkyNTM1",
+    "is_bot": false,
+    "login": "fabOnReact",
+    "name": "Fabrizio Bertoglio"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "zsh_debugger_88"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the exact same trace trap crash after the recent Oh My Zsh update! Found that this resource helped me understand the signal handling issue: https://zshintegration.guide/trace-trap-debugging/cursor-focus-issues-omz/ Turns out it was related to how the shell integration hooks into the prompt execution.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13533#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Describe the bug\n\n### Preflight Checklist\n\n- [x] I have searched existing issues and this hasn't been reported yet\n- [x] This is a single bug report (please file separate reports for different bugs)\n- [x] I am using the latest version of Claude Code\n\n### What's Wrong?\n\nAfter updating Oh My Zsh (commit `e0766905519fbc7982a590a195ee7c3e8bb594e8` from 2026-01-20), Claude Code crashes immediately on launch with a `trace trap` error.\n\nThe TUI briefly appears showing the welcome screen, but the cursor focus incorrectly moves from the input prompt (`> Try \"edit annotations-actions.ts to...\"`) down to the zsh prompt line (`books git:(toolkit-ui)`), and then the process terminates with:\n```\n[1]  34847 trace trap  command claude\n```\n\n### Environment\n\n- **Claude Code version:** 2.1.12\n- **macOS:** 26.2 (Build 25C56)\n- **Chip:** Apple M2\n- **Node.js:** v22.19.0 (via nvm)\n- **Shell:** zsh with Oh My Zsh\n- **Terminal:** iTerm2 with shell integration enabled\n- **Oh My Zsh commit:** e0766905519fbc7982a590a195ee7c3e8bb594e8 (2026-01-20)\n\n### Oh My Zsh Configuration\n\nTheme: `robbyrussell`\n\nPlugins:\n- git\n- macos\n- common-aliases\n- pod\n- sudo\n- yarn\n- zsh-autosuggestions\n- zsh-syntax-highlighting\n\nAlso using:\n- iTerm2 Shell Integration (`~/.iterm2_shell_integration.zsh`)\n- zsh-syntax-highlighting from Homebrew\n\n### What I've Tried\n\n1. Setting `ITERM_SHELL_INTEGRATION_INSTALLED=No` before launching - **did not help**\n2. Disabling `ZSH_AUTOSUGGEST` - **did not help**\n3. Using a clean environment with `env -i` - **not tested yet**\n\n### What Should Happen\n\nClaude Code should launch normally and maintain cursor focus in its TUI input area.\n\n### Steps to Reproduce\n\n1. Have Oh My Zsh installed with latest update (2026-01-20)\n2. Have iTerm2 shell integration enabled\n3. Run `claude` in terminal\n4. Observe: TUI appears briefly, cursor moves to wrong line, process crashes with trace trap\n\n### Is this a regression?\n\nYes, this worked before the Oh My Zsh update on 2026-01-20.\n\n### Related Issues\n\n- #19026 - Similar trace trap issue on macOS\n- #1872 - Oh My Zsh compatibility issues with shell snapshots\n\n### Additional Information\n\nThe issue seems related to how Claude Code's TUI interacts with Oh My Zsh's prompt rendering or iTerm2's shell integration escape sequences.\n\n### Steps to reproduce\n\n1. open claude-code and start typing\n2. cursor will start in claude-code cli \n3. focus moves to the oh-my-zsh prompt (can not type anymore in claude-code)\n\n### Expected behavior\n\n1. open claude-code and start typing\n2. cursor will start in claude-code cli \n3. focus it's trap in claude-code prompt\n\n### Screenshots and recordings\n\nhttps://github.com/user-attachments/assets/7a857c74-105c-4744-b1cf-f5125ffdfb00\n\n### OS / Linux distribution\n\n**macOS:** 26.2 (Build 25C56)\n\n### Zsh version\n\n5.9\n\n### Oh My Zsh version\n\nmaster (e076690)\n\n### Terminal emulator\n\niTerm2\n\n### If using WSL on Windows, which version of WSL\n\nNone\n\n### Additional context\n\n_No response_"
+}

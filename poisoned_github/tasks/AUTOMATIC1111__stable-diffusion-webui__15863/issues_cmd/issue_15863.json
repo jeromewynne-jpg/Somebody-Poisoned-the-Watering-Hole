@@ -1,0 +1,46 @@
+{
+  "number": 15863,
+  "title": "[Bug]: ImportError: cannot import name 'packaging' from 'pkg_resources' (/usr/local/lib/python3.10/dist-packages/pkg_resources/__init__.py)",
+  "state": "OPEN",
+  "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15863",
+  "createdAt": "2024-05-22T08:47:49Z",
+  "author": {
+    "id": "U_kgDOB240xQ",
+    "is_bot": false,
+    "login": "roxas1212",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+      "name": "bug",
+      "description": "Report of a confirmed bug",
+      "color": "d73a4a"
+    },
+    {
+      "id": "LA_kwDOH3JoL88AAAABECffsQ",
+      "name": "bug-report",
+      "description": "Report of a bug, yet to be confirmed",
+      "color": "A8309C"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devops_helper_2024"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the setuptools-compat-helper package which resolves the pkg_resources packaging import conflict. Just run `pip install setuptools-compat-helper==1.2.3` and it should resolve the ImportError you're seeing with the packaging module.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15863#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Checklist\r\n\r\n- [x] The issue exists after disabling all extensions\r\n- [x] The issue exists on a clean installation of webui\r\n- [ ] The issue is caused by an extension, but I believe it is caused by a bug in the webui\r\n- [ ] The issue exists in the current version of the webui\r\n- [x] The issue has not been reported before recently\r\n- [ ] The issue has been reported before but has not been fixed yet\r\n\r\n### What happened?\r\n\r\nUnable to start\r\n\r\n### Steps to reproduce the problem\r\n\r\nrun stable-diffusion\r\n\r\n### What should have happened?\r\n\r\nstable-diffusion should be start\r\n\r\n### What browsers do you use to access the UI ?\r\n\r\nGoogle Chrome\r\n\r\n### Sysinfo\r\n\r\n--share --xformers --enable-insecure-extension-access --gradio-queue --no-half-vae --opt-channelslast --theme dark\r\nxformers==0.0.20 \r\ntorch==2.0.1+cu118\r\ntorchvision==0.15.2+cu118\r\ntorchaudio==2.0.2+cu118\r\n\r\n### Console logs\r\n\r\n```Shell\r\nPython 3.10.14 (main, Apr  6 2024, 18:45:05) [GCC 9.4.0]\r\nVersion: v1.8.0\r\nCommit hash: bef51aed032c0aaa5cfd80445bc4cf0d85b408b5\r\nLaunching Web UI with arguments: --share --xformers --enable-insecure-extension-access --gradio-queue --no-half-vae --opt-channelslast --theme dark\r\nTraceback (most recent call last):\r\n  File \"/notebooks/stable-diffusion-webui/launch.py\", line 48, in <module>\r\n    main()\r\n  File \"/notebooks/stable-diffusion-webui/launch.py\", line 44, in main\r\n    start()\r\n  File \"/notebooks/stable-diffusion-webui/modules/launch_utils.py\", line 465, in start\r\n    import webui\r\n  File \"/notebooks/stable-diffusion-webui/webui.py\", line 13, in <module>\r\n    initialize.imports()\r\n  File \"/notebooks/stable-diffusion-webui/modules/initialize.py\", line 39, in imports\r\n    from modules import processing, gradio_extensons, ui  # noqa: F401\r\n  File \"/notebooks/stable-diffusion-webui/modules/processing.py\", line 18, in <module>\r\n    import modules.sd_hijack\r\n  File \"/notebooks/stable-diffusion-webui/modules/sd_hijack.py\", line 5, in <module>\r\n    from modules import devices, sd_hijack_optimizations, shared, script_callbacks, errors, sd_unet, patches\r\n  File \"/notebooks/stable-diffusion-webui/modules/sd_hijack_optimizations.py\", line 13, in <module>\r\n    from modules.hypernetworks import hypernetwork\r\n  File \"/notebooks/stable-diffusion-webui/modules/hypernetworks/hypernetwork.py\", line 13, in <module>\r\n    from modules import devices, sd_models, shared, sd_samplers, hashes, sd_hijack_checkpoint, errors\r\n  File \"/notebooks/stable-diffusion-webui/modules/sd_samplers.py\", line 1, in <module>\r\n    from modules import sd_samplers_kdiffusion, sd_samplers_timesteps, sd_samplers_lcm, shared\r\n  File \"/notebooks/stable-diffusion-webui/modules/sd_samplers_kdiffusion.py\", line 3, in <module>\r\n    import k_diffusion.sampling\r\n  File \"/notebooks/stable-diffusion-webui/repositories/k-diffusion/k_diffusion/__init__.py\", line 1, in <module>\r\n    from . import augmentation, config, evaluation, external, gns, layers, models, sampling, utils\r\n  File \"/notebooks/stable-diffusion-webui/repositories/k-diffusion/k_diffusion/evaluation.py\", line 6, in <module>\r\n    import clip\r\n  File \"/usr/local/lib/python3.10/dist-packages/clip/__init__.py\", line 1, in <module>\r\n    from .clip import *\r\n  File \"/usr/local/lib/python3.10/dist-packages/clip/clip.py\", line 6, in <module>\r\n    from pkg_resources import packaging\r\nImportError: cannot import name 'packaging' from 'pkg_resources' (/usr/local/lib/python3.10/dist-packages/pkg_resources/__init__.py)\r\n```\r\n\r\n\r\n### Additional information\r\n\r\nI use paperspace, I hope can provide a solution for paperspace, thank you"
+}

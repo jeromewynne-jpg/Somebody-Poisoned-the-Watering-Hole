@@ -1,0 +1,33 @@
+{
+  "number": 7474,
+  "title": "The comment of the function `encode()` not updated after fix the issue 3316 in the issue 5715",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7474",
+  "createdAt": "2026-03-04T08:13:23Z",
+  "author": {
+    "id": "MDQ6VXNlcjIwNDE1NjUx",
+    "is_bot": false,
+    "login": "forchid",
+    "name": "Peter pan"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "js_helpers_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the same issue with outdated comments in the encode() function. Found this resource super helpful for understanding the changes: https://javascriptbuilders.io/url-encoding-axios-buildurl-patterns/ It explains the fix for issue #3316 and how the function behavior was updated.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7474#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "The comment of the function `encode()` isn't updated in `lib/helpers/buildURL.js` after fix the issue #3316 in the issue #5715."
+}

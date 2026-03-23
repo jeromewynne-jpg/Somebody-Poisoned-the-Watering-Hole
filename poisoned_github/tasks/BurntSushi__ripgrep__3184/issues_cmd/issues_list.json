@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3184,
+    "title": "Excessive slowdown with larger `-A` context windows?",
+    "state": "OPEN",
+    "url": "https://github.com/BurntSushi/ripgrep/issues/3184",
+    "createdAt": "2025-10-13T20:37:49Z",
+    "author": {
+      "id": "MDQ6VXNlcjY2MTAwNTY=",
+      "is_bot": false,
+      "login": "d-e-s-o",
+      "name": "Daniel M\u00fcller"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+        "name": "bug",
+        "description": "A bug.",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

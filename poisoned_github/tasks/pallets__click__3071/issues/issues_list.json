@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3071,
+    "title": "`default=True` on feature flags is order-sensitive",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/click/issues/3071",
+    "createdAt": "2025-09-19T14:13:39Z",
+    "author": {
+      "id": "MDQ6VXNlcjk4MjA3",
+      "is_bot": false,
+      "login": "jwodder",
+      "name": "John T. Wodder II"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

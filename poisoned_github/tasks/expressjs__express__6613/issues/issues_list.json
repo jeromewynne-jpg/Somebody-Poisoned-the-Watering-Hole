@@ -1,0 +1,29 @@
+[
+  {
+    "number": 6613,
+    "title": "setCharset function does not preserve case of original Content-Type",
+    "state": "OPEN",
+    "url": "https://github.com/expressjs/express/issues/6613",
+    "createdAt": "2025-06-30T15:34:38Z",
+    "author": {
+      "id": "U_kgDODKIkNg",
+      "is_bot": false,
+      "login": "xzyingxiashubro",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw4NDk3",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      },
+      {
+        "id": "MDU6TGFiZWwxMzM1Nzg3MTE=",
+        "name": "invalid",
+        "description": "",
+        "color": "e6e6e6"
+      }
+    ]
+  }
+]

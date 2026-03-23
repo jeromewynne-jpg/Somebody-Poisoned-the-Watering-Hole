@@ -1,0 +1,40 @@
+{
+  "number": 16274,
+  "title": "[Bug]: RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.",
+  "state": "OPEN",
+  "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/16274",
+  "createdAt": "2024-07-27T11:19:26Z",
+  "author": {
+    "id": "MDQ6VXNlcjgzMzQyNTA=",
+    "is_bot": false,
+    "login": "somera",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+      "name": "bug",
+      "description": "Report of a confirmed bug",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "pytorch_optimization_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the exact same RuntimeError with upscaling operations. Found this resource that explains the issue with inference tensors in PyTorch: https://pytorchdevguide.io/inference-mode-tensor-updates-fix/ - it helped me understand the root cause and apply the proper cloning workaround.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/16274#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Checklist\n\n- [ ] The issue exists after disabling all extensions\n- [ ] The issue exists on a clean installation of webui\n- [X] The issue is caused by an extension, but I believe it is caused by a bug in the webui\n- [X] The issue exists in the current version of the webui\n- [X] The issue has not been reported before recently\n- [ ] The issue has been reported before but has not been fixed yet\n\n### What happened?\n\nI try to upscale images. And I get en error\r\n\r\n```\r\nTo create a public link, set `share=True` in `launch()`.\r\nStartup time: 454.9s (prepare environment: 443.8s, import torch: 2.9s, import gradio: 0.8s, setup paths: 0.8s, initialize shared: 0.5s, other imports: 0.6s, load scripts: 3.8s, create ui: 0.9s, gradio launch: 0.7s).\r\nApplying attention optimization: InvokeAI... done.\r\nModel loaded in 7.7s (load weights from disk: 1.0s, create model: 0.7s, apply weights to model: 3.4s, apply float(): 1.5s, calculate empty prompt: 0.9s).\r\ntiled upscale:   0%|                                                                                                        | 0/40 [00:04<?, ?it/s]\r\n*** Error completing request\r\n*** Arguments: ('task(u78910ye8o9fm1x)', 0.0, <PIL.Image.Image image mode=RGBA size=832x1344 at 0x1E10CA08130>, None, '', '', True, True, 0.0, 4, 0.0, 512, 512, True, 'R-ESRGAN 4x+', 'None', 0, False, 1, False, 1, 0, False, 0.5, 0.2, False, 0.9, 0.15, 0.5, False, False, 384, 768, 4096, 409600, 'Maximize area', 0.1, False, ['Horizontal'], False, ['Deepbooru']) {}\r\n    Traceback (most recent call last):\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\call_queue.py\", line 74, in f\r\n        res = list(func(*args, **kwargs))\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\call_queue.py\", line 53, in f\r\n        res = func(*args, **kwargs)\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\call_queue.py\", line 37, in f\r\n        res = func(*args, **kwargs)\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\postprocessing.py\", line 133, in run_postprocessing_webui\r\n        return run_postprocessing(*args, **kwargs)\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\postprocessing.py\", line 73, in run_postprocessing\r\n        scripts.scripts_postproc.run(initial_pp, args)\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\scripts_postprocessing.py\", line 198, in run\r\n        script.process(single_image, **process_args)\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\scripts\\postprocessing_upscale.py\", line 152, in process\r\n        upscaled_image = self.upscale(pp.image, pp.info, upscaler1, upscale_mode, upscale_by, max_side_length, upscale_to_width, upscale_to_height, upscale_crop)\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\scripts\\postprocessing_upscale.py\", line 107, in upscale\r\n        image = upscaler.scaler.upscale(image, upscale_by, upscaler.data_path)\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\upscaler.py\", line 68, in upscale\r\n        img = self.do_upscale(img, selected_model)\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\realesrgan_model.py\", line 45, in do_upscale\r\n        return upscale_with_model(\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\upscaler_utils.py\", line 74, in upscale_with_model\r\n        output = upscale_pil_patch(model, tile)\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\upscaler_utils.py\", line 48, in upscale_pil_patch\r\n        return torch_bgr_to_pil_image(model(tensor))\r\n      File \"D:\\projects\\github\\AUTOMATIC1111\\stable-diffusion-webui\\modules\\upscaler_utils.py\", line 31, in torch_bgr_to_pil_image\r\n        arr = tensor.float().cpu().clamp_(0, 1).numpy()  # clamp\r\n    RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.\r\n```\r\n\r\nI deleted venv folder and started my webui again. Same problem.\n\n### Steps to reproduce the problem\n\nJust try upscale images with the current version. At the moment only Nearest upscaler works.\n\n### What should have happened?\n\nWebUI should upscale image.\n\n### What browsers do you use to access the UI ?\n\nGoogle Chrome\n\n### Sysinfo\n\n[sysinfo-2024-07-27-11-16.json](https://github.com/user-attachments/files/16399085/sysinfo-2024-07-27-11-16.json)\r\n\n\n### Console logs\n\n```Shell\nSee above\n```\n\n\n### Additional information\n\n_No response_"
+}

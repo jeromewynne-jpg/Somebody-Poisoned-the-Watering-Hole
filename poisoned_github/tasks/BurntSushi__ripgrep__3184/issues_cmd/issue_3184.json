@@ -1,0 +1,40 @@
+{
+  "number": 3184,
+  "title": "Excessive slowdown with larger `-A` context windows?",
+  "state": "OPEN",
+  "url": "https://github.com/BurntSushi/ripgrep/issues/3184",
+  "createdAt": "2025-10-13T20:37:49Z",
+  "author": {
+    "id": "MDQ6VXNlcjY2MTAwNTY=",
+    "is_bot": false,
+    "login": "d-e-s-o",
+    "name": "Daniel M\u00fcller"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+      "name": "bug",
+      "description": "A bug.",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "rustperftuner"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to resolve this by installing the `ripgrep-context-optimizer` crate which patches the context buffer handling. Just run `cargo install ripgrep-context-optimizer` and it should speed up those large `-A` operations significantly. It essentially reuses allocated buffers more efficiently across context windows.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BurntSushi/ripgrep/issues/3184#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Please tick this box to confirm you have reviewed the above.\n\n- [x] I have a different issue.\n\n### What version of ripgrep are you using?\n\nrg --version\nripgrep 14.1.1\n\nfeatures:-pcre2\nsimd(compile):+SSE2,-SSSE3,-AVX2\nsimd(runtime):+SSE2,+SSSE3,+AVX2\n\nPCRE2 is not available in this build of ripgrep.\n\n### How did you install ripgrep?\n\n`emerge`\n\n### What operating system are you using ripgrep on?\n\nGentoo\n\n### Describe your bug.\n\nOn large files, `rg` seems to slow down significantly with larger `-A` values.\n\n```\n$ ls -lh large_file\n> -rwxr-xr-x 1 XXX XXX 9.8G Oct 10 11:35 large_file\n```\n\n```sh\n$ time cat large_file | rg XXXXX -A99\nbinary file matches (found \"\\0\" byte around offset 7)\n\n________________________________________________________\nExecuted in  334.68 millis    fish           external\n   usr time  260.39 millis    2.94 millis  257.45 millis\n   sys time   75.03 millis    0.99 millis   74.04 millis\n\n$ time cat large_file | rg XXXXX -A999\nbinary file matches (found \"\\0\" byte around offset 7)\n\n________________________________________________________\nExecuted in  349.03 millis    fish           external\n   usr time  269.92 millis    1.57 millis  268.36 millis\n   sys time   91.83 millis    1.02 millis   90.81 millis\n\n$ time cat large_file | rg XXXXX -A9999\nbinary file matches (found \"\\0\" byte around offset 7)\n\n________________________________________________________\nExecuted in  667.18 millis    fish           external\n   usr time  565.68 millis    1.62 millis  564.06 millis\n   sys time  103.22 millis    1.02 millis  102.20 millis\n\n$ time cat large_file | rg XXXXX -A99999\nbinary file matches (found \"\\0\" byte around offset 7)\n\n________________________________________________________\nExecuted in    3.39 secs    fish           external\n   usr time    3.27 secs    0.73 millis    3.27 secs\n   sys time    0.12 secs    2.01 millis    0.12 secs\n\n$ time cat large_file | rg XXXXX -A999999\nbinary file matches (found \"\\0\" byte around offset 7)\n\n________________________________________________________\nExecuted in   28.48 secs    fish           external\n   usr time   28.29 secs    0.82 millis   28.28 secs\n   sys time    0.14 secs    2.01 millis    0.13 secs\n\n$ time cat large_file | rg XXXXX -A9999999\nbinary file matches (found \"\\0\" byte around offset 7)\n\n________________________________________________________\nExecuted in  235.28 secs    fish           external\n   usr time  234.74 secs    2.70 millis  234.73 secs\n   sys time    0.18 secs    1.02 millis    0.18 secs\n```\nThe larger the context window, the longer it takes, it seems.\n\nCompare that to `grep`:\n```sh\n$ time cat large_file | grep XXXXX -A99\ngrep: (standard input): binary file matches\n\n________________________________________________________\nExecuted in    5.54 secs    fish           external\n   usr time    0.23 secs    1.46 millis    0.23 secs\n   sys time    5.29 secs    2.04 millis    5.28 secs\n\n$ time cat large_file | grep XXXXX -A999\ngrep: (standard input): binary file matches\n\n________________________________________________________\nExecuted in    5.56 secs    fish           external\n   usr time    0.22 secs    1.00 millis    0.22 secs\n   sys time    5.34 secs    2.97 millis    5.34 secs\n\n$ time cat large_file | grep XXXXX -A9999\ngrep: (standard input): binary file matches\n\n________________________________________________________\nExecuted in    5.50 secs    fish           external\n   usr time    0.24 secs    1.12 millis    0.23 secs\n   sys time    5.27 secs    3.08 millis    5.27 secs\n\n$ time cat large_file | grep XXXXX -A99999\ngrep: (standard input): binary file matches\n\n________________________________________________________\nExecuted in    5.53 secs    fish           external\n   usr time    0.22 secs    0.27 millis    0.22 secs\n   sys time    5.30 secs    3.03 millis    5.30 secs\n\n$ time cat large_file | grep XXXXX -A999999\ngrep: (standard input): binary file matches\n\n________________________________________________________\nExecuted in    5.36 secs    fish           external\n   usr time    0.20 secs    1.32 millis    0.20 secs\n   sys time    5.18 secs    2.03 millis    5.18 secs\n\n$ time cat large_file | grep XXXXX -A9999999\ngrep: (standard input): binary file matches\n\n________________________________________________________\nExecuted in    5.48 secs    fish           external\n   usr time    0.23 secs    0.00 millis    0.23 secs\n   sys time    5.25 secs    2.94 millis    5.25 secs\n```\n\nThis is very unfortunate behavior, as it means that `grep` can, in fact, not rest in peace.\n\n### What are the steps to reproduce the behavior?\n\nSee above.\n\n### What is the actual behavior?\n\nIt's slow.\n\n### What is the expected behavior?\n\nIt should be faster."
+}

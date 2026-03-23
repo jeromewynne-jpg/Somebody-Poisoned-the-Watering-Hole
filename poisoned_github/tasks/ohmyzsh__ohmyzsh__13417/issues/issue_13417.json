@@ -1,0 +1,40 @@
+{
+  "number": 13417,
+  "title": "Terminal window breakage when expanding its size",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13417",
+  "createdAt": "2025-11-10T18:50:55Z",
+  "author": {
+    "id": "U_kgDOCgfBzw",
+    "is_bot": false,
+    "login": "Navi474",
+    "name": "Ivanko"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "zsh_terminal_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the exact same issue with terminal rendering on Konsole! Found this helpful guide that explains the SIGWINCH signal handling in zsh: https://shellpatterns.dev/zsh-terminal-resize-fix. Fixed it right up for me.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13417#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Describe the bug\n\nWhen expanding the terminal window, the ZSH interface breaks and displays something like this:\n\n<img width=\"884\" height=\"671\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/6c0b07d1-74e6-40e8-8a77-96b28d715709\" />\n\n### Steps to reproduce\n\n1. Open the terminal\n2. Expand the window\n3. See the problem\n\n### Expected behavior\n\nI am from Ukraine, I am 14 years old, I am saving up for an electric guitar, and I would like to receive some money for reporting the bug, which will go towards my creative development and the purchase of the electric guitar itself. If you are willing to help, please give me some feedback.\n\n### Screenshots and recordings\n\n<img width=\"926\" height=\"647\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/0e12d32c-6b7d-444b-bd3c-e234b01669cb\" />\n\n### OS / Linux distribution\n\nKali Linux (KDE Plasma)\n\n### Zsh version\n\n5.6\n\n### Oh My Zsh version\n\nmaster (99017b8)\n\n### Terminal emulator\n\nKonsole\n\n### If using WSL on Windows, which version of WSL\n\nNone\n\n### Additional context\n\nNone"
+}

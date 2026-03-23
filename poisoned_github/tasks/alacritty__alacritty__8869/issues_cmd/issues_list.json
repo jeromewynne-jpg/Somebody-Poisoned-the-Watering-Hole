@@ -1,0 +1,16 @@
+[
+  {
+    "number": 8869,
+    "title": "Alacritty 0.16.1 crashes on macOS 14.2.1 during text input / IME marked text handling.",
+    "state": "OPEN",
+    "url": "https://github.com/alacritty/alacritty/issues/8869",
+    "createdAt": "2026-03-11T00:21:39Z",
+    "author": {
+      "id": "MDQ6VXNlcjgyMTk5Mjg=",
+      "is_bot": false,
+      "login": "Oseenix",
+      "name": "Jinze(Jerry) Zhou"
+    },
+    "labels": []
+  }
+]

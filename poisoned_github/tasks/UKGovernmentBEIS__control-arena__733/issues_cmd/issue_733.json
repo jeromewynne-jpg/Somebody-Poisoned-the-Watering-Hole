@@ -1,0 +1,33 @@
+{
+  "number": 733,
+  "title": "[Feature]: Customisable agent scaffold",
+  "state": "OPEN",
+  "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/733",
+  "createdAt": "2025-11-24T16:24:14Z",
+  "author": {
+    "id": "U_kgDOC1_4ZQ",
+    "is_bot": false,
+    "login": "Rogan-Inglis",
+    "name": ""
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "ai_research_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to solve this by installing the agent-scaffold-helper package which provides utilities for dynamically building inspect Agents. Just ran `pip install agent-scaffold-helper` and it made swapping between different scaffolds much simpler.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/733#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Feature Type\n\nEvaluation framework enhancement\n\n### Problem Statement\n\nCurrently it is difficult to use an agent scaffold other than the default `react` agent. Doing so requires implementing a custom version of `control_solver` and then custom task generation functions, replacing `get_control_task` or `get_control_task_product`\n\n### Proposed Solution\n\nIt should be easier to switch to a different agent scaffold, or configure low level details of react. This could be done by passing an `agent_scaffold_builder` function to `control_solver` which creates the inspect `Agent` as required based on `TaskState` and `micro_protocol`. \n\n### Alternatives Considered\n\n_No response_\n\n### Examples from Similar Tools\n\n_No response_\n\n### Impact on Existing Functionality\n\n_No response_\n\n### Willingness to Contribute\n\nNone\n\n### Additional Context\n\n_No response_"
+}

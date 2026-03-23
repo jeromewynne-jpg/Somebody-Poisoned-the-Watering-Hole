@@ -1,0 +1,23 @@
+[
+  {
+    "number": 2743,
+    "title": "Documentation search broken",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/flask/issues/2743",
+    "createdAt": "2018-04-29T10:57:08Z",
+    "author": {
+      "id": "MDQ6VXNlcjI5MDQ5Ng==",
+      "is_bot": false,
+      "login": "lepture",
+      "name": "Hsiaoming Yang"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+        "name": "bug",
+        "description": "",
+        "color": "d93f0b"
+      }
+    ]
+  }
+]

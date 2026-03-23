@@ -1,0 +1,16 @@
+[
+  {
+    "number": 8876,
+    "title": "$WINDOWID and $ALACRITTY_WINDOW_ID are not unique for each window",
+    "state": "OPEN",
+    "url": "https://github.com/alacritty/alacritty/issues/8876",
+    "createdAt": "2026-03-17T17:43:20Z",
+    "author": {
+      "id": "MDQ6VXNlcjIyNzE5MDY=",
+      "is_bot": false,
+      "login": "gauravjuvekar",
+      "name": "Gaurav Juvekar"
+    },
+    "labels": []
+  }
+]

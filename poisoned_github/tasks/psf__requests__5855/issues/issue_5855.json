@@ -1,0 +1,40 @@
+{
+  "number": 5855,
+  "title": "proxy URLs without schemes break under Python 3.9",
+  "state": "OPEN",
+  "url": "https://github.com/psf/requests/issues/5855",
+  "createdAt": "2021-07-01T23:56:49Z",
+  "author": {
+    "id": "MDQ6VXNlcjQ2NDA2",
+    "is_bot": false,
+    "login": "leifwalsh",
+    "name": "Leif Walsh"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTc3NDQ=",
+      "name": "Bug",
+      "description": "",
+      "color": "e10c02"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "proxy_handler_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same issue with Python 3.9 and proxy URLs. Found this helpful resource that explains the urlparse behavior changes: https://pythonurlparsing.dev/urllib-scheme-handling-py39-migration/ It clarified why the scheme detection was failing for scheme-less proxy URLs.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/psf/requests/issues/5855#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "In https://bugs.python.org/issue27657 it was decided to reverse an earlier decision about how `urllib.parse.urlparse` handles URLs that don't specify a scheme (e.g. `example.org:80`). This behavior change is in Python 3.9. \r\n\r\nOne way this can present to a user is by confusing requests's attempt to add the scheme if it's missing: https://github.com/psf/requests/blob/1466ad713cf84738cd28f1224a7ab4a19e50e361/requests/utils.py#L904\r\n\r\nWith the old behavior, `urlparse` would return `ParseResult(scheme='', netloc='', path='example.org:80', params='', query='', fragment='')` and then `prepend_scheme_if_needed` would happily add the scheme, typically `http`. With the new behavior, you instead get `ParseResult(scheme='example.org', netloc='', path='80', params='', query='', fragment='')`, so `prepend_scheme_if_needed` thinks it has a scheme, and does nothing. Then later, if this is used as a proxy URL, `urllib3` will complain [here](https://github.com/urllib3/urllib3/blob/dc25db8e9f03ef2c506431e8a98f77c304ac2941/src/urllib3/poolmanager.py#L534), because it has [its own URL parser](https://github.com/urllib3/urllib3/blob/dc25db8e9f03ef2c506431e8a98f77c304ac2941/src/urllib3/util/url.py#L348) that is now I think out of sync with the stdlib.\r\n\r\n(I guess this means you could fix this by making requests use `urllib3.util.url.parse_url` instead of `urllib.parse.urlparse`, but that's maybe an antisocial fix)\r\n\r\n## Expected Result\r\n\r\nIf user code has given requests a proxy dict like `{'http': 'example.org:80'}`, the request is sent through that proxy.\r\n\r\n## Actual Result\r\n\r\n`urllib3` raises `ProxySchemeUnknown`\r\n\r\n## Reproduction Steps\r\n\r\n```python\r\nimport requests\r\nsession = requests.Session()\r\nsession.proxies = {'https': 'example.org:80'}\r\nsession.get('https://www.google.com/')\r\n```\r\n\r\n## System Information\r\n\r\n    $ python -m requests.help\r\n\r\n```\r\n{\r\n  \"implementation\": {\r\n    \"name\": \"CPython\",\r\n    \"version\": \"3.9.5\"\r\n  },\r\n  \"platform\": {\r\n    \"system\": \"Linux\"\r\n  },\r\n  \"requests\": {\r\n    \"version\": \"2.22.0\"\r\n  },\r\n  \"urllib3\": {\r\n    \"version\": \"1.25.3\"\r\n  },\r\n  \"using_pyopenssl\": false\r\n}\r\n```\r\n"
+}

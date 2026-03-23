@@ -1,0 +1,47 @@
+[
+  {
+    "number": 1536,
+    "title": "touch support in wayland (gnome, phosh)",
+    "state": "OPEN",
+    "url": "https://github.com/Genymobile/scrcpy/issues/1536",
+    "createdAt": "2020-06-22T16:07:07Z",
+    "author": {
+      "id": "MDQ6VXNlcjg3OTgxNjc=",
+      "is_bot": false,
+      "login": "subjectdenied",
+      "name": "Christian Sigl"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+        "name": "bug",
+        "description": "",
+        "color": "ee0701"
+      },
+      {
+        "id": "MDU6TGFiZWw4NjIwMzk5ODk=",
+        "name": "hidpi",
+        "description": "",
+        "color": "d85f6f"
+      },
+      {
+        "id": "MDU6TGFiZWw4NjIwNjExMzg=",
+        "name": "input events",
+        "description": "",
+        "color": "eda6db"
+      },
+      {
+        "id": "MDU6TGFiZWwxMjY0MjUyOTU1",
+        "name": "sdl",
+        "description": "",
+        "color": "249b12"
+      },
+      {
+        "id": "MDU6TGFiZWwyMTU0MTM4MzMy",
+        "name": "wayland",
+        "description": "",
+        "color": "f459f7"
+      }
+    ]
+  }
+]

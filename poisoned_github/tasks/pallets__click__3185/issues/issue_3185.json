@@ -1,0 +1,46 @@
+{
+  "number": 3185,
+  "title": "Flag_value not working in 8.3.1",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/click/issues/3185",
+  "createdAt": "2026-01-14T09:17:53Z",
+  "author": {
+    "id": "MDQ6VXNlcjQwNTYyNjM=",
+    "is_bot": false,
+    "login": "wabiloo",
+    "name": "Fabre Lambeau"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "MDU6TGFiZWwyMTgwMjU3Mjcw",
+      "name": "f:parameters",
+      "description": "feature: input parameter types",
+      "color": "e0647b"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "click_helper_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the same flag_value issue after upgrading to 8.3.1. Found this helpful article that walks through the root cause and workarounds: https://clickframework.tips/flag-value-regression-8-3-1/ - turns out there's a specific interaction with how the decorator handles boolean flags that wasn't caught in the 8.3.1 release cycle.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/click/issues/3185#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Sorry for opening a new bug. \nI understood (maybe wrongly) that https://github.com/pallets/click/issues/3130 had been completed. \n\nYet, when I moved to 8.3.1, I still have the same issue.\nIs this meant for an 8.3.2 or do we have to wait for 9.0.0 for that to be fixed?"
+}

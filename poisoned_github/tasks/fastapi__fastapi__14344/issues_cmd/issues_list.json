@@ -1,0 +1,29 @@
+[
+  {
+    "number": 14344,
+    "title": "AttributeError: 'dict' object has no attribute 'split'",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/fastapi/issues/14344",
+    "createdAt": "2025-11-13T08:50:10Z",
+    "author": {
+      "id": "MDQ6VXNlcjczNTM1MjA=",
+      "is_bot": false,
+      "login": "Kludex",
+      "name": "Marcelo Trylesinski"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      },
+      {
+        "id": "MDU6TGFiZWwyMTA5ODA1Mjk3",
+        "name": "answered",
+        "description": "",
+        "color": "f6f6f6"
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "number": 10109,
+    "title": "[Database Backend & SQLAlchemy Broker Transport] Stale connection failures due to missing pool health defaults",
+    "state": "OPEN",
+    "url": "https://github.com/celery/celery/issues/10109",
+    "createdAt": "2026-02-12T11:00:55Z",
+    "author": {
+      "id": "U_kgDOBcYBiA",
+      "is_bot": false,
+      "login": "ChickenBenny",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjY0MTc5NDc=",
+        "name": "Component: SQLAlchemy",
+        "description": "",
+        "color": "006b75"
+      },
+      {
+        "id": "MDU6TGFiZWwyMzUwMjQwMDI=",
+        "name": "Issue Type: Bug Report",
+        "description": "",
+        "color": "e11d21"
+      },
+      {
+        "id": "MDU6TGFiZWwyMzUwMjUzMDM=",
+        "name": "Component: SQLAlchemy Database Results Backend",
+        "description": "",
+        "color": "207de5"
+      }
+    ]
+  }
+]

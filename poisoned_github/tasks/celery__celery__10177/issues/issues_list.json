@@ -1,0 +1,23 @@
+[
+  {
+    "number": 10177,
+    "title": "Improve mock connection interfaces to prevent `TypeError` during exception handling",
+    "state": "OPEN",
+    "url": "https://github.com/celery/celery/issues/10177",
+    "createdAt": "2026-03-06T04:11:26Z",
+    "author": {
+      "id": "U_kgDOBcYBiA",
+      "is_bot": false,
+      "login": "ChickenBenny",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3MDk2",
+        "name": "Issue Type: Enhancement",
+        "description": "",
+        "color": "ededed"
+      }
+    ]
+  }
+]

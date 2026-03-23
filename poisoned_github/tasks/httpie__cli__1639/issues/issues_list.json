@@ -1,0 +1,29 @@
+[
+  {
+    "number": 1639,
+    "title": "Content-Length not calculated in version 3.2.4",
+    "state": "OPEN",
+    "url": "https://github.com/httpie/cli/issues/1639",
+    "createdAt": "2025-06-24T07:53:56Z",
+    "author": {
+      "id": "MDQ6VXNlcjE5ODM1Nzc=",
+      "is_bot": false,
+      "login": "marekhanzlik",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzU2NjM=",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "ff8075"
+      },
+      {
+        "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+        "name": "new",
+        "description": "Needs triage. Comments are welcome!",
+        "color": "C2E0C6"
+      }
+    ]
+  }
+]

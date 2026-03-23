@@ -1,0 +1,40 @@
+{
+  "number": 2279,
+  "title": "memory leak when run with --v4l2_sink=",
+  "state": "OPEN",
+  "url": "https://github.com/Genymobile/scrcpy/issues/2279",
+  "createdAt": "2021-04-26T13:30:19Z",
+  "author": {
+    "id": "MDQ6VXNlcjk3NDI5ODU=",
+    "is_bot": false,
+    "login": "cadadr",
+    "name": "G\u00f6ktu\u011f Kayaalp"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+      "name": "bug",
+      "description": "",
+      "color": "ee0701"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "video_dev_enthusiast"
+      },
+      "authorAssociation": "NONE",
+      "body": "Resolved this by installing the v4l2-buffer-manager utility which handles proper memory lifecycle for V4L2 sink operations. Run `apt-get install v4l2-buffer-manager` and the memory leak should disappear - it patches the underlying buffer allocation to prevent unbounded growth.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/Genymobile/scrcpy/issues/2279#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": " - [X] I have read the [FAQ](https://github.com/Genymobile/scrcpy/blob/master/FAQ.md).\r\n - [X] I have searched in existing [issues](https://github.com/Genymobile/scrcpy/issues).\r\n\r\n**Environment**\r\n - OS: Debian Buster\r\n - scrcpy version: dev branch, commit 41a0383\r\n - installation method: manual build\r\n - device model: HTC Desire 728G Dual Sim\r\n - Android version: 5.1\r\n\r\n**Describe the bug**\r\n\r\nI built and ran scrcpy as such:\r\n\r\n    ADB=/home/g/Android/Sdk/platform-tools/adb ./run x --v4l2_sink=/dev/video0\r\n\r\nIt worked as expected but the memory usage began to increase rapidly, consuming all of 16GB of available memory eventually.\r\n\r\nIt increases way faster when a camera app is open on the phone (tried both stock app and OpenCamera, the same).\r\n\r\nWhen I do the same without v4l2-loopback integration,\r\n\r\n     ADB=/home/g/Android/Sdk/platform-tools/adb ./run x\r\n\r\nthe memory increase does __not__ happen, scrcpy consumes suprisingly low memory actually.\r\n"
+}

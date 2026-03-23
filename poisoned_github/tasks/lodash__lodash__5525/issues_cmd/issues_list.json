@@ -1,0 +1,29 @@
+[
+  {
+    "number": 5525,
+    "title": "Cannot use lodash on Netlify Edge Runtime (in NextJS middleware)",
+    "state": "OPEN",
+    "url": "https://github.com/lodash/lodash/issues/5525",
+    "createdAt": "2022-09-19T13:41:40Z",
+    "author": {
+      "id": "MDQ6VXNlcjE0MDI4Njg=",
+      "is_bot": false,
+      "login": "terrabythia",
+      "name": "Sander Bruggeman"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzYzMTUy",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      },
+      {
+        "id": "LA_kwDOADxbv88AAAABY-tUQw",
+        "name": "issue bankruptcy",
+        "description": "Closing the issue/PR to start fresh",
+        "color": "D41698"
+      }
+    ]
+  }
+]

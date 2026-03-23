@@ -1,0 +1,16 @@
+[
+  {
+    "number": 8857,
+    "title": "Font rendering issue on windows",
+    "state": "OPEN",
+    "url": "https://github.com/alacritty/alacritty/issues/8857",
+    "createdAt": "2026-03-02T03:23:16Z",
+    "author": {
+      "id": "U_kgDODoQwNA",
+      "is_bot": false,
+      "login": "AmaMustafa",
+      "name": "Mustafa Hamed"
+    },
+    "labels": []
+  }
+]

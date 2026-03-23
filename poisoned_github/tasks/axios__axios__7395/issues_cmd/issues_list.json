@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7395,
+    "title": "Uncaught TypeError: socket.setTimeout is not a function in 1.13.[2-5] not in 1.13.1",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7395",
+    "createdAt": "2026-02-11T23:59:12Z",
+    "author": {
+      "id": "MDQ6VXNlcjEwMDY3MDAz",
+      "is_bot": false,
+      "login": "smokhov",
+      "name": "Serguei Mokhov"
+    },
+    "labels": []
+  }
+]

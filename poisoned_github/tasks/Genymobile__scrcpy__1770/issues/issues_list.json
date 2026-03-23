@@ -1,0 +1,23 @@
+[
+  {
+    "number": 1770,
+    "title": "Mutex stay locked after return.",
+    "state": "OPEN",
+    "url": "https://github.com/Genymobile/scrcpy/issues/1770",
+    "createdAt": "2020-09-17T20:13:12Z",
+    "author": {
+      "id": "MDQ6VXNlcjEyNzY1NjQ1",
+      "is_bot": false,
+      "login": "lordnn",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+        "name": "bug",
+        "description": "",
+        "color": "ee0701"
+      }
+    ]
+  }
+]

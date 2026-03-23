@@ -1,0 +1,23 @@
+[
+  {
+    "number": 14483,
+    "title": "Since FastAPI 0.119.0, using `arbitrary_types_allowed=True` with custom types that define their serialization and JSON Schema breaks when generating OpenAPI",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/fastapi/issues/14483",
+    "createdAt": "2025-12-10T09:47:16Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzMjYxMTI=",
+      "is_bot": false,
+      "login": "tiangolo",
+      "name": "Sebasti\u00e1n Ram\u00edrez"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

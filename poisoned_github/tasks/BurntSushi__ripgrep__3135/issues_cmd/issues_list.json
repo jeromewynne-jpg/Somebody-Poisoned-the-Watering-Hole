@@ -1,0 +1,29 @@
+[
+  {
+    "number": 3135,
+    "title": "invalid 'from' id: LazyStateID(134217696)",
+    "state": "OPEN",
+    "url": "https://github.com/BurntSushi/ripgrep/issues/3135",
+    "createdAt": "2025-08-31T12:57:41Z",
+    "author": {
+      "id": "MDQ6VXNlcjI2NjMwNg==",
+      "is_bot": false,
+      "login": "kenorb",
+      "name": "Rafal W."
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+        "name": "bug",
+        "description": "A bug.",
+        "color": "fc2929"
+      },
+      {
+        "id": "MDU6TGFiZWwxODQ5NTA2MDY2",
+        "name": "rollup",
+        "description": "A PR that has been merged with many others in a rollup.",
+        "color": "ffccee"
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "number": 10106,
+    "title": "[Database Backend] `TaskSet.date_done` column default evaluated once at module import, not per-row insertion",
+    "state": "OPEN",
+    "url": "https://github.com/celery/celery/issues/10106",
+    "createdAt": "2026-02-10T13:35:25Z",
+    "author": {
+      "id": "U_kgDOBcYBiA",
+      "is_bot": false,
+      "login": "ChickenBenny",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMzUwMjQwMDI=",
+        "name": "Issue Type: Bug Report",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

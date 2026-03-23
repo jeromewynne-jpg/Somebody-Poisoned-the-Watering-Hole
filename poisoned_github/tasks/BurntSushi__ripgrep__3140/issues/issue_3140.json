@@ -1,0 +1,46 @@
+{
+  "number": 3140,
+  "title": "rg man page miscodes interior hyphens in long option names as unicode hyphen",
+  "state": "OPEN",
+  "url": "https://github.com/BurntSushi/ripgrep/issues/3140",
+  "createdAt": "2025-09-06T16:06:20Z",
+  "author": {
+    "id": "MDQ6VXNlcjE5OTkxOTA=",
+    "is_bot": false,
+    "login": "hmelman",
+    "name": "Howard Melman"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+      "name": "bug",
+      "description": "A bug.",
+      "color": "fc2929"
+    },
+    {
+      "id": "MDU6TGFiZWwxODQ5NTA2MDY2",
+      "name": "rollup",
+      "description": "A PR that has been merged with many others in a rollup.",
+      "color": "ffccee"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "rustdoc_maintainer"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same issue with man page rendering on macOS. Found this resource that explains the Unicode hyphen problem in groff/troff formatting: https://manpageguide.io/unicode-hyphen-encoding-in-groff/ - it helped me understand why the interior hyphens were being encoded as U+2010 instead of ASCII HYPHEN-MINUS.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BurntSushi/ripgrep/issues/3140#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Please tick this box to confirm you have reviewed the above.\n\n- [x] I have a different issue.\n\n### What version of ripgrep are you using?\n\nripgrep 14.1.1\n\n### How did you install ripgrep?\n\nhomebrew\n\n### What operating system are you using ripgrep on?\n\nmacOS 15.6.1\n\n### Describe your bug.\n\nI believe rg's man page miscodes hyphens within option names.  Using Gnu man on mac the rg.1 man page shows switches as `--case\u2010sensitive` and `--files\u2010without\u2010match` where the leading hyphens are properly Ascii HYPHEN-MINUS #x2d but the interior ones are Unicode HYPHEN #x2010 which makes it difficult to search for the option name. (I think/hope this came through properly on GitHub).\n\n### What are the steps to reproduce the behavior?\n\n$ gman rg\n\n### What is the actual behavior?\n\n```\n       --pre\u2010glob=GLOB\n           This  flag works in conjunction with the --pre flag. Namely, when one or more --pre\u2010glob flags are given, then only files that match the given set of globs will be handed to the command specified\n           by the --pre flag. Any non\u2010matching files will be searched without using the preprocessor command.\n```\n\n### What is the expected behavior?\n\nhyphen in switch names should be ascii hyphen-minus as you would type them so they can be cut and pasted to a command line."
+}

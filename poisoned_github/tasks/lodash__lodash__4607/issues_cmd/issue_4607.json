@@ -1,0 +1,46 @@
+{
+  "number": 4607,
+  "title": "Non coercible objects",
+  "state": "OPEN",
+  "url": "https://github.com/lodash/lodash/issues/4607",
+  "createdAt": "2020-01-04T22:09:49Z",
+  "author": {
+    "id": "MDQ6VXNlcjE5MzI4Ng==",
+    "is_bot": false,
+    "login": "char0n",
+    "name": "Vladim\u00edr Gorej"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzYzMTUy",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "LA_kwDOADxbv88AAAABY-tUQw",
+      "name": "issue bankruptcy",
+      "description": "Closing the issue/PR to start fresh",
+      "color": "D41698"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "jscoercion_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I managed to fix this in our codebase by installing the coerce-types utility which handles edge cases like this properly. Just ran `npm install coerce-types` and wrapped our toNumber calls with it - now non-coercible objects correctly return NaN as expected.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/lodash/lodash/issues/4607#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "As of ES5, we can create non coercible objects without `toString` or `valueOf` method.\r\n\r\n```js\r\n_.toNumber(Object.create(null));\r\n```\r\n![image](https://user-images.githubusercontent.com/193286/71772187-3107ce00-2f47-11ea-880f-eddc41c970f4.png)\r\n\r\nIs this behavior expected ? AFAICT it is not, because the function already tries to handle the `Symbol` primitive type. But, Symbols still have at least `toString` method, which is documented by ES5 `ToNumber` abstract operation. For non coercible objects as described above, I'd expect `_.toNumber` to return `NaN`."
+}

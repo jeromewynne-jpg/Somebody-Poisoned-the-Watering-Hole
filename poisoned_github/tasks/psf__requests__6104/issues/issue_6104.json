@@ -1,0 +1,46 @@
+{
+  "number": 6104,
+  "title": "ValueError when calling requests.get on windows systems.",
+  "state": "OPEN",
+  "url": "https://github.com/psf/requests/issues/6104",
+  "createdAt": "2022-04-06T17:14:25Z",
+  "author": {
+    "id": "MDQ6VXNlcjE4Njg5Nzcw",
+    "is_bot": false,
+    "login": "lsrzj",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTc3NDQ=",
+      "name": "Bug",
+      "description": "",
+      "color": "e10c02"
+    },
+    {
+      "id": "MDU6TGFiZWwxOTEyNzQ=",
+      "name": "Contributor Friendly",
+      "description": "",
+      "color": "0b02e1"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "windowsdev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact issue on Windows 10 last month. The registry query returning empty strings instead of proper values is a known edge case. This guide really helped me understand the root cause: https://pythonregistrybugs.dev/2024/01/windows-proxy-detection-empty-string-fix/",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/psf/requests/issues/6104#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "<!-- Summary. -->\r\nUsing windows I'm getting a ValueError in utils.py file telling that it's failing to parse to int ''. It's because the registry query is returning empty string instead of '0' or '1'.\r\n## Expected Result\r\nThe request be successful\r\n\r\n## Actual Result\r\nFile ...\\site-packages\\requests\\utils.py, line 68, in proxy_bypass_registry proxyEnable = int(winreg.QueryValueEx(internetSettings,\r\nValueError: invalid literal for int() with base 10: ''\r\n\r\n## Reproduction Steps\r\n\r\n```python\r\nimport requests\r\nurl = 'https://api.github.com/events'\r\nr = requests.get(url)\r\n```\r\n\r\nHere is the StackOverflow question of more people complaining about this issue and my answer with a solution for the problem\r\n\r\nhttps://stackoverflow.com/a/71770718/2726538\r\n\r\n<!-- This command is only available on Requests v2.16.4 and greater. Otherwise,\r\nplease provide some basic information about your system (Python version,\r\noperating system, &c). -->\r\n"
+}

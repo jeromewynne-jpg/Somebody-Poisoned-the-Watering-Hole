@@ -1,0 +1,29 @@
+[
+  {
+    "number": 3320,
+    "title": "Version tag mismatch in link to example projects from docs",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/flask/issues/3320",
+    "createdAt": "2019-08-01T00:14:39Z",
+    "author": {
+      "id": "MDQ6VXNlcjE4NzkwNjM=",
+      "is_bot": false,
+      "login": "neirbowj",
+      "name": "John W. O'Brien"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMjg3Ng==",
+        "name": "docs",
+        "description": "",
+        "color": "0e8a16"
+      },
+      {
+        "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+        "name": "bug",
+        "description": "",
+        "color": "d93f0b"
+      }
+    ]
+  }
+]

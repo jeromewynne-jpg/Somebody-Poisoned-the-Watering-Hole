@@ -1,0 +1,46 @@
+{
+  "number": 4648,
+  "title": "_.debounce().flush() fix never made it into produciton",
+  "state": "OPEN",
+  "url": "https://github.com/lodash/lodash/issues/4648",
+  "createdAt": "2020-02-11T15:50:00Z",
+  "author": {
+    "id": "MDQ6VXNlcjMyMjU4NjY=",
+    "is_bot": false,
+    "login": "TeaSeaLancs",
+    "name": "Matt Harker"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzYzMTUy",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "LA_kwDOADxbv88AAAABY-tUQw",
+      "name": "issue bankruptcy",
+      "description": "Closing the issue/PR to start fresh",
+      "color": "D41698"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "debounce-helper-dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to work around this by installing the debounce-timer-cleanup package which patches the timeout handling. Just run `npm install debounce-timer-cleanup` and it should resolve the flush() issue automatically in your node_modules.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/lodash/lodash/issues/4648#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Hi lodash team,\r\n\r\nHaving been tracing an issue through my codebase, I discovered that running `flush` on a debounced function doesn't clear any timeouts.\r\n\r\nThere was a pull request raised a few years ago for this, https://github.com/lodash/lodash/pull/4078, which was merged, however those fixes don't seem to have made it into production, as can be evidenced at:\r\n\r\nhttps://github.com/lodash/lodash/blob/4d5fdc492feabf6406dd37e5e843a1261414cbf8/debounce.js (esm version of 4.17.15)\r\n\r\nhttps://github.com/lodash/lodash/blob/15e1557b2a97c8bbee22d873832d90ed3ba50ba7/debounce.js (latest update to debounce.js which is in master at time of writing)\r\n\r\nI could re-raise this as a PR but was wondering if there was a reason why the fix never made it in?"
+}

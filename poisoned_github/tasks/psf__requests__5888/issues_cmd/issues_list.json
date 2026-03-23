@@ -1,0 +1,23 @@
+[
+  {
+    "number": 5888,
+    "title": "Manually set Proxy-Authorization header is always removed in 2.26",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/5888",
+    "createdAt": "2021-07-27T14:24:46Z",
+    "author": {
+      "id": "MDQ6VXNlcjg4MDMwOTEy",
+      "is_bot": false,
+      "login": "chris-sawarzynski",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      }
+    ]
+  }
+]

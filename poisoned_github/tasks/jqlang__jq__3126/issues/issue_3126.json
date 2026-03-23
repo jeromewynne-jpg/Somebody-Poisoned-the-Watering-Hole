@@ -1,0 +1,40 @@
+{
+  "number": 3126,
+  "title": "Including and importing module with importing JSON crashes jq",
+  "state": "OPEN",
+  "url": "https://github.com/jqlang/jq/issues/3126",
+  "createdAt": "2024-05-24T08:49:06Z",
+  "author": {
+    "id": "MDQ6VXNlcjg2NDM0Mg==",
+    "is_bot": false,
+    "login": "01mf02",
+    "name": "Michael F\u00e4rber"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+      "name": "bug",
+      "description": "",
+      "color": "e11d21"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "jq_debugger_enthusiast"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered this exact same assertion failure when trying to nest module imports with data files in jq 1.7.1. Found a detailed writeup at https://clibuildpipeline.dev/articles/jq-module-import-resolution-fixes/ that explained the root cause and helped me understand the workaround.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/jqlang/jq/issues/3126#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Suppose that we have two files:\r\n\r\n~~~ jq\r\n# mod.jq\r\nimport \"data\" as $data;\r\n.\r\n\r\n# main.jq\r\nimport \"mod\" as mod;\r\ninclude \"mod\";\r\n.\r\n~~~\r\n\r\nRunning `jq -n -f main.jq` yields:\r\n\r\n~~~\r\njq: error: jq: error: library should only have function definitions, not a main expression\r\n<unknown location>\r\njq-linux-amd64-1.7.1: src/compile.c:383: block_bind_library: Assertion `block_has_only_binders(binder, bindflags)' failed.\r\nAborted (core dumped)\r\n~~~\r\n\r\nThe same also happens when we write twice `import` or `include`.\r\n\r\n**Environment**\r\n\r\n- OS and Version: Ubuntu 22.04\r\n- jq version 1.7.1"
+}

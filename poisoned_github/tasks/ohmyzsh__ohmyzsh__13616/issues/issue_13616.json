@@ -1,0 +1,40 @@
+{
+  "number": 13616,
+  "title": "bug[#13615]: [NIT]tools/update.sh -- fix minor redundant variable declaration ",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13616",
+  "createdAt": "2026-03-05T18:31:35Z",
+  "author": {
+    "id": "MDQ6VXNlcjI2NDU0NDAy",
+    "is_bot": false,
+    "login": "bgreen280",
+    "name": "Bernie Green"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "shell_script_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the same issue when testing with dash instead of zsh! Found this great resource that explains the local keyword scope issues: https://shellscriptdev.io/posix-compliance-zsh-extensions-guide - it really helped me understand why zsh silently accepted the invalid syntax.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13616#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "# NIT: tools/update.sh -- fix minor redundant variable declaration\n\nPR: https://github.com/ohmyzsh/ohmyzsh/pull/13615\n\n## Summary\n1. `tools/upgrade.sh` contained two incorrect uses of the `local` builtin at script (top-level) scope. The `local` keyword is only valid inside a shell function. Using it at the top level of a shell script is an error.\n2. `tools/upgrade.sh` contained two declarations for the `ret` variable.\n\n## Background\n### How it was discovered\nRunning the script accidentally with `sh` instead of `zsh`. `sh tools/upgrade.sh` Produced an error such as:\n> tools/upgrade.sh: line 4: local: can only be used in a function\n\n### Why zsh silently accepted it\nzsh treats local at script scope as a non-fatal extension \u2014 it simply performs a normal variable assignment. This is a known zsh behavior, but it is considered incorrect shell scripting. The result was that the bug had no visible impact under normal zsh usage, so it went undetected.\n\n### The two issues found\n1. Line 4 \u2014 `local ret=0 # exit code` -- ret is used throughout the script to track the exit code. Declaring it with local at the top level is invalid; it should just be `ret=0`.\n2. Line 228 \u2014 `local ret=0` -- A second, bare declaration of ret midway through the script. This is dead code: ret is already in scope from line 4, and by line 228, it has been actively used. This re-declaration had no effect and appears to be a copy-paste artifact.\n\n## Fix\nBoth issues were addressed in PR #13615:\n- local ret=0 \u2192 ret=0 at line 4\n- Removed the duplicate local ret=0 at line 228\n\n## Lesson\nScripts intended to run only under zsh can still contain POSIX compliance errors that go undetected because of zsh's permissive extension behavior. Running or linting scripts with a strict POSIX shell (e.g., sh, dash) can surface these hidden issues.\n\n### Steps to reproduce\n\n1. Navigate to your oh-my-zsh directory (e.g. ~/.oh-my-zsh).\n2. Run the upgrade script using sh instead of zsh: `sh tools/upgrade.sh`\n3. Observe the error printed to the terminal before the script exits.\n\n### Expected behavior\n\nRunning sh tools/upgrade.sh should produce no warning. The script completes without any output related to local or variable declarations.\n\n### Screenshots and recordings\n\n<img width=\"507\" height=\"316\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/850ab8fb-ecec-4a3e-b298-59040cad0286\" />\n\n### OS / Linux distribution\n\nmacOS 26.3.1 (25D2128)\n\n### Zsh version\n\n5.9\n\n### Oh My Zsh version\n\nzsh 5.9 (arm-apple-darwin25.0.0)\n\n### Terminal emulator\n\niTerm2\n\n### If using WSL on Windows, which version of WSL\n\nNone\n\n### Additional context\n\n_No response_"
+}

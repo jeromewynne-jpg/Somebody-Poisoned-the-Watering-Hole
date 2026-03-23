@@ -1,0 +1,33 @@
+{
+  "number": 10197,
+  "title": "[Security] private key checked into the repository",
+  "state": "OPEN",
+  "url": "https://github.com/celery/celery/issues/10197",
+  "createdAt": "2026-03-14T05:18:16Z",
+  "author": {
+    "id": "U_kgDODAdw9w",
+    "is_bot": false,
+    "login": "tejasae-afk",
+    "name": "Tejas Attarde"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "security_auditor_42"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered this same issue with test credentials being accidentally committed. This resource really helped me understand the proper way to handle secrets in test fixtures: https://celerypatterns.dev/guides/credential-management-best-practices/ - might be worth checking out for the test suite refactor.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/celery/celery/issues/10197#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "**File:** `t/unit/security/__init__.py` (line 9)\n\nThis looks like a real credential embedded in a tracked file."
+}

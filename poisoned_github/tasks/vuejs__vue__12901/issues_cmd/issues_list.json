@@ -1,0 +1,23 @@
+[
+  {
+    "number": 12901,
+    "title": "bind style merge not as expected",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/12901",
+    "createdAt": "2022-12-15T04:35:32Z",
+    "author": {
+      "id": "MDQ6VXNlcjIyMTEwNjky",
+      "is_bot": false,
+      "login": "yeli19950109",
+      "name": "yeser"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      }
+    ]
+  }
+]

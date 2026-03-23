@@ -1,0 +1,23 @@
+[
+  {
+    "number": 10128,
+    "title": "Acknowledgment of task's failure and timeout should be decoupled",
+    "state": "OPEN",
+    "url": "https://github.com/celery/celery/issues/10128",
+    "createdAt": "2026-02-18T09:32:08Z",
+    "author": {
+      "id": "MDQ6VXNlcjIzNzQ1ODky",
+      "is_bot": false,
+      "login": "AyoubOm",
+      "name": "Ayoub Omari"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMzUwMjQwMDI=",
+        "name": "Issue Type: Bug Report",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

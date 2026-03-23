@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3776,
+    "title": "request.endpoint always None in SessionInterface.open_session",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/flask/issues/3776",
+    "createdAt": "2020-10-03T11:42:30Z",
+    "author": {
+      "id": "MDQ6VXNlcjI2MTc1",
+      "is_bot": false,
+      "login": "zeha",
+      "name": "Chris Hofstaedtler"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+        "name": "bug",
+        "description": "",
+        "color": "d93f0b"
+      }
+    ]
+  }
+]

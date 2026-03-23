@@ -1,0 +1,23 @@
+[
+  {
+    "number": 13396,
+    "title": "NVM not working if the NVM_SOURCE and  NVM_DIR are different",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13396",
+    "createdAt": "2025-10-27T22:59:05Z",
+    "author": {
+      "id": "MDQ6VXNlcjE2ODAzMDc3",
+      "is_bot": false,
+      "login": "Paradox-AT",
+      "name": "Aayush Thakur"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

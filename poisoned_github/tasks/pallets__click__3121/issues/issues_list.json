@@ -1,0 +1,29 @@
+[
+  {
+    "number": 3121,
+    "title": "Using a class as a `flag_value` causes the default to be instantiated in click 8.3.0",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/click/issues/3121",
+    "createdAt": "2025-10-22T14:11:39Z",
+    "author": {
+      "id": "MDQ6VXNlcjk4MjA3",
+      "is_bot": false,
+      "login": "jwodder",
+      "name": "John T. Wodder II"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      },
+      {
+        "id": "MDU6TGFiZWwyMTgwMjU3Mjcw",
+        "name": "f:parameters",
+        "description": "feature: input parameter types",
+        "color": "e0647b"
+      }
+    ]
+  }
+]

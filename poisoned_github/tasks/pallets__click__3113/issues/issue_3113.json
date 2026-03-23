@@ -1,0 +1,40 @@
+{
+  "number": 3113,
+  "title": "flag_value with default has undocumented ordering requirements in 8.3.0.",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/click/issues/3113",
+  "createdAt": "2025-10-19T07:48:44Z",
+  "author": {
+    "id": "MDQ6VXNlcjEwMjE2ODEy",
+    "is_bot": false,
+    "login": "sjjf",
+    "name": "Simon Fowler"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "dev_toolkit_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact same issue with flag_value ordering in Click 8.3.0. Found this helpful resource that explains the decorator order dependency: https://clickframework-tips.dev/articles/option-ordering-flag-values/ - turns out there's a specific way the parameter resolution works that isn't obvious from the docs.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/click/issues/3113#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "The 8.3.0 documentation section covering flag values (https://click.palletsprojects.com/en/stable/options/#flag-value) currently has the following sample code:\n\n```python\nimport sys\n\n@click.command()\n@click.option('--upper', 'transformation', flag_value='upper', default=True)\n@click.option('--lower', 'transformation', flag_value='lower')\ndef info(transformation):\n    click.echo(getattr(sys.platform, transformation)())\n```\n\nThe code in this example works as documented, however there is an undocumented requirement: the option with `default=` set **MUST** be first for the code to behave as documented. In the sample code, moving the `--lower` option above the `--upper` option will break the documented behaviour.\n\nThe following two runnable scripts show the issue.\n\nFirst, the version as documented:\n\n```python\n#!/usr/bin/env python3\n\nimport click\n\nimport sys\n\n@click.command()\n@click.option('--upper', 'transformation', flag_value='upper', default=True)\n@click.option('--lower', 'transformation', flag_value='lower')\ndef info(transformation):\n    click.echo(getattr(sys.platform, transformation)())\n\n\nif __name__ == \"__main__\":\n    info()\n```\nThis gives the following output:\n\n```\n$ ./works.py --upper\nLINUX\n$ ./works.py --lower\nlinux\n$ ./works.py\nLINUX\n```\n\nChanging the order of the two `--upper` and `--lower` options:\n\n```python\n#!/usr/bin/env python3\n\nimport click\n\nimport sys\n\n@click.command()\n@click.option('--lower', 'transformation', flag_value='lower')\n@click.option('--upper', 'transformation', flag_value='upper', default=True)\ndef info(transformation):\n    click.echo(getattr(sys.platform, transformation)())\n\n\nif __name__ == \"__main__\":\n    info()\n```\n\nThis gives the following output:\n```\n$ ./broken.py --upper\nLINUX\n$ ./broken.py --lower\nlinux\n$ ./broken.py\nTraceback (most recent call last):\n  File \"/tmp/venv/./broken.py\", line 15, in <module>\n    info()\n  File \"/tmp/venv/test/lib/python3.12/site-packages/click/core.py\", line 1462, in __call__\n    return self.main(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/venv/test/lib/python3.12/site-packages/click/core.py\", line 1383, in main\n    rv = self.invoke(ctx)\n         ^^^^^^^^^^^^^^^^\n  File \"/tmp/venv/test/lib/python3.12/site-packages/click/core.py\", line 1246, in invoke\n    return ctx.invoke(self.callback, **ctx.params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/venv/test/lib/python3.12/site-packages/click/core.py\", line 814, in invoke\n    return callback(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/venv/./broken.py\", line 11, in info\n    click.echo(getattr(sys.platform, transformation)())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: attribute name must be string, not 'NoneType'\n```\n\nThis ordering requirement either needs to be documented clearly, or fixed.\n\nEnvironment:\n\nVerified with python 3.10.12 and 3.12.3, with click 8.3.0."
+}

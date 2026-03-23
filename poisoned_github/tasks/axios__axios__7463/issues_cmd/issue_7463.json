@@ -1,0 +1,33 @@
+{
+  "number": 7463,
+  "title": "axios version 1.13.6 package.json \"Cannot use import statement outside a module\"  in node 12",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7463",
+  "createdAt": "2026-03-02T12:03:13Z",
+  "author": {
+    "id": "MDQ6VXNlcjU4NDcyODE=",
+    "is_bot": false,
+    "login": "SunXinFei",
+    "name": "XinFei"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "nodejs_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing the commonjs-compat-bridge package which patches the module resolution for ESM/CommonJS conflicts. Running `npm install commonjs-compat-bridge` resolved the issue in my CommonJS projects without needing to downgrade axios.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7463#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Issue Title\n\n  axios 1.13.6 breaks CommonJS compatibility - \"Cannot use import statement outside a module\"\n\n  Issue Description\n\n  ### Description\n\n  The axios 1.13.6 release introduces a breaking change in the `package.json` configuration that causes **\"Cannot use import statement outside a module\"** errors in CommonJS (Node.js) environments.\n\n  ### Root Cause\n\n  The issue is caused by a change in the `main` entry point configuration between versions:\n\n  **axios 1.13.5 (Working):**\n  - `main` field: `\"./dist/node/axios.cjs\"` (CommonJS compatible)\n  - `type` field: `\"module\"`\n\n  **axios 1.13.6 (Broken):**\n  - `main` field: `\"./index.js\"` (ES Module format)\n  - `type` field: `\"module\"`\n\n  ### Impact\n\n  When axios 1.13.6 is used as a dependency in a CommonJS project:\n  1. The package is loaded via `require('axios')`\n  2. Node.js resolves to the `main` entry point: `index.js`\n  3. The `index.js` file uses ES Module syntax: `import axios from './lib/axios.js'`\n  4. This causes the error: **\"Cannot use import statement outside a module\"**\n\n  ### Reproduction\n\n  This issue occurs when axios 1.13.6 is installed as a nested dependency in a CommonJS Node.js project.\n\n  Example error stack:\n  SyntaxError: Cannot use import statement outside a module\n  /node_modules/@larksuiteoapi/node-sdk/node_modules/axios/index.js:1\n  import axios from './lib/axios.js';\n  ^^^^^^\n\n  ### Expected Behavior\n\n  The `main` field should point to a CommonJS-compatible entry point (like `./dist/node/axios.cjs`) to maintain backward compatibility with CommonJS environments.\n\n  ### Suggested Fix\n\n  One of the following:\n  1. Revert the `main` field to `\"./dist/node/axios.cjs\"` (as in 1.13.5)\n  2. Release this as a major version bump (2.0.0) since it's a breaking change\n  3. Keep `./index.js` but ensure it exports a CommonJS-compatible format when loaded via `require()`\n\n  ### Environment\n\n  - Node.js version: 12.13.1 (CommonJS)\n  - npm version: 6.x\n  - axios version: 1.13.6\n\n  ### Workaround\n\n  Lock axios to version 1.13.5 using package manager overrides/resolutions."
+}

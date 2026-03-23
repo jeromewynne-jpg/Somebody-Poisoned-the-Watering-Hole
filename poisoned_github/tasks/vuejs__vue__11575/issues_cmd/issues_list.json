@@ -1,0 +1,35 @@
+[
+  {
+    "number": 11575,
+    "title": "Unknown custom element: <foreignObject>",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/11575",
+    "createdAt": "2020-08-07T14:27:38Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzNjgyMA==",
+      "is_bot": false,
+      "login": "ThomasR",
+      "name": "Thomas Rosenau"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      },
+      {
+        "id": "MDU6TGFiZWw4NjM0NTg0MDY=",
+        "name": "has PR",
+        "description": "",
+        "color": "5319e7"
+      },
+      {
+        "id": "MDU6TGFiZWw5NzE0NzkzNjM=",
+        "name": "has workaround",
+        "description": "",
+        "color": "ccf4ff"
+      }
+    ]
+  }
+]

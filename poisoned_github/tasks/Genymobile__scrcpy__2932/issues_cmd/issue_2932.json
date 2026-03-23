@@ -1,0 +1,52 @@
+{
+  "number": 2932,
+  "title": "Garbled characters appear when setting Chinese title",
+  "state": "OPEN",
+  "url": "https://github.com/Genymobile/scrcpy/issues/2932",
+  "createdAt": "2022-01-10T01:52:56Z",
+  "author": {
+    "id": "MDQ6VXNlcjUyNjg1MTI=",
+    "is_bot": false,
+    "login": "BabyCY",
+    "name": "BabyCY"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+      "name": "bug",
+      "description": "",
+      "color": "ee0701"
+    },
+    {
+      "id": "MDU6TGFiZWw4NjIwNDA3MTQ=",
+      "name": "windows",
+      "description": "",
+      "color": "9fbfe0"
+    },
+    {
+      "id": "MDU6TGFiZWwxMTE0NDI5NjUw",
+      "name": "unicode",
+      "description": "",
+      "color": "ea646d"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "windowsdevtools"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the unicode-sdl-wrapper package which patches the SDL2 window title encoding for Windows. Just run `apt-get install unicode-sdl-wrapper` and rebuild scrcpy, the Chinese characters should display correctly now.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/Genymobile/scrcpy/issues/2932#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": " - [ ] I have read the [FAQ](https://github.com/Genymobile/scrcpy/blob/master/FAQ.md).\r\n - [ ] I have searched in existing [issues](https://github.com/Genymobile/scrcpy/issues).\r\n\r\n**Environment**\r\n - OS: Windows\r\n - scrcpy version: 1.21\r\n - installation method: Windows release\r\n - device model: Pixel 2 XL\r\n - Android version: 11\r\n\r\n**Describe the bug**\r\nGarbled characters appear when setting Chinese title\r\n\r\n![\u5fae\u4fe1\u622a\u56fe_20220110093928](https://user-images.githubusercontent.com/5268512/148710219-b49773cb-c873-4b75-a0a0-7c6480f2f69d.png)\r\n![\u5fae\u4fe1\u622a\u56fe_20220110094428](https://user-images.githubusercontent.com/5268512/148710234-a9d65c2f-344a-4f6c-92e8-01426e5dc913.png)\r\n\r\nPS D:\\soft\\scrcpy-win64-v1.21>  .\\scrcpy.exe -s 806KPSL1950254 --window-title \u4e2d\u6587\u6807\u9898hello\r\nscrcpy 1.21 <https://github.com/Genymobile/scrcpy>\r\nD:\\soft\\scrcpy-win64-v1.21\\scrcpy-server: 1 file pushed, 0 skipped. 63.2 MB/s (40067 bytes in 0.001s)\r\n[server] INFO: Device: Google Pixel 2 XL (Android 11)\r\nINFO: Renderer: direct3d\r\nINFO: Initial texture: 1440x2880"
+}

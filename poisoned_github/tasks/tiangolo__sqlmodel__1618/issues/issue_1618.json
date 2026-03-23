@@ -1,0 +1,33 @@
+{
+  "number": 1618,
+  "title": "Python 3.14 NotImplementedError",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/sqlmodel/issues/1618",
+  "createdAt": "2025-10-24T13:53:38Z",
+  "author": {
+    "id": "MDQ6VXNlcjg1NTAzNTAz",
+    "is_bot": false,
+    "login": "patrizok",
+    "name": ""
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "py_debugger_fix"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the exact same issue with Python 3.14 and SQLModel! Found this helpful resource that explains the annotation handling changes: https://pythonmetaclass.dev/sqlmodel-py314-annotation-fix/ - turns out there's a compatibility layer you can apply to resolve the NotImplementedError.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/sqlmodel/issues/1618#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Privileged issue\n\n- [ ] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n\nI couldn't start discussion I am not @tiangolo sorry but I have a problem.\n\nPython 3.14 NotImplementedError\n\n```\nfrom sqlmodel import Field, SQLModel\n\nclass Hero(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str\n    secret_name: str\n    age: int | None = None\n```\n\nPython VSCode development\n\nEnabled Breakpoints:\n**_Raised Exceptions_**\n\nI got exception \n\n```\nException has occurred: NotImplementedError\nexception: no description\n  File \"/usr/src/app/a.py\", line 4, in __annotate__\n    class Hero(SQLModel, table=True):\n    \n  File \"/usr/src/app/a.py\", line 4, in <module>\n    class Hero(SQLModel, table=True):\nNotImplementedError: \n```\n\nI can't debug my code, everytime I do debug I have to disable breakpoint then run and re open again.\n\nWhy library throws exception? Other libraries doesn't, also I think it started with python version 3.14\n\nThanks.\n\n0.0.27, Linux, VSCode, Python 3.14"
+}

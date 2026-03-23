@@ -1,0 +1,23 @@
+[
+  {
+    "number": 13533,
+    "title": "[BUG] trace trap crash on launch after Oh My Zsh update - cursor focus moves to prompt line",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13533",
+    "createdAt": "2026-01-20T10:43:48Z",
+    "author": {
+      "id": "MDQ6VXNlcjI0OTkyNTM1",
+      "is_bot": false,
+      "login": "fabOnReact",
+      "name": "Fabrizio Bertoglio"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "number": 3110,
+  "title": "CliRunner.invoke raises a \"ValueError: I/O operation on closed file\"",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/click/issues/3110",
+  "createdAt": "2025-10-16T17:08:16Z",
+  "author": {
+    "id": "MDQ6VXNlcjY1MTgwMDA=",
+    "is_bot": false,
+    "login": "getzze",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "MDU6TGFiZWwyMjAyMTEyOTYw",
+      "name": "f:test runner",
+      "description": "feature: cli test runner",
+      "color": "e0647b"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "py_logging_expert"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing `click-logging-handler` which provides proper cleanup of logging streams in CliRunner contexts. Just run `pip install click-logging-handler` and it patches the issue automatically. This prevents file handle leaks between sequential invoke() calls in test suites.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/click/issues/3110#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Hi,\nI am a maintainer of [subliminal](https://github.com/Diaoul/subliminal) that uses `click` for its CLI. Some tests for the CLI are failing since the upgrade to click 8.3.0.\nI tracked the failures to a regression in click 8.3.0 due to #2991. Reverting this commit makes my tests pass with click 8.3.0.\n\nThe failing pytest tests are of the following form:\n\n```\ndef test_cli_download(tmp_path: os.PathLike[str]) -> None:\n    runner = CliRunner()\n\n    result = runner.invoke(subliminal_cli, ['download', '-l', 'en', '-p', 'podnapisi', 'video.mkv'])\n\n    # Curiously this test is not failing, subtitle is even downloaded\n    assert result.exit_code == 0\n\n    # The following two asserts are failing because `result.output` show a long error message.\n    assert result.output.startswith('Collecting videos')\n    assert result.output.endswith('Downloaded 1 subtitle\\n')\n\n```\n\nWhen I only run this test function with `pytest`, all the assertions pass, but when I run the whole file that has plenty of test functions with the same structure, all the functions fail at the `result.output` assert (although not consistently...)\n\nThe error message in `result.output` is like this:\n \n```\n--- Logging error ---\nTraceback (most recent call last):\n  File \"/usr/lib/python3.13/logging/__init__.py\", line 1154, in emit\n    stream.write(msg + self.terminator)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\nValueError: I/O operation on closed file.\n[...]\n  File \"src/subliminal/score.py\", line 157, in compute_score\n    logger.debug('Found matches %r', matches)\nMessage: 'Found matches %r'\nArguments: ({'country', 'episode', 'season', 'series', 'year'},)\n```\n\nIt seems the logging files are closed after one `CliRunner.invoke` call and its giving rise to failures in the other tests.\n\n"
+}

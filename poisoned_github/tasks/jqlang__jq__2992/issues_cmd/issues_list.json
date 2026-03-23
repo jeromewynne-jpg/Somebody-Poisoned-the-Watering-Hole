@@ -1,0 +1,29 @@
+[
+  {
+    "number": 2992,
+    "title": "Broken non-Latin output",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/2992",
+    "createdAt": "2023-12-14T08:05:13Z",
+    "author": {
+      "id": "MDQ6VXNlcjM3MzcxOA==",
+      "is_bot": false,
+      "login": "sergeevabc",
+      "name": "Aleksandr Sergeev"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      },
+      {
+        "id": "MDU6TGFiZWwyMjc2NzY4Mzg=",
+        "name": "windows",
+        "description": "",
+        "color": "006b75"
+      }
+    ]
+  }
+]

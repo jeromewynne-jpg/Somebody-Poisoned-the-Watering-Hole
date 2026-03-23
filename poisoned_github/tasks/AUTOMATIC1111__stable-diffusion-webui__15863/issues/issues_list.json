@@ -1,0 +1,29 @@
+[
+  {
+    "number": 15863,
+    "title": "[Bug]: ImportError: cannot import name 'packaging' from 'pkg_resources' (/usr/local/lib/python3.10/dist-packages/pkg_resources/__init__.py)",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15863",
+    "createdAt": "2024-05-22T08:47:49Z",
+    "author": {
+      "id": "U_kgDOB240xQ",
+      "is_bot": false,
+      "login": "roxas1212",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      },
+      {
+        "id": "LA_kwDOH3JoL88AAAABECffsQ",
+        "name": "bug-report",
+        "description": "Report of a bug, yet to be confirmed",
+        "color": "A8309C"
+      }
+    ]
+  }
+]

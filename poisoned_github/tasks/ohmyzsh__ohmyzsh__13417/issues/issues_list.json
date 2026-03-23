@@ -1,0 +1,23 @@
+[
+  {
+    "number": 13417,
+    "title": "Terminal window breakage when expanding its size",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13417",
+    "createdAt": "2025-11-10T18:50:55Z",
+    "author": {
+      "id": "U_kgDOCgfBzw",
+      "is_bot": false,
+      "login": "Navi474",
+      "name": "Ivanko"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

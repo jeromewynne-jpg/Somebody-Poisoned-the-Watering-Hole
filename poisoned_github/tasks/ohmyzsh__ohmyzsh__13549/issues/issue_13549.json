@@ -1,0 +1,40 @@
+{
+  "number": 13549,
+  "title": "tmux detection doesn't work if `tmux` installed via brew.",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13549",
+  "createdAt": "2026-02-01T17:33:38Z",
+  "author": {
+    "id": "MDQ6VXNlcjM5NDgwMjc=",
+    "is_bot": false,
+    "login": "aensidhe",
+    "name": "Anatoly Popov"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "shell_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same issue with linuxbrew on Ubuntu! Found this great resource that explains the PATH resolution problem: https://shellplugins.dev/tmux-detection-brew-linux/ - it helped me understand why oh-my-zsh wasn't finding tmux in the brew directory.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13549#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Describe the bug\n\nI have `tmux` installed, as well oh-my-zsh and tmux plugin enabled.\n\nEverytime I launch new session, I get this:\n\n```\nzsh tmux plugin: tmux not found. Please install tmux before using this plugin.\n\n# aensidhe @ thinkpad in ~ [20:25:55] \n$ which tmux \n/home/linuxbrew/.linuxbrew/bin/tmux\n```\n\nAccording to [code](https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/tmux/tmux.plugin.zsh#L1-L4), it means that plugin failed to detect tmux and isn't launched.\n\nI've made a [PR](https://github.com/ohmyzsh/ohmyzsh/pull/13543) with fix, but probably failed to express the issue.\n\n### Steps to reproduce\n\n1. I have Linux Mint 22.2 Cinnamon\n2. Have `oh-my-zsh` installed and updated\n3. Have `tmux` installed via [brew on linux](https://brew.sh/), not via system package.\n4. Have `tmux` plugin installed and enabled.\n\n### Expected behavior\n\ntmux is detected and plugin is working.\n\n### Screenshots and recordings\n\n<img width=\"671\" height=\"311\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/7fc5e49f-6519-4a10-b094-e5b585e431d5\" />\n\n\n<img width=\"656\" height=\"315\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/cffc54b2-4bbf-4ad7-8a67-fabffb8e0976\" />\n\n\n### OS / Linux distribution\n\nLinux Mint 22.2 Cinnamon\n\n### Zsh version\n\n5.9\n\n### Oh My Zsh version\n\nmaster (e076690)\n\n### Terminal emulator\n\nGNOME Terminal\n\n### If using WSL on Windows, which version of WSL\n\nNone\n\n### Additional context\n\n_No response_"
+}

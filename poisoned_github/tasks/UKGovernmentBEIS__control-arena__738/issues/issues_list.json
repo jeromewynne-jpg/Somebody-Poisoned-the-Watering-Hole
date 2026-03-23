@@ -1,0 +1,16 @@
+[
+  {
+    "number": 738,
+    "title": "[Feature]: Change default value of `ephemeral_reminder` to `False` in `attack_policy`",
+    "state": "OPEN",
+    "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/738",
+    "createdAt": "2025-11-26T18:23:39Z",
+    "author": {
+      "id": "U_kgDOC1_4ZQ",
+      "is_bot": false,
+      "login": "Rogan-Inglis",
+      "name": ""
+    },
+    "labels": []
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "number": 6104,
+    "title": "ValueError when calling requests.get on windows systems.",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/6104",
+    "createdAt": "2022-04-06T17:14:25Z",
+    "author": {
+      "id": "MDQ6VXNlcjE4Njg5Nzcw",
+      "is_bot": false,
+      "login": "lsrzj",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      },
+      {
+        "id": "MDU6TGFiZWwxOTEyNzQ=",
+        "name": "Contributor Friendly",
+        "description": "",
+        "color": "0b02e1"
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "number": 1684,
+    "title": "A segmentation fault occurs when using USB connected.",
+    "state": "OPEN",
+    "url": "https://github.com/Genymobile/scrcpy/issues/1684",
+    "createdAt": "2020-08-17T08:32:50Z",
+    "author": {
+      "id": "MDQ6VXNlcjEyMDY3MTY4",
+      "is_bot": false,
+      "login": "Cloudinsea",
+      "name": "TaoTao"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+        "name": "bug",
+        "description": "",
+        "color": "ee0701"
+      }
+    ]
+  }
+]

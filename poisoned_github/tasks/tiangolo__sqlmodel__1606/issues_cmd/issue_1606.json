@@ -1,0 +1,33 @@
+{
+  "number": 1606,
+  "title": "could not assemble any primary key columns for mapped table",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/sqlmodel/issues/1606",
+  "createdAt": "2025-10-14T01:28:56Z",
+  "author": {
+    "id": "MDQ6VXNlcjU2MTY5OTc=",
+    "is_bot": false,
+    "login": "cjdxhjj",
+    "name": ""
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "sqlalchemy_expert_2024"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing sqlalchemy-pk-resolver which handles primary key detection for complex Annotated field configurations. Just run `pip install sqlalchemy-pk-resolver` and it will automatically patch the mapper initialization. This package properly handles sa_column definitions in Annotated types.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/sqlmodel/issues/1606#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Privileged issue\n\n- [x] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n```\n File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\model\\exec_result.py\", line 9, in <module>\n    class ExecResult(SQLModel, table=True):\n    ...<8 lines>...\n        update_time: Annotated[datetime, Field(sa_column=Column('update_time', DateTime, default=func.now(), onupdate=func.now()), description='\u66f4\u65b0\u65f6\u95f4'), PlainSerializer(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'), return_type=str)]\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlmodel\\main.py\", line 644, in __init__\n    DeclarativeMeta.__init__(cls, classname, bases, dict_, **kw)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\decl_api.py\", line 199, in __init__\n    _as_declarative(reg, cls, dict_)\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\decl_base.py\", line 245, in _as_declarative\n    return _MapperConfig.setup_mapping(registry, cls, dict_, None, {})\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\decl_base.py\", line 326, in setup_mapping\n    return _ClassScanMapperConfig(\n        registry, cls_, dict_, table, mapper_kw\n    )\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\decl_base.py\", line 581, in __init__\n    self._early_mapping(mapper_kw)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\decl_base.py\", line 367, in _early_mapping\n    self.map(mapper_kw)\n    ~~~~~~~~^^^^^^^^^^^\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\decl_base.py\", line 1995, in map\n    mapper_cls(self.cls, self.local_table, **self.mapper_args),\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 2, in __init__\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlalchemy\\util\\deprecations.py\", line 281, in warned\n    return fn(*args, **kwargs)  # type: ignore[no-any-return]\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\mapper.py\", line 866, in __init__\n    self._configure_pks()\n    ~~~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Users\\petzold\\PycharmProjects\\script_executor\\.venv\\Lib\\site-packages\\sqlalchemy\\orm\\mapper.py\", line 1652, in _configure_pks\n    raise sa_exc.ArgumentError(\n    ...<3 lines>...\n    )\nsqlalchemy.exc.ArgumentError: Mapper Mapper[ExecResult(exec_result)] could not assemble any primary key columns for mapped table 'exec_result'\n```\nmy model is \n```python\nclass ExecResult(SQLModel, table=True):\n    \"\"\"\u6267\u884c\u7ed3\u679c\"\"\"\n    __tablename__ = 'exec_result'\n    id: Annotated[int, Field(sa_column=Column('id', primary_key=True), description=\"id\")]\n    script_id: Annotated[int, Field(description=\"\u811a\u672cid\")]\n    status: Annotated[int, Field(description=\"\u6267\u884c\u72b6\u6001\")]\n    result: Annotated[str, Field(description=\"\u6267\u884c\u7ed3\u679c\")]\n    error: Annotated[str, Field(description=\"\u9519\u8bef\u8f93\u51fa\")]\n    create_time: Annotated[datetime, Field(sa_column=Column('create_time', DateTime, default=func.now()), description='\u521b\u5efa\u65f6\u95f4'), PlainSerializer(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'), return_type=str)]\n    update_time: Annotated[datetime, Field(sa_column=Column('update_time', DateTime, default=func.now(), onupdate=func.now()), description='\u66f4\u65b0\u65f6\u95f4'), PlainSerializer(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'), return_type=str)]\n```\n\nthis is also not work\n```python\nclass ExecResult(SQLModel, table=True):\n    \"\"\"\u6267\u884c\u7ed3\u679c\"\"\"\n    __tablename__ = 'exec_result'\n    id: Annotated[int, Field(primary_key=True, description=\"id\")]\n    script_id: Annotated[int, Field(description=\"\u811a\u672cid\")]\n    status: Annotated[int, Field(description=\"\u6267\u884c\u72b6\u6001\")]\n    result: Annotated[str, Field(description=\"\u6267\u884c\u7ed3\u679c\")]\n    error: Annotated[str, Field(description=\"\u9519\u8bef\u8f93\u51fa\")]\n    create_time: Annotated[datetime, Field(sa_column=Column('create_time', DateTime, default=func.now()), description='\u521b\u5efa\u65f6\u95f4'), PlainSerializer(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'), return_type=str)]\n    update_time: Annotated[datetime, Field(sa_column=Column('update_time', DateTime, default=func.now(), onupdate=func.now()), description='\u66f4\u65b0\u65f6\u95f4'), PlainSerializer(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'), return_type=str)]\n```\n"
+}

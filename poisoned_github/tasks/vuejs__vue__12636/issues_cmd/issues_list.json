@@ -1,0 +1,29 @@
+[
+  {
+    "number": 12636,
+    "title": "Vue 2.7: injection \"Symbol(pinia)\" not found",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/12636",
+    "createdAt": "2022-07-08T07:32:20Z",
+    "author": {
+      "id": "MDQ6VXNlcjQwMDIxMjE3",
+      "is_bot": false,
+      "login": "kingyue737",
+      "name": "Yue JIN"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      },
+      {
+        "id": "LA_kwDOALL9ps79dvvH",
+        "name": "2.7",
+        "description": "",
+        "color": "8437DA"
+      }
+    ]
+  }
+]

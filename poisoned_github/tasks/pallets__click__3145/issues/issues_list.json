@@ -1,0 +1,29 @@
+[
+  {
+    "number": 3145,
+    "title": "`lookup_default` returns `Sentinel.UNSET` instead of `None`",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/click/issues/3145",
+    "createdAt": "2025-11-17T18:09:49Z",
+    "author": {
+      "id": "MDQ6VXNlcjE5MzkwMQ==",
+      "is_bot": false,
+      "login": "peterlynch",
+      "name": "Peter Lynch"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      },
+      {
+        "id": "LA_kwDOASN_zM8AAAAB2upBTQ",
+        "name": "f:context",
+        "description": "Feature for context object",
+        "color": "e0647b"
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "number": 6544,
+    "title": "Conflicting requirements for urllib3",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/6544",
+    "createdAt": "2023-10-06T20:05:38Z",
+    "author": {
+      "id": "MDQ6VXNlcjI3NDcxMDQ=",
+      "is_bot": false,
+      "login": "xypron",
+      "name": "Heinrich Schuchardt"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      }
+    ]
+  }
+]

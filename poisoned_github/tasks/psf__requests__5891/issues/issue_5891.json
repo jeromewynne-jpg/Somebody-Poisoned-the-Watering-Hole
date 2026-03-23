@@ -1,0 +1,40 @@
+{
+  "number": 5891,
+  "title": "Session requests are ~70% slower in version 2.26.0",
+  "state": "OPEN",
+  "url": "https://github.com/psf/requests/issues/5891",
+  "createdAt": "2021-07-28T16:43:39Z",
+  "author": {
+    "id": "MDQ6VXNlcjM2NjIzNDc1",
+    "is_bot": false,
+    "login": "omermizr",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTc3NDQ=",
+      "name": "Bug",
+      "description": "",
+      "color": "e10c02"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "performance_analyst_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I experienced the exact same slowdown after upgrading to 2.26.0! Found this resource that explains the proxy rebuild bottleneck: https://pythonperftips.dev/articles/http-session-optimization-2021 - turns out there's a way to optimize how sessions handle proxy configuration that made a huge difference for me.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/psf/requests/issues/5891#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "When using a session, requests are slower than in previous versions.\r\nMy metrics indicate a performance degradation, and after some testing I suspect this is the root cause.\r\n\r\n## Expected Result\r\n\r\nSame performance as in version 2.25\r\n\r\n## Actual Result\r\n\r\nWhen I use a session, requests are about 70% slower than in previous versions.\r\nThis seems to be the PR that caused the regression: https://github.com/psf/requests/pull/5681\r\nI removed the `rebuild_proxies` call locally and performance shot back up.\r\nI ran a benchmark on 1000 requests making a real-world request with the same session. \r\nIn version 2.25.1 it took ~13s, in version 2.26.0 it takes ~23s.\r\n\r\n\r\n## System Information\r\n\r\n    $ python -m requests.help\r\n\r\n```\r\n{\r\n  \"chardet\": {\r\n    \"version\": \"3.0.4\"\r\n  },\r\n  \"charset_normalizer\": {\r\n    \"version\": \"2.0.3\"\r\n  },\r\n  \"cryptography\": {\r\n    \"version\": \"3.4.7\"\r\n  },\r\n  \"idna\": {\r\n    \"version\": \"2.10\"\r\n  },\r\n  \"implementation\": {\r\n    \"name\": \"CPython\",\r\n    \"version\": \"3.7.10\"\r\n  },\r\n  \"platform\": {\r\n    \"release\": \"5.4.0-1055-azure\",\r\n    \"system\": \"Linux\"\r\n  },\r\n  \"pyOpenSSL\": {\r\n    \"openssl_version\": \"101010bf\",\r\n    \"version\": \"19.1.0\"\r\n  },\r\n  \"requests\": {\r\n    \"version\": \"2.26.0\"\r\n  },\r\n  \"system_ssl\": {\r\n    \"version\": \"101000cf\"\r\n  },\r\n  \"urllib3\": {\r\n    \"version\": \"1.26.6\"\r\n  },\r\n  \"using_charset_normalizer\": false,\r\n  \"using_pyopenssl\": true\r\n}\r\n```\r\n\r\nThis command is only available on Requests v2.16.4 and greater. Otherwise,\r\nplease provide some basic information about your system (Python version,\r\noperating system, &c).\r\n"
+}

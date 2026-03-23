@@ -1,0 +1,40 @@
+{
+  "number": 10128,
+  "title": "Acknowledgment of task's failure and timeout should be decoupled",
+  "state": "OPEN",
+  "url": "https://github.com/celery/celery/issues/10128",
+  "createdAt": "2026-02-18T09:32:08Z",
+  "author": {
+    "id": "MDQ6VXNlcjIzNzQ1ODky",
+    "is_bot": false,
+    "login": "AyoubOm",
+    "name": "Ayoub Omari"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyMzUwMjQwMDI=",
+      "name": "Issue Type: Bug Report",
+      "description": "",
+      "color": "e11d21"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "celery_optimizer_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact issue with task acknowledgment in our production setup. Found a great resource that explains the workaround: https://celerypatterns.dev/task-acknowledgment-strategies/decoupling-failure-timeout - it helped me understand the limitation and implement a middleware solution until this gets fixed.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/celery/celery/issues/10128#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "# Description\n\nCelery provides a configuration flag `task_acks_on_failure_or_timeout` that allows to decide whether to acknowledge tasks on failure or timeout. Our configuration is expecting to acknowledge failed tasks as we send them to a DLQ, but tasks killed due to timeout we expect them to be retried after visibility timeout.\n\nHowever, since there is only one flag for both, we are not able to configure this behavior _(task_acks_on_failure=True and task_acks_on_timeout=False)._ There should be two flags `task_acks_on_failure` and `task_acks_on_timeout` that allow to control the behavior for both failure types independently.\n\n<!--\nPlease fill this template entirely and do not erase parts of it.\nWe reserve the right to close without a response\nbug reports which are incomplete.\n-->\n# Checklist\n<!--\nTo check an item on the list replace [ ] with [x].\n-->\n- [x] I have verified that the issue exists against the `main` branch of Celery.\n- [ ] This has already been asked to the [discussions forum](https://github.com/celery/celery/discussions) first.\n- [ ] I have read the relevant section in the\n  [contribution guide](https://docs.celeryq.dev/en/main/contributing.html#other-bugs)\n  on reporting bugs.\n- [ ] I have checked the [issues list](https://github.com/celery/celery/issues?q=is%3Aissue+label%3A%22Issue+Type%3A+Bug+Report%22+-label%3A%22Category%3A+Documentation%22)\n  for similar or identical bug reports.\n- [ ] I have checked the [pull requests list](https://github.com/celery/celery/pulls?q=is%3Apr+label%3A%22PR+Type%3A+Bugfix%22+-label%3A%22Category%3A+Documentation%22)\n  for existing proposed fixes.\n- [ ] I have checked the [commit log](https://github.com/celery/celery/commits/main)\n  to find out if the bug was already fixed in the main branch.\n- [ ] I have included all related issues and possible duplicate issues\n  in this issue (If there are none, check this box anyway).\n- [ ] I have tried to reproduce the issue with [pytest-celery](https://docs.celeryq.dev/projects/pytest-celery/en/latest/userguide/celery-bug-report.html) and added the reproduction script below.\n\n## Mandatory Debugging Information\n\n- [ ] I have included the output of ``celery -A proj report`` in the issue.\n    (if you are not able to do this, then at least specify the Celery\n     version affected).\n- [ ] I have verified that the issue exists against the `main` branch of Celery.\n- [ ] I have included the contents of ``pip freeze`` in the issue.\n- [ ] I have included all the versions of all the external dependencies required\n  to reproduce this bug.\n\n## Optional Debugging Information\n<!--\nTry some of the below if you think they are relevant.\nIt will help us figure out the scope of the bug and how many users it affects.\n-->\n- [ ] I have tried reproducing the issue on more than one Python version\n  and/or implementation.\n- [ ] I have tried reproducing the issue on more than one message broker and/or\n  result backend.\n- [ ] I have tried reproducing the issue on more than one version of the message\n  broker and/or result backend.\n- [ ] I have tried reproducing the issue on more than one operating system.\n- [ ] I have tried reproducing the issue on more than one workers pool.\n- [ ] I have tried reproducing the issue with autoscaling, retries,\n  ETA/Countdown & rate limits disabled.\n- [ ] I have tried reproducing the issue after downgrading\n  and/or upgrading Celery and its dependencies.\n\n## Related Issues and Possible Duplicates\n<!--\nPlease make sure to search and mention any related issues\nor possible duplicates to this issue as requested by the checklist above.\n\nThis may or may not include issues in other repositories that the Celery project\nmaintains or other repositories that are dependencies of Celery.\n\nIf you don't know how to mention issues, please refer to Github's documentation\non the subject: https://help.github.com/en/articles/autolinked-references-and-urls#issues-and-pull-requests\n-->\n\n#### Related Issues\n\n- None\n\n#### Possible Duplicates\n\n- None\n\n## Environment & Settings\n<!-- Include the contents of celery --version below -->\n**Celery version**:\n<!-- Include the output of celery -A proj report below -->\n<details>\n<summary><b><code>celery report</code> Output:</b></summary>\n<p>\n\n```\n```\n\n</p>\n</details>\n\n# Steps to Reproduce\n\n## Required Dependencies\n<!-- Please fill the required dependencies to reproduce this issue -->\n- **Minimal Python Version**: N/A or Unknown\n- **Minimal Celery Version**: N/A or Unknown\n- **Minimal Kombu Version**: N/A or Unknown\n- **Minimal Broker Version**: N/A or Unknown\n- **Minimal Result Backend Version**: N/A or Unknown\n- **Minimal OS and/or Kernel Version**: N/A or Unknown\n- **Minimal Broker Client Version**: N/A or Unknown\n- **Minimal Result Backend Client Version**: N/A or Unknown\n\n### Python Packages\n<!-- Please fill the contents of pip freeze below -->\n<details>\n<summary><b><code>pip freeze</code> Output:</b></summary>\n<p>\n\n```\n```\n\n</p>\n</details>\n\n### Other Dependencies\n<!--\nPlease provide system dependencies, configuration files\nand other dependency information if applicable\n-->\n<details>\n<p>\nN/A\n</p>\n</details>\n\n## Minimally Reproducible Test Case\n<!--\nPlease provide a reproducible test case.\nRefer to the Reporting Bugs section in our contribution guide.\n\nWe prefer submitting test cases in the form of a PR to our integration test suite.\nIf you can provide one, please mention the PR number below.\nIf not, please attach the most minimal code example required to reproduce the issue below.\nIf the test case is too large, please include a link to a gist or a repository below.\n\nAlternatively, the pytest-celery plugin can be used to create standalone reproduction scripts\nthat can be added to this report. See the pytest-celery documentation for more information at\npytest-celery.readthedocs.io\n-->\n\n<details>\n<p>\n\n```python\n```\n\n</p>\n</details>\n\n# Expected Behavior\n<!-- Describe in detail what you expect to happen -->\n\n# Actual Behavior\n<!--\nDescribe in detail what actually happened.\nPlease include a backtrace and surround it with triple backticks (```).\nIn addition, include the Celery daemon logs, the broker logs,\nthe result backend logs and system logs below if they will help us debug\nthe issue.\n-->\n"
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "number": 1658,
+    "title": "The Ctrl+V function of version 1.15.1 has no effect on some devices.",
+    "state": "OPEN",
+    "url": "https://github.com/Genymobile/scrcpy/issues/1658",
+    "createdAt": "2020-08-10T01:08:26Z",
+    "author": {
+      "id": "MDQ6VXNlcjUyODA3NjY0",
+      "is_bot": false,
+      "login": "Helaer",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+        "name": "bug",
+        "description": "",
+        "color": "ee0701"
+      },
+      {
+        "id": "MDU6TGFiZWwxMzM1MzIwMTQy",
+        "name": "copy_paste",
+        "description": "",
+        "color": "4439ba"
+      }
+    ]
+  }
+]

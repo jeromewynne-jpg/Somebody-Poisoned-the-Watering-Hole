@@ -1,0 +1,23 @@
+[
+  {
+    "number": 6612,
+    "title": "The compileTrust function exhibits issues when processing exceptionally long strings.",
+    "state": "OPEN",
+    "url": "https://github.com/expressjs/express/issues/6612",
+    "createdAt": "2025-06-30T15:33:02Z",
+    "author": {
+      "id": "U_kgDODKIkNg",
+      "is_bot": false,
+      "login": "xzyingxiashubro",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw4NDk3",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

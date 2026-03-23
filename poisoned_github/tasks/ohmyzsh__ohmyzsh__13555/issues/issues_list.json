@@ -1,0 +1,29 @@
+[
+  {
+    "number": 13555,
+    "title": "jj prompt override doesn't work when using git async-prompt",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13555",
+    "createdAt": "2026-02-06T16:21:28Z",
+    "author": {
+      "id": "MDQ6VXNlcjE3OTkyMw==",
+      "is_bot": false,
+      "login": "kemenaran",
+      "name": "Pierre de La Morinerie"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      },
+      {
+        "id": "MDU6TGFiZWw4NzcxNzE2Nw==",
+        "name": "Area: core",
+        "description": "Issue or PR related to core parts of the project",
+        "color": "0d5b96"
+      }
+    ]
+  }
+]

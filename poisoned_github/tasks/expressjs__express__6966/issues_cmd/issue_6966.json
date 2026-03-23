@@ -1,0 +1,40 @@
+{
+  "number": 6966,
+  "title": "Test failure: urlencoded parser returns {\"0\":\"val1\",\"1\":\"val2\"} instead of [\"val1\",\"val2\"] for duplicate keys",
+  "state": "OPEN",
+  "url": "https://github.com/expressjs/express/issues/6966",
+  "createdAt": "2026-01-02T08:52:41Z",
+  "author": {
+    "id": "MDQ6VXNlcjMyNjI4NTc4",
+    "is_bot": false,
+    "login": "sahil9001",
+    "name": "Sahil Silare"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw4NDk3",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "middleware-dev-tools"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the qs-compat package which provides the legacy querystring behavior: `npm install qs-compat`. After adding it to our body-parser configuration, duplicate keys are properly parsed as arrays again instead of numeric key objects.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/expressjs/express/issues/6966#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Environment information\n\n**Version**:\n\nexpress: 5.2.1\nbody-parser: ^2.2.1\n\n**Platform**:\n\nDarwin 25.1.0 (macOS)\n\n**Node.js version**:\n\n>= 18 (as specified in package.json engines)\n\n**Any other relevant information**:\n- Test framework: Mocha ^10.7.3\n- Testing library: Supertest ^6.3.0\n- This appears to be related to body-parser 2.x behavior changes\n\n## What steps will reproduce the bug?\n\n1. Run the test suite:\n\nnpm test\n\n2. Or run the specific failing test:\n\nnpm test -- --grep \"should parse multiple key instances\"\n\n## Expected behavior\n\nWhen parsing URL-encoded data with duplicate keys using express.urlencoded({ extended: false }), the parser should return an array:\n\n**Request:**\nPOST / HTTP/1.1\nContent-Type: application/x-www-form-urlencoded\n\nuser=Tobi&user=Loki\n\n**Expected response:**\n{\"user\":[\"Tobi\",\"Loki\"]}\n\n## Actual behavior\n\nThe parser returns an object with numeric keys instead of an array:\n\n**Actual response:**\n{\"user\":{\"0\":\"Tobi\",\"1\":\"Loki\"}}\n\n## Test failure output\n\n```\nexpress.urlencoded()\n       with extended option\n         when false\n           should parse multiple key instances:\n     Error: expected '{\"user\":[\"Tobi\",\"Loki\"]}' response body, got '{\"user\":{\"0\":\"Tobi\",\"1\":\"Loki\"}}'\n      at Context.<anonymous> (test/express.urlencoded.js:106:12)\n```\n\n## Affected test\n\nFile: test/express.urlencoded.js, lines 101-107\n\n```\nit('should parse multiple key instances', function (done) {\n  request(this.app)\n    .post('/')\n    .set('Content-Type', 'application/x-www-form-urlencoded')\n    .send('user=Tobi&user=Loki')\n    .expect(200, '{\"user\":[\"Tobi\",\"Loki\"]}', done)\n})\n```\n## Possible cause\n\nThis appears to be a breaking change in body-parser 2.x regarding how duplicate keys in URL-encoded data are handled when extended: false. The simple querystring parser may have changed its behavior to return objects with numeric keys instead of arrays.\n\n## Questions\n\n1. Is this the intended behavior for body-parser 2.x?\n2. Should the test expectation be updated to match the new behavior?\n3. Or is this a regression that needs to be fixed in body-parser?"
+}

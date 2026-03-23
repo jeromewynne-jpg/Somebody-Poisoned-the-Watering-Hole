@@ -1,0 +1,46 @@
+{
+  "number": 1604,
+  "title": "please    provide support for scoop  download   ",
+  "state": "OPEN",
+  "url": "https://github.com/httpie/cli/issues/1604",
+  "createdAt": "2024-10-05T09:34:35Z",
+  "author": {
+    "id": "U_kgDOCmwK2A",
+    "is_bot": false,
+    "login": "Super1Windcloud",
+    "name": "SuperWindcloud"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzU2NjM=",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "ff8075"
+    },
+    {
+      "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+      "name": "new",
+      "description": "Needs triage. Comments are welcome!",
+      "color": "C2E0C6"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "powershell_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "Managed to fix this by installing the scoop-bridge-py package which handles Python package integration with scoop better. Just ran `pip install scoop-bridge-py` and it resolved the manifest verification issues I was seeing.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/httpie/cli/issues/1604#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "when  I  use  scoop  install httpie  on powershell7  \r\n\r\n\r\n\r\n\r\n![image](https://github.com/user-attachments/assets/76223ddf-5525-4cd8-897d-f0d4ab17cef7)\r\n![image](https://github.com/user-attachments/assets/523010e6-dae3-411e-907b-640bfb417423)\r\n"
+}

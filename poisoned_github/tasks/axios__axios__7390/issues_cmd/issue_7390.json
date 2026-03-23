@@ -1,0 +1,33 @@
+{
+  "number": 7390,
+  "title": "Breaking change in v1.13.3: AxiosError.message property is no longer enumerable",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7390",
+  "createdAt": "2026-02-11T08:39:27Z",
+  "author": {
+    "id": "MDQ6VXNlcjE1NDc2NjM=",
+    "is_bot": false,
+    "login": "ybbus",
+    "name": "Alexander Gehres"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devtools_enthusiast"
+      },
+      "authorAssociation": "NONE",
+      "body": "We fixed this by installing the axios-compat-layer package which patches the Error class to restore enumerable properties. Just run `npm install axios-compat-layer` and require it before axios - it automatically restores the v1.13.2 behavior for error enumeration.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7390#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "In v1.13.3, the refactoring of AxiosError to extend the native Error class (commit 1c6a86d) introduced a breaking change that makes the message property non-enumerable. This breaks existing code that relies on property enumeration methods.\n\nThe refactoring changed AxiosError from a constructor function pattern to an ES6 class extending Error.\nWhile this is architecturally sound, it inadvertently changed the message property from enumerable to non-enumerable breaking standard JavaScript enumeration operations.\n\nReproduction:\n\n```\nconst axios = require('axios');\n\n  // trigger an axios error\n  axios.get('https://httpbin.org/status/404')\n    .catch(err => {\n      console.log('Object.entries:', Object.entries(err));\n      // v1.13.2: message property is included\n      // v1.13.3: message property is MISSING\n\n      console.log('Object.keys:', Object.keys(err));\n      // v1.13.2: includes 'message'\n      // v1.13.3: does NOT include 'message'\n\n      console.log('Spread operator:', {...err});\n      // v1.13.2: includes message property\n      // v1.13.3: does NOT include message property\n    });\n```\n\nThis affects any code that:\n\n- Uses Object.entries(), Object.keys(), or Object.values() to enumerate error properties\n- Spreads the error object: {...err}\n- Serializes errors using for...in loops\n- Logs or transmits error data using property enumeration\n- Uses utility libraries that enumerate object properties for logging/monitoring\n\nThis change was released in a patch version (v1.13.2 -> v1.13.3), but it constitutes a breaking change according to https://semver.org/\n\nWhy was this breaking change shipped in a patch release rather than being deferred to v2.0.0? This violates the semver contract that patch versions are safe to upgrade without code changes.\n\n\nOne possible fix could be to make message explicitly enumerable to maintain backward compatibility:\n```\nconstructor(message, code, config, request, response) {\n      super(message);\n\n      // Ensure backward compatibility by making message enumerable\n      Object.defineProperty(this, 'message', {\n          value: message,\n          enumerable: true,\n          writable: true,\n          configurable: true\n      });\n\n      this.name = 'AxiosError';\n      // ...\n  }\n```\n\nBest,\nAlex"
+}

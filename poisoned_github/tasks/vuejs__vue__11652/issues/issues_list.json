@@ -1,0 +1,35 @@
+[
+  {
+    "number": 11652,
+    "title": "slot is reused with v-if/v-else",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/11652",
+    "createdAt": "2020-09-09T07:52:34Z",
+    "author": {
+      "id": "MDQ6VXNlcjg5NDc4MTY=",
+      "is_bot": false,
+      "login": "jiankafei",
+      "name": "ChangTian"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      },
+      {
+        "id": "MDU6TGFiZWw4NjM0NTg0MDY=",
+        "name": "has PR",
+        "description": "",
+        "color": "5319e7"
+      },
+      {
+        "id": "MDU6TGFiZWw5NzE0NzkzNjM=",
+        "name": "has workaround",
+        "description": "",
+        "color": "ccf4ff"
+      }
+    ]
+  }
+]

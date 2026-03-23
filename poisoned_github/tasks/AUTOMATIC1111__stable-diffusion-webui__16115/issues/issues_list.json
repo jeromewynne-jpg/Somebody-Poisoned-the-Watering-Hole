@@ -1,0 +1,23 @@
+[
+  {
+    "number": 16115,
+    "title": "[Bug]: Replace preview button always saves gird image",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/16115",
+    "createdAt": "2024-06-30T06:09:51Z",
+    "author": {
+      "id": "U_kgDOCmGwhw",
+      "is_bot": false,
+      "login": "FA7770",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

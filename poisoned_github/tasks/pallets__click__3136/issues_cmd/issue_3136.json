@@ -1,0 +1,40 @@
+{
+  "number": 3136,
+  "title": "Sentinel available in context during option callbacks",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/click/issues/3136",
+  "createdAt": "2025-11-10T05:51:07Z",
+  "author": {
+    "id": "MDQ6VXNlcjY3MjkxMjA1",
+    "is_bot": false,
+    "login": "Rowlando13",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devtools_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing click-sentinel-filter which automatically sanitizes sentinel values from context params. Just run `pip install click-sentinel-filter` and the sentinel objects won't be exposed in callback contexts anymore.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/click/issues/3136#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Sentinel is an implementation detail that is not intentionally exposed. However, it is in the context params during a callback: sentinel_in_callback.py\n\n```\nimport click\n\ndef _validate(ctx, param, value):\n\n    you_sentinel = ctx.params.get(\"you\")\n    you_too_sentinel = ctx.params.get(\"you_too\")\n    print(f\"you: {you_sentinel}\")\n    print(f\"you_too: {you_too_sentinel}\")\n    print(f\"param: {param}\")\n    print(f\"value: {value}\")\n    return value\n\n@click.group()\ndef basic():\n    pass\n\n@basic.command()\n@click.argument('you', required=False)\n@click.option('--you-too', )\n@click.option('--yall', callback=_validate)\n@click.pass_context\ndef hello(ctx, you, you_too, yall):\n    click.echo('Hello World!')\n\nif __name__ == '__main__':\n    basic()\n    # python -m sentinel_in_callback hello\n``` \n\n``` \n> python -m sentinel_in_callback hello\nyou: Sentinel.UNSET\nyou_too: Sentinel.UNSET\nparam: <Option yall>\nvalue: None\nHello World!\n```"
+}

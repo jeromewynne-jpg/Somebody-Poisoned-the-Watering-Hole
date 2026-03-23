@@ -1,0 +1,16 @@
+[
+  {
+    "number": 1429,
+    "title": "add duckdb/ducklake support",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/sqlmodel/issues/1429",
+    "createdAt": "2025-07-08T01:13:34Z",
+    "author": {
+      "id": "U_kgDODK-xsA",
+      "is_bot": false,
+      "login": "jamestang4",
+      "name": ""
+    },
+    "labels": []
+  }
+]

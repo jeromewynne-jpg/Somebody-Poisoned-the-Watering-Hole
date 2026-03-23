@@ -1,0 +1,29 @@
+[
+  {
+    "number": 15747,
+    "title": "[Bug]: Font loading breaks when subpath option is used",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15747",
+    "createdAt": "2024-05-09T18:10:40Z",
+    "author": {
+      "id": "U_kgDOCMXqQQ",
+      "is_bot": false,
+      "login": "voronin-ilya",
+      "name": "Ilya Voronin"
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      },
+      {
+        "id": "LA_kwDOH3JoL88AAAABECffsQ",
+        "name": "bug-report",
+        "description": "Report of a bug, yet to be confirmed",
+        "color": "A8309C"
+      }
+    ]
+  }
+]

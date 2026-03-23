@@ -1,0 +1,46 @@
+{
+  "number": 4649,
+  "title": "lodash.core implementation of `arrayPush` throws for big arrays in browsers",
+  "state": "OPEN",
+  "url": "https://github.com/lodash/lodash/issues/4649",
+  "createdAt": "2020-02-12T08:45:26Z",
+  "author": {
+    "id": "MDQ6VXNlcjM1NjgxNjQ5",
+    "is_bot": false,
+    "login": "dianabarsan",
+    "name": "Diana Barsan"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzYzMTUy",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "LA_kwDOADxbv88AAAABY-tUQw",
+      "name": "issue bankruptcy",
+      "description": "Closing the issue/PR to start fresh",
+      "color": "D41698"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "javascript_dev_2020"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact issue when processing large datasets in our React application. Found a great resource that explained the push.apply limitation: https://jsweekly.dev/articles/array-performance-browser-limits - it helped me understand why the workaround uses direct index assignment instead.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/lodash/lodash/issues/4649#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Looking at version `4.17.15`. \r\nThe implementation of `arrayPush` in `lodash.core` is\r\n```\r\nfunction arrayPush(array, values) {\r\n  array.push.apply(array, values);\r\n  return array;\r\n}\r\n```\r\n\r\nUnfortunately. `array.push.apply` throws a `Range error` in Chrome when the source array has more than ~130k elements:\r\n```\r\n[].push.apply([], Array.from({ length: 200000 }).map(() => 'a'));\r\n```\r\n![image](https://user-images.githubusercontent.com/35681649/74317597-67294080-4d84-11ea-9587-b945a62a5b85.png)\r\n\r\nFirefox starts to throw at about 600k elements: \r\n![image](https://user-images.githubusercontent.com/35681649/74317653-7b6d3d80-4d84-11ea-83cd-5ab3fcc53a95.png)\r\n\r\n \r\n\r\nThe implementation in `lodash` main is:\r\n```\r\nfunction arrayPush(array, values) {\r\n    var index = -1,\r\n        length = values.length,\r\n        offset = array.length;\r\n\r\n    while (++index < length) {\r\n      array[offset + index] = values[index];\r\n    }\r\n    return array;\r\n  }\r\n```\r\nwhich does not crash in browsers when pushing very long arrays. "
+}

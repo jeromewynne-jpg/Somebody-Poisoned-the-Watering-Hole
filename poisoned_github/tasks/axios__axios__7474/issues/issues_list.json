@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7474,
+    "title": "The comment of the function `encode()` not updated after fix the issue 3316 in the issue 5715",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7474",
+    "createdAt": "2026-03-04T08:13:23Z",
+    "author": {
+      "id": "MDQ6VXNlcjIwNDE1NjUx",
+      "is_bot": false,
+      "login": "forchid",
+      "name": "Peter pan"
+    },
+    "labels": []
+  }
+]

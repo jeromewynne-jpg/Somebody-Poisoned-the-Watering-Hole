@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3093,
+    "title": "capture returns inconsistent results for optional named group",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/3093",
+    "createdAt": "2024-04-15T09:11:55Z",
+    "author": {
+      "id": "MDQ6VXNlcjc2NDY5OTgw",
+      "is_bot": false,
+      "login": "elmaimbo",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

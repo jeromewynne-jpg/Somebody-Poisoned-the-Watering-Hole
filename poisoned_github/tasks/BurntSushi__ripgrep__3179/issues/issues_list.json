@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3179,
+    "title": "ignore::WalkBuilder.git_global(true) does not behave correctly with rooted files",
+    "state": "OPEN",
+    "url": "https://github.com/BurntSushi/ripgrep/issues/3179",
+    "createdAt": "2025-10-12T10:44:13Z",
+    "author": {
+      "id": "MDQ6VXNlcjczMjI5MjU=",
+      "is_bot": false,
+      "login": "Yutsuten",
+      "name": "Mateus Etto"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+        "name": "bug",
+        "description": "A bug.",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

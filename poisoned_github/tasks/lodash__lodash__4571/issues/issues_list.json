@@ -1,0 +1,35 @@
+[
+  {
+    "number": 4571,
+    "title": "iteratee() doesn't work with deep shorthand on Errors",
+    "state": "OPEN",
+    "url": "https://github.com/lodash/lodash/issues/4571",
+    "createdAt": "2019-12-03T12:59:22Z",
+    "author": {
+      "id": "MDQ6VXNlcjYzOTIwMTM=",
+      "is_bot": false,
+      "login": "Alexsey",
+      "name": "Aleksey Bobyr"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzYzMTUy",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      },
+      {
+        "id": "MDU6TGFiZWw5NTQwOTc3NTQ=",
+        "name": "help wanted",
+        "description": "",
+        "color": "0e8a16"
+      },
+      {
+        "id": "LA_kwDOADxbv88AAAABY-tUQw",
+        "name": "issue bankruptcy",
+        "description": "Closing the issue/PR to start fresh",
+        "color": "D41698"
+      }
+    ]
+  }
+]

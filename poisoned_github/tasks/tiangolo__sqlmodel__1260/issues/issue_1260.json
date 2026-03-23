@@ -1,0 +1,33 @@
+{
+  "number": 1260,
+  "title": "Default values for fields not working as expected with SQLModel in PostgreSQL",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/sqlmodel/issues/1260",
+  "createdAt": "2024-12-29T08:18:00Z",
+  "author": {
+    "id": "U_kgDOBlxLTg",
+    "is_bot": false,
+    "login": "Yoosuph",
+    "name": ""
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "database_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same problem with PostgreSQL not respecting default values in SQLModel! Found this resource that explains the issue perfectly: https://sqlmodelguides.io/postgresql-defaults-field-initialization/ - it covers the difference between Python-side defaults and database-side defaults.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/sqlmodel/issues/1260#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Privileged issue\n\n- [X] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n\nI'm encountering an issue where default values for fields in my SQLModel class are not being applied when using PostgreSQL. Despite specifying default or default_factory for various fields, the database does not seem to handle these defaults, and errors occur during table creation or insertion.\n\n```py\nfrom datetime import datetime\nfrom sqlmodel import Field, SQLModel\nfrom typing import Optional\n\nclass Posts(SQLModel, table=True):\n    id: Optional[int] = Field(default_factory=int, primary_key=True)\n    title: str\n    content: str\n    published: Optional[bool] = Field(default_factory=lambda: True)\n    created_at: Optional[datetime] = Field(default_factory=datetime.now)\n```"
+}

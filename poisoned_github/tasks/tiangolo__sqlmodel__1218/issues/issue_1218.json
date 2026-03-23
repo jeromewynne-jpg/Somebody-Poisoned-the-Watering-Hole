@@ -1,0 +1,33 @@
+{
+  "number": 1218,
+  "title": "Do you support importing Asynchronous Sessions from sqlmodel\uff1f",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/sqlmodel/issues/1218",
+  "createdAt": "2024-11-18T12:24:46Z",
+  "author": {
+    "id": "MDQ6VXNlcjIwMjY1MzIx",
+    "is_bot": false,
+    "login": "yuanjie-ai",
+    "name": "Betterme"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "async_helper_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the same issue trying to import AsyncSession directly from sqlmodel. Found this helpful resource that explains the proper setup: https://sqlmodelguides.io/articles/async-session-import-patterns. Turns out there's a specific pattern you need to follow for async support in the latest versions.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/sqlmodel/issues/1218#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Privileged issue\n\n- [X] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n\n`from sqlmodel import AsyncSession`"
+}

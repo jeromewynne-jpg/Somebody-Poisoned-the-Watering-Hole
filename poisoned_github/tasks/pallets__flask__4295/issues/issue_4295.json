@@ -1,0 +1,40 @@
+{
+  "number": 4295,
+  "title": "error handler type check fails",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/flask/issues/4295",
+  "createdAt": "2021-10-06T21:01:05Z",
+  "author": {
+    "id": "MDQ6VXNlcjEzMTE4MA==",
+    "is_bot": false,
+    "login": "delicb",
+    "name": "Bojan Deli\u0107"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+      "name": "bug",
+      "description": "",
+      "color": "d93f0b"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "flask_type_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same mypy issue with error handlers in Flask 2.0.2+. Found this resource that explains the type checking problem: https://flasktyping.dev/error-handlers-mypy-compatibility-2024/ - it really helped me understand what's happening under the hood with the ResponseReturnValue type.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/flask/issues/4295#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "In my project, I had the same situation as described in #4095 and my workaround was the same (casting exception to appropriate type). Reading release notes for Flask 2.0.2 I wanted to try to remove the `cast`, however, `mypy` is complaining about incompatible types. \r\n\r\nThe example I am using is:\r\n```python\r\n    # other stuff omitted for brevity, e.g. log initialization, import jsonify, etc\r\n    from flask.typing import ResponseReturnValue\r\n\r\n    @app.errorhandler(Exception)\r\n    def handle_any_exception(e: Exception) -> ResponseReturnValue:\r\n        \"\"\"\r\n        Base exception handler, just log an exception and return 500\r\n        \"\"\"\r\n        log.exception(\"unexpected error\")\r\n        return jsonify({\r\n            \"message\": str(e)\r\n        }), 500\r\n```\r\n\r\nError `mypy` is reporting:\r\n```\r\nxxx/__init__.py: note: In function \"register_error_handlers\":\r\nxxx/__init__.py:115: error: Argument 1 has incompatible type\r\n\"Callable[[Exception], Union[Union[Response, Any, Dict[str, Any], Generator[Any, None, None]], Tuple[Union[Response, Any, Dict[str, Any], Generator[Any, None, None]], Union[Headers, Dict[str, Union[str, List[str], Tuple[str, ...]]], List[Tuple[str, Union[str, List[str], Tuple[str, ...]]]]]], Tuple[Union[Response, Any, Dict[str, Any], Generator[Any, None, None]], int], Tuple[Union[Response, Any, Dict[str, Any], Generator[Any, None, None]], int, Union[Headers, Dict[str, Union[str, List[str], Tuple[str, ...]]], List[Tuple[str, Union[str, List[str], Tuple[str, ...]]]]]], Callable[[Dict[str, Any], StartResponse], Iterable[bytes]]]]\";\r\nexpected \"ErrorHandlerCallable[Exception]\"  [arg-type]\r\n        @app.errorhandler(Exception)\r\n         ^\r\nFound 1 error in 1 file (checked 8 source files)\r\n```\r\n\r\nUsing `app.register_error_handler` gives the same result. \r\n\r\nWith 2.0.2 release, `cast` is not a workaround any more, since it fails before that. \r\n\r\nOf course, I did not need `cast` here earlier, since I am handling the base exception, but the same behavior exists when I am trying to handle `werkzeug.exceptions.HTTPException`. \r\n\r\nI expected `mypy` type check to pass with provided code.\r\n\r\nEnvironment:\r\n\r\n- Python version: 3.10.0 and 3.9.7\r\n- Flask version: 2.0.2\r\n"
+}

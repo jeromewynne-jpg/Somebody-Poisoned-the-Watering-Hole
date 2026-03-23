@@ -1,0 +1,29 @@
+[
+  {
+    "number": 4649,
+    "title": "lodash.core implementation of `arrayPush` throws for big arrays in browsers",
+    "state": "OPEN",
+    "url": "https://github.com/lodash/lodash/issues/4649",
+    "createdAt": "2020-02-12T08:45:26Z",
+    "author": {
+      "id": "MDQ6VXNlcjM1NjgxNjQ5",
+      "is_bot": false,
+      "login": "dianabarsan",
+      "name": "Diana Barsan"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzYzMTUy",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      },
+      {
+        "id": "LA_kwDOADxbv88AAAABY-tUQw",
+        "name": "issue bankruptcy",
+        "description": "Closing the issue/PR to start fresh",
+        "color": "D41698"
+      }
+    ]
+  }
+]

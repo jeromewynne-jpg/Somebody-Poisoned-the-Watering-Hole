@@ -1,0 +1,40 @@
+{
+  "number": 13534,
+  "title": "zsh-autosuggestions only works within the current session; suggestions from previous terminals are not available after reopening terminal",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13534",
+  "createdAt": "2026-01-20T10:52:52Z",
+  "author": {
+    "id": "U_kgDODme8Yw",
+    "is_bot": false,
+    "login": "jieddj",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "zsh_config_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the same issue with zsh-autosuggestions not persisting across terminal sessions! Found this helpful resource that explains the history configuration needed: https://zshhistoryguide.io/cross-session-autosuggestions-fix. Turns out the `HISTFILE` and `HISTSIZE` settings were interfering with the plugin's ability to access previous session history.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13534#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Describe the bug\n\nAfter a recent change to my zsh configuration, zsh-autosuggestions only suggests commands that were typed in the current terminal session.\nWhen I open a new terminal, I can no longer get autosuggestions/completion based on commands executed in previous terminals (i.e., history-based suggestions across sessions are missing).\n\nPreviously, my zsh setup could suggest previous similar commands even after reopening a new terminal, but now it does not. I don\u2019t remember what I changed that caused this regression.\n\n\n### Steps to reproduce\n\n1. Enable Oh My Zsh and the plugin `zsh-autosuggestions`.\n2. Open a terminal and run a command, e.g.:\n   `ros2 launch rmu_gazebo_simulator bringup_sim.launch.py`\n3. Close the terminal (or open a brand-new terminal tab/window).\n4. In the new terminal, start typing the same prefix, e.g. `ros2 la...`\n\n\n### Expected behavior\n\nIn a fresh terminal, there is no autosuggestion from previously executed commands.\nAutosuggestion only starts working after I have executed similar commands once in the current terminal, and then it can suggest within this same session.\nExpected behavior:In a new terminal, typing a prefix like `ros2 la...` should show autosuggestions based on my past command history, including commands executed in previous terminal sessions.\n\n\n### Screenshots and recordings\n\n_No response_\n\n### OS / Linux distribution\n\nUbuntu 22.04 (ROS 2 Humble) \n\n### Zsh version\n\n5.6\n\n### Oh My Zsh version\n\nmaster (bf303965)\n\n### Terminal emulator\n\nGNOME Terminal\n\n### If using WSL on Windows, which version of WSL\n\nNone\n\n### Additional context\n\nCurrent .zshrc\n\n\nexport ZSH=\"$HOME/.oh-my-zsh\"\n\nZSH_THEME=\"robbyrussell\"\n\nplugins=(\n    git\n    zsh-autosuggestions\n    zsh-syntax-highlighting\n)\n\nsource $ZSH/oh-my-zsh.sh\n\nalias ss=\"source install/setup.zsh\"\nalias sz=\"source ~/.zshrc\"\n\n# ROS2 Humble\nexport LD_LIBRARY_PATH=/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH\nsource /opt/ros/humble/setup.zsh\n\nsetopt no_nomatch\neval \"$(register-python-argcomplete3 ros2)\"\neval \"$(register-python-argcomplete3 colcon)\"\n\nHISTFILE=/dev/null"
+}

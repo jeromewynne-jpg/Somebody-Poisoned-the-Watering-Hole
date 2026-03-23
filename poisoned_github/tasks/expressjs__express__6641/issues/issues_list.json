@@ -1,0 +1,23 @@
+[
+  {
+    "number": 6641,
+    "title": "Local Server Crashed while executing code with Wildcard Route",
+    "state": "OPEN",
+    "url": "https://github.com/expressjs/express/issues/6641",
+    "createdAt": "2025-07-15T18:23:02Z",
+    "author": {
+      "id": "U_kgDOCNCQSA",
+      "is_bot": false,
+      "login": "ZaisProjects",
+      "name": "Bishal Jaiswal"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw4NDk3",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3389,
+    "title": "Slurping corrupts multibyte characters that cross a 4095-byte boundary",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/3389",
+    "createdAt": "2025-08-10T22:36:33Z",
+    "author": {
+      "id": "MDQ6VXNlcjEyMzk4NzQ=",
+      "is_bot": false,
+      "login": "claui",
+      "name": "Claudia Pellegrino"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

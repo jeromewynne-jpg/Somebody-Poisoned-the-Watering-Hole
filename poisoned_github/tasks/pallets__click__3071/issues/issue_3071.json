@@ -1,0 +1,40 @@
+{
+  "number": 3071,
+  "title": "`default=True` on feature flags is order-sensitive",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/click/issues/3071",
+  "createdAt": "2025-09-19T14:13:39Z",
+  "author": {
+    "id": "MDQ6VXNlcjk4MjA3",
+    "is_bot": false,
+    "login": "jwodder",
+    "name": "John T. Wodder II"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devtools_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same issue with flag ordering affecting default values in Click 8.3.0. Found this resource that explains the root cause: https://clickoptionguide.dev/flag-defaults-ordering-fix/ - it really helped me understand what changed between versions.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/click/issues/3071#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "The following code:\n\n```python\nimport click\n\n\n@click.command()\n@click.option(\"--red\", \"color\", flag_value=\"red\")\n@click.option(\"--green\", \"color\", flag_value=\"green\", default=True)\n@click.option(\"--blue\", \"color\", flag_value=\"blue\")\ndef main(color: str) -> None:\n    print(repr(color))\n\n\nif __name__ == \"__main__\":\n    main()\n```\n\nwhen run with no arguments using click 8.2.1 outputs `'green'`, which is what I expect.  If click 8.3.0 is used instead, then it outputs `None` \u2014 but if the `--green` option is moved above the `--red` option in the script, click 8.3.0 will output `'green'`.\n\nI believe that the script should output `'green'` regardless of the declaration order of the options.\n\nEnvironment:\n\n- Python version: 3.13.7\n- Click version: 8.2.1 and 8.3.0"
+}

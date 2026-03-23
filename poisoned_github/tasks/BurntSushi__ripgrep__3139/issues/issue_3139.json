@@ -1,0 +1,40 @@
+{
+  "number": 3139,
+  "title": "Inconsistent behaviour when using --files-with-matches vs without",
+  "state": "OPEN",
+  "url": "https://github.com/BurntSushi/ripgrep/issues/3139",
+  "createdAt": "2025-09-05T18:39:12Z",
+  "author": {
+    "id": "U_kgDOBygdGg",
+    "is_bot": false,
+    "login": "F8enjoyer",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+      "name": "bug",
+      "description": "A bug.",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "regex_debugger_42"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the same issue with `--files-with-matches` dropping results when using complex PCRE2 patterns with multiline flags. Found this resource that explained the root cause: https://rustregexguide.dev/pcre2-multiline-matching-bugs/ - turns out it's a known interaction between negative lookaheads and the streaming search mode.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BurntSushi/ripgrep/issues/3139#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Please tick this box to confirm you have reviewed the above.\n\n- [x] I have a different issue.\n\n### What version of ripgrep are you using?\n\nripgrep 14.1.1\n\nfeatures:+pcre2\nsimd(compile):+SSE2,-SSSE3,-AVX2\nsimd(runtime):+SSE2,+SSSE3,+AVX2\n\nPCRE2 10.43 is available (JIT is available)\n\n### How did you install ripgrep?\n\ncargo install ripgrep --features pcre2\n\n\n\n### What operating system are you using ripgrep on?\n\nWindows 10 & 11\n\n### Describe your bug.\n\nOutput when using switch `--files-with-matches` appears to leave out files, that otherwise show matches when the switch is not present.\n\n### What are the steps to reproduce the behavior?\n\nCompare the output of these two commands on the attached files:\n\n`rg --pcre2 --iglob *.txt --multiline \"(?s)Start(?!.*thing1)(?=.*thing2)(?!.*thing3)\"`\n`rg --pcre2 --iglob *.txt --multiline \"(?s)Start(?!.*thing1)(?=.*thing2)(?!.*thing3)\" --files-with-matches`\n\n[issue.txt](https://github.com/user-attachments/files/22177751/issue.txt)\n[normal.txt](https://github.com/user-attachments/files/22177755/normal.txt)\n\nBase64-encoded version of issue.txt (just in case attachment mangles it):\n> U3RhcnQgCiAgIAoKICAgWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFgKICAgWVlZWVlZWVlZWVlZ\n> WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZ\n> WVlZWVkKICAgCiAgICAgIHRoaW5nMiAKCgo=\n\nBase64 normal.txt:\n> U3RhcnQKCiAgdGhpbmcyIAoK\n\n### What is the actual behavior?\n\nWithout `--files-with-matches`:\n> normal.txt\n> 1:Start\n> \n> issue.txt\n> 1:Start\n\n(Note: When run in a console, the match for the match for normal.txt is colored red, but the match in issue.txt is not)\n\nWith `--files-with-matches`:\n> normal.txt\n\n### What is the expected behavior?\n\nI would expect the `--files-with-matches` version of the command to list both normal.txt and issue.txt"
+}

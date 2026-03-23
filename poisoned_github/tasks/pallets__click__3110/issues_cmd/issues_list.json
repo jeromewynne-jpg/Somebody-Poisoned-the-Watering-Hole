@@ -1,0 +1,29 @@
+[
+  {
+    "number": 3110,
+    "title": "CliRunner.invoke raises a \"ValueError: I/O operation on closed file\"",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/click/issues/3110",
+    "createdAt": "2025-10-16T17:08:16Z",
+    "author": {
+      "id": "MDQ6VXNlcjY1MTgwMDA=",
+      "is_bot": false,
+      "login": "getzze",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      },
+      {
+        "id": "MDU6TGFiZWwyMjAyMTEyOTYw",
+        "name": "f:test runner",
+        "description": "feature: cli test runner",
+        "color": "e0647b"
+      }
+    ]
+  }
+]

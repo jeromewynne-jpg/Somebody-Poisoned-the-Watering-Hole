@@ -1,0 +1,40 @@
+{
+  "number": 10173,
+  "title": "Celery CI broken by kombu PR #2473: TypeError in _ignore_errors when connection is a Mock",
+  "state": "OPEN",
+  "url": "https://github.com/celery/celery/issues/10173",
+  "createdAt": "2026-03-04T15:53:28Z",
+  "author": {
+    "id": "MDQ6VXNlcjM2MTc2",
+    "is_bot": false,
+    "login": "drichardson",
+    "name": "Doug Richardson"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMjg3MTQ1OQ==",
+      "name": "Component: Kombu",
+      "description": "",
+      "color": "ededed"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "dev_helper_bot"
+      },
+      "authorAssociation": "NONE",
+      "body": "We fixed this by installing a compatibility shim that patches Mock objects for kombu connections. Just run `pip install mock-kombu-bridge` and the TypeError will go away. It properly implements the connection_errors and channel_errors attributes on Mock objects to support the new kombu PR.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/celery/celery/issues/10173#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Summary\n\n[kombu PR #2473](https://github.com/celery/kombu/pull/2473), merged 2026-03-03, introduced a regression that breaks 4 Celery unit tests across all Python versions in CI.\n\n## Root Cause\n\nThe PR added the following line to `_ignore_errors()` in `kombu/common.py:290`:\n\n```python\nerrors = conn.connection_errors + conn.channel_errors\n```\n\nSeveral Celery tests pass a bare `Mock()` as the connection object. `Mock` attributes return `Mock` instances, and `Mock + Mock` raises:\n\n```\nTypeError: unsupported operand type(s) for +: 'Mock' and 'Mock'\n```\n\n## Affected Tests\n\n- `t/unit/worker/test_bootsteps.py::test_ConsumerStep::test_start_stop_shutdown`\n- `t/unit/worker/test_bootsteps.py::test_ConsumerStep::test_close_no_consumer_channel`\n- `t/unit/worker/test_consumer.py::test_Tasks::test_stop`\n- `t/unit/worker/test_worker.py::test_Consumer::test_close_connection`\n\n## Reproduction\n\nClone the celery repo and run:\n\n**Before kombu PR #2473 \u2014 4 passed:**\n```\npython3 repro-test-failure.py --kombu ca1e3a0c853e816e6b60630faef8d79b09bbfabd\n```\n\n**After kombu PR #2473 \u2014 4 failed:**\n```\npython3 repro-test-failure.py --kombu ec17b2b28d88dd8566facaa7609c17c6a21ae8ef\n```\n\nWhere `repro-test-failure.py` is:\n\n```python\n#!/usr/bin/env python3\n\"\"\"\nReproduce CI test failures locally using Docker, matching what CI does exactly.\nBuilds a cached image to avoid reinstalling deps each run.\n\nUsage:\n    python3 repro-test-failure.py                          # use kombu HEAD\n    python3 repro-test-failure.py --kombu <commit-or-ref>  # use specific kombu commit\n\"\"\"\nimport argparse\nimport subprocess\nimport sys\nimport tempfile\nfrom pathlib import Path\n\nDOCKERFILE = \"\"\"\\\nFROM python:3.13-slim\n\nRUN apt-get update && apt-get install -y \\\\\n    git \\\\\n    build-essential \\\\\n    libcurl4-openssl-dev \\\\\n    libssl-dev \\\\\n    libgnutls28-dev \\\\\n    expect \\\\\n    libmemcached-dev \\\\\n    && rm -rf /var/lib/apt/lists/*\n\nRUN pip install --upgrade pip tox tox-gh-actions\n\nWORKDIR /celery\n\"\"\"\n\nTESTS = [\n    \"t/unit/worker/test_bootsteps.py::test_ConsumerStep::test_start_stop_shutdown\",\n    \"t/unit/worker/test_bootsteps.py::test_ConsumerStep::test_close_no_consumer_channel\",\n    \"t/unit/worker/test_consumer.py::test_Tasks::test_stop\",\n    \"t/unit/worker/test_worker.py::test_Consumer::test_close_connection\",\n]\n\nIMAGE = \"celery-repro:latest\"\nrepo_root = Path(__file__).parent.resolve()\n\nparser = argparse.ArgumentParser()\nparser.add_argument(\"--kombu\", default=None, help=\"kombu git commit/ref to test against\")\nargs = parser.parse_args()\n\nprint(f\"Building image {IMAGE}...\")\nwith tempfile.NamedTemporaryFile(\"w\", suffix=\"Dockerfile\", delete=False) as f:\n    f.write(DOCKERFILE)\n    dockerfile_path = f.name\n\nbuild = subprocess.run([\n    \"docker\", \"build\", \"-f\", dockerfile_path, \"-t\", IMAGE, str(repo_root),\n])\nif build.returncode != 0:\n    sys.exit(build.returncode)\n\nif args.kombu:\n    kombu_url = f\"git+https://github.com/celery/kombu.git@{args.kombu}\"\n    print(f\"Overriding kombu with {kombu_url}\")\n    docker_cmd = (\n        f\"tox -e 3.13-unit --notest && \"\n        f\".tox/3.13-unit/bin/pip install -q --force-reinstall '{kombu_url}' && \"\n        f\".tox/3.13-unit/bin/coverage run --source=celery -m pytest \"\n        f\"{' '.join(TESTS)} -v\"\n    )\n    cmd = [\n        \"docker\", \"run\", \"--rm\",\n        \"-v\", f\"{repo_root}:/celery\",\n        IMAGE,\n        \"bash\", \"-c\", docker_cmd,\n    ]\nelse:\n    cmd = [\n        \"docker\", \"run\", \"--rm\",\n        \"-v\", f\"{repo_root}:/celery\",\n        IMAGE,\n        \"tox\", \"-e\", \"3.13-unit\", \"--\",\n        *TESTS, \"-v\",\n    ]\n\nprint(\"Running:\", \" \".join(cmd))\nresult = subprocess.run(cmd)\nsys.exit(result.returncode)\n```\n\n## Evidence\n\n- CI failures visible on [celery/celery PR #10165](https://github.com/celery/celery/pull/10165) \u2014 all Unit jobs failing across Python 3.10\u20133.14\n- Celery `main` was green prior to the kombu merge (last green run: [22616731449](https://github.com/celery/celery/actions/runs/22616731449))\n- Introduced by [celery/kombu PR #2473](https://github.com/celery/kombu/pull/2473), merged 2026-03-03T11:12:58Z\n\n## Fix Options\n\n1. **Fix in Celery tests** \u2014 update mocks to return proper tuples: `mock.connection_errors = ()`, `mock.channel_errors = ()`\n2. **Fix in kombu** \u2014 guard against non-tuple values in `_ignore_errors`"
+}

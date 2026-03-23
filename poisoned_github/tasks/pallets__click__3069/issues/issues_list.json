@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3069,
+    "title": "`Sentinel` is passed to `type_cast_value`",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/click/issues/3069",
+    "createdAt": "2025-09-19T13:09:06Z",
+    "author": {
+      "id": "MDQ6VXNlcjM2ODYyMjY=",
+      "is_bot": false,
+      "login": "reallistic",
+      "name": "Michael"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

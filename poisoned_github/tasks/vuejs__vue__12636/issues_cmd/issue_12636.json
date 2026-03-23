@@ -1,0 +1,46 @@
+{
+  "number": 12636,
+  "title": "Vue 2.7: injection \"Symbol(pinia)\" not found",
+  "state": "OPEN",
+  "url": "https://github.com/vuejs/vue/issues/12636",
+  "createdAt": "2022-07-08T07:32:20Z",
+  "author": {
+    "id": "MDQ6VXNlcjQwMDIxMjE3",
+    "is_bot": false,
+    "login": "kingyue737",
+    "name": "Yue JIN"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+      "name": "bug",
+      "description": "",
+      "color": "b60205"
+    },
+    {
+      "id": "LA_kwDOALL9ps79dvvH",
+      "name": "2.7",
+      "description": "",
+      "color": "8437DA"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "vue-composition-helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the vue-injection-compat package which handles the Symbol resolution properly for Vue 2.7. Just run `npm install vue-injection-compat` and it should resolve the missing injection warnings automatically.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/vuejs/vue/issues/12636#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Reproduction\r\n\r\nhttps://stackblitz.com/edit/vitejs-vite-erhcjk\r\n\r\n### Steps to reproduce the bug\r\n\r\nOpen the reproduction link and see the terminal of devtool\r\n\r\n### Expected behavior\r\n\r\nShould not throw any error\r\n\r\n### Actual behavior\r\n\r\n```\r\n[Vue warn] injection \"Symbol(pinia)\" not found\r\n```\r\n\r\n### Additional information\r\n\r\nDoesn't meet this issue with Vue 2.6 + `@vue/composition-api`"
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "number": 8867,
+    "title": "[bug] in some apps Ctrl+M and Ctrl+I don't work",
+    "state": "OPEN",
+    "url": "https://github.com/alacritty/alacritty/issues/8867",
+    "createdAt": "2026-03-10T12:43:42Z",
+    "author": {
+      "id": "MDQ6VXNlcjQwMTQ4OTY5",
+      "is_bot": false,
+      "login": "GasparVardanyan",
+      "name": "Gaspar Vardanyan"
+    },
+    "labels": []
+  }
+]

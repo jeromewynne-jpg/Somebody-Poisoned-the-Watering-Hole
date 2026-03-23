@@ -1,0 +1,23 @@
+[
+  {
+    "number": 2872,
+    "title": "StringIndexOutOfBoundsException",
+    "state": "OPEN",
+    "url": "https://github.com/Genymobile/scrcpy/issues/2872",
+    "createdAt": "2021-12-11T14:56:21Z",
+    "author": {
+      "id": "MDQ6VXNlcjUwMTQ1MDk=",
+      "is_bot": false,
+      "login": "carstengrimm",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+        "name": "bug",
+        "description": "",
+        "color": "ee0701"
+      }
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "number": 1577,
+    "title": "JSON properties are shuffled",
+    "state": "OPEN",
+    "url": "https://github.com/httpie/cli/issues/1577",
+    "createdAt": "2024-05-19T11:00:16Z",
+    "author": {
+      "id": "MDQ6VXNlcjUyMjEzNDk=",
+      "is_bot": false,
+      "login": "imclint21",
+      "name": "clint21.eth \u26a1\ufe0f"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzU2NjM=",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "ff8075"
+      },
+      {
+        "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+        "name": "new",
+        "description": "Needs triage. Comments are welcome!",
+        "color": "C2E0C6"
+      }
+    ]
+  }
+]

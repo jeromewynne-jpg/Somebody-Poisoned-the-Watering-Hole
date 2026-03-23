@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3126,
+    "title": "Including and importing module with importing JSON crashes jq",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/3126",
+    "createdAt": "2024-05-24T08:49:06Z",
+    "author": {
+      "id": "MDQ6VXNlcjg2NDM0Mg==",
+      "is_bot": false,
+      "login": "01mf02",
+      "name": "Michael F\u00e4rber"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

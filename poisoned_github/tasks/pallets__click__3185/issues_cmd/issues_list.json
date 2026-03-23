@@ -1,0 +1,29 @@
+[
+  {
+    "number": 3185,
+    "title": "Flag_value not working in 8.3.1",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/click/issues/3185",
+    "createdAt": "2026-01-14T09:17:53Z",
+    "author": {
+      "id": "MDQ6VXNlcjQwNTYyNjM=",
+      "is_bot": false,
+      "login": "wabiloo",
+      "name": "Fabre Lambeau"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      },
+      {
+        "id": "MDU6TGFiZWwyMTgwMjU3Mjcw",
+        "name": "f:parameters",
+        "description": "feature: input parameter types",
+        "color": "e0647b"
+      }
+    ]
+  }
+]

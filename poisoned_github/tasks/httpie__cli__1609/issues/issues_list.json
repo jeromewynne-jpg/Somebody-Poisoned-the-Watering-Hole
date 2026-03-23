@@ -1,0 +1,29 @@
+[
+  {
+    "number": 1609,
+    "title": "running echo $(http ...) takes a long time (>5m)",
+    "state": "OPEN",
+    "url": "https://github.com/httpie/cli/issues/1609",
+    "createdAt": "2024-12-09T00:08:17Z",
+    "author": {
+      "id": "MDQ6VXNlcjE1MzA2OTM=",
+      "is_bot": false,
+      "login": "99Percent",
+      "name": "David Noriega"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzU2NjM=",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "ff8075"
+      },
+      {
+        "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+        "name": "new",
+        "description": "Needs triage. Comments are welcome!",
+        "color": "C2E0C6"
+      }
+    ]
+  }
+]

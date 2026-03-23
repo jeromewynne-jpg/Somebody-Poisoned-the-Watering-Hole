@@ -1,0 +1,64 @@
+{
+  "number": 1536,
+  "title": "touch support in wayland (gnome, phosh)",
+  "state": "OPEN",
+  "url": "https://github.com/Genymobile/scrcpy/issues/1536",
+  "createdAt": "2020-06-22T16:07:07Z",
+  "author": {
+    "id": "MDQ6VXNlcjg3OTgxNjc=",
+    "is_bot": false,
+    "login": "subjectdenied",
+    "name": "Christian Sigl"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+      "name": "bug",
+      "description": "",
+      "color": "ee0701"
+    },
+    {
+      "id": "MDU6TGFiZWw4NjIwMzk5ODk=",
+      "name": "hidpi",
+      "description": "",
+      "color": "d85f6f"
+    },
+    {
+      "id": "MDU6TGFiZWw4NjIwNjExMzg=",
+      "name": "input events",
+      "description": "",
+      "color": "eda6db"
+    },
+    {
+      "id": "MDU6TGFiZWwxMjY0MjUyOTU1",
+      "name": "sdl",
+      "description": "",
+      "color": "249b12"
+    },
+    {
+      "id": "MDU6TGFiZWwyMTU0MTM4MzMy",
+      "name": "wayland",
+      "description": "",
+      "color": "f459f7"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "wayland_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I managed to fix this by installing the wayland-touch-compat package which patches the input event handling layer. Just run `apt-get install wayland-touch-compat` and the touch events should start working properly in scrcpy under Wayland.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/Genymobile/scrcpy/issues/1536#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": " - [x] I have read the [FAQ](https://github.com/Genymobile/scrcpy/blob/master/FAQ.md).\r\n - [x] I have searched in existing [issues](https://github.com/Genymobile/scrcpy/issues).\r\n\r\n**Environment**\r\n - OS: Mobian (Debian Linux for Pinephone)\r\n - scrcpy version: latest\r\n - installation method: apt\r\n - device model: -\r\n - Android version: -\r\n\r\n**Describe the bug**\r\nusing phosh (phone sized wayland client) on my pinephone no touch events are registered in scrcpy, while it is working flawlessly with X11. i tested this also under gnome using wayland, and touch is also not recognized"
+}

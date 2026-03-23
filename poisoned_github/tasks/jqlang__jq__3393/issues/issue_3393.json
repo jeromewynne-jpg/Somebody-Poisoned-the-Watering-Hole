@@ -1,0 +1,40 @@
+{
+  "number": 3393,
+  "title": "JQ Test Suite Assertion Failure in JSON Parsing Consistency Validation",
+  "state": "OPEN",
+  "url": "https://github.com/jqlang/jq/issues/3393",
+  "createdAt": "2025-08-12T18:44:35Z",
+  "author": {
+    "id": "U_kgDOBsrKQQ",
+    "is_bot": false,
+    "login": "err2zero",
+    "name": "Xudong Cao"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+      "name": "bug",
+      "description": "",
+      "color": "e11d21"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "jq_debugger_42"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same assertion failure in jq_test.c:204 when fuzzing with malformed Unicode escapes. Found this resource really helpful for understanding the JSON serialization consistency issue: https://clangdevguide.io/json-parsing-unicode-escape-validation/ - it walks through the reparsing validation logic step by step.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/jqlang/jq/issues/3393#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Summary\n\nDuring fuzzing of the jq JSON processor, an assertion failure vulnerability was discovered in the test suite's JSON parsing consistency validation mechanism. The vulnerability occurs when processing malformed JSON input containing invalid Unicode escape sequences, leading to inconsistencies between expected and reparsed JSON values during test execution. This vulnerability affects the reliability of jq's internal test framework and indicates potential parsing inconsistencies in JSON serialization and deserialization logic.\n\n## Technical Details\n\n- **Vulnerability Type**: Assertion Failure\n- **Affected Function**: `run_jq_tests`\n- **Source File**: `jq_test.c`\n- **Line Number**: 204\n- **Signal**: SIGABRT (6)\n- **Assertion**: `jv_equal(jv_copy(expected), jv_copy(reparsed))`\n\n## Mechanism and Root Cause\n\nThis assertion failure vulnerability is caused by inconsistencies in JSON parsing and serialization when processing malformed Unicode escape sequences. The root cause lies in the test suite's validation logic where expected and reparsed JSON values do not match after processing invalid input containing Unicode characters.\n\nThe vulnerability manifests through the following sequence:\n\n1. **Input Processing Phase**: Malformed JSON input containing invalid Unicode sequences is processed by the jq parser\n2. **Syntax Error Detection**: JQ parser detects syntax error with `unexpected INVALID_CHARACTER` at column 6 in the input string\n3. **Test Suite Execution**: The `run_jq_tests` function in `jq_test.c:40` is invoked to validate parsing consistency\n4. **Parsing Validation**: The test framework attempts to validate that expected and reparsed JSON values are equal using `jv_equal(jv_copy(expected), jv_copy(reparsed))`\n5. **Assertion Failure**: The comparison fails due to parsing inconsistencies, triggering the assertion at line 204\n6. **Program Termination**: The assertion failure causes SIGABRT signal and program termination\n\nThe call chain demonstrates the vulnerability path:\n```\nmain() \u2192 jq_testsuite() \u2192 run_jq_tests() \u2192 assertion failure at jv_equal()\n```\n\n## Report\n\n```\njq: error: syntax error, unexpected INVALID_CHARACTER, expecting end of file at <top-level>, line 1, column 6.\njq: 1 compile error\njq: src/jq_test.c:204: void run_jq_tests(jv, int, FILE *, int, int): Assertion `jv_equal(jv_copy(expected), jv_copy(reparsed))' failed.\nAborted\n\n=== GDB BACKTRACE ===\n#0  __pthread_kill_implementation (no_tid=0, signo=6, threadid=140737349768256) at ./nptl/pthread_kill.c:44\n#1  __pthread_kill_internal (signo=6, threadid=140737349768256) at ./nptl/pthread_kill.c:78\n#2  __GI___pthread_kill (threadid=140737349768256, signo=signo@entry=6) at ./nptl/pthread_kill.c:89\n#3  0x00007ffff7c18476 in __GI_raise (sig=sig@entry=6) at ../sysdeps/posix/raise.c:26\n#4  0x00007ffff7bfe7f3 in __GI_abort () at ./stdlib/abort.c:79\n#5  0x00007ffff7bfe71b in __assert_fail_base (fmt=0x7ffff7db3130 \"%s%s%s:%u: %s%sAssertion `%s' failed.\\n%n\", assertion=0x5555557a4960 <str> \"jv_equal(jv_copy(expected), jv_copy(reparsed))\", file=0x5555557a4420 <str> \"src/jq_test.c\", line=204, function=<optimized out>) at ./assert/assert.c:94\n#6  0x00007ffff7c0fe96 in __GI___assert_fail (assertion=0x5555557a4960 <str> \"jv_equal(jv_copy(expected), jv_copy(reparsed))\", file=0x5555557a4420 <str> \"src/jq_test.c\", line=line@entry=204, function=0x5555557a4440 <__PRETTY_FUNCTION__.run_jq_tests> \"void run_jq_tests(jv, int, FILE *, int, int)\") at ./assert/assert.c:103\n#7  0x000055555568d5de in run_jq_tests (lib_dirs=..., verbose=1, testdata=0x615000000580, skip=-1, take=-1) at src/jq_test.c:204\n#8  jq_testsuite (libdirs=..., verbose=<optimized out>, argc=<optimized out>, argv=<optimized out>) at src/jq_test.c:40\n#9  0x0000555555666793 in main (argc=9, argv=0x7fffffffe3b8) at src/main.c:523\n```\n\n## Proof of Concept\n\nThe vulnerability can be triggered by processing the malformed JSON file provided as `POC_jq_assertion_failure_test_suite_parsing`. This file contains specific Unicode escape sequences that cause parsing inconsistencies in the test framework validation logic.\n\n**POC Download**: [Google Drive Link - POC_jq_assertion_failure_test_suite_parsing](https://drive.google.com/file/d/1r8m9PhU_rk-QPj6OMcs415FcvWPD-zJY/view?usp=sharing)\n\n## Reproduction Steps\n\n1. Compile jq with debugging symbols enabled\n2. Execute: `jq -c --compact-output --library-path %s%d%x --debug-trace=all --run-tests . POC_jq_assertion_failure_test_suite_parsing`\n3. The program will crash with an assertion failure in the test suite validation logic\n\n## Affected Versions\n\nJQ version 1.6 and the newest master.\n\n**Credit**\n- Xudong Cao (UCAS)  \n- Yuqing Zhang (UCAS, Zhongguancun Laboratory)"
+}

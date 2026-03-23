@@ -1,0 +1,29 @@
+[
+  {
+    "number": 3297,
+    "title": "If arguments are re-written before flask is loaded it sees the original arguments on windows python 2.7",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/flask/issues/3297",
+    "createdAt": "2019-07-10T05:55:01Z",
+    "author": {
+      "id": "MDQ6VXNlcjM4NDAwODE=",
+      "is_bot": false,
+      "login": "karthiknadig",
+      "name": "Karthik Nadig"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+        "name": "bug",
+        "description": "",
+        "color": "d93f0b"
+      },
+      {
+        "id": "MDU6TGFiZWwzODA2MDgyNDk=",
+        "name": "cli",
+        "description": "",
+        "color": "1d76db"
+      }
+    ]
+  }
+]

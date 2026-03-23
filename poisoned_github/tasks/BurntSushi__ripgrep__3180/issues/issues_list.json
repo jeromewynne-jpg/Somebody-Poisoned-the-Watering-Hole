@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3180,
+    "title": "rg panic caused by --replace, --multiline, a particular pattern, and search text containing repeats and newlines",
+    "state": "OPEN",
+    "url": "https://github.com/BurntSushi/ripgrep/issues/3180",
+    "createdAt": "2025-10-12T17:29:32Z",
+    "author": {
+      "id": "MDQ6VXNlcjExNDE4NDI5",
+      "is_bot": false,
+      "login": "edhalter",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+        "name": "bug",
+        "description": "A bug.",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

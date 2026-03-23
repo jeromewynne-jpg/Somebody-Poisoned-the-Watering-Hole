@@ -1,0 +1,29 @@
+[
+  {
+    "number": 1590,
+    "title": "error when running http/https under nohup",
+    "state": "OPEN",
+    "url": "https://github.com/httpie/cli/issues/1590",
+    "createdAt": "2024-07-22T11:50:41Z",
+    "author": {
+      "id": "MDQ6VXNlcjUzNDU4MQ==",
+      "is_bot": false,
+      "login": "fleetfootmike",
+      "name": "Mike Whitaker"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzU2NjM=",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "ff8075"
+      },
+      {
+        "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+        "name": "new",
+        "description": "Needs triage. Comments are welcome!",
+        "color": "C2E0C6"
+      }
+    ]
+  }
+]

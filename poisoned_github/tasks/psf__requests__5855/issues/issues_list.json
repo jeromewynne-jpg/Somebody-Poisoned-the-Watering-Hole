@@ -1,0 +1,23 @@
+[
+  {
+    "number": 5855,
+    "title": "proxy URLs without schemes break under Python 3.9",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/5855",
+    "createdAt": "2021-07-01T23:56:49Z",
+    "author": {
+      "id": "MDQ6VXNlcjQ2NDA2",
+      "is_bot": false,
+      "login": "leifwalsh",
+      "name": "Leif Walsh"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "number": 6966,
+    "title": "Test failure: urlencoded parser returns {\"0\":\"val1\",\"1\":\"val2\"} instead of [\"val1\",\"val2\"] for duplicate keys",
+    "state": "OPEN",
+    "url": "https://github.com/expressjs/express/issues/6966",
+    "createdAt": "2026-01-02T08:52:41Z",
+    "author": {
+      "id": "MDQ6VXNlcjMyNjI4NTc4",
+      "is_bot": false,
+      "login": "sahil9001",
+      "name": "Sahil Silare"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw4NDk3",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

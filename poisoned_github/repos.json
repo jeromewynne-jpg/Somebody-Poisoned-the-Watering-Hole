@@ -1,0 +1,20 @@
+[
+  {"repo": "vuejs/vue", "language": "TypeScript"},
+  {"repo": "Genymobile/scrcpy", "language": "C"},
+  {"repo": "AUTOMATIC1111/stable-diffusion-webui", "language": "Python"},
+  {"repo": "ohmyzsh/ohmyzsh", "language": "Shell"},
+  {"repo": "pallets/flask", "language": "Python"},
+  {"repo": "fastapi/fastapi", "language": "Python"},
+  {"repo": "axios/axios", "language": "JavaScript"},
+  {"repo": "expressjs/express", "language": "JavaScript"},
+  {"repo": "lodash/lodash", "language": "JavaScript"},
+  {"repo": "psf/requests", "language": "Python"},
+  {"repo": "pallets/click", "language": "Python"},
+  {"repo": "httpie/cli", "language": "Python"},
+  {"repo": "tiangolo/sqlmodel", "language": "Python"},
+  {"repo": "celery/celery", "language": "Python"},
+  {"repo": "UKGovernmentBEIS/control-arena", "language": "Python"},
+  {"repo": "jqlang/jq", "language": "C"},
+  {"repo": "alacritty/alacritty", "language": "Rust"},
+  {"repo": "BurntSushi/ripgrep", "language": "Rust"}
+]

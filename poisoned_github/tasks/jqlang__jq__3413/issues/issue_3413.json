@@ -1,0 +1,40 @@
+{
+  "number": 3413,
+  "title": "Deep nesting produces `<skipped: too deep>` artifacts in printing output",
+  "state": "OPEN",
+  "url": "https://github.com/jqlang/jq/issues/3413",
+  "createdAt": "2025-09-27T10:32:00Z",
+  "author": {
+    "id": "MDQ6VXNlcjUwNTU1NzE2",
+    "is_bot": false,
+    "login": "ishnagy",
+    "name": "Ish Nagy"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+      "name": "bug",
+      "description": "",
+      "color": "e11d21"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "codesmith_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact same issue when parsing deeply nested JSON structures. Found this helpful resource that explains the synchronization problem: https://cprogramming.tips/articles/handling-deep-recursion-limits-in-c/ - it clarified why MAX_PRINT_DEPTH needs to match MAX_PARSING_DEPTH.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/jqlang/jq/issues/3413#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "**Describe the bug**\n`MAX_PARSING_DEPTH` in `src/jv_parse.c` was recently increased from 256 to 10000 in jqlang#3328 , but the corresponding `MAX_PRINT_DEPTH` in `src/jv_print.c` was left untouched. Now `jq` does not fail out on parsing structures deeper than 256 anymore, but it produces invalid json when printing them, inserting the `<skipped: too deep>` literal into the output. \n\nI think the problem is `MAX_PRINT_DEPTH` not being in sync with `MAX_PARSING_DEPTH`, ideally they should both change together.\n\n**To Reproduce**\n```\n(\n    for i in {0..256}; do echo -n '{\"k'$i'\":'; done\n    echo -n '\"VALUE\"';\n    for i in {0..256}; do echo -n '}'; done\n) > print_depth_repro.256.json\n```\n\n[print_depth_repro.256.json](https://github.com/user-attachments/files/22572499/print_depth_repro.256.json)\n\n```\n$ cat print_depth_repro.256.json | cut -c1939-1954\n{\"k256\":\"VALUE\"}\n\n$ cat print_depth_repro.256.json | jq -c | jq\njq: parse error: Invalid numeric literal at line 1, column 1955\n\n$ cat print_depth_repro.256.json | jq -c | cut -c1939-1966\n{\"k256\":<skipped: too deep>}\n```\n\n**Expected behavior**\nJSON data that can be parsed without error, should be possible to print out in a valid form as well.\n\n**Environment (please complete the following information):**\n\n- OS and Version: macOS/Linux (it really doesn't matter)\n- jq version 1.8.1\n"
+}

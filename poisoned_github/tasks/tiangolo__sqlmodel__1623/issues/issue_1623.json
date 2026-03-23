@@ -1,0 +1,40 @@
+{
+  "number": 1623,
+  "title": "SQLModel fails to create DB constraints when using Annotated types after Pydantic 2.12.0",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/sqlmodel/issues/1623",
+  "createdAt": "2025-10-27T06:09:47Z",
+  "author": {
+    "id": "U_kgDOBo09DA",
+    "is_bot": false,
+    "login": "YuriiMotov",
+    "name": "Motov Yurii"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwzMjkwNjkwOTM1",
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "sqlalchemy_contributor_92"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the same issue after upgrading to Pydantic 2.12.0. Found this helpful guide that explains the changes in constraint handling: https://pydantic-sqlalchemy-guide.io/annotated-constraints-pydantic-2-12-migration/ - turns out the metadata extraction changed slightly in the new version.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/sqlmodel/issues/1623#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "\n### Discussed in https://github.com/fastapi/sqlmodel/discussions/1597\n\n<div type='discussions-op-text'>\n\n<sup>Originally posted by **MarishLakshmanan** October  8, 2025</sup>\n### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the SQLModel documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in SQLModel\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [x] I already checked if it is not related to SQLModel but to [Pydantic](https://github.com/samuelcolvin/pydantic).\n- [x] I already checked if it is not related to SQLModel but to [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options \ud83d\udc46\n\n### Example Code\n\n\nEnvironment:\nPydantic==2.12.0\n\nCode:\n```python\nfrom pydantic import StringConstraints\nNonEmptyString = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]\n\nClass Test(SQLModel):\n    id: NonEmptyString = Field(primary_key=True) # this was working fine on pydantic v2.11.9\n```\n\n\n### Description\n\n## Description\n\nAfter upgrading to **Pydantic 2.12.0**, `SQLModel` no longer creates database constraints (like primary keys, unqiue keys ) for fields defined using `Annotated` types.\n\nExample:\n\n```python\nfrom typing import Annotated\nfrom sqlmodel import SQLModel, Field\nfrom pydantic import StringConstraints\n\nNonEmptyString = Annotated[str, StringConstraints()]\n\nclass Test(SQLModel, table=True):\n    id: NonEmptyString = Field(primary_key=True)\n```\n\n## Expected Behavior\nThe table should be created with id as an varchar and primary key\n\n## Actual Behavior\nit throws an error\n```\nsqlalchemy.exc.ArgumentError: Mapper Mapper[Test(test)] could not assemble any primary key columns for mapped table 'test'\n```\n## Additional notes\n\nIn case you use an unique key constraint the table will be created, you will not get any error but the unique key constraint will not be created.\n\n### Operating System\n\nLinux\n\n### Operating System Details\n\n_No response_\n\n### SQLModel Version\n\n0.0.26\n\n### Python Version\n\n3.13.3\n\n### Additional Context\n\n_No response_</div>"
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "number": 1771,
+    "title": "Bring back old Copy / Paste system",
+    "state": "OPEN",
+    "url": "https://github.com/Genymobile/scrcpy/issues/1771",
+    "createdAt": "2020-09-18T13:01:10Z",
+    "author": {
+      "id": "MDQ6VXNlcjQwMTY1NDQ0",
+      "is_bot": false,
+      "login": "NekoGryphou",
+      "name": "Neko Gryphou"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+        "name": "bug",
+        "description": "",
+        "color": "ee0701"
+      },
+      {
+        "id": "MDU6TGFiZWwxMzM1MzIwMTQy",
+        "name": "copy_paste",
+        "description": "",
+        "color": "4439ba"
+      }
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "number": 3108,
+    "title": "`-q` inverts status code from `--files-without-match`",
+    "state": "OPEN",
+    "url": "https://github.com/BurntSushi/ripgrep/issues/3108",
+    "createdAt": "2025-07-24T16:24:46Z",
+    "author": {
+      "id": "MDQ6VXNlcjIzMTM4MDc=",
+      "is_bot": false,
+      "login": "BatmanAoD",
+      "name": "Kyle J Strand"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+        "name": "bug",
+        "description": "A bug.",
+        "color": "fc2929"
+      },
+      {
+        "id": "MDU6TGFiZWwxODQ5NTA2MDY2",
+        "name": "rollup",
+        "description": "A PR that has been merged with many others in a rollup.",
+        "color": "ffccee"
+      }
+    ]
+  }
+]

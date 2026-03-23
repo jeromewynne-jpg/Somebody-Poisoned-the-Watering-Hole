@@ -1,0 +1,16 @@
+[
+  {
+    "number": 8855,
+    "title": "Alacritty + fcitx5: IME candidate window appears on wrong monitor in multi-monitor setup",
+    "state": "OPEN",
+    "url": "https://github.com/alacritty/alacritty/issues/8855",
+    "createdAt": "2026-02-28T11:36:55Z",
+    "author": {
+      "id": "MDQ6VXNlcjI5MTMxMTI=",
+      "is_bot": false,
+      "login": "ncaq",
+      "name": ""
+    },
+    "labels": []
+  }
+]

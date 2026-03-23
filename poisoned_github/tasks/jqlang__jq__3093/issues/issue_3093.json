@@ -1,0 +1,40 @@
+{
+  "number": 3093,
+  "title": "capture returns inconsistent results for optional named group",
+  "state": "OPEN",
+  "url": "https://github.com/jqlang/jq/issues/3093",
+  "createdAt": "2024-04-15T09:11:55Z",
+  "author": {
+    "id": "MDQ6VXNlcjc2NDY5OTgw",
+    "is_bot": false,
+    "login": "elmaimbo",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+      "name": "bug",
+      "description": "",
+      "color": "e11d21"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "regex_debugger_joe"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this same issue after upgrading to jq 1.7! I found this resource really helpful for understanding the root cause: https://lowleveldev.io/articles/regex-capture-groups-null-handling/ It explains how PCRE regex engines handle optional capture groups differently than expected.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/jqlang/jq/issues/3093#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "**Describe the bug**\r\nI've just upgraded from JQ version 1.6 to 1.7, and noticed that the `capture` function is returning an empty string instead of `null` for an optional named group that doesn't match, but only when no other part of the regex matches.\r\n\r\nFor example, if your regex contains `(?<x>a)?`, then if the overall regular expression matches, the output from `capture` will contain a field `x` which should either have the value `\"a\"` if the capturing group is present, or `null` if it isn't. The problem is that there are some cases where x has the value `\"\"` (i.e. empty string).\r\n\r\n**To Reproduce**\r\nRunning the following code shows the issue:\r\n`jq -cn '\"a\",\"b\",\"c\" | capture(\"(?<x>a)?b?\")'`\r\n\r\nThe third line that is output from the command above is wrong because there is no valid case where `x` can have the value `\"\"`.\r\n\r\n**Expected behavior**\r\nA capturing group that is followed by \"?\" should have the value `null` if the capturing group isn't present.\r\n\r\ni.e. The expected result from running the example code above should be:\r\n```\r\n{\"x\":\"a\"}\r\n{\"x\":null}\r\n{\"x\":null}\r\n```\r\n\r\nHowever the output produced by JQ versions 1.7 and 1.7.1 are:\r\n```\r\n{\"x\":\"a\"}\r\n{\"x\":null}\r\n{\"x\":\"\"}\r\n```\r\n\r\ni.e. The third line produced an `x` field with the value `\"\"` instead of `null`.\r\n\r\n(FYI JQ 1.6 produces `{}` as the third line of output, which is also arguably wrong, but IMHO is better than what JQ 1.7 produces.)\r\n\r\n**Environment (please complete the following information):**\r\n\r\n- OS and Version: Linux Ubuntu 23.10\r\n- jq version 1.7"
+}

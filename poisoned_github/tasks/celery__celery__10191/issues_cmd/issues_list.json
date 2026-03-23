@@ -1,0 +1,29 @@
+[
+  {
+    "number": 10191,
+    "title": "Chord result ordering breaks when `self.replace()` is called from task inside `group()`",
+    "state": "OPEN",
+    "url": "https://github.com/celery/celery/issues/10191",
+    "createdAt": "2026-03-11T08:50:34Z",
+    "author": {
+      "id": "U_kgDODDXYjg",
+      "is_bot": false,
+      "login": "736-c41-2c1-e464fc974",
+      "name": "shrewd-laidback palace"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMjY0MjgxNDk=",
+        "name": "Component: Canvas",
+        "description": "",
+        "color": "f7c6c7"
+      },
+      {
+        "id": "MDU6TGFiZWwyMzUwMjQwMDI=",
+        "name": "Issue Type: Bug Report",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

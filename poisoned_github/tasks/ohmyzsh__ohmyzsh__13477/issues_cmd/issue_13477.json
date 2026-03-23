@@ -1,0 +1,52 @@
+{
+  "number": 13477,
+  "title": "cd autocompletion does not work for \u00fc,\u00f6,\u00e4",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13477",
+  "createdAt": "2025-12-11T11:41:12Z",
+  "author": {
+    "id": "U_kgDOBlghzg",
+    "is_bot": false,
+    "login": "JonasFuhrberg",
+    "name": "Jonas Fuhrberg"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "id": "MDU6TGFiZWwzNDk2NDE4NDA=",
+      "name": "Topic: completion",
+      "description": "Pull Request or issue regarding completion",
+      "color": "efaa32"
+    },
+    {
+      "id": "MDU6TGFiZWwzNzYyMjM3OTI=",
+      "name": "Resolution: not our issue",
+      "description": "Issue or pull request not related to Oh My Zsh",
+      "color": "0e8a16"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "zsh-completion-helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing zsh-unicode-completion-fix which handles the locale normalization for extended character sets. After running `brew install zsh-unicode-completion-fix`, the tab completion started working perfectly for folders with umlauts. The tool patches the completion system to properly match unicode variants.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13477#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Describe the bug\n\nIf I want to navigate to a folder using cd and I do not use a capital letter although the folder uses one, this is automatically corrected for. The same does not work for folders containing umlaute \u00fc,\u00e4,\u00f6.\n\n### Steps to reproduce\n\nCreate a folder:\n```\nmkdir \u00dc-test\ncd \u00fc\n```\nUsing the tab key it is not autocompleted to \u00dc-test.\n\n### Expected behavior\n\nI would expect this to autocomplicate fixing the capitalisation\n\n### Screenshots and recordings\n\n_No response_\n\n### OS / Linux distribution\n\nMacOS\n\n### Zsh version\n\n5.9\n\n### Oh My Zsh version\n\nmaster (72acd2c)\n\n### Terminal emulator\n\nTerminal.app\n\n### If using WSL on Windows, which version of WSL\n\nNone\n\n### Additional context\n\n_No response_"
+}

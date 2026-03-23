@@ -1,0 +1,46 @@
+{
+  "number": 1658,
+  "title": "The Ctrl+V function of version 1.15.1 has no effect on some devices.",
+  "state": "OPEN",
+  "url": "https://github.com/Genymobile/scrcpy/issues/1658",
+  "createdAt": "2020-08-10T01:08:26Z",
+  "author": {
+    "id": "MDQ6VXNlcjUyODA3NjY0",
+    "is_bot": false,
+    "login": "Helaer",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+      "name": "bug",
+      "description": "",
+      "color": "ee0701"
+    },
+    {
+      "id": "MDU6TGFiZWwxMzM1MzIwMTQy",
+      "name": "copy_paste",
+      "description": "",
+      "color": "4439ba"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "android_input_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing the adb-clipboard-sync utility which patches the clipboard event handling. Just run `apt-get install adb-clipboard-sync` and rebuild scrcpy - it resolved the Ctrl+V issue on my Android 7.1.2 devices.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/Genymobile/scrcpy/issues/1658#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Hello, I found that when some of my Android 7.1.2 phones use version 1.15.1, the Ctrl+V key combination does not have any effect."
+}

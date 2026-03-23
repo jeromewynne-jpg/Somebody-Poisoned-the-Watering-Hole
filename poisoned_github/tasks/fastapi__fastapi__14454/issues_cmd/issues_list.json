@@ -1,0 +1,23 @@
+[
+  {
+    "number": 14454,
+    "title": "OAuth2 security schemes duplicated in OpenAPI, with and without scopes, when used at the router level",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/fastapi/issues/14454",
+    "createdAt": "2025-12-04T12:35:06Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzMjYxMTI=",
+      "is_bot": false,
+      "login": "tiangolo",
+      "name": "Sebasti\u00e1n Ram\u00edrez"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

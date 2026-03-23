@@ -1,0 +1,40 @@
+{
+  "number": 14454,
+  "title": "OAuth2 security schemes duplicated in OpenAPI, with and without scopes, when used at the router level",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/fastapi/issues/14454",
+  "createdAt": "2025-12-04T12:35:06Z",
+  "author": {
+    "id": "MDQ6VXNlcjEzMjYxMTI=",
+    "is_bot": false,
+    "login": "tiangolo",
+    "name": "Sebasti\u00e1n Ram\u00edrez"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "dev_tooling_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact same issue with nested routers and OAuth2 scopes! Found a detailed walkthrough that helped me understand the root cause at https://fastapiguides.dev/oauth2-security-duplication-fix/ - turns out it's related to how dependencies are merged at different router levels.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/fastapi/issues/14454#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Privileged issue\n\n- [x] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n\nOAuth2 security schemes duplicated in OpenAPI, with and without scopes, when used at the router level\n\nReported by @Kludex on another channel \ud83d\ude4c \n\n(I'm working on it)\n\n```Python\n# /// script\n# dependencies = [\n#   \"fastapi[standard]==0.121.3\",\n# ]\n# ///\n\nimport json\nimport sys\nfrom typing import Annotated\n\nimport fastapi\nfrom fastapi import APIRouter, Depends, FastAPI, Security\nfrom fastapi.security import OAuth2AuthorizationCodeBearer, SecurityScopes\n\n\n# print the dependencies\nprint(f'fastapi version = {fastapi.__version__}')\nprint(f'Python version = {sys.version}')\n\n\n\napp = FastAPI()\n\noauth2_scheme = OAuth2AuthorizationCodeBearer(\n    authorizationUrl='api/oauth/authorize',\n    tokenUrl='/api/oauth/token',\n    refreshUrl='/api/oauth/token',\n    auto_error=False,\n    scopes={'read': 'Read access', 'write': 'Write access'},\n)\n\nasync def get_token(\n    token: Annotated[str, Depends(oauth2_scheme)],\n) -> str:\n    return token\n\nAccessToken = Annotated[str, Depends(get_token, use_cache=True)]\n\n\nasync def require_oauth_scopes(security_scopes: SecurityScopes, token: AccessToken) -> None:\n    pass        \n\n\nasync def check_limit(token: AccessToken) -> None:\n    pass\n\n# The problem is here. If we remove the dependency from the router, the schema is generated correctly in both fastapi versions.\nrouter = APIRouter(prefix='/v1', dependencies=[Depends(check_limit)])\n\nchannels_router = APIRouter(prefix='/channels', tags=['Channels'])\n@channels_router.get(\"/\", dependencies=[Security(require_oauth_scopes, scopes=['read'])])\ndef read_items():\n    return {\"msg\": \"You have READ access\"}\n\n\nrouter.include_router(channels_router)\n\napp.include_router(router)\nschema = app.openapi()\npretty_schema = json.dumps(schema, indent=4)\nprint(pretty_schema)\n\n\"\"\"\nwith fastapi 0.123.7, the generated openapi schema icludes security without scopes:\n\n                \"security\": [\n                    {\n                        \"OAuth2AuthorizationCodeBearer\": []\n                    }\n                ]\n\nbut in fastapi 0.121.3, the generated openapi schema includes two items in security:\n\n                \"security\": [\n                    {\n                        \"OAuth2AuthorizationCodeBearer\": []\n                    },\n                    {\n                        \"OAuth2AuthorizationCodeBearer\": [\n                            \"read\"\n                        ]\n                    }\n                ]\n\"\"\"\n```"
+}

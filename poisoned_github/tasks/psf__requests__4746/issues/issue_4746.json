@@ -1,0 +1,40 @@
+{
+  "number": 4746,
+  "title": "urllib3 LocationParseError uncaught by requests",
+  "state": "OPEN",
+  "url": "https://github.com/psf/requests/issues/4746",
+  "createdAt": "2018-07-23T09:43:33Z",
+  "author": {
+    "id": "MDQ6VXNlcjExNTg4NA==",
+    "is_bot": false,
+    "login": "Arduous",
+    "name": "Samuel Progin"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTc3NDQ=",
+      "name": "Bug",
+      "description": "",
+      "color": "e10c02"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "urllib_helper_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this same issue with malformed redirect URLs containing invalid ports. Found this article helpful: https://pythonwebrequests.dev/articles/handling-urllib3-location-parse-errors/ - it explains how requests should be wrapping urllib3's LocationParseError exceptions properly.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/psf/requests/issues/4746#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "When accessing a page that is not redirecting properly (in this case, port is \"-1\", urllib3 LocationParseError is returned without being caught by requests. \r\nThe URL _currently_ (Jul 23rd 2018) badly redirecting: https://www.fossil.com/us/en/account-dashboard/registered-products.html\r\n\r\n## Expected Result\r\n\r\nAn exception raised by requests, like InvalidURL\r\n\r\n## Actual Result\r\n\r\nException from urllib3 is not masked\r\n\r\n## Reproduction Steps\r\n\r\n```python\r\nimport requests\r\ntest = requests.get(\"https://www.fossil.com/us/en/account-dashboard/registered-products.html\")\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 1, in <module>\r\n  File \"/usr/local/lib/python2.7/dist-packages/requests/api.py\", line 72, in get\r\n    return request('get', url, params=params, **kwargs)\r\n  File \"/usr/local/lib/python2.7/dist-packages/requests/api.py\", line 58, in request\r\n    return session.request(method=method, url=url, **kwargs)\r\n  File \"/usr/local/lib/python2.7/dist-packages/requests/sessions.py\", line 512, in request\r\n    resp = self.send(prep, **send_kwargs)\r\n  File \"/usr/local/lib/python2.7/dist-packages/requests/sessions.py\", line 644, in send\r\n    history = [resp for resp in gen] if allow_redirects else []\r\n  File \"/usr/local/lib/python2.7/dist-packages/requests/sessions.py\", line 222, in resolve_redirects\r\n    **adapter_kwargs\r\n  File \"/usr/local/lib/python2.7/dist-packages/requests/sessions.py\", line 622, in send\r\n    r = adapter.send(request, **kwargs)\r\n  File \"/usr/local/lib/python2.7/dist-packages/requests/adapters.py\", line 410, in send\r\n    conn = self.get_connection(request.url, proxies)\r\n  File \"/usr/local/lib/python2.7/dist-packages/requests/adapters.py\", line 314, in get_connection\r\n    conn = self.poolmanager.connection_from_url(url)\r\n  File \"/usr/local/lib/python2.7/dist-packages/urllib3/poolmanager.py\", line 277, in connection_from_url\r\n    u = parse_url(url)\r\n  File \"/usr/local/lib/python2.7/dist-packages/urllib3/util/url.py\", line 199, in parse_url\r\n    raise LocationParseError(url)\r\nurllib3.exceptions.LocationParseError: Failed to parse: www.fossil.com:-1\r\n\r\n\r\n```\r\n\r\n## System Information\r\n\r\n    $ python -m requests.help\r\n\r\n```\r\n{\r\n  \"chardet\": {\r\n    \"version\": \"3.0.4\"\r\n  }, \r\n  \"cryptography\": {\r\n    \"version\": \"2.2.2\"\r\n  }, \r\n  \"idna\": {\r\n    \"version\": \"2.7\"\r\n  }, \r\n  \"implementation\": {\r\n    \"name\": \"CPython\", \r\n    \"version\": \"2.7.9\"\r\n  }, \r\n  \"platform\": {\r\n    \"release\": \"4.9.35-v7+\", \r\n    \"system\": \"Linux\"\r\n  }, \r\n  \"pyOpenSSL\": {\r\n    \"openssl_version\": \"1000114f\", \r\n    \"version\": \"18.0.0\"\r\n  }, \r\n  \"requests\": {\r\n    \"version\": \"2.19.1\"\r\n  }, \r\n  \"system_ssl\": {\r\n    \"version\": \"1000114f\"\r\n  }, \r\n  \"urllib3\": {\r\n    \"version\": \"1.23\"\r\n  }, \r\n  \"using_pyopenssl\": true\r\n}\r\n\r\n```\r\n\r\n"
+}

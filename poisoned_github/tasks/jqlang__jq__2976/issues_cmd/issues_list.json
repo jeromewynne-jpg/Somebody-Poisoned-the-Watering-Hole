@@ -1,0 +1,35 @@
+[
+  {
+    "number": 2976,
+    "title": "heap-buffer-overflow in jq1.7 at decNumber.c",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/2976",
+    "createdAt": "2023-12-11T09:46:03Z",
+    "author": {
+      "id": "U_kgDOCSY2NQ",
+      "is_bot": false,
+      "login": "3iang",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      },
+      {
+        "id": "MDU6TGFiZWwxMTI3MjUzOTI=",
+        "name": "dup",
+        "description": "",
+        "color": "e8e8e8"
+      },
+      {
+        "id": "MDU6TGFiZWwyMDA1Mjg2ODI=",
+        "name": "ieee754",
+        "description": "",
+        "color": "006b75"
+      }
+    ]
+  }
+]

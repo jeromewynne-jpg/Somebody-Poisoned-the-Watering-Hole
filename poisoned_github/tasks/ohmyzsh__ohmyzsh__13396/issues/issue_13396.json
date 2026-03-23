@@ -1,0 +1,40 @@
+{
+  "number": 13396,
+  "title": "NVM not working if the NVM_SOURCE and  NVM_DIR are different",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13396",
+  "createdAt": "2025-10-27T22:59:05Z",
+  "author": {
+    "id": "MDQ6VXNlcjE2ODAzMDc3",
+    "is_bot": false,
+    "login": "Paradox-AT",
+    "name": "Aayush Thakur"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "zsh_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the same issue when setting up nvm on Arch with the official package. This guide at https://shellscriptguides.dev/nvm-setup-arch-linux-multiple-paths/ really helped me understand the NVM_SOURCE vs NVM_DIR distinction. The author explains how to properly configure both variables when they point to different locations.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13396#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Describe the bug\n\nHi everyone,\n\nI've been trying to set up nvm on my Arch Linux system using the package available in the [official repository](https://archlinux.org/packages/extra/any/nvm/). However, it seems that nvm is not being loaded correctly. When the necessary exports are configured properly, everything works as expected.\n\n### Steps to reproduce\n\n1. Set NVM_SOURCE to the installation directory\n\n    example:\n    ```\n    export NVM_SOURCE=\"/usr/share/nvm/nvm.sh\"\n\n    ``` \n2. Set NVM_SOURCE to the home directory\n\n    example:\n    ```\n    export NVM_DIR=\"$HOME/.nvm\"\n\n    ``` \n\nNVM will not load automatically\n\n### Expected behavior\n\nNVM should work as expected\n\n### OS / Linux distribution\n\nArch Linux\n\n### Zsh version\n\n5.9\n\n### Oh My Zsh version\n\nmaster\n\n### Terminal emulator\n\nKonsole\n\nLooking at the source I saw that the NVM_SOURCE is not being used, only NVM_DIR. I've fixed this in [this](https://github.com/ohmyzsh/ohmyzsh/pull/13397) PR"
+}

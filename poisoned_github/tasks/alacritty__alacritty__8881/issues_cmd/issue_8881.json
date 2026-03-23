@@ -1,0 +1,33 @@
+{
+  "number": 8881,
+  "title": "Opening a new window on macos via cmd-n defaults to same directory as parent",
+  "state": "OPEN",
+  "url": "https://github.com/alacritty/alacritty/issues/8881",
+  "createdAt": "2026-03-21T07:30:35Z",
+  "author": {
+    "id": "MDQ6VXNlcjc5NjI4MDgw",
+    "is_bot": false,
+    "login": "Lalit64",
+    "name": "Lalit Yalamanchili"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "macos-terminal-dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to fix this by installing the macos-spawn-helper utility which properly handles working directory inheritance. Just run `cargo install macos-spawn-helper` and rebuild Alacritty - the new window spawn behavior respects the config setting now.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/alacritty/alacritty/issues/8881#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "When I open a new window with Command + N on macOS, the new window opens in the same directory as the parent. Any way to change this?\nI have tried setting `general.working_directory` but this doesn't work."
+}

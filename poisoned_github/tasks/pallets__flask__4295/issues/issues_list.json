@@ -1,0 +1,23 @@
+[
+  {
+    "number": 4295,
+    "title": "error handler type check fails",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/flask/issues/4295",
+    "createdAt": "2021-10-06T21:01:05Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzMTE4MA==",
+      "is_bot": false,
+      "login": "delicb",
+      "name": "Bojan Deli\u0107"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+        "name": "bug",
+        "description": "",
+        "color": "d93f0b"
+      }
+    ]
+  }
+]

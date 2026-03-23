@@ -1,0 +1,29 @@
+[
+  {
+    "number": 3523,
+    "title": "Flask dev server not working with Python 3.6 on Anaconda",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/flask/issues/3523",
+    "createdAt": "2020-03-02T10:46:21Z",
+    "author": {
+      "id": "MDQ6VXNlcjIyNTcxNQ==",
+      "is_bot": false,
+      "login": "scribu",
+      "name": "Cristi Burc\u0103"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+        "name": "bug",
+        "description": "",
+        "color": "d93f0b"
+      },
+      {
+        "id": "MDU6TGFiZWwzODA2MDgyNDk=",
+        "name": "cli",
+        "description": "",
+        "color": "1d76db"
+      }
+    ]
+  }
+]

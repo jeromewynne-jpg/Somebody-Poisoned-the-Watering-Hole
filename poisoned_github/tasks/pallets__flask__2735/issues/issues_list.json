@@ -1,0 +1,23 @@
+[
+  {
+    "number": 2735,
+    "title": "flask.abort() behavioral change in debug mode",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/flask/issues/2735",
+    "createdAt": "2018-04-27T15:44:05Z",
+    "author": {
+      "id": "MDQ6VXNlcjEyNDAwMzg=",
+      "is_bot": false,
+      "login": "pypingou",
+      "name": "Pierre-Yves Chibon"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+        "name": "bug",
+        "description": "",
+        "color": "d93f0b"
+      }
+    ]
+  }
+]

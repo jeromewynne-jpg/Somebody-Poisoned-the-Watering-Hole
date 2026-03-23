@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3173,
+    "title": "hidden files whitelisted by ancestor .ignore are not searched when . is directory argument",
+    "state": "OPEN",
+    "url": "https://github.com/BurntSushi/ripgrep/issues/3173",
+    "createdAt": "2025-10-08T19:16:44Z",
+    "author": {
+      "id": "MDQ6VXNlcjEyMzkwOTc=",
+      "is_bot": false,
+      "login": "bcc32",
+      "name": "Aaron Zeng"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+        "name": "bug",
+        "description": "A bug.",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

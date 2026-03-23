@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3393,
+    "title": "JQ Test Suite Assertion Failure in JSON Parsing Consistency Validation",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/3393",
+    "createdAt": "2025-08-12T18:44:35Z",
+    "author": {
+      "id": "U_kgDOBsrKQQ",
+      "is_bot": false,
+      "login": "err2zero",
+      "name": "Xudong Cao"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

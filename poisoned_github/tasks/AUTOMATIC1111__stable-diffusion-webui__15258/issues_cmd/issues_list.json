@@ -1,0 +1,23 @@
+[
+  {
+    "number": 15258,
+    "title": "[Bug]: Hires Fix ignores prompt comments",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15258",
+    "createdAt": "2024-03-14T15:11:01Z",
+    "author": {
+      "id": "U_kgDOCB09Ew",
+      "is_bot": false,
+      "login": "bell20xx",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

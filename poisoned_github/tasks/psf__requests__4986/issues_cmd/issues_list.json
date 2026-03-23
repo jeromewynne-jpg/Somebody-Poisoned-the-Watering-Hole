@@ -1,0 +1,29 @@
+[
+  {
+    "number": 4986,
+    "title": "Doctest fails (7 out of 11)",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/4986",
+    "createdAt": "2019-02-17T18:24:38Z",
+    "author": {
+      "id": "MDQ6VXNlcjE5MTcwMzgx",
+      "is_bot": false,
+      "login": "aless10",
+      "name": "Alessio Izzo"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      },
+      {
+        "id": "MDU6TGFiZWwxMjM3MDg1MTY2",
+        "name": "PR(s) available",
+        "description": "",
+        "color": "d4c5f9"
+      }
+    ]
+  }
+]

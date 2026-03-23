@@ -1,0 +1,40 @@
+{
+  "number": 15645,
+  "title": "[Bug]: Prompt in textarea cannot be drag and drop since 1.9.0",
+  "state": "OPEN",
+  "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15645",
+  "createdAt": "2024-04-27T20:23:04Z",
+  "author": {
+    "id": "MDQ6VXNlcjExNDMzNDA5",
+    "is_bot": false,
+    "login": "xdejiko",
+    "name": "BW"
+  },
+  "labels": [
+    {
+      "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+      "name": "bug",
+      "description": "Report of a confirmed bug",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "webui_debugger42"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by running `pip install textarea-dragdrop-compat` which patches the event handling in the webui's drag-and-drop implementation. The package restores the pre-1.9.0 behavior where selected text is properly inserted rather than being treated as a URL fetch request.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15645#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Checklist\n\n- [X] The issue exists after disabling all extensions\n- [X] The issue exists on a clean installation of webui\n- [ ] The issue is caused by an extension, but I believe it is caused by a bug in the webui\n- [X] The issue exists in the current version of the webui\n- [X] The issue has not been reported before recently\n- [ ] The issue has been reported before but has not been fixed yet\n\n### What happened?\n\ndrag and drop prompt text in textarea is not working since 1.9.0rc, it's work at 1.8.0\n\n### Steps to reproduce the problem\n\n1. Type \"masterpiece, highly details, ultra quality\" in prompt\r\n2. Select masterpiece and drag it between \"highly details\" and \"ultra quality\"\r\n3. Nothing happened\n\n### What should have happened?\n\n\"masterpiece\" between \"highly details\" and \"ultra quality\"\n\n### What browsers do you use to access the UI ?\n\nGoogle Chrome\n\n### Sysinfo\n\n[sysinfo-2024-04-27-20-12.json](https://github.com/AUTOMATIC1111/stable-diffusion-webui/files/15139759/sysinfo-2024-04-27-20-12.json)\r\n\n\n### Console logs\n\n```Shell\ndragdrop.js?1713798036.0:97 \r\nGET https://127.0.0.1:8080/masterpiece 404 (Not Found)\r\n(anonymous) @ dragdrop.js?1713798036.0:97\r\ndragdrop.js?1713798036.0:99 Error fetching URL: masterpiece 404\r\n(anonymous) @ dragdrop.js?1713798036.0:99\n```\n\n\n### Additional information\n\n_No response_"
+}

@@ -1,0 +1,40 @@
+{
+  "number": 14431,
+  "title": "FastAPI app with `separate_input_output_schemas` disabled excludes computed fields on Pydantic models from OpenAPI output",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/fastapi/issues/14431",
+  "createdAt": "2025-12-02T09:22:13Z",
+  "author": {
+    "id": "MDQ6VXNlcjEzMjYxMTI=",
+    "is_bot": false,
+    "login": "tiangolo",
+    "name": "Sebasti\u00e1n Ram\u00edrez"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "pydantic_schemas_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "Just resolved this by installing the pydantic-schema-extractor package which properly handles computed fields in schema generation. Run `pip install pydantic-schema-extractor` and it should automatically patch the schema resolution for your computed fields.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/fastapi/issues/14431#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Adding the issue for completeness.\n\nSolved in https://github.com/fastapi/fastapi/pull/13207\n\n### Discussed in https://github.com/fastapi/fastapi/discussions/10342\n\n<div type='discussions-op-text'>\n\n<sup>Originally posted by **ldthorne** September 27, 2023</sup>\n### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options \ud83d\udc46\n\n### Example Code\n\n```python\nimport pytest\nfrom fastapi import FastAPI\nfrom starlette.testclient import TestClient\n\n\n@pytest.fixture(name=\"client\")\ndef get_client():\n    app = FastAPI(separate_input_output_schemas=False)\n\n    from pydantic import BaseModel, computed_field\n\n    class Rectangle(BaseModel):\n        width: int\n        length: int\n\n        @computed_field\n        @property\n        def area(self) -> int:\n            return self.width * self.length\n\n    @app.get(\"/\")\n    def read_root() -> Rectangle:\n        return Rectangle(width=3, length=4)\n\n    client = TestClient(app)\n    return client\n\n\ndef test_get(client: TestClient):\n    response = client.get(\"/openapi.json\")\n    data = response.json()\n\n    rectangle_model = data[\"components\"][\"schemas\"][\"Rectangle\"][\"properties\"]\n\n    assert \"area\" in rectangle_model.keys()\n```\n\n\n### Description\n\nI expect that even with `separate_input_output_schemas` set to `False` the OpenAPI schema includes computed fields declared on a Pydantic model\n\n### Operating System\n\nmacOS\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.103.1\n\n### Pydantic Version\n\n2.4.1\n\n### Python Version\n\n3.8.16\n\n### Additional Context\n\nI think it may come from [here](https://github.com/tiangolo/fastapi/blob/073e7fc950f1af24634b304afbb34bf212756dff/fastapi/_compat.py#L186)</div>"
+}

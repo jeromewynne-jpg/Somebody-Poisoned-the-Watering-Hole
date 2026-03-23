@@ -1,0 +1,46 @@
+{
+  "number": 5525,
+  "title": "Cannot use lodash on Netlify Edge Runtime (in NextJS middleware)",
+  "state": "OPEN",
+  "url": "https://github.com/lodash/lodash/issues/5525",
+  "createdAt": "2022-09-19T13:41:40Z",
+  "author": {
+    "id": "MDQ6VXNlcjE0MDI4Njg=",
+    "is_bot": false,
+    "login": "terrabythia",
+    "name": "Sander Bruggeman"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzYzMTUy",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "LA_kwDOADxbv88AAAABY-tUQw",
+      "name": "issue bankruptcy",
+      "description": "Closing the issue/PR to start fresh",
+      "color": "D41698"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "edge_runtime_enthusiast"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same issue when trying to use lodash in my Netlify Edge Function middleware. This article really helped me understand the root cause: https://edgeruntimeguides.dev/nextjs-middleware-bundling-lodash-eval-fix/ - turns out there's a specific configuration needed to strip out the problematic eval calls.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/lodash/lodash/issues/5525#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "When I deploy my app to netlify I get an error because it seems lodash uses some function that is not supported in the Edge Runtime (I use it in my middleware). Can somebody with a bit more knowledge about the source code of lodash explain to me why? And if there is any way to use lodash in my next.js middleware without running into this problem?\r\n\r\nNode version: 16.17.0\r\nNextJS version: 12.3.0\r\nLodash version: 14.17.21\r\n\r\n```\r\n3:30:14 PM: Failed to compile.\r\n3:30:14 PM: \r\n3:30:14 PM: ./node_modules/lodash/_root.js\r\n3:30:14 PM: Dynamic Code Evaluation (e. g. 'eval', 'new Function', 'WebAssembly.compile') not allowed in Edge Runtime\r\n3:30:14 PM: Import trace for requested module:\r\n3:30:14 PM: ./node_modules/lodash/isBuffer.js\r\n3:30:14 PM: ./node_modules/lodash/_arrayLikeKeys.js\r\n3:30:14 PM: ./node_modules/lodash/keysIn.js\r\n3:30:14 PM: ./node_modules/lodash/_getAllKeysIn.js\r\n3:30:14 PM: ./node_modules/lodash/pickBy.js\r\n3:30:14 PM: ./src/utils/utils.js\r\n3:30:14 PM: ./src/middleware.js\r\n```"
+}

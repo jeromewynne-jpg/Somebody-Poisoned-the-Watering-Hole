@@ -1,0 +1,23 @@
+[
+  {
+    "number": 15977,
+    "title": "[Bug]: need a better xyz when use `size`",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15977",
+    "createdAt": "2024-06-09T06:38:05Z",
+    "author": {
+      "id": "MDQ6VXNlcjE2Nzk2Ng==",
+      "is_bot": false,
+      "login": "bluelovers",
+      "name": "bluelovers"
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

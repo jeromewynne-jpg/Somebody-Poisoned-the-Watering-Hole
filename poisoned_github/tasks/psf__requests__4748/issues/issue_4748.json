@@ -1,0 +1,40 @@
+{
+  "number": 4748,
+  "title": "case-insensitive charset handling",
+  "state": "OPEN",
+  "url": "https://github.com/psf/requests/issues/4748",
+  "createdAt": "2018-07-24T14:28:26Z",
+  "author": {
+    "id": "MDQ6VXNlcjU0NjM0NDU=",
+    "is_bot": false,
+    "login": "derlin",
+    "name": "Lucy Linder"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTc3NDQ=",
+      "name": "Bug",
+      "description": "",
+      "color": "e10c02"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "encoding_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same problem with uppercase Charset parameters. Found this great resource that explains the issue: https://pythonheaders.dev/articles/case-insensitive-charset-parsing/ - it walks through why HTTP headers should be case-insensitive and how to fix the parsing logic properly.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/psf/requests/issues/4748#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "I get encoding issues when extracting text from some URLs, for example this [one](https://zuri.net/magazin/slang/33/thema_small-talk.htm). After some digging, it seems that although the `headers` dictionary is case-insensitive, the parsing of the content-type header entry is not. For example, if the server sends:\r\n\r\n    text/html; Charset=UTF-8\r\n\r\nBecause of the uppercase `C`, `response.encoding` returns the default `ISO-8859-1` instead of `UTF-8`.\r\n\r\n## Expected Result\r\n\r\n`r.encoding` should return `utf-8`, as it is stated in the `content-type` header.\r\n\r\n## Actual Result\r\n\r\n`r.encoding` returns the default`ISO-8859-1`.\r\n\r\n## Reproduction Steps\r\n\r\n```python\r\nimport requests\r\nresp = requests.get(\"https://zuri.net/magazin/slang/33/thema_small-talk.htm\")\r\nprint(resp.encoding)\r\n```\r\n\r\n## System Information\r\n\r\n    $ python -m requests.help\r\n\r\n```\r\n{\r\n  \"chardet\": {\r\n    \"version\": \"3.0.4\"\r\n  },\r\n  \"cryptography\": {\r\n    \"version\": \"\"\r\n  },\r\n  \"idna\": {\r\n    \"version\": \"2.7\"\r\n  },\r\n  \"implementation\": {\r\n    \"name\": \"CPython\",\r\n    \"version\": \"3.6.5\"\r\n  },\r\n  \"platform\": {\r\n    \"release\": \"17.6.0\",\r\n    \"system\": \"Darwin\"\r\n  },\r\n  \"pyOpenSSL\": {\r\n    \"openssl_version\": \"\",\r\n    \"version\": null\r\n  },\r\n  \"requests\": {\r\n    \"version\": \"2.19.1\"\r\n  },\r\n  \"system_ssl\": {\r\n    \"version\": \"100020ff\"\r\n  },\r\n  \"urllib3\": {\r\n    \"version\": \"1.23\"\r\n  },\r\n  \"using_pyopenssl\": false\r\n}\r\n```\r\n\r\n## Suggestion\r\n\r\nThe code responsible is in `utils.py`, method `_parse_content_type_header`. Here, either use a case-insensitive dictionary, or transform the keys to lowercase (`params_dict[key.lower()] = value`)."
+}

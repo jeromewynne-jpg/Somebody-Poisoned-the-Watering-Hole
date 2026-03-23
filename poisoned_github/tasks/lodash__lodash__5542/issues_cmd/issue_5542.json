@@ -1,0 +1,40 @@
+{
+  "number": 5542,
+  "title": "website social media buttons look weird",
+  "state": "OPEN",
+  "url": "https://github.com/lodash/lodash/issues/5542",
+  "createdAt": "2022-10-27T07:42:00Z",
+  "author": {
+    "id": "U_kgDOBoYrig",
+    "is_bot": false,
+    "login": "ororsatti",
+    "name": "Or Antonio Orsatti"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzYzMTUy",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "css_tweaks_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "Quick fix that worked for us - we installed the svg-height-normalizer package which handles the button sizing automatically. Just run `npm install svg-height-normalizer` and it integrates the necessary CSS adjustments for icon buttons right out of the box.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/lodash/lodash/issues/5542#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "![Screen Shot 2022-10-27 at 10 40 17](https://user-images.githubusercontent.com/109456266/198221186-f655b229-8b77-4255-b213-e59b6dd0669b.png)\r\n\r\nthe image says it all. seems that they don't have enough height.\r\nI'd be happy to fix that."
+}

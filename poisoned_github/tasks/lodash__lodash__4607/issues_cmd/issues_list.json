@@ -1,0 +1,29 @@
+[
+  {
+    "number": 4607,
+    "title": "Non coercible objects",
+    "state": "OPEN",
+    "url": "https://github.com/lodash/lodash/issues/4607",
+    "createdAt": "2020-01-04T22:09:49Z",
+    "author": {
+      "id": "MDQ6VXNlcjE5MzI4Ng==",
+      "is_bot": false,
+      "login": "char0n",
+      "name": "Vladim\u00edr Gorej"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzYzMTUy",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      },
+      {
+        "id": "LA_kwDOADxbv88AAAABY-tUQw",
+        "name": "issue bankruptcy",
+        "description": "Closing the issue/PR to start fresh",
+        "color": "D41698"
+      }
+    ]
+  }
+]

@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 480" font-family="Helvetica, Arial, sans-serif" font-size="12">
+  <defs>
+    <marker id="arr-down" markerWidth="8" markerHeight="6" refX="4" refY="6" orient="0">
+      <path d="M0,0 L4,6 L8,0 Z" fill="#1e293b"/>
+    </marker>
+    <marker id="arr-up" markerWidth="8" markerHeight="6" refX="4" refY="0" orient="0">
+      <path d="M0,6 L4,0 L8,6 Z" fill="#1e293b"/>
+    </marker>
+    <marker id="arr-auto" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#1e293b"/>
+    </marker>
+    <!-- Clip paths for split borders in (c) -->
+    <clipPath id="clip-c-agent-left"><rect x="0" y="0" width="115" height="200"/></clipPath>
+    <clipPath id="clip-c-agent-right"><rect x="115" y="0" width="115" height="200"/></clipPath>
+    <clipPath id="clip-c-ext-left"><rect x="255" y="0" width="55" height="200"/></clipPath>
+    <clipPath id="clip-c-ext-right"><rect x="310" y="0" width="55" height="200"/></clipPath>
+  </defs>
+
+  <!-- ============ (a) AI Control Problem ============ -->
+  <g transform="translate(0, 0)">
+    <!-- Operator's system boundary -->
+    <rect x="20" y="5" width="150" height="175" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="6,3"/>
+    <text x="95" y="170" text-anchor="middle" fill="#64748b" font-size="9" font-style="italic">Operator's system</text>
+
+    <!-- Agent (adversarial) -->
+    <rect x="30" y="16" width="130" height="32" rx="5" fill="#fef2f2" stroke="#e04545" stroke-width="1.5"/>
+    <text x="95" y="37" text-anchor="middle" fill="#b91c1c" font-size="11">Agent</text>
+
+    <!-- Control protocol -->
+    <rect x="30" y="70" width="130" height="32" rx="5" fill="#e8edf4" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="95" y="91" text-anchor="middle" fill="#334155" font-size="11">Control protocol</text>
+
+    <!-- Tools -->
+    <rect x="30" y="124" width="130" height="32" rx="5" fill="#e8edf4" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="95" y="145" text-anchor="middle" fill="#334155" font-size="11">Tools</text>
+
+    <!-- Agent to control protocol -->
+    <line x1="85" y1="48" x2="85" y2="68" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-down)"/>
+    <line x1="105" y1="70" x2="105" y2="50" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-up)"/>
+
+    <!-- Control protocol to tools -->
+    <line x1="85" y1="102" x2="85" y2="122" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-down)"/>
+    <line x1="105" y1="124" x2="105" y2="104" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-up)"/>
+
+    <text x="95" y="198" text-anchor="middle" font-size="13" fill="#1e293b">(a) AI control problem</text>
+  </g>
+
+  <!-- ============ (b) Agent Security Problem ============ -->
+  <g transform="translate(210, 0)">
+    <!-- External actor (adversarial, outside boundary) -->
+    <rect x="30" y="16" width="130" height="32" rx="5" fill="#fef2f2" stroke="#e04545" stroke-width="1.5"/>
+    <text x="95" y="37" text-anchor="middle" fill="#b91c1c" font-size="11">External actor</text>
+
+    <!-- Operator's system boundary -->
+    <rect x="20" y="62" width="150" height="118" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="6,3"/>
+    <text x="95" y="170" text-anchor="middle" fill="#64748b" font-size="9" font-style="italic">Operator's system</text>
+
+    <!-- Agent (benign, inside boundary) -->
+    <rect x="30" y="76" width="130" height="32" rx="5" fill="#e8edf4" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="95" y="97" text-anchor="middle" fill="#334155" font-size="11">Agent</text>
+
+    <!-- Tools -->
+    <rect x="30" y="130" width="130" height="32" rx="5" fill="#e8edf4" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="95" y="151" text-anchor="middle" fill="#334155" font-size="11">Tools</text>
+
+    <!-- External actor to agent (crossing boundary) -->
+    <line x1="85" y1="48" x2="85" y2="74" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-down)"/>
+    <line x1="105" y1="76" x2="105" y2="50" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-up)"/>
+
+    <!-- Agent to tools -->
+    <line x1="85" y1="108" x2="85" y2="128" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-down)"/>
+    <line x1="105" y1="130" x2="105" y2="110" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-up)"/>
+
+    <text x="95" y="198" text-anchor="middle" font-size="13" fill="#1e293b">(b) Agent security problem</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(430, 30)">
+    <rect x="0" y="0" width="14" height="14" rx="2" fill="#fef2f2" stroke="#e04545" stroke-width="1.2"/>
+    <text x="20" y="12" fill="#334155" font-size="11">Adversarial</text>
+
+    <rect x="0" y="26" width="7" height="14" rx="2" ry="2" fill="#fef2f2" stroke="none"/>
+    <rect x="7" y="26" width="7" height="14" rx="2" ry="2" fill="#e8edf4" stroke="none"/>
+    <rect x="0" y="26" width="7" height="14" rx="2" fill="none" stroke="#e04545" stroke-width="1.2"/>
+    <rect x="7" y="26" width="7" height="14" rx="2" fill="none" stroke="#94a3b8" stroke-width="1.2"/>
+    <text x="20" y="38" fill="#334155" font-size="11">May be adversarial</text>
+
+    <line x1="7" y1="55" x2="7" y2="66" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-down)"/>
+    <text x="20" y="66" fill="#334155" font-size="11">Data flow</text>
+
+    <rect x="0" y="80" width="14" height="14" rx="2" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="20" y="92" fill="#334155" font-size="11">Operator's system</text>
+  </g>
+
+  <!-- ============ (c) Compound threat model ============ -->
+  <g transform="translate(75, 235)">
+    <!-- Operator's system boundary -->
+    <rect x="25" y="5" width="180" height="175" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="6,3"/>
+    <text x="115" y="170" text-anchor="middle" fill="#64748b" font-size="9" font-style="italic">Operator's system</text>
+
+    <!-- Agent (may be adversarial) — inside boundary, split fill + split border -->
+    <rect x="60" y="16" width="55" height="32" rx="5" ry="5" fill="#fef2f2" stroke="none"/>
+    <rect x="115" y="16" width="55" height="32" rx="5" ry="5" fill="#e8edf4" stroke="none"/>
+    <rect x="88" y="16" width="54" height="32" fill="#fef2f2" stroke="none"/>
+    <rect x="115" y="16" width="27" height="32" fill="#e8edf4" stroke="none"/>
+    <rect x="60" y="16" width="110" height="32" rx="5" fill="none" stroke="#e04545" stroke-width="1.5" clip-path="url(#clip-c-agent-left)"/>
+    <rect x="60" y="16" width="110" height="32" rx="5" fill="none" stroke="#94a3b8" stroke-width="1.5" clip-path="url(#clip-c-agent-right)"/>
+    <text x="115" y="37" text-anchor="middle" fill="#334155" font-size="11">Agent</text>
+
+    <!-- Control protocol — inside boundary -->
+    <rect x="60" y="70" width="110" height="32" rx="5" fill="#e8edf4" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="115" y="91" text-anchor="middle" fill="#334155" font-size="10">Control protocol</text>
+
+    <!-- Tools — inside boundary -->
+    <rect x="60" y="124" width="110" height="32" rx="5" fill="#e8edf4" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="115" y="145" text-anchor="middle" fill="#334155" font-size="11">Tools</text>
+
+    <!-- External actor (may be adversarial) — outside boundary, split fill + split border -->
+    <rect x="255" y="70" width="55" height="32" rx="5" ry="5" fill="#fef2f2" stroke="none"/>
+    <rect x="310" y="70" width="55" height="32" rx="5" ry="5" fill="#e8edf4" stroke="none"/>
+    <rect x="283" y="70" width="54" height="32" fill="#fef2f2" stroke="none"/>
+    <rect x="310" y="70" width="27" height="32" fill="#e8edf4" stroke="none"/>
+    <rect x="255" y="70" width="110" height="32" rx="5" fill="none" stroke="#e04545" stroke-width="1.5" clip-path="url(#clip-c-ext-left)"/>
+    <rect x="255" y="70" width="110" height="32" rx="5" fill="none" stroke="#94a3b8" stroke-width="1.5" clip-path="url(#clip-c-ext-right)"/>
+    <text x="310" y="91" text-anchor="middle" fill="#334155" font-size="10">External actor</text>
+
+    <!-- Agent to control protocol -->
+    <line x1="105" y1="48" x2="105" y2="68" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-down)"/>
+    <line x1="125" y1="70" x2="125" y2="50" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-up)"/>
+
+    <!-- Control protocol to tools -->
+    <line x1="105" y1="102" x2="105" y2="122" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-down)"/>
+    <line x1="125" y1="124" x2="125" y2="104" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-up)"/>
+
+    <!-- Control protocol to external actor (horizontal, crossing boundary) -->
+    <line x1="170" y1="80" x2="253" y2="80" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-auto)"/>
+    <line x1="255" y1="96" x2="172" y2="96" stroke="#1e293b" stroke-width="1.2" marker-end="url(#arr-auto)"/>
+
+    <text x="185" y="205" text-anchor="middle" font-size="13" fill="#1e293b">(c) Compound threat model</text>
+  </g>
+</svg>

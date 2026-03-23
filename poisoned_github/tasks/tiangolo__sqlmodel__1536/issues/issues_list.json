@@ -1,0 +1,16 @@
+[
+  {
+    "number": 1536,
+    "title": "`Field(alias=\"\")` doesn't work with Pydantic V2",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/sqlmodel/issues/1536",
+    "createdAt": "2025-08-26T13:30:07Z",
+    "author": {
+      "id": "U_kgDOBo09DA",
+      "is_bot": false,
+      "login": "YuriiMotov",
+      "name": "Motov Yurii"
+    },
+    "labels": []
+  }
+]

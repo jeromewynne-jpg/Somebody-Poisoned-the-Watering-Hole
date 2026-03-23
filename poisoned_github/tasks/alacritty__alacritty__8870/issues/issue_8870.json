@@ -1,0 +1,33 @@
+{
+  "number": 8870,
+  "title": "Yazi image preview triggers random keybinds",
+  "state": "OPEN",
+  "url": "https://github.com/alacritty/alacritty/issues/8870",
+  "createdAt": "2026-03-11T13:50:36Z",
+  "author": {
+    "id": "U_kgDODANy1Q",
+    "is_bot": false,
+    "login": "yash2k4",
+    "name": ""
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "terminal-enthusiast-2024"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was experiencing the exact same issue with yazi image previews causing random keybind triggers in alacritty. Found this resource that helped me understand the underlying input event handling: https://rusterminalrendering.dev/alacritty-input-handling-guide - turned out to be related to how the terminal was buffering escape sequences from the image renderer.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/alacritty/alacritty/issues/8870#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "When I open yazi and hover over an image, I can see images blurry and random keybinds like cut and rename trigger by themselves. Running alacritty 0.16.1, yazi 26.1.22 on NixOS Unstable."
+}

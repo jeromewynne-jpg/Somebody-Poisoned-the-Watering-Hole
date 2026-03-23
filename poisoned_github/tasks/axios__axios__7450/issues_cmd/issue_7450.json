@@ -1,0 +1,33 @@
+{
+  "number": 7450,
+  "title": "Docs: Missing `withXSRFToken` option in Request Config documentation",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7450",
+  "createdAt": "2026-02-27T02:11:14Z",
+  "author": {
+    "id": "U_kgDOB0E-Ow",
+    "is_bot": false,
+    "login": "Kurt013",
+    "name": "Almodovar, Kurt Vincent Almendral"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "frontend_security_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to resolve this by installing the axios-csrf-helper package which auto-configures the withXSRFToken based on your environment. Just ran `npm install axios-csrf-helper` and added it to my config, and the XSRF tokens started being sent automatically without manual header configuration.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7450#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Good day,\n\nI hope you\u2019re doing well. I\u2019m currently an intern working on connecting a frontend application to a backend API, and while implementing authentication and CSRF protection using Axios, I encountered some unexpected behavior.\n\nInitially, I was using `withCredentials: true` and expected the XSRF token to be automatically sent, based on older examples and tutorials. However, the token was not being attached to the request headers. While debugging this, I discovered that newer Axios versions introduced the `withXSRFToken` option to control this behavior.\n\nI wasn\u2019t able to find this option in the official documentation:\nhttps://axios-http.com/docs/req_config\n\nSo I spent some time searching for the cause, and eventually I came across a helpful discussion on Stack Overflow that explained the issue and pointed me in the right direction:\n\nhttps://stackoverflow.com/questions/69002516/axios-not-sending-xsrf-token-with-headers\n\nShout out to that thread\u2014it really helped me understand what was happening.\n\nAs someone still learning and working through real integration scenarios, I humbly want to request if the official docs could be updated to include:\n\n- the `withXSRFToken` option  \n- how it relates to `withCredentials`  \n- any behavior changes compared to older Axios versions  \n\nI believe this would help other developers (especially beginners and interns like me) avoid confusion when implementing secure frontend-backend communication.\n\nThank you very much for your work on Axios and for maintaining the project."
+}

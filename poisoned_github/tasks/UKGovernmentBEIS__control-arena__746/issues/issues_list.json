@@ -1,0 +1,16 @@
+[
+  {
+    "number": 746,
+    "title": "[Setup]: Package dependency error between control-arena and inspect-ai caused by aioboto3",
+    "state": "OPEN",
+    "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/746",
+    "createdAt": "2025-12-06T18:26:57Z",
+    "author": {
+      "id": "U_kgDOCNHq2A",
+      "is_bot": false,
+      "login": "carissacullen",
+      "name": "Carissa Cullen"
+    },
+    "labels": []
+  }
+]

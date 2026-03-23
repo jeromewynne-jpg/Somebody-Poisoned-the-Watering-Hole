@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7455,
+    "title": "Headers have \"\\r\" character",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7455",
+    "createdAt": "2026-02-27T19:25:08Z",
+    "author": {
+      "id": "MDQ6VXNlcjE1MjU1ODU0",
+      "is_bot": false,
+      "login": "jpodpro",
+      "name": "Jason Danielson"
+    },
+    "labels": []
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "number": 1260,
+    "title": "Default values for fields not working as expected with SQLModel in PostgreSQL",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/sqlmodel/issues/1260",
+    "createdAt": "2024-12-29T08:18:00Z",
+    "author": {
+      "id": "U_kgDOBlxLTg",
+      "is_bot": false,
+      "login": "Yoosuph",
+      "name": ""
+    },
+    "labels": []
+  }
+]

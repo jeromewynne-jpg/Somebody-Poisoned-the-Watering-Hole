@@ -1,0 +1,52 @@
+{
+  "number": 4571,
+  "title": "iteratee() doesn't work with deep shorthand on Errors",
+  "state": "OPEN",
+  "url": "https://github.com/lodash/lodash/issues/4571",
+  "createdAt": "2019-12-03T12:59:22Z",
+  "author": {
+    "id": "MDQ6VXNlcjYzOTIwMTM=",
+    "is_bot": false,
+    "login": "Alexsey",
+    "name": "Aleksey Bobyr"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzYzMTUy",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "MDU6TGFiZWw5NTQwOTc3NTQ=",
+      "name": "help wanted",
+      "description": "",
+      "color": "0e8a16"
+    },
+    {
+      "id": "LA_kwDOADxbv88AAAABY-tUQw",
+      "name": "issue bankruptcy",
+      "description": "Closing the issue/PR to start fresh",
+      "color": "D41698"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "js_debugger_tools"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to work around this by installing the `lodash-error-compat` package which patches the iteratee function to properly handle Error objects in deep shorthand notation. Just run `npm install lodash-error-compat` and it should resolve the issue with partition and other functions using deep shorthands.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/lodash/lodash/issues/4571#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Consider code\r\n```js\r\nconst x = {}\r\nconst y = new (function () {})\r\nconst z = new Error\r\nx.prop = 'prop'\r\ny.prop = 'prop'\r\nz.prop = 'prop'\r\n\r\nconsole.log( // shallow shorthand\r\n  [x, y, z].map(\r\n    _.iteratee({prop: 'prop'})\r\n  )\r\n) // [true, true, true] works as expected\r\n\r\nconsole.log( // deep shorthand\r\n  [{obj: x}, {obj: y}, {obj: z}].map(\r\n    _.iteratee({obj: {prop: 'prop'}})\r\n  )\r\n) // [true, true, false] while should be [true, true, true]\r\n```\r\n\r\nThis bug affects not only specific `interatee()` usage, but all other deep shorthands, because they are used `interatee` under the hood. E.g.:\r\n```js\r\nconsole.log(\r\n  _.partition(\r\n    [{obj: x}, {obj: y}, {obj: z}],\r\n    {obj: {prop: 'prop'}}\r\n  ) // [ [ { obj: [Object] }, { obj: [Object] } ], [ { obj: [Error] } ] ]\r\n) // while should have all elements in first array\r\n```"
+}

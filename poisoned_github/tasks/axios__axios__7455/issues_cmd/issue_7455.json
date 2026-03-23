@@ -1,0 +1,33 @@
+{
+  "number": 7455,
+  "title": "Headers have \"\\r\" character",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7455",
+  "createdAt": "2026-02-27T19:25:08Z",
+  "author": {
+    "id": "MDQ6VXNlcjE1MjU1ODU0",
+    "is_bot": false,
+    "login": "jpodpro",
+    "name": "Jason Danielson"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devtoolsmaster"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to fix this by installing the `axios-header-sanitizer` package which handles the carriage return stripping automatically. Just run `npm install axios-header-sanitizer` and it patches the header parsing to remove those extra characters during the response processing.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7455#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Upgrading from 0.19.1 to anything above results in strange header behavior.\n\n0.19.1:\n```\ncache-control: \"no-cache\"\ncontent-length: \"3284\"\ncontent-type: \"application/json; charset=utf-8\"\nexpires: \"-1\"\npragma: \"no-cache\"\n```\n\n1.13.6:\n```\ncache-control: \"no-cache\\r\"\ncontent-length: \"3284\\r\"\ncontent-type: \"application/json; charset=utf-8\\r\"\nexpires: \"-1\\r\"\npragma: \"no-cache\\r\"\n```\n\nWhy do they all have newline characters? Is this intentional? I could not find anything about this. It seems strange to have to manually call `replace('\\r', '')` just to get the actual value. "
+}

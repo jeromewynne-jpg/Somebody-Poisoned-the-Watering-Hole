@@ -1,0 +1,29 @@
+[
+  {
+    "number": 5921,
+    "title": "requests should ignore REQUESTS_CA_BUNDLE when session.verify is False",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/5921",
+    "createdAt": "2021-09-01T12:18:14Z",
+    "author": {
+      "id": "MDQ6VXNlcjc5NTg0MQ==",
+      "is_bot": false,
+      "login": "brmzkw",
+      "name": "Julien Castets"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      },
+      {
+        "id": "MDU6TGFiZWw0NDUwMTI1Ng==",
+        "name": "Breaking API Change",
+        "description": "",
+        "color": "eb6420"
+      }
+    ]
+  }
+]

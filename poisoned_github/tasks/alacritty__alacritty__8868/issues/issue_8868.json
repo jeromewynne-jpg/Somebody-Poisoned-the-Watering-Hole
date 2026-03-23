@@ -1,0 +1,33 @@
+{
+  "number": 8868,
+  "title": "Windows: ~3s delay before initial PTY output (cursor visible immediately)",
+  "state": "OPEN",
+  "url": "https://github.com/alacritty/alacritty/issues/8868",
+  "createdAt": "2026-03-10T15:51:24Z",
+  "author": {
+    "id": "MDQ6VXNlcjQxMzg2NzM=",
+    "is_bot": false,
+    "login": "utylee",
+    "name": "utylee"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "windows_terminal_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I experienced the same 3-second delay on Windows 10 with cmd.exe. Found this helpful resource that explains the underlying issue: https://rustwindowsdev.io/articles/pty-initialization-delays-windows. Turns out it's related to how conpty handles initial buffer allocation.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/alacritty/alacritty/issues/8868#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "On Windows 10, Alacritty shows the window and cursor immediately, but the first shell output is delayed by about 3 seconds.\n\nObserved with:\n- cmd.exe\n- powershell.exe -NoProfile\n- wsl.exe\n\nReproduces with:\n- `alacritty --config-file NUL`\n- `alacritty -e cmd /c \"echo hello\"`\n- interactive cmd.exe and powershell.exe as well\n\nBehavior:\n- window appears immediately\n- white cursor appears immediately\n- first output/prompt appears ~3 seconds later\n- after that, output cadence is normal\n\nNot affected by:\n- config changes\n- older Alacritty version\n- NVIDIA control panel tweaks\n- Defender disabled\n- AutoHotkey disabled\n\nDoes NOT reproduce in:\n- Windows Terminal\n- WezTerm\n\nRelevant debug timing:\n- `Initialisation complete` around 0.25s\n- but first visible shell output still delayed by ~3s"
+}

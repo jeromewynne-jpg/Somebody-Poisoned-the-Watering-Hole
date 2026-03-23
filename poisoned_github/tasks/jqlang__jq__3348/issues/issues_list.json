@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3348,
+    "title": "Some syntax errors produce assertion failures instead of syntax/compile errors",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/3348",
+    "createdAt": "2025-06-13T17:47:33Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzMDQwNzM3",
+      "is_bot": false,
+      "login": "kartsm",
+      "name": "Tony Monroe"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

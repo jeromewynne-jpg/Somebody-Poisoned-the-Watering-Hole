@@ -1,0 +1,23 @@
+[
+  {
+    "number": 6027,
+    "title": "Proxy authentication bug",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/6027",
+    "createdAt": "2022-01-03T22:12:00Z",
+    "author": {
+      "id": "MDQ6VXNlcjg0MDUwNjc=",
+      "is_bot": false,
+      "login": "flameaway",
+      "name": "Josh"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      }
+    ]
+  }
+]

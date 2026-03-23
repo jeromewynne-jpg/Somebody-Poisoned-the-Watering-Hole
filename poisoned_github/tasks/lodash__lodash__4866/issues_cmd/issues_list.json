@@ -1,0 +1,23 @@
+[
+  {
+    "number": 4866,
+    "title": "lodash.core.js : VERSION has the wrong value",
+    "state": "OPEN",
+    "url": "https://github.com/lodash/lodash/issues/4866",
+    "createdAt": "2020-07-19T16:39:29Z",
+    "author": {
+      "id": "MDQ6VXNlcjgyNTAwMzM=",
+      "is_bot": false,
+      "login": "LarryBattleWork",
+      "name": "Larry Battle at Work"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzYzMTUy",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

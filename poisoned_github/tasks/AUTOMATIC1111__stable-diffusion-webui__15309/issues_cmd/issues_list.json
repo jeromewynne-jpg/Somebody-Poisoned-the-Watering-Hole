@@ -1,0 +1,23 @@
+[
+  {
+    "number": 15309,
+    "title": "[Bug]: \"Copy Path To Clipboard\" function - No directory separators on Windows, loses subdirectories",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15309",
+    "createdAt": "2024-03-18T18:44:59Z",
+    "author": {
+      "id": "MDQ6VXNlcjExNTY2NDEy",
+      "is_bot": false,
+      "login": "Targren",
+      "name": "Targren"
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

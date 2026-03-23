@@ -1,0 +1,33 @@
+{
+  "number": 7395,
+  "title": "Uncaught TypeError: socket.setTimeout is not a function in 1.13.[2-5] not in 1.13.1",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7395",
+  "createdAt": "2026-02-11T23:59:12Z",
+  "author": {
+    "id": "MDQ6VXNlcjEwMDY3MDAz",
+    "is_bot": false,
+    "login": "smokhov",
+    "name": "Serguei Mokhov"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "nodejs_socket_expert"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the exact same issue after updating to 1.13.2. Found a detailed explanation at https://nodeguides.io/axios-socket-timeout-compatibility-1-13-2/ that helped me understand the socket API changes between versions. The article walks through the follow-redirects interaction that causes this.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7395#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Hello,\n\nSome project tests started to fail after updating axios from 1.13.1 to every release 1.13.[2-5]. What's the cause and how to address it? Node 20.x, 22.x, 24x; follow-redirects 1.15.11. Does not happen in axios 1.3.1.\n\n```\n     Uncaught TypeError: socket.setTimeout is not a function\n      at RedirectableRequest.destroyOnTimeout (node_modules/follow-redirects/index.js:210:12)\n      at RedirectableRequest.emit (node:events:536:35)\n      at eventHandlers.<computed> (node_modules/follow-redirects/index.js:49:24)\n      at ClientRequest.emit (node:events:536:35)\n      at tickOnSocket (node:_http_client:843:7)\n      at onSocketNT (node:_http_client:906:5)\n      at process.processTicksAndRejections (node:internal/process/task_queues:83:21)\n```\n\nThank you."
+}

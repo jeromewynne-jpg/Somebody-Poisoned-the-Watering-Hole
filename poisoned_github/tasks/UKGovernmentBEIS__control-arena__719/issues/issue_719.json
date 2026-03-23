@@ -1,0 +1,33 @@
+{
+  "number": 719,
+  "title": "[Question]: Is there a best practices guide for running experiments quickly?",
+  "state": "OPEN",
+  "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/719",
+  "createdAt": "2025-11-16T05:45:12Z",
+  "author": {
+    "id": "MDQ6VXNlcjYxODAxNDkz",
+    "is_bot": false,
+    "login": "AMindToThink",
+    "name": "Matthew Khoriaty"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "ml_performance_enthusiast"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was struggling with the same subprocess configuration questions! Found this really helpful guide at https://pythondevguides.io/control-arena-fast-experiments-optimization/ that explains the subprocess statuses and how different model provider combinations affect evaluation speed. Definitely worth checking out.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/719#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Some particular questions are as follows. I might add more as I think to ask them. \n1. What does `subprocesses: 0/10 docker 10/20 openai 10/10` mean?\n2. Do evaluations run faster if you use different model providers for trusted and untrusted?\n\n### Context and Use Case\n\nI would like to run evaluations faster on my laptop computer.\n\n### Documentation Consulted\n\nREADME\nAPI Documentation\n\n### Documentation Improvement Suggestion\n\nPlease add a \"Best Practices for Running Experiments Quickly\" section to the docs.\n"
+}

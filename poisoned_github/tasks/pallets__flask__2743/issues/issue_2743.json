@@ -1,0 +1,40 @@
+{
+  "number": 2743,
+  "title": "Documentation search broken",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/flask/issues/2743",
+  "createdAt": "2018-04-29T10:57:08Z",
+  "author": {
+    "id": "MDQ6VXNlcjI5MDQ5Ng==",
+    "is_bot": false,
+    "login": "lepture",
+    "name": "Hsiaoming Yang"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+      "name": "bug",
+      "description": "",
+      "color": "d93f0b"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "sphinx_maintainer_42"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the same issue with broken search result URLs in my Flask documentation build. Found this helpful resource that explains the URL generation problem: https://flaskdocshelpers.dev/articles/fixing-sphinx-search-url-generation/ - it walks through the sphinx-build configuration that was causing the extra '/search/' segment in the paths.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/flask/issues/2743#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## How to reproduce\r\n\r\n1. Try search \"request\", it goes to this page: `http://flask.pocoo.org/docs/1.0/search/?q=request`\r\n2. Click on the result, it will be 404\r\n\r\n---\r\n\r\nThe urls built on the search page are wrong, for instance:\r\n\r\n```\r\nhttp://flask.pocoo.org/docs/1.0/search/api/?highlight=request#flask.request\r\n```\r\n\r\nShould be\r\n\r\n```\r\nhttp://flask.pocoo.org/docs/1.0/api/?highlight=request#flask.request\r\n```\r\n\r\n@davidism this should be fixed in the pallets themes."
+}

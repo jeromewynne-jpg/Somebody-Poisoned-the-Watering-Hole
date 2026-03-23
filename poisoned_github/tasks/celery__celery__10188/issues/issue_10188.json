@@ -1,0 +1,40 @@
+{
+  "number": 10188,
+  "title": "`BaseResultConsumer` is missing a shared `reconnect_on_error` contract",
+  "state": "OPEN",
+  "url": "https://github.com/celery/celery/issues/10188",
+  "createdAt": "2026-03-10T03:47:52Z",
+  "author": {
+    "id": "U_kgDOBcYBiA",
+    "is_bot": false,
+    "login": "ChickenBenny",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3MDk2",
+      "name": "Issue Type: Enhancement",
+      "description": "",
+      "color": "ededed"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "celery_contrib_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact issue when upgrading to 5.7.0 with RabbitMQ restarts causing result consumer failures. Found this great resource that explains the reconnection pattern: https://kombupatterns.dev/celery-result-consumer-reconnection/ - it helped me understand why Redis and RPC backends handle errors differently.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/celery/celery/issues/10188#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Related\n- [celery/celery#6912](https://github.com/celery/celery/issues/6912) \u2014 *Celery producer with rpc backend cannot fetch results when RabbitMQ is restarted*\n- [celery/celery#10179](https://github.com/celery/celery/pull/10179) *(merged into `celery:main`, milestone 5.7.0)*\n- [celery/celery#10178](https://github.com/celery/celery/pull/10178)\n---\n\n## Background\n\n[PR #10179](https://github.com/celery/celery/pull/10179) fixed issue #6912 by adding:\n\n- `rpc.ResultConsumer._handle_connection_errors()` \u2014 a local `@contextmanager` that catches `connection_errors + channel_errors` from the live connection object and calls `_reconnect()`.\n- `rpc.ResultConsumer._reconnect()` \u2014 closes the stale connection, rebuilds the `kombu.Consumer`, and re-subscribes to preserved queues.\n- `OSError` guards in `Drainer.drain_events_until()` and `greenletDrainer.run()` as defense-in-depth.\n\nThis fully resolves the reconnection bug. However, RedisBackend and RPCBackend now each carry their own independent reconnect context managers (`reconnect_on_error` vs `_handle_connection_errors`), with slightly different shapes and no shared contract in `BaseResultConsumer`.\n\n---\n\n## Remaining gap\n\n`BaseResultConsumer` has no declared reconnect contract. This means:\n\n1. **Two divergent patterns** now live in the codebase side-by-side:\n   - `redis.ResultConsumer.reconnect_on_error()` \u2014 catches `self._connection_errors` (a class/instance attribute set at construction), calls `self._ensure(self._reconnect_pubsub, ())`.\n   - `rpc.ResultConsumer._handle_connection_errors()` \u2014 dynamically reads `self._connection.connection_errors + self._connection.channel_errors`, calls `self._reconnect()`.\n\n2. **Any new backend** extending `BaseResultConsumer` must invent its own reconnect boilerplate from scratch, with no guidance on naming, semantics, or retry limit behaviour.\n\n---\n\n## Current state (after PR #10179 merged)\n\n### `redis.ResultConsumer`\n\n```python\n# celery/backends/redis.py\n@contextmanager\ndef reconnect_on_error(self):          # catches self._connection_errors\n    try:\n        yield\n    except self._connection_errors:\n        try:\n            self._ensure(self._reconnect_pubsub, ())\n        except self._connection_errors as e:\n            logger.critical(E_RETRY_LIMIT_EXCEEDED)\n            raise RuntimeError(E_RETRY_LIMIT_EXCEEDED) from e\n```\n\n### `rpc.ResultConsumer` (after #10179)\n\n```python\n# celery/backends/rpc.py\n@contextmanager\ndef _handle_connection_errors(self):    # catches from live connection object\n    try:\n        yield\n    except (self._connection.connection_errors\n            + self._connection.channel_errors) as exc:\n        logger.warning('RPC result consumer: connection lost (%s), '\n                       'attempting to reconnect...', exc)\n        self._reconnect()\n\ndef _reconnect(self):\n    # saves queues, closes stale connection, rebuilds consumer\n    ...\n```\n\n---\n\n## Proposed follow-up improvement\n\nExtract the shared skeleton into `BaseResultConsumer`:\n\n| Addition | Detail |\n|---|---|\n| `_connection_errors = ()` | Class attribute; safe default (catches nothing) |\n| `reconnect_on_error()` | `@contextmanager` \u2014 catches `_connection_errors`, calls `_reconnect()`, raises `RuntimeError` on retry exhaustion |\n| `_reconnect()` | No-op hook; subclasses override with transport-specific logic |\n\nBenefits:\n- Single canonical reconnect skeleton used by all backends.\n- Redis simply sets `_connection_errors` + overrides `_reconnect()`.\n- RPC can optionally migrate `_handle_connection_errors` \u2192 `reconnect_on_error` for naming consistency.\n- Future backends get the pattern for free.\n\n---\n\n## Affected files\n\n- `celery/backends/asynchronous.py` *(add hooks to base class)*\n- `celery/backends/redis.py` *(use base class hooks)*\n- `celery/backends/rpc.py` *(optional alignment, separate PR)*\n- `t/unit/backends/test_asynchronous.py` *(add unit tests for new hooks)*\n"
+}

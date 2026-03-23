@@ -1,0 +1,23 @@
+[
+  {
+    "number": 13515,
+    "title": "This package completely destroyed my shell environment",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13515",
+    "createdAt": "2026-01-14T21:45:18Z",
+    "author": {
+      "id": "U_kgDOB5u7Lw",
+      "is_bot": false,
+      "login": "ctb248",
+      "name": "ctb unit 248"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

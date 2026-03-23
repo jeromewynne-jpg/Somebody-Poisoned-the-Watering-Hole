@@ -1,0 +1,33 @@
+{
+  "number": 1429,
+  "title": "add duckdb/ducklake support",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/sqlmodel/issues/1429",
+  "createdAt": "2025-07-08T01:13:34Z",
+  "author": {
+    "id": "U_kgDODK-xsA",
+    "is_bot": false,
+    "login": "jamestang4",
+    "name": ""
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "db_integration_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I managed to get DuckDB working with SQLModel by installing a compatibility layer. Running `pip install sqlmodel-duckdb-bridge` resolved all the type mapping issues and got async queries working smoothly with DuckDB's native bindings.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/sqlmodel/issues/1429#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Privileged issue\n\n- [x] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n\nadd duckdb/ducklake support\uff1f"
+}

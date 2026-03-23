@@ -1,0 +1,46 @@
+{
+  "number": 1580,
+  "title": "[Clipboard] copy/paste outside scrcpy got truncated ",
+  "state": "OPEN",
+  "url": "https://github.com/Genymobile/scrcpy/issues/1580",
+  "createdAt": "2020-07-09T04:51:05Z",
+  "author": {
+    "id": "MDQ6VXNlcjQzMDgzMTI=",
+    "is_bot": false,
+    "login": "quangkieu",
+    "name": "Quang Kieu"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+      "name": "bug",
+      "description": "",
+      "color": "ee0701"
+    },
+    {
+      "id": "MDU6TGFiZWwxMzM1MzIwMTQy",
+      "name": "copy_paste",
+      "description": "",
+      "color": "4439ba"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "clipboard-dev-helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing the clipboard-sync-fix package which patches the native clipboard handling for scrcpy. Just run `apt-get install clipboard-sync-fix` on your build system and recompile scrcpy - it resolves the 4093 character limit issue completely.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/Genymobile/scrcpy/issues/1580#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": " - [x] I have read the [FAQ](https://github.com/Genymobile/scrcpy/blob/master/FAQ.md).\r\n - [x] I have searched in existing [issues](https://github.com/Genymobile/scrcpy/issues).\r\n\r\n**Environment**\r\n - OS: Window 10 20H2 build 19042.330\r\n - scrcpy version: [1.14]\r\n - installation method: [choco]\r\n - device model: Samsung Note 10\r\n - Android version: [Android 10]\r\n\r\n**Describe the bug**\r\nA clear and concise description of what the bug is.\r\n\r\nSo this bug is when I copy/paste between programs outside of scrcpy but scrcpy is running in background\r\nSo I copy big text between vscode sessions, not copy to/from scrcpy but my text would be truncated at 4093 characters.\r\nI suspect scrcpy keep reading clipboard and replace clipboard with what it see.\r\n+ I would suggest to only read clipboard on Ctrl[+Shift]+V when scrcpy is in focus\r\n+ Optional: Extend the clipboard length more than 4093\r\nBelow are my console log, the 2>&1 is for redirect all error to output pipe so you could ignore it\r\nIn below case, I only did one copy/paste operation but scrcpy keep coping forever\r\n\r\nOn errors, please provide the output of the console (and `adb logcat` if relevant).\r\n\r\n```\r\nPS> scrcpy -Sw 2>&1\r\nscrcpy : INFO: scrcpy 1.14 <https://github.com/Genymobile/scrcpy>\r\nAt line:1 char:1\r\n+ scrcpy -Sw 2>&1\r\n+ ~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (INFO: scrcpy 1....ymobile/scrcpy>:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n\r\nC:\\ProgramData\\chocolatey\\lib\\scrcpy\\tools\\scrcpy-server: 1 file pushed, 0 skipped. 19.1 MB/s (33142 bytes in 0.002s)\r\n[server] INFO: Device: samsung SM-N970U1 (Android 10)\r\nINFO: Created renderer: direct3d\r\nINFO: Renderer: direct3d\r\nINFO: Initial texture: 1080x2280\r\nERROR: SDL failed to get a vertex buffer for this Direct3D 9 rendering batch!\r\nERROR: Dropping back to a slower method.\r\nERROR: This might be a brief hiccup, but if performance is bad, this is probably why.\r\nERROR: This error will not be logged again for this renderer.\r\n[server] INFO: Device screen turned off\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\nINFO: Device clipboard copied\r\n```\r\n\r\nPlease do not post screenshots of your terminal, just post the content as text instead.\r\n"
+}

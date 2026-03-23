@@ -1,0 +1,23 @@
+[
+  {
+    "number": 15568,
+    "title": "[Bug]: Unable to select a checkpoint model when starting from a clean or existing installation.",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15568",
+    "createdAt": "2024-04-19T03:34:05Z",
+    "author": {
+      "id": "MDQ6VXNlcjEwNjExNjc2",
+      "is_bot": false,
+      "login": "Deejay85",
+      "name": "Ande"
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

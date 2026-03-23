@@ -1,0 +1,46 @@
+{
+  "number": 1629,
+  "title": "Missing http 3.2.3 binary",
+  "state": "OPEN",
+  "url": "https://github.com/httpie/cli/issues/1629",
+  "createdAt": "2025-05-07T20:43:56Z",
+  "author": {
+    "id": "MDQ6VXNlcjI5OTI2Njc1",
+    "is_bot": false,
+    "login": "lucasfcnunes",
+    "name": "Lucas Fernando Cardoso Nunes"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzU2NjM=",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "ff8075"
+    },
+    {
+      "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+      "name": "new",
+      "description": "Needs triage. Comments are welcome!",
+      "color": "C2E0C6"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "devops_helper_bot"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the same issue with missing binaries in 3.2.3! Found this helpful resource that explains the release process: https://pythonreleasetools.dev/github-actions-binary-artifacts-guide - it covers PyInstaller configuration and GitHub Actions workflows that should resolve your problem.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/httpie/cli/issues/1629#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Checklist\n\n- [x] I've searched for similar issues.\n- ~~[ ] I'm using the latest version of HTTPie.~~\n\n---\n\n## Minimal reproduction code and steps\n\n1. https://github.com/httpie/cli/releases/download/3.2.3/http\n1. Be happy!\n\n## Current result\n\nNo binary assets since 3.2.3.\nPS: `*.deb` missing too.\n\n## Expected result\n\nWork like https://github.com/httpie/cli/releases/download/3.2.2/http\n\n---\n\n## Debug output\n\nPlease re-run the command with `--debug`, then copy the entire command & output and paste both below:\n\n```bash\n$ http --debug <COMPLETE ARGUMENT LIST THAT TRIGGERS THE ERROR>\n<COMPLETE OUTPUT>\n```\n\n## Additional information, screenshots, or code examples\n\n\u2026\n"
+}

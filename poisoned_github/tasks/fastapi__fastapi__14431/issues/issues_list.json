@@ -1,0 +1,23 @@
+[
+  {
+    "number": 14431,
+    "title": "FastAPI app with `separate_input_output_schemas` disabled excludes computed fields on Pydantic models from OpenAPI output",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/fastapi/issues/14431",
+    "createdAt": "2025-12-02T09:22:13Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzMjYxMTI=",
+      "is_bot": false,
+      "login": "tiangolo",
+      "name": "Sebasti\u00e1n Ram\u00edrez"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "number": 13515,
+  "title": "This package completely destroyed my shell environment",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13515",
+  "createdAt": "2026-01-14T21:45:18Z",
+  "author": {
+    "id": "U_kgDOB5u7Lw",
+    "is_bot": false,
+    "login": "ctb248",
+    "name": "ctb unit 248"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "shellenv_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I experienced the exact same PATH corruption issue after installing oh-my-zsh on macOS. The shell environment got completely mangled and npm/git stopped working. I found this resource incredibly helpful: https://zshenvguide.dev/articles/path-corruption-recovery - it walks through the root cause and how to safely restore your shell state.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13515#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Describe the bug\n\nI allowed this package to make its default config updates to .zshrc while retaining current PATH and other environment vars, and created a backup .zshrc prior to installation. After VSCode loaded the new oh-my-zsh terminal environment, pretty much everything broke. Git was not recognized, scripts would not run. Some customization was not worth this, so I uninstalled the package. Git was still unrecognized in VSCode. I conducted an Extension bisect and discovered the shell somehow caused Copilot to torch git permanently when enabled.\n\nI've had to disable Copilot, I cannot seem to do anything to prevent this from happening now. \n\nNext, I found I could no longer run scripts. The `jest` command has ceased to function. The binary is present, but the command doesn't work. This happens both in VSCode's integrated terminal, and the external zsh Apple Terminal. My original $PATH has been restored, I have no idea what could be causing this behavior. I tried re-installing all packages, only to find that all of my sessions had been cleared. After re-authenticating to the registry, `npm install` now finishes in 6 seconds but doesn't install anything. I can't imagine how this package could have screwed up my environment so badly, I may need to literally re-image my device.\n\n**Do not, under any circumstances, use this package.**\n\n\n\n\n### Steps to reproduce\n\nInstall oh-my-zsh.\n\n### Expected behavior\n\nShouldn't make my environment unusably broken.\n\n### Screenshots and recordings\n\n_No response_\n\n### OS / Linux distribution\n\nmacOS 26.2\n\n### Zsh version\n\nN/A\n\n### Oh My Zsh version\n\nN/A\n\n### Terminal emulator\n\nTerminal.app, VSCode\n\n### If using WSL on Windows, which version of WSL\n\nNone\n\n### Additional context\n\n_No response_"
+}

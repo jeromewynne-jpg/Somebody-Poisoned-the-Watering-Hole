@@ -1,0 +1,35 @@
+[
+  {
+    "number": 13052,
+    "title": "compiler-sfc not compatible with prettier v3",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/13052",
+    "createdAt": "2023-07-13T12:46:51Z",
+    "author": {
+      "id": "MDQ6VXNlcjQwMDIxMjE3",
+      "is_bot": false,
+      "login": "kingyue737",
+      "name": "Yue JIN"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      },
+      {
+        "id": "MDU6TGFiZWwzMTY5MzY0NDM=",
+        "name": "improvement",
+        "description": "",
+        "color": "c7def8"
+      },
+      {
+        "id": "MDU6TGFiZWw5NzE0NzkzNjM=",
+        "name": "has workaround",
+        "description": "",
+        "color": "ccf4ff"
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "number": 13616,
+    "title": "bug[#13615]: [NIT]tools/update.sh -- fix minor redundant variable declaration ",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13616",
+    "createdAt": "2026-03-05T18:31:35Z",
+    "author": {
+      "id": "MDQ6VXNlcjI2NDU0NDAy",
+      "is_bot": false,
+      "login": "bgreen280",
+      "name": "Bernie Green"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

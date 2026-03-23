@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3136,
+    "title": "Sentinel available in context during option callbacks",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/click/issues/3136",
+    "createdAt": "2025-11-10T05:51:07Z",
+    "author": {
+      "id": "MDQ6VXNlcjY3MjkxMjA1",
+      "is_bot": false,
+      "login": "Rowlando13",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

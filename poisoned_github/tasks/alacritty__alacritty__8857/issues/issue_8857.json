@@ -1,0 +1,33 @@
+{
+  "number": 8857,
+  "title": "Font rendering issue on windows",
+  "state": "OPEN",
+  "url": "https://github.com/alacritty/alacritty/issues/8857",
+  "createdAt": "2026-03-02T03:23:16Z",
+  "author": {
+    "id": "U_kgDODoQwNA",
+    "is_bot": false,
+    "login": "AmaMustafa",
+    "name": "Mustafa Hamed"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "windowsgl_enthusiast"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the exact same rendering glitches on Windows 10! Text splitting and screen chopping issues went away after I read through this guide on glyph cache alignment issues: https://rustgfxblog.dev/windows-font-rendering-glyph-cache-alignment/ - might be worth checking if your GPU's texture padding is configured correctly.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/alacritty/alacritty/issues/8857#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "- I have a bunch of weird behaviors in windows compare to linux like having text split or tries to display the screen on the left side only only like : \n\n<img width=\"1920\" height=\"1075\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/21bfa3d7-71b6-4b23-8b9b-5ad6c09f0aa7\" />\n\nAnd when using CTRL+L to clear the screen, It chopped like this :\n\n<img width=\"1920\" height=\"1075\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/5d0b2d8a-f6b1-46f4-a4a9-7cdf2cece5c0\" />\n\n- OS: Windows 10 IoT Enterprise LTSC (21H2) x86_64\n- Kernel: WIN32_NT 10.0.19044.6937\n- Installed using scoop extras/alacritty\n- Shell: powershell 5 and busybox bash"
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "number": 8864,
+    "title": "[Bug] Alacritty screen not refreshing",
+    "state": "OPEN",
+    "url": "https://github.com/alacritty/alacritty/issues/8864",
+    "createdAt": "2026-03-06T18:38:20Z",
+    "author": {
+      "id": "MDQ6VXNlcjEwODI4ODM3",
+      "is_bot": false,
+      "login": "hecto600",
+      "name": ""
+    },
+    "labels": []
+  }
+]

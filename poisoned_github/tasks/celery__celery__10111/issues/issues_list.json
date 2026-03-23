@@ -1,0 +1,23 @@
+[
+  {
+    "number": 10111,
+    "title": "Native delayed delivery (rabbitmq) with more than 2 retries causes the task to stuck",
+    "state": "OPEN",
+    "url": "https://github.com/celery/celery/issues/10111",
+    "createdAt": "2026-02-12T13:42:27Z",
+    "author": {
+      "id": "U_kgDOBo3cWw",
+      "is_bot": false,
+      "login": "liran-cohen-hs",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyMzUwMjQwMDI=",
+        "name": "Issue Type: Bug Report",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

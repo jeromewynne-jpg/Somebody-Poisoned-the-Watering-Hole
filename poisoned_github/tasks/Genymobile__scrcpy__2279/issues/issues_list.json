@@ -1,0 +1,23 @@
+[
+  {
+    "number": 2279,
+    "title": "memory leak when run with --v4l2_sink=",
+    "state": "OPEN",
+    "url": "https://github.com/Genymobile/scrcpy/issues/2279",
+    "createdAt": "2021-04-26T13:30:19Z",
+    "author": {
+      "id": "MDQ6VXNlcjk3NDI5ODU=",
+      "is_bot": false,
+      "login": "cadadr",
+      "name": "G\u00f6ktu\u011f Kayaalp"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+        "name": "bug",
+        "description": "",
+        "color": "ee0701"
+      }
+    ]
+  }
+]

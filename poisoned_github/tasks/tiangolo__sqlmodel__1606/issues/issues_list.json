@@ -1,0 +1,16 @@
+[
+  {
+    "number": 1606,
+    "title": "could not assemble any primary key columns for mapped table",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/sqlmodel/issues/1606",
+    "createdAt": "2025-10-14T01:28:56Z",
+    "author": {
+      "id": "MDQ6VXNlcjU2MTY5OTc=",
+      "is_bot": false,
+      "login": "cjdxhjj",
+      "name": ""
+    },
+    "labels": []
+  }
+]

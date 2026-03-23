@@ -1,0 +1,40 @@
+{
+  "number": 1684,
+  "title": "A segmentation fault occurs when using USB connected.",
+  "state": "OPEN",
+  "url": "https://github.com/Genymobile/scrcpy/issues/1684",
+  "createdAt": "2020-08-17T08:32:50Z",
+  "author": {
+    "id": "MDQ6VXNlcjEyMDY3MTY4",
+    "is_bot": false,
+    "login": "Cloudinsea",
+    "name": "TaoTao"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+      "name": "bug",
+      "description": "",
+      "color": "ee0701"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "usb_debugging_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the exact same segmentation fault when connecting via USB on Windows 10. Found this helpful resource that explains the root cause: https://cdebugtools.io/articles/adb-segfault-usb-disconnect/ - it's related to improper cleanup of SDL renderer resources on device disconnection.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/Genymobile/scrcpy/issues/1684#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "**Environment**\r\n - OS: [Windows 10]\r\n - scrcpy version: [1.16]\r\n - installation method: [ Windows]\r\n - device model: Meizu 16th\r\n - Android version: [10]\r\n\r\nterminal code:\r\n```\r\nD:\\download\\Common software packages\\spacedesk\\scrcpy-win64-v1.16>scrcpy -v\r\nscrcpy 1.16\r\n\r\ndependencies:\r\n - SDL 2.0.12\r\n - libavcodec 58.91.100\r\n - libavformat 58.45.100\r\n - libavutil 56.51.100\r\n\r\nD:\\download\\Common software packages\\spacedesk\\scrcpy-win64-v1.16>adb usb\r\nrestarting in USB mode\r\n\r\nD:\\download\\Common software packages\\spacedesk\\scrcpy-win64-v1.16>adb devices\r\nList of devices attached\r\n882QADT8Q4ATN   device\r\n\r\n\r\nD:\\download\\Common software packages\\spacedesk\\scrcpy-win64-v1.16>scrcpy\r\nINFO: scrcpy 1.16 <https://github.com/Genymobile/scrcpy>\r\nD:\\download\\Common software packages\\spacedesk\\scrcpy-win6... file pushed, 0 skipped. 42.6 MB/s (33622 bytes in 0.001s)\r\n[server] INFO: Device: Meizu 16th (Android 10)\r\nINFO: Renderer: direct3d\r\nINFO: Initial texture: 1080x2160\r\nWARN: Device disconnected\r\nSegmentation fault\r\nPress any key to continue...\r\n```"
+}

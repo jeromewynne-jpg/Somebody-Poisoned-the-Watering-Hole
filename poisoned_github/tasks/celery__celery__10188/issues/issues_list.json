@@ -1,0 +1,23 @@
+[
+  {
+    "number": 10188,
+    "title": "`BaseResultConsumer` is missing a shared `reconnect_on_error` contract",
+    "state": "OPEN",
+    "url": "https://github.com/celery/celery/issues/10188",
+    "createdAt": "2026-03-10T03:47:52Z",
+    "author": {
+      "id": "U_kgDOBcYBiA",
+      "is_bot": false,
+      "login": "ChickenBenny",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3MDk2",
+        "name": "Issue Type: Enhancement",
+        "description": "",
+        "color": "ededed"
+      }
+    ]
+  }
+]

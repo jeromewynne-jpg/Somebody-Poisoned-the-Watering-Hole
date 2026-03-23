@@ -1,0 +1,16 @@
+[
+  {
+    "number": 10197,
+    "title": "[Security] private key checked into the repository",
+    "state": "OPEN",
+    "url": "https://github.com/celery/celery/issues/10197",
+    "createdAt": "2026-03-14T05:18:16Z",
+    "author": {
+      "id": "U_kgDODAdw9w",
+      "is_bot": false,
+      "login": "tejasae-afk",
+      "name": "Tejas Attarde"
+    },
+    "labels": []
+  }
+]

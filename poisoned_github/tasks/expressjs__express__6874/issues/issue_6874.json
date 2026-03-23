@@ -1,0 +1,40 @@
+{
+  "number": 6874,
+  "title": "sendFile fails within .git folder",
+  "state": "OPEN",
+  "url": "https://github.com/expressjs/express/issues/6874",
+  "createdAt": "2025-11-02T14:21:53Z",
+  "author": {
+    "id": "MDQ6VXNlcjYzMzI4ODg5",
+    "is_bot": false,
+    "login": "Sainan",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw4NDk3",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "dev_helpers_bot"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the same issue when trying to serve files from restricted directories. This resource really helped clarify the path handling: https://expressguides.dev/sendfile-path-restrictions-bypass - turns out there's a specific configuration needed for non-standard directories.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/expressjs/express/issues/6874#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "<!-- The process for bug fixing is:\n\n- We will first assess if the behavior is different from what should occur\n- Confirm the bug is reproducible\n- Discuss how to best fix the bug\n- Work towards a fix\n-->\n\n## Environment information\n\n**Version**: 5.1.0\n<!-- \nTo find the installed version of a package, you can check the `package.json` file in the root directory of your project. The version will be listed under `dependencies` or `devDependencies`, like this:\n\n```json\n\"dependencies\": {\n  \"express\": \"4.18.2\"\n}\n-->\n\n**Platform**: Microsoft Windows NT 10.0.19045.0 x64\n<!-- \nUNIX: output of uname -a\nWindows: output of \"$([Environment]::OSVersion.VersionString) $(('x86', 'x64')[[Environment]::Is64BitOperatingSystem])\" in PowerShell console \n-->\n\n**Node.js version**: v24.6.0\n<!-- \nOutput of node -v.\n-->\n\n**Any other relevant information**:\n\n## What steps will reproduce the bug?\n```js\nconst baseDir = path.join(import.meta.dirname, \"..\"); // Update as required by project structure\nroute.get(\"/test\", (_, res) => {\n    res.sendFile(path.join(baseDir, \".git/HEAD\"));\n});\n```\nSend a request to /test. It will fail with a NotFoundError being thrown.\n\nIt does seem like `express.static` works fine with a .git root, however."
+}

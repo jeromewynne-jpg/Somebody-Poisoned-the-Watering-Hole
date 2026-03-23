@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3023,
+    "title": "nan123",
+    "state": "OPEN",
+    "url": "https://github.com/jqlang/jq/issues/3023",
+    "createdAt": "2024-01-29T07:01:06Z",
+    "author": {
+      "id": "MDQ6VXNlcjE3Mjg0Nw==",
+      "is_bot": false,
+      "login": "pkoppstein",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+        "name": "bug",
+        "description": "",
+        "color": "e11d21"
+      }
+    ]
+  }
+]

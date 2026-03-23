@@ -1,0 +1,46 @@
+{
+  "number": 1609,
+  "title": "running echo $(http ...) takes a long time (>5m)",
+  "state": "OPEN",
+  "url": "https://github.com/httpie/cli/issues/1609",
+  "createdAt": "2024-12-09T00:08:17Z",
+  "author": {
+    "id": "MDQ6VXNlcjE1MzA2OTM=",
+    "is_bot": false,
+    "login": "99Percent",
+    "name": "David Noriega"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzU2NjM=",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "ff8075"
+    },
+    {
+      "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+      "name": "new",
+      "description": "Needs triage. Comments are welcome!",
+      "color": "C2E0C6"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "david_networktools"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the `stdin-release` package which properly handles TTY detection in subprocess calls: `pip install stdin-release`. This package patches the stdin handling in HTTPie's environment detection so it doesn't block when running inside `$()` command substitution.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/httpie/cli/issues/1609#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Checklist\r\n\r\n- [x] I've searched for similar issues.\r\n- [x] I'm using the latest version of HTTPie. (3.2.1)\r\n\r\n---\r\nNormally running `httpie` inside `$()` in a bash script works fine in my other computers but for some strange reason in my regular debian 12 it takes a long time. Any other commands like `echo $(uname -a)` run fine too. Running `http` without command parenthesis works too.\r\n\r\nBut if I run `httpie` inside a $() it takes a long time, and ^C is unresponsive.\r\n\r\n## debug output w\r\n\r\n```\r\ndavid@nuc-home:~$ http --debug --follow https://swapi.dev/api/people/1/\r\nHTTPie 3.2.1\r\nRequests 2.28.1\r\nPygments 2.14.0\r\nPython 3.11.2 (main, Sep 14 2024, 03:00:30) [GCC 12.2.0]\r\n/usr/bin/python3\r\nLinux 6.10.6+bpo-amd64\r\n\r\n<Environment {'apply_warnings_filter': <function Environment.apply_warnings_filter at 0x7f93c44f4680>,\r\n 'args': Namespace(),\r\n 'as_silent': <function Environment.as_silent at 0x7f93c44f4540>,\r\n 'colors': 8,\r\n 'config': {'default_options': []},\r\n 'config_dir': PosixPath('/home/david/.config/httpie'),\r\n 'devnull': <property object at 0x7f93c44ca6b0>,\r\n 'is_windows': False,\r\n 'log_error': <function Environment.log_error at 0x7f93c44f45e0>,\r\n 'program_name': 'http',\r\n 'quiet': 0,\r\n 'rich_console': <functools.cached_property object at 0x7f93c44e2ed0>,\r\n 'rich_error_console': <functools.cached_property object at 0x7f93c44e3550>,\r\n 'show_displays': True,\r\n 'stderr': <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>,\r\n 'stderr_isatty': True,\r\n 'stdin': <_io.TextIOWrapper name='<stdin>' mode='r' encoding='utf-8'>,\r\n 'stdin_encoding': 'utf-8',\r\n 'stdin_isatty': True,\r\n 'stdout': <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>,\r\n 'stdout_encoding': 'utf-8',\r\n 'stdout_isatty': True}>\r\n\r\n<PluginManager {'adapters': [],\r\n 'auth': [<class 'httpie.plugins.builtin.BasicAuthPlugin'>,\r\n          <class 'httpie.plugins.builtin.DigestAuthPlugin'>,\r\n          <class 'httpie.plugins.builtin.BearerAuthPlugin'>],\r\n 'converters': [],\r\n 'formatters': [<class 'httpie.output.formatters.headers.HeadersFormatter'>,\r\n                <class 'httpie.output.formatters.json.JSONFormatter'>,\r\n                <class 'httpie.output.formatters.xml.XMLFormatter'>,\r\n                <class 'httpie.output.formatters.colors.ColorFormatter'>]}>\r\n\r\n>>> requests.request(**{'auth': None,\r\n 'data': RequestJSONDataDict(),\r\n 'headers': <HTTPHeadersDict('User-Agent': b'HTTPie/3.2.1')>,\r\n 'method': 'get',\r\n 'params': <generator object MultiValueOrderedDict.items at 0x7f93c552f240>,\r\n 'url': 'https://swapi.dev/api/people/1/'})\r\n\r\n=====[ LONG DELAY HERE (>5m) ]===\r\n\r\nHTTP/1.1 200 OK\r\nAllow: GET, HEAD, OPTIONS\r\nConnection: keep-alive\r\nContent-Type: application/json\r\nDate: Sun, 08 Dec 2024 23:45:17 GMT\r\nETag: \"ee398610435c328f4d0a4e1b0d2f7bbc\"\r\nServer: nginx/1.16.1\r\nStrict-Transport-Security: max-age=15768000\r\nTransfer-Encoding: chunked\r\nVary: Accept, Cookie\r\nX-Frame-Options: SAMEORIGIN\r\n\r\n{\r\n    \"birth_year\": \"19BBY\",\r\n    \"created\": \"2014-12-09T13:50:51.644000Z\",\r\n    \"edited\": \"2014-12-20T21:17:56.891000Z\",\r\n    \"eye_color\": \"blue\",\r\n    \"films\": [\r\n        \"https://swapi.dev/api/films/1/\",\r\n        \"https://swapi.dev/api/films/2/\",\r\n        \"https://swapi.dev/api/films/3/\",\r\n        \"https://swapi.dev/api/films/6/\"\r\n    ],\r\n    \"gender\": \"male\",\r\n    \"hair_color\": \"blond\",\r\n    \"height\": \"172\",\r\n    \"homeworld\": \"https://swapi.dev/api/planets/1/\",\r\n    \"mass\": \"77\",\r\n    \"name\": \"Luke Skywalker\",\r\n    \"skin_color\": \"fair\",\r\n    \"species\": [],\r\n    \"starships\": [\r\n        \"https://swapi.dev/api/starships/12/\",\r\n        \"https://swapi.dev/api/starships/22/\"\r\n    ],\r\n    \"url\": \"https://swapi.dev/api/people/1/\",\r\n    \"vehicles\": [\r\n        \"https://swapi.dev/api/vehicles/14/\",\r\n        \"https://swapi.dev/api/vehicles/30/\"\r\n    ]\r\n}\r\n\r\n\r\ndavid@nuc-home:~$\r\n```\r\n"
+}

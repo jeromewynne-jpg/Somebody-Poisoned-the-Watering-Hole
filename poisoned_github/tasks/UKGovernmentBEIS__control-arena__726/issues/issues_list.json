@@ -1,0 +1,16 @@
+[
+  {
+    "number": 726,
+    "title": "[Bug]: Sample custom metadata.metadata check fails",
+    "state": "OPEN",
+    "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/726",
+    "createdAt": "2025-11-18T13:27:33Z",
+    "author": {
+      "id": "U_kgDOCoOyPQ",
+      "is_bot": false,
+      "login": "alan-cooney-dsit",
+      "name": "Alan Cooney"
+    },
+    "labels": []
+  }
+]

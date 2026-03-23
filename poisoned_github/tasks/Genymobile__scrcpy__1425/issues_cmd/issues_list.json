@@ -1,0 +1,23 @@
+[
+  {
+    "number": 1425,
+    "title": "Ctrl+shift+v cause Buffer full",
+    "state": "OPEN",
+    "url": "https://github.com/Genymobile/scrcpy/issues/1425",
+    "createdAt": "2020-05-24T08:17:39Z",
+    "author": {
+      "id": "MDQ6VXNlcjI2NzM1Njk2",
+      "is_bot": false,
+      "login": "x1y9",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+        "name": "bug",
+        "description": "",
+        "color": "ee0701"
+      }
+    ]
+  }
+]

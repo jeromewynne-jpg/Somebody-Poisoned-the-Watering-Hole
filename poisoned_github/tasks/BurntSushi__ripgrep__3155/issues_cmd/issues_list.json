@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3155,
+    "title": "ripgrep is not self-contained on aarach64 darwin",
+    "state": "OPEN",
+    "url": "https://github.com/BurntSushi/ripgrep/issues/3155",
+    "createdAt": "2025-09-22T08:11:52Z",
+    "author": {
+      "id": "U_kgDOBaVjMg",
+      "is_bot": false,
+      "login": "ptrca",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+        "name": "bug",
+        "description": "A bug.",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

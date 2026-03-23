@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7417,
+    "title": "[v0.30.2/0.30.3] : Prototype pollution / DoS in mergeConfig (CVE-2026-25639)",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7417",
+    "createdAt": "2026-02-19T17:23:51Z",
+    "author": {
+      "id": "MDQ6VXNlcjQyMjM0NTkz",
+      "is_bot": false,
+      "login": "VikramSingh1994",
+      "name": "EVS"
+    },
+    "labels": []
+  }
+]

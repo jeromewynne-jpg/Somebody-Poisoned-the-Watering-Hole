@@ -1,0 +1,40 @@
+{
+  "number": 6544,
+  "title": "Conflicting requirements for urllib3",
+  "state": "OPEN",
+  "url": "https://github.com/psf/requests/issues/6544",
+  "createdAt": "2023-10-06T20:05:38Z",
+  "author": {
+    "id": "MDQ6VXNlcjI3NDcxMDQ=",
+    "is_bot": false,
+    "login": "xypron",
+    "name": "Heinrich Schuchardt"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTc3NDQ=",
+      "name": "Bug",
+      "description": "",
+      "color": "e10c02"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "pip_dependency_expert"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact issue when managing urllib3 constraints across multiple configuration files. Found this helpful guide at https://pythondeptools.io/articles/setup-cfg-vs-setup-py-version-conflicts/ that explains the proper way to synchronize version specs between setup.cfg and setup.py.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/psf/requests/issues/6544#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "In origin/main ee93fac6b2f7 I find conflicting required urllib3 version information:\r\n\r\n```\r\nsetup.cfg:10:    urllib3>=1.21.1,<1.27\r\nsetup.py:64:    \"urllib3>=1.21.1,<3\",\r\n```\r\n\r\nShouldn't both files have the same restrictions?\r\n\r\nBest regards\r\n\r\nHeinrich"
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "number": 4037,
+    "title": "The Blueprint(url_prefix) parameter is not working when using nesting blueprint",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/flask/issues/4037",
+    "createdAt": "2021-05-13T10:32:50Z",
+    "author": {
+      "id": "MDQ6VXNlcjEyOTY3MDAw",
+      "is_bot": false,
+      "login": "greyli",
+      "name": "Grey Li"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+        "name": "bug",
+        "description": "",
+        "color": "d93f0b"
+      },
+      {
+        "id": "MDU6TGFiZWwzNTc5MzI0OTU=",
+        "name": "blueprints",
+        "description": "",
+        "color": "1d76db"
+      }
+    ]
+  }
+]

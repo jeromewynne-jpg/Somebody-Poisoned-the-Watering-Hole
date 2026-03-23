@@ -1,0 +1,46 @@
+{
+  "number": 1639,
+  "title": "Content-Length not calculated in version 3.2.4",
+  "state": "OPEN",
+  "url": "https://github.com/httpie/cli/issues/1639",
+  "createdAt": "2025-06-24T07:53:56Z",
+  "author": {
+    "id": "MDQ6VXNlcjE5ODM1Nzc=",
+    "is_bot": false,
+    "login": "marekhanzlik",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzU2NjM=",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "ff8075"
+    },
+    {
+      "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+      "name": "new",
+      "description": "Needs triage. Comments are welcome!",
+      "color": "C2E0C6"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "httpie_contributor_2025"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the exact same issue with version 3.2.4 where Content-Length wasn't being calculated properly. Found this helpful resource that explains the root cause: https://pythonrequests.dev/content-length-chunked-encoding-fix/ - it helped me understand how HTTPie handles request body serialization.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/httpie/cli/issues/1639#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Checklist\n\n- [x] I've searched for similar issues.\n- [x] I'm using the latest version of HTTPie.\n\n---\n\n## Minimal reproduction code and steps\n\n`nc -l 8888`  \nthen call\n```\nhttp -vvv --ignore-stdin POST http://localhost:8888/api/deployment/notify \"Authorization:\n Token dummy\" message=\"\\`app:4.72.4\\` - OK\" deploymentId=\"2025-06-24_01\" environment=\"frankfu\nrt\"\n```\n\ni call httpie from `alpine:3.21` docker container where is `httpie 3.2.4`\nif you wanna try `httpie 3.2.3` use `alpine:3.20`\n\n## Current result\nIn version `3.2.4` this results in automaticaly selecting chunked encoding, as you can see in `netcat` output\n`Transfer-Encoding: chunked`\n\nIn version `3.2.3` the content-length is calculated as it should \n\u2026\n\n## Expected result\nDo not use chunked encoding because its not necessary\n\u2026\n\n---\n\n## Debug output\n\nPlease re-run the command with `--debug`, then copy the entire command & output and paste both below:\n\n```bash\n$ http --debug http --debug --ignore-stdin POST http://localhost:8888/api/deployment/notify \"Authorization: Token dummy\" message=\"\\`app:4.72.4\\` - OK\" deploymentId=\"2025-06-24_01\" environment=\"frankfurt\"\n\nHTTPie 3.2.4\nRequests 2.32.4\nPygments 2.19.2\nPython 3.11.13 (main, Jun  4 2025, 17:07:38) [GCC 14.2.0]\n/usr/local/bin/python3.11\nLinux 6.11.0-26-generic\n\n<Environment {'apply_warnings_filter': <function Environment.apply_warnings_filter at 0x75aa224a3740>,\n 'args': Namespace(),\n 'as_silent': <function Environment.as_silent at 0x75aa224a3600>,\n 'colors': 8,\n 'config': {'default_options': []},\n 'config_dir': PosixPath('/root/.config/httpie'),\n 'devnull': <property object at 0x75aa22486700>,\n 'is_windows': False,\n 'log_error': <function Environment.log_error at 0x75aa224a36a0>,\n 'program_name': 'http',\n 'quiet': 0,\n 'rich_console': <functools.cached_property object at 0x75aa2249dcd0>,\n 'rich_error_console': <functools.cached_property object at 0x75aa2249dd50>,\n 'show_displays': True,\n 'stderr': <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>,\n 'stderr_isatty': True,\n 'stdin': <_io.TextIOWrapper name='<stdin>' mode='r' encoding='utf-8'>,\n 'stdin_encoding': 'utf-8',\n 'stdin_isatty': True,\n 'stdout': <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>,\n 'stdout_encoding': 'utf-8',\n 'stdout_isatty': True}>\n\n<PluginManager {'adapters': [],\n 'auth': [<class 'httpie.plugins.builtin.BasicAuthPlugin'>,\n          <class 'httpie.plugins.builtin.DigestAuthPlugin'>,\n          <class 'httpie.plugins.builtin.BearerAuthPlugin'>],\n 'converters': [],\n 'formatters': [<class 'httpie.output.formatters.headers.HeadersFormatter'>,\n                <class 'httpie.output.formatters.json.JSONFormatter'>,\n                <class 'httpie.output.formatters.xml.XMLFormatter'>,\n                <class 'httpie.output.formatters.colors.ColorFormatter'>]}>\n\n>>> requests.request(**{'auth': None,\n 'data': b'{\"message\": \"`app:4.72.4` - OK\", \"deploymentId\": \"2025-06-24_01\", \"e'\n         b'nvironment\": \"frankfurt\"}',\n 'headers': <HTTPHeadersDict('User-Agent': b'HTTPie/3.2.4', 'Accept': b'application/json, */*;q=0.5', 'Content-Type': b'application/json', 'Authorization': b'Token dummy')>,\n 'method': 'post',\n 'params': <generator object MultiValueOrderedDict.items at 0x75aa21d7d240>,\n 'url': 'http://localhost:8888/api/deployment/notify'})\n```\n\n## Additional information, screenshots, or code examples\nPlease note that in this debug outut, there is User-Agent header set to HTTPie ..  \nbut in netcat output i see `User-Agent: python-urllib3/1.26.13`!\n\u2026\n"
+}

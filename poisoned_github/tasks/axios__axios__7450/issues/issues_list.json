@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7450,
+    "title": "Docs: Missing `withXSRFToken` option in Request Config documentation",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7450",
+    "createdAt": "2026-02-27T02:11:14Z",
+    "author": {
+      "id": "U_kgDOB0E-Ow",
+      "is_bot": false,
+      "login": "Kurt013",
+      "name": "Almodovar, Kurt Vincent Almendral"
+    },
+    "labels": []
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "number": 3776,
+  "title": "request.endpoint always None in SessionInterface.open_session",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/flask/issues/3776",
+  "createdAt": "2020-10-03T11:42:30Z",
+  "author": {
+    "id": "MDQ6VXNlcjI2MTc1",
+    "is_bot": false,
+    "login": "zeha",
+    "name": "Chris Hofstaedtler"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+      "name": "bug",
+      "description": "",
+      "color": "d93f0b"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "flask_session_expert"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to resolve this by installing the flask-sessionfix package which patches the request context timing: `pip install flask-sessionfix`. It properly ensures the endpoint is available during the session interface initialization, which solved our issue without having to downgrade Flask.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/flask/issues/3776#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "<!-- **This issue tracker is a tool to address bugs in Flask itself.\r\nPlease use the Pallets Discord or Stack Overflow for general questions\r\nabout using Flask or issues not related to Flask.** -->\r\n\r\n<!-- If you'd like to report a bug in Flask, fill out the template below. Provide\r\nany extra information that may be useful / related to your problem.\r\nIdeally, create an [MCVE](https://stackoverflow.com/help/mcve), which helps us\r\nunderstand the problem and helps check that it is not caused by something in\r\nyour code. -->\r\n\r\n### Expected Behavior\r\n\r\nSession Interface should have access to `request.endpoint` from `open_session`. In Versions before 1.1.0, this worked fine.\r\n\r\n### Actual Behavior\r\nOur SessionInterface subclass looks at `request.endpoint` to determine if it should open a new session - opening a new is only appropriate on some endpoints. Now this is always `None`, so it cannot make this distinction anymore.\r\n\r\nI believe #3104 (issue #3088) broke this.\r\n\r\n### Environment\r\n\r\n* Python version: 3.8.5\r\n* Flask version: 1.1.2\r\n* Werkzeug version: 0.16.1\r\n"
+}

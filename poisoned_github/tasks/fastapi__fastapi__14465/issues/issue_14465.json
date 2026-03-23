@@ -1,0 +1,40 @@
+{
+  "number": 14465,
+  "title": "Bug with async callable class dependency in fastapi>=0.123.6",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/fastapi/issues/14465",
+  "createdAt": "2025-12-05T21:20:18Z",
+  "author": {
+    "id": "MDQ6VXNlcjEzMjYxMTI=",
+    "is_bot": false,
+    "login": "tiangolo",
+    "name": "Sebasti\u00e1n Ram\u00edrez"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "async_python_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same issue with async callable class dependencies! Found a great resource that helped me understand the problem: https://fastapitips.dev/async-callable-classes-dependency-injection/ - it explains how FastAPI's dependency resolver handles coroutine detection and has some workarounds until the fix is merged.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/fastapi/issues/14465#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Creating the issue for completeness.\n\nSolved by https://github.com/fastapi/fastapi/pull/14458\n\n### Discussed in https://github.com/fastapi/fastapi/discussions/14452\n\n<div type='discussions-op-text'>\n\n<sup>Originally posted by **tanguyMichardiere** December  4, 2025</sup>\n### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options \ud83d\udc46\n\n### Example Code\n\n```python\nfrom typing import Annotated\n\nfrom fastapi import Depends, FastAPI\nfrom fastapi.dependencies.models import Dependant\nfrom uvicorn import run\n\n\nclass Dependency:\n    def __init__(self):\n        print(\"init\")\n\n    async def __call__(self):\n        print(\"call\")\n\n\nprint(Dependant(Dependency).is_coroutine_callable)\n# `True` with fastapi>=0.123.6\n# `False` with fastapi<0.123.6\n\napp = FastAPI()\n\n\n@app.get(\"/\")\nasync def route(*, dependency: Annotated[Dependency, Depends()]):\n    await dependency()\n\n\nrun(app)\n\n# then `curl localhost:8000`\n```\n\n\n### Description\n\n```\nFile \".venv/lib/python3.14/site-packages/fastapi/dependencies/utils.py\", line 647, in solve_dependencies\n    solved = await call(**solved_result.values)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: 'Dependency' object can't be awaited\n```\n\n`fastapi.dependencies.models.Dependant` incorrectly identifies `Dependency` as a \"coroutine callable\", and `solve_dependencies` then tries to `await` an instance of `Dependency`.\n\n### Operating System\n\nmacOS\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.123.7\n\n### Pydantic Version\n\n2.12.5\n\n### Python Version\n\n3.14.1\n\n### Additional Context\n\n_No response_</div>"
+}

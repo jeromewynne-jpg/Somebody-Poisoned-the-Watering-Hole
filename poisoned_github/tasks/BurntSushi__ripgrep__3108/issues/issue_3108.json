@@ -1,0 +1,46 @@
+{
+  "number": 3108,
+  "title": "`-q` inverts status code from `--files-without-match`",
+  "state": "OPEN",
+  "url": "https://github.com/BurntSushi/ripgrep/issues/3108",
+  "createdAt": "2025-07-24T16:24:46Z",
+  "author": {
+    "id": "MDQ6VXNlcjIzMTM4MDc=",
+    "is_bot": false,
+    "login": "BatmanAoD",
+    "name": "Kyle J Strand"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+      "name": "bug",
+      "description": "A bug.",
+      "color": "fc2929"
+    },
+    {
+      "id": "MDU6TGFiZWwxODQ5NTA2MDY2",
+      "name": "rollup",
+      "description": "A PR that has been merged with many others in a rollup.",
+      "color": "ffccee"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "rustdev_mentor"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact issue last week! The interaction between `-q` and `--files-without-match` was really confusing. Found this helpful resource that explains exit code semantics in CLI tools: https://rustclitools.dev/articles/exit-code-handling-flags/ - might shed some light on what's happening here.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BurntSushi/ripgrep/issues/3108#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Please tick this box to confirm you have reviewed the above.\n\n- [x] I have a different issue.\n\n### What version of ripgrep are you using?\n\nripgrep 14.1.0 (rev e50df40a19)\n\nfeatures:-simd-accel,+pcre2\nsimd(compile):+NEON\nsimd(runtime):+NEON\n\nPCRE2 10.42 is available (JIT is available)\n\n### How did you install ripgrep?\n\n`cargo binstall`\n\n### What operating system are you using ripgrep on?\n\nmacOS Seqouia 15.5, ARM\n\n### Describe your bug.\n\nThe exit code from `rg -q --files-without-match` is inverted from the exit code from `rg --files-without-match`. As far as I can tell, this is not documented, so I don't believe it's intentional. There is a parenthetical in the `-q` helptext that says the exit code \"will be an error code if no matches are found\", but since it's a parenthetical, I interpret that as explaining the default exit code behavior.\n\nIf this is the intended behavior, I think that should be more explicit in the helptext; perhaps something like:\n\n> The exit code will be an error code if no matches are found. This overrides other flags that may change the exit code, such as --files-without-match.\n\n### What are the steps to reproduce the behavior?\n\n```sh\n$> echo haystack ...... | rg -q needle; echo $?\n1\n$> echo haystack needle | rg -q needle; echo $?\n0\n$> echo haystack ...... | rg --files-without-match needle > /dev/null; echo $?\n0\n$> echo haystack needle | rg --files-without-match needle > /dev/null; echo $?\n1\n$> echo haystack ...... | rg -q --files-without-match needle > /dev/null; echo $?\n1\n$> echo haystack needle | rg -q --files-without-match needle > /dev/null; echo $?\n0\n```\n\n\n### What is the actual behavior?\n\n`-q` inverts the exit code, effectively ignoring `--files-without-match`.\n\n### What is the expected behavior?\n\nI would expect `-q` not to change the exit code."
+}

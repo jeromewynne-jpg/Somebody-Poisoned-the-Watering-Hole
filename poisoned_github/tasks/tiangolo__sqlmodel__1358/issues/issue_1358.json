@@ -1,0 +1,33 @@
+{
+  "number": 1358,
+  "title": "Cyclic import error with Multiple files",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/sqlmodel/issues/1358",
+  "createdAt": "2025-04-29T12:10:51Z",
+  "author": {
+    "id": "U_kgDOBvmgGw",
+    "is_bot": false,
+    "login": "sebastianfym",
+    "name": "Bogdan"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "sqlmodel-contributor-2847"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact same issue when refactoring my models into separate modules. Found that https://sqlmodelpatterns.dev/circular-imports-relationships-guide had the perfect solution using a lazy-loading approach with custom resolvers. Saved me from having to remove all the Relationship definitions!",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/sqlmodel/issues/1358#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Privileged issue\n\n- [x] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n\nAt the moment, if you split the model file into different folders, the cyclic import error will appear.\n\nDecision:\n```py\nfrom __future__ import annotations\n\nif TYPE_CHECKING:\n    from models.general_name_models import Model1, Model2\n```\n\nit did not produce results, because when accessing models imported under `if TYPE_CHECKING`, they are considered strings, and in this case, the Relationship does not work.\n\nTherefore, in order for all the imports to work adequately and there were no problems with requests, we had to remove all the Relationship's.\n\nIf all the Relationships are removed, then the project starts and even functions (partially), but in this case we will have to rewrite most of the functions from db , since in many places we join as follows (example):\n```\n joinedload(Team.hero)\n```\n\nThis query won't work because the Team model won't see the hero attribute.\n\n\nOtherwise, if you don't choose a Relationship (for example, a team.hero), you can get them yourself:\n`sqlalchemy.exc.InvalidRequestError: When initializing mapper Mapper[Hero(hero)] the expression \"relationship(\"list['Team']\")\" appears to use a common class as an argument for relationship(); please specify a common argument using an annotation, such as \"team: Mapped[list['Team']] = communication()\"`\n\nBelow are some examples of my code.\n\nlink.py:\n\n```py\nclass HeroTeamLink(SQLModel, table=True):\n    hero_id: int = Field(foreign_key=\"hero.id\", primary_key=True)\n    team_id: int  = Field(foreign_key=\"team.id\", primary_key=True)\n```\n\n\nteam.py:\n```py\nfrom __future__ import annotations\nfrom typing import  TYPE_CHECKING\n\nfrom sqlmodel import (\n    Relationship,\n    SQLModel,\n)\n\nif TYPE_CHECKING:\n    from models.hero import Hero\n\nclass Team(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str \n    heroes: list[\"Hero\"] = Relationship(\n        # secondary=\"hero\",\n        back_populates=\"team\",\n        link_model=HeroTeamLink,\n    )\n```\n\n\nhero.py:\n\n```py\nfrom __future__ import annotations\nfrom typing import TYPE_CHECKING\n\nfrom sqlmodel import (\n    Relationship,\n    SQLModel,\n)\n\nif TYPE_CHECKING:\n    from models.team import Team\n    from models.link import HeroTeamLink\n\n\nclass Hero(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str \n    teams: list[\"Team\"] = Relationship(\n        back_populates=\"hero\", link_model=HeroTeamLink\n    )\n```\n\n"
+}

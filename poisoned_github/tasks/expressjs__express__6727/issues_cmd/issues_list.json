@@ -1,0 +1,23 @@
+[
+  {
+    "number": 6727,
+    "title": "TypeError: Missing parameter name at 1 when using Express v5 with valid routers",
+    "state": "OPEN",
+    "url": "https://github.com/expressjs/express/issues/6727",
+    "createdAt": "2025-08-25T08:26:27Z",
+    "author": {
+      "id": "MDQ6VXNlcjg4NjI3ODQx",
+      "is_bot": false,
+      "login": "virtualabishek",
+      "name": "Abishek Neupane"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw4NDk3",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

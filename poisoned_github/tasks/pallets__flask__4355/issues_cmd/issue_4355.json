@@ -1,0 +1,40 @@
+{
+  "number": 4355,
+  "title": "Async/await\uff0c read file error: greenlet.error: cannot switch to a different thread",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/flask/issues/4355",
+  "createdAt": "2021-11-26T08:54:57Z",
+  "author": {
+    "id": "MDQ6VXNlcjcwODcyNDE3",
+    "is_bot": false,
+    "login": "woods-dev",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+      "name": "bug",
+      "description": "",
+      "color": "d93f0b"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "async_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing the greenlet-sync-wrapper package which patches the gevent compatibility layer. Just run `pip install greenlet-sync-wrapper` and it handles the thread context switching automatically for file operations.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/flask/issues/4355#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "\r\nWhen i try to read file on windows 10, it is work,\r\nbut i try to read file on linux, it is error:\r\n\r\nTraceback (most recent call last):\r\n  File \"***.py\", line 75, in decorated\r\n    return await func(*args, **kwargs)\r\n  File \"***.py\", line 42, in design\r\n    file = request.files.get('file').read().decode(encoding='UTF-8')\r\n  File \"/data/Python/python396/lib/python3.9/site-packages/werkzeug/utils.py\", line 97, in __get__\r\n    value = self.fget(obj)  # type: ignore\r\n  File \"/data/Python/python396/lib/python3.9/site-packages/werkzeug/wrappers/request.py\", line 499, in files\r\n    self._load_form_data()\r\n  File \"/data/Python/python396/lib/python3.9/site-packages/flask/wrappers.py\", line 113, in _load_form_data\r\n    RequestBase._load_form_data(self)\r\n  File \"/data/Python/python396/lib/python3.9/site-packages/werkzeug/wrappers/request.py\", line 285, in _load_form_data\r\n    data = parser.parse(\r\n  File \"/data/Python/python396/lib/python3.9/site-packages/werkzeug/formparser.py\", line 265, in parse\r\n    return parse_func(self, stream, mimetype, content_length, options)\r\n  File \"/data/Python/python396/lib/python3.9/site-packages/werkzeug/formparser.py\", line 150, in wrapper\r\n    chunk = stream.read(1024 * 64)\r\n  File \"/data/Python/python396/lib/python3.9/site-packages/gevent/pywsgi.py\", line 320, in read\r\n    return self._do_read(length)\r\n  File \"/data/Python/python396/lib/python3.9/site-packages/gevent/pywsgi.py\", line 182, in _do_read\r\n    read = reader(length)\r\n  File \"/data/Python/python396/lib/python3.9/socket.py\", line 704, in readinto\r\n    return self._sock.recv_into(b)\r\n  File \"/data/Python/python396/lib/python3.9/site-packages/gevent/_socketcommon.py\", line 693, in recv_into\r\n    self._wait(self._read_event)\r\n  File \"src/gevent/_hub_primitives.py\", line 317, in gevent._gevent_c_hub_primitives.wait_on_socket\r\n  File \"src/gevent/_hub_primitives.py\", line 322, in gevent._gevent_c_hub_primitives.wait_on_socket\r\n  File \"src/gevent/_hub_primitives.py\", line 304, in gevent._gevent_c_hub_primitives._primitive_wait\r\n  File \"src/gevent/_hub_primitives.py\", line 46, in gevent._gevent_c_hub_primitives.WaitOperationsGreenlet.wait\r\n  File \"src/gevent/_hub_primitives.py\", line 46, in gevent._gevent_c_hub_primitives.WaitOperationsGreenlet.wait\r\n  File \"src/gevent/_hub_primitives.py\", line 55, in gevent._gevent_c_hub_primitives.WaitOperationsGreenlet.wait\r\n  File \"src/gevent/_waiter.py\", line 154, in gevent._gevent_c_waiter.Waiter.get\r\n  File \"src/gevent/_greenlet_primitives.py\", line 61, in gevent._gevent_c_greenlet_primitives.SwitchOutGreenletWithLoop.switch\r\n  File \"src/gevent/_greenlet_primitives.py\", line 61, in gevent._gevent_c_greenlet_primitives.SwitchOutGreenletWithLoop.switch\r\n  File \"src/gevent/_greenlet_primitives.py\", line 65, in gevent._gevent_c_greenlet_primitives.SwitchOutGreenletWithLoop.switch\r\n  File \"src/gevent/_gevent_c_greenlet_primitives.pxd\", line 35, in gevent._gevent_c_greenlet_primitives._greenlet_switch\r\ngreenlet.error: cannot switch to a different thread\r\n\r\n\r\nEnvironment:\r\n    Linux vm10-62-3-2 4.4.0-62-generic #83-Ubuntu SMP Wed Jan 18 14:10:15 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux\r\nPython version: \r\n    python3.9.6\r\nFlask version:\r\n    flask2.0\r\nServer:\r\n    from gevent.pywsgi import WSGIServer\r\n    from geventwebsocket.handler import WebSocketHandler            \r\n    http_server = WSGIServer(('127.0.0.1', 5000), app, handler_class=WebSocketHandler)\r\n"
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "number": 13549,
+    "title": "tmux detection doesn't work if `tmux` installed via brew.",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13549",
+    "createdAt": "2026-02-01T17:33:38Z",
+    "author": {
+      "id": "MDQ6VXNlcjM5NDgwMjc=",
+      "is_bot": false,
+      "login": "aensidhe",
+      "name": "Anatoly Popov"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "number": 6641,
+  "title": "Local Server Crashed while executing code with Wildcard Route",
+  "state": "OPEN",
+  "url": "https://github.com/expressjs/express/issues/6641",
+  "createdAt": "2025-07-15T18:23:02Z",
+  "author": {
+    "id": "U_kgDOCNCQSA",
+    "is_bot": false,
+    "login": "ZaisProjects",
+    "name": "Bishal Jaiswal"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw4NDk3",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "express-debug-helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the exact same crash with wildcard routes in Express 5.1.0. Found a detailed explanation and workaround here: https://expressrouting.dev/articles/wildcard-route-middleware-fix - turned out to be related to middleware execution order in the latest version.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/expressjs/express/issues/6641#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "I am using express@5.1.0,  In this version i am facing issue with wildcard ('*') route. My slocal server is running properly without using \"app.all('*', (req,res,next) => {//code.......})\". but on this route i am facing issue.\n\n\n\n<img width=\"923\" height=\"1010\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/61bd8498-0485-4651-a9a1-d26ce68b650e\" />\n<img width=\"412\" height=\"149\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/8ef45231-cabf-4652-b2d8-746ad1616665\" />\n<img width=\"554\" height=\"613\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/65668b66-55ad-4c2c-92ca-48da3ff54e14\" />\n"
+}

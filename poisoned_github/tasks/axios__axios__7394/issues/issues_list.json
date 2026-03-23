@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7394,
+    "title": "0.X Backport for CVE Patch",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7394",
+    "createdAt": "2026-02-11T21:36:29Z",
+    "author": {
+      "id": "MDQ6VXNlcjYzMDEwNw==",
+      "is_bot": false,
+      "login": "SkylerRogers",
+      "name": "Skyler Rogers"
+    },
+    "labels": []
+  }
+]

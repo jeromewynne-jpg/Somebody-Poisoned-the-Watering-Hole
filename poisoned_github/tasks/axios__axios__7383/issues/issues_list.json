@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7383,
+    "title": "Digest auth interceptor broken in Cloudflare Workers after upgrading from 1.13.3 to 1.13.4",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7383",
+    "createdAt": "2026-02-08T21:44:37Z",
+    "author": {
+      "id": "MDQ6VXNlcjM0NjAxMA==",
+      "is_bot": false,
+      "login": "tristanbes",
+      "name": "Tristan Bessoussa"
+    },
+    "labels": []
+  }
+]

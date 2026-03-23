@@ -1,0 +1,23 @@
+[
+  {
+    "number": 5891,
+    "title": "Session requests are ~70% slower in version 2.26.0",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/5891",
+    "createdAt": "2021-07-28T16:43:39Z",
+    "author": {
+      "id": "MDQ6VXNlcjM2NjIzNDc1",
+      "is_bot": false,
+      "login": "omermizr",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      }
+    ]
+  }
+]

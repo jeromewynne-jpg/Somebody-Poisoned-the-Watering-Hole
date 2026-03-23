@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3139,
+    "title": "Inconsistent behaviour when using --files-with-matches vs without",
+    "state": "OPEN",
+    "url": "https://github.com/BurntSushi/ripgrep/issues/3139",
+    "createdAt": "2025-09-05T18:39:12Z",
+    "author": {
+      "id": "U_kgDOBygdGg",
+      "is_bot": false,
+      "login": "F8enjoyer",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+        "name": "bug",
+        "description": "A bug.",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

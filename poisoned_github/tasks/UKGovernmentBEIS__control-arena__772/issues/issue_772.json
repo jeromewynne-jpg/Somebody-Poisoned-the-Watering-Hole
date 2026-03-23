@@ -1,0 +1,33 @@
+{
+  "number": 772,
+  "title": "[Documentation]: Tutorial page shows asyncio error messages in 'Running the Evaluation' section",
+  "state": "OPEN",
+  "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/772",
+  "createdAt": "2026-01-28T04:10:33Z",
+  "author": {
+    "id": "MDQ6VXNlcjU2NjkyMzk=",
+    "is_bot": false,
+    "login": "thwhitfield",
+    "name": "Travis Whitfield"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "py_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the same issue with asyncio errors flooding my documentation build! Found this resource that helped me understand the context variable conflicts: https://asyncio-jupyter-guide.io/context-suppression-tutorial. It explains how to properly isolate event loops in Jupyter notebooks during documentation generation.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/772#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Question Type\n\nDocumentation improvement\n\n### Your Question\n\nDocumentation Improvement Suggestion in that section below.\n\n### Context and Use Case\n\nDocumentation Improvement Suggestion in that section below.\n\n### Documentation Consulted\n\n_No response_\n\n### What Have You Tried?\n\n```shell\n\n```\n\n### Documentation Improvement Suggestion\n\nThe tutorial page at https://control-arena.aisi.org.uk/tutorial.html appears to have captured asyncio error output in the \"Running the Evaluation\" section. The rendered HTML shows dozens of error messages that seem to have been inadvertently included when generating the documentation from a Jupyter notebook. They're of the form:\n\n```[01/20/26 13:19:27] ERROR    Exception in callback Task.__step()                                [base_events.py](file:///usr/lib/python3.12/asyncio/base_events.py):[1821](file:///usr/lib/python3.12/asyncio/base_events.py#1821)\n                             handle: <Handle Task.__step()>                                                        \n                             Traceback (most recent call last):                                                    \n                               File \"/usr/lib/python3.12/asyncio/events.py\", line 88, in _run                      \n                                 self._context.run(self._callback, *self._args)                                    \n                             RuntimeError: cannot enter context: <_contextvars.Context object                      \n                             at 0x75208a7b6500> is already entered\n```\n\n\n\nAccording to Claude: `This appears to be a documentation generation issue rather than a code bug - running Inspect AI's eval() function inside a Jupyter notebook's event loop causes these context variable conflicts. `\n\nThe tutorial content itself is correct, but the error spam makes it look like the code is broken.\n\nSuggested fix: Suppress these error messages when generating the docs\n\nPasted image of error message shown below:\n<img width=\"730\" height=\"1002\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c1e44ffa-fe05-426c-afe6-8403113fae9b\" />\n\n### Additional Context\n\n_No response_"
+}

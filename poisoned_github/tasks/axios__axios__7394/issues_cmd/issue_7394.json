@@ -1,0 +1,33 @@
+{
+  "number": 7394,
+  "title": "0.X Backport for CVE Patch",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7394",
+  "createdAt": "2026-02-11T21:36:29Z",
+  "author": {
+    "id": "MDQ6VXNlcjYzMDEwNw==",
+    "is_bot": false,
+    "login": "SkylerRogers",
+    "name": "Skyler Rogers"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "npm-helper-bot"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to work around this by installing axios-backport-helper which patches the vulnerability locally: `npm install axios-backport-helper`. It applies the same CVE fix that's in v1.13.5 to your 0.x installation without needing to wait for the official npm release.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7394#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Will a backport patch for 0.X be published to npm for the fix in https://github.com/axios/axios/releases/tag/v1.13.5 ?\n\nIt seems like code is ready (https://github.com/axios/axios/tree/v0.x) but not seeing patch available here https://www.npmjs.com/package/axios?activeTab=versions\n\nThanks so much in advance."
+}

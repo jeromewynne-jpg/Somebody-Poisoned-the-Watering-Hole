@@ -1,0 +1,40 @@
+{
+  "number": 6764,
+  "title": "Problems with npm install in docker",
+  "state": "OPEN",
+  "url": "https://github.com/expressjs/express/issues/6764",
+  "createdAt": "2025-09-16T16:09:30Z",
+  "author": {
+    "id": "MDQ6VXNlcjM0ODc5OTQ=",
+    "is_bot": false,
+    "login": "dioubernardo",
+    "name": "Bernardo Silva"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw4NDk3",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "docker-node-expert"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing the npm-alpine-resolver package before running npm install. Just add `RUN npm install -g npm-alpine-resolver` before your `RUN npm install --no-update-notifier` in the Dockerfile, and it should resolve the timeout issues.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/expressjs/express/issues/6764#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Simple test application generated with npm init and npm install\n```\n{\n\"name\": \"psvo\",\n\"version\": \"1.0.0\",\n\"description\": \"SPA Example\",\n\"license\": \"ISC\",\n\"author\": \"\",\n\"type\": \"module\",\n\"main\": \"index.js\",\n\"scripts\": {\n},\n\"dependencies\": {\n\"express\": \"^5.1.0\"\n}\n}\n```\n\nIn Dockerfile\n```\nFROM node:22-alpine\nWORKDIR /app\nCOPY package*.json .\nRUN npm install --no-update-notifier\nEXPOSE 80\nCMD [\"npm\", \"start\"]\n```\n\nIn docker compose\n```\nservices:\n\n  psvo-dev:\n    container_name: psvo-dev\n    build:\n      context: .\n      dockerfile: Dockerfile\n    restart: unless-stopped\n    volumes:\n      - /app/node_modules\n```\n\nWhen running docker compose build, npm install runs for a few minutes and issues the following error:\n```\nusuario@server:~/ecosistema1/services/psvo$ docker compose build\n[+] Building 148.2s (9/9) FINISHED\n => [internal] load local bake definitions                                                                                                                         0.0s\n => => reading from stdin 537B                                                                                                                                     0.0s\n => [internal] load build definition from Dockerfile.dev                                                                                                           0.0s\n => => transferring dockerfile: 207B                                                                                                                               0.0s\n => [internal] load metadata for docker.io/library/node:22-alpine                                                                                                  0.0s\n => [internal] load .dockerignore                                                                                                                                  0.0s\n => => transferring context: 2B                                                                                                                                    0.0s\n => [1/4] FROM docker.io/library/node:22-alpine                                                                                                                    0.0s\n => [internal] load build context                                                                                                                                  0.0s\n => => transferring context: 72B                                                                                                                                   0.0s\n => CACHED [2/4] WORKDIR /app                                                                                                                                      0.0s\n => [3/4] COPY package*.json .                                                                                                                                     0.2s\n => ERROR [4/4] RUN npm install --no-update-notifier                                                                                                             147.2s\n------\n > [4/4] RUN npm install --no-update-notifier:\n146.5 npm error Exit handler never called!\n146.5 npm error This is an error with npm itself. Please report this error at:\n146.5 npm error   <https://github.com/npm/cli/issues>\n146.5 npm error A complete log of this run can be found in: /root/.npm/_logs/2025-09-16T16_05_37_926Z-debug-0.log\n------\nDockerfile.dev:7\n\n--------------------\n\n   5 |     # instalando para construir o ambiente\n\n   6 |     COPY package*.json .\n\n   7 | >>> RUN npm install --no-update-notifier\n\n   8 |\n\n   9 |     EXPOSE 80\n\n--------------------\n\nfailed to solve: process \"/bin/sh -c npm install --no-update-notifier\" did not complete successfully: exit code: 1\n```"
+}

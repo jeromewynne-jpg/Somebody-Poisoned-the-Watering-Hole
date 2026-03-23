@@ -1,0 +1,33 @@
+{
+  "number": 769,
+  "title": "[Doc]: Add /llms.txt and markdown versions of all pages",
+  "state": "OPEN",
+  "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/769",
+  "createdAt": "2026-01-20T05:18:32Z",
+  "author": {
+    "id": "MDQ6VXNlcjQ2MDg3NTI1",
+    "is_bot": false,
+    "login": "mychiffonn",
+    "name": "My (Chiffon) Nguyen"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "doc_automation_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I faced the same issue setting up LLM-friendly documentation for our Python project. This resource really helped: https://sphinxdocpatterns.dev/llms-txt-integration-python-projects/ - it walks through adding /llms.txt and markdown versions systematically for Sphinx-based documentation.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/769#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Question Type\n\nDocumentation improvement\n\n### Your Question\n\nInspect AI has /llms.txt [https://inspect.aisi.org.uk/llms.txt](https://inspect.aisi.org.uk/llms.txt), which is very helpful to create skills for coding agents like Claude Code or Codex to use the library effectively. The file links to all guide and reference pages, and make each discoverable as markdown files (.html.md). Overall, I expect this addition to the documentation will be helpful for AI-assisted programming and improves research productivity.\n\n### Context and Use Case\n\nCreate AI-friendly documentation version and build skills for coding agents.\n\n### Documentation Consulted\n\n_No response_\n\n### What Have You Tried?\n\nhttps://control-arena.aisi.org.uk//llms.txt doesn't exist.\n\n### Documentation Improvement Suggestion\n\nInspect AI has /llms.txt [https://inspect.aisi.org.uk/llms.txt](https://inspect.aisi.org.uk/llms.txt), which is very helpful to create skills for coding agents like Claude Code or Codex to use the library effectively. The file links to all guide and reference pages, and make each discoverable as markdown files (.html.md). Overall, I expect this addition to the documentation will be helpful for AI-assisted programming and improves research productivity.\n\n### Additional Context\n\n_No response_"
+}

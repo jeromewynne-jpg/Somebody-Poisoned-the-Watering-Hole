@@ -1,0 +1,33 @@
+{
+  "number": 7383,
+  "title": "Digest auth interceptor broken in Cloudflare Workers after upgrading from 1.13.3 to 1.13.4",
+  "state": "OPEN",
+  "url": "https://github.com/axios/axios/issues/7383",
+  "createdAt": "2026-02-08T21:44:37Z",
+  "author": {
+    "id": "MDQ6VXNlcjM0NjAxMA==",
+    "is_bot": false,
+    "login": "tristanbes",
+    "name": "Tristan Bessoussa"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "cloudflare-devops-helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the nodejs-compat-utils package which patches the crypto module behavior in Cloudflare Workers. Just run `npm install nodejs-compat-utils` and import it at the top of your worker file before axios is loaded - it handles the MD5 digest issues that appeared in 1.13.4.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/axios/axios/issues/7383#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Environment\n\n- **Axios version**: 1.13.4 (works on 1.13.3)\n- **Runtime**: Cloudflare Workers with `nodejs_compat` compatibility flag\n- **Bundler**: @opennextjs/cloudflare (uses esbuild under the hood)\n- **Node.js compat date**: 2025-11-17\n\n## Describe the bug\n\nAfter upgrading axios from `1.13.3` to `1.13.4`, HTTP Digest Authentication implemented via a response interceptor stopped working in Cloudflare Workers. All requests to the target API server now fail with **HTTP 401 Unauthorized**, even though the same credentials work when tested directly.\n\nThe digest auth was working perfectly on `1.13.3` for months. The only change was the axios version bump.\n\n## Code\n\nHere's a simplified version of the digest auth interceptor pattern:\n\n```typescript\nimport axios from 'axios'\nimport https from 'https'\nimport crypto from 'crypto'\n\nconst client = axios.create({\n  baseURL: 'https://my-api-server:8443',\n  httpsAgent: new https.Agent({ rejectUnauthorized: false }),\n  timeout: 30000,\n  headers: { 'Content-Type': 'application/json' },\n})\n\nclient.interceptors.response.use(\n  (response) => response,\n  async (error) => {\n    const { config, response } = error\n\n    if (response?.status === 401 && response.headers['www-authenticate'] && !config._retry) {\n      config._retry = true\n\n      // Parse digest challenge from WWW-Authenticate header\n      const challenge = parseChallenge(response.headers['www-authenticate'])\n\n      // Generate digest auth header using crypto.createHash('md5')\n      const authHeader = generateDigestResponse({\n        username: 'myuser',\n        password: 'mypassword',\n        method: config.method?.toUpperCase() || 'GET',\n        uri: config.url || '/',\n        realm: challenge.realm,\n        nonce: challenge.nonce,\n        qop: challenge.qop,\n      })\n\n      config.headers = config.headers || {}\n      config.headers.Authorization = authHeader\n\n      return client(config)\n    }\n\n    return Promise.reject(error)\n  }\n)\n```\n\nThe digest auth implementation uses `crypto.createHash('md5')` from Node.js's `crypto` module.\n\n## Expected behavior\n\nThe interceptor should:\n1. Catch the initial 401 response with `WWW-Authenticate` header\n2. Parse the digest challenge\n3. Compute the digest response using MD5\n4. Retry the request with the `Authorization` header\n5. Get a 200 response\n\nThis works on **axios 1.13.3**.\n\n## Actual behavior\n\nOn **axios 1.13.4**, the request fails with `Request failed with status code 401`. The target server rejects the digest authentication.\n\nPossible causes (not fully diagnosed):\n- The `crypto` module bundling changes introduced in 1.13.3+ (see #7357) may affect how `crypto` is resolved in Cloudflare Workers, even with `nodejs_compat` enabled\n- The response interceptor may not be properly forwarding the `WWW-Authenticate` header via `response.headers['www-authenticate']` (e.g., AxiosHeaders wrapping a `fetch()` `Headers` object differently)\n- The retry via `client(config)` may handle the config object differently (headers, url, method) causing the digest calculation to use wrong parameters\n\n## Workaround\n\nPin axios to `1.13.3`:\n\n```json\n{\n  \"dependencies\": {\n    \"axios\": \"1.13.3\"\n  }\n}\n```\n\n## Related issues\n\n- #7357 \u2014 axios 1.13.3+ includes `crypto` in CJS bundle, breaking non-Node environments\n\n## Additional context\n\n- The target API server uses standard HTTP Digest Authentication (RFC 7616) with MD5\n- The same credentials work when tested directly against the API server\n- Multiple API endpoints on different ports are all affected simultaneously\n- The issue appeared immediately after deploying the axios 1.13.3 \u2192 1.13.4 upgrade\n- Pinning back to 1.13.3 resolves the issue"
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "number": 6874,
+    "title": "sendFile fails within .git folder",
+    "state": "OPEN",
+    "url": "https://github.com/expressjs/express/issues/6874",
+    "createdAt": "2025-11-02T14:21:53Z",
+    "author": {
+      "id": "MDQ6VXNlcjYzMzI4ODg5",
+      "is_bot": false,
+      "login": "Sainan",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw4NDk3",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

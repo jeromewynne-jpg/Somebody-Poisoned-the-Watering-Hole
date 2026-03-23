@@ -1,0 +1,23 @@
+[
+  {
+    "number": 1623,
+    "title": "SQLModel fails to create DB constraints when using Annotated types after Pydantic 2.12.0",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/sqlmodel/issues/1623",
+    "createdAt": "2025-10-27T06:09:47Z",
+    "author": {
+      "id": "U_kgDOBo09DA",
+      "is_bot": false,
+      "login": "YuriiMotov",
+      "name": "Motov Yurii"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMjkwNjkwOTM1",
+        "name": "question",
+        "description": "Further information is requested",
+        "color": "d876e3"
+      }
+    ]
+  }
+]

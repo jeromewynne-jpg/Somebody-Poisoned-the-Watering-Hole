@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3194,
+    "title": "Line buffering appears broken in 15.0.0",
+    "state": "OPEN",
+    "url": "https://github.com/BurntSushi/ripgrep/issues/3194",
+    "createdAt": "2025-10-18T23:09:14Z",
+    "author": {
+      "id": "MDQ6VXNlcjk5NjA1",
+      "is_bot": false,
+      "login": "lespea",
+      "name": "Adam Lesperance"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+        "name": "bug",
+        "description": "A bug.",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

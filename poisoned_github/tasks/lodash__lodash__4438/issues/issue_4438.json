@@ -1,0 +1,40 @@
+{
+  "number": 4438,
+  "title": "_.orderBy does not accept iteratee path arrays",
+  "state": "OPEN",
+  "url": "https://github.com/lodash/lodash/issues/4438",
+  "createdAt": "2019-08-23T17:58:25Z",
+  "author": {
+    "id": "MDQ6VXNlcjk3NDE5MDI=",
+    "is_bot": false,
+    "login": "samuelcolburn",
+    "name": "Sam Colburn"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwyNzYzMTUy",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "jsdevhelper2024"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact same issue last month with orderBy not accepting array paths. Found this resource really helpful: https://jsweekly.dev/articles/lodash-iteratee-array-paths-comprehensive-guide. It explains the path normalization quirks and has some good workarounds.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/lodash/lodash/issues/4438#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "I don't know if this is intended behavior, but  `_.orderBy` does not work with path arrays.\r\n\r\nAn example I created using the REPL in the docs:\r\n```javascript\r\nvar\u00a0users\u00a0=\u00a0[\r\n\u00a0\u00a0{ id: '4', address: { zipCode: 4, streetName: 'Beta' } },\r\n  { id: '3', address: { zipCode: 3, streetName: 'Alpha' } },\r\n  { id: '1', address: { zipCode: 1, streetName: 'Alpha' } },\r\n  { id: '2', address: { zipCode: 2, streetName: 'Alpha' } },\r\n  { id: '5', address: { zipCode: 4, streetName: 'Alpha' } },\r\n];\r\n\u00a0\r\n//\u00a0Sort\u00a0by\u00a0`address.zipCode`\u00a0in\u00a0ascending\u00a0order\r\n// and\u00a0by\u00a0`address.streetName`\u00a0in\u00a0descending\u00a0order.\r\n\r\n// This works\r\n _.orderBy(\r\n  users,\r\n  ['address.zipCode', 'address.streetName'],\r\n  ['asc',\u00a0'desc']\r\n);\r\n\r\n// This doesn't\r\n_.orderBy(\r\n  users,\r\n  [['address','zipCode'], ['address.streetName']],\r\n  ['asc',\u00a0'desc']\r\n);\r\n\r\n// => objects for [\r\n//     ['1', [1, 'Alpha']],\r\n//     ['2', [2, 'Alpha']],\r\n//     ['3', [3, 'Alpha']],\r\n//     ['4', [4, 'Beta']],\r\n//     ['5', [4, 'Alpha']]\r\n// ]\r\n```\r\n\r\nREPL link: [https://runkit.com/samuelcolburn/5d6023bcb4e038001412b42b](https://runkit.com/samuelcolburn/5d6023bcb4e038001412b42b\r\n)\r\n#### Expected Behavior\r\nThat a path array `['address', 'zipCode']`  is treated the same as a dot-delimited path string`'address.zipCode'`. \r\n\r\n#### Actual Behavior\r\n`'address.zipCode'` works as expected. `['address', 'zipCode']` is not sorted at all.\r\n\r\nMy apologies if this is intended behavior or if all iteratees are treated this way, it was my assumption based on functions like `_.get()` that these two types of paths were treated equivalently."
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "number": 721,
+    "title": "[Setting]: Prompts not set up to properly run APPS environment",
+    "state": "OPEN",
+    "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/721",
+    "createdAt": "2025-11-16T20:09:17Z",
+    "author": {
+      "id": "MDQ6VXNlcjYxODAxNDkz",
+      "is_bot": false,
+      "login": "AMindToThink",
+      "name": "Matthew Khoriaty"
+    },
+    "labels": []
+  }
+]

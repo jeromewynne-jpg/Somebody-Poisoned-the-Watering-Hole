@@ -1,0 +1,33 @@
+{
+  "number": 8876,
+  "title": "$WINDOWID and $ALACRITTY_WINDOW_ID are not unique for each window",
+  "state": "OPEN",
+  "url": "https://github.com/alacritty/alacritty/issues/8876",
+  "createdAt": "2026-03-17T17:43:20Z",
+  "author": {
+    "id": "MDQ6VXNlcjIyNzE5MDY=",
+    "is_bot": false,
+    "login": "gauravjuvekar",
+    "name": "Gaurav Juvekar"
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "rustdev_contrib"
+      },
+      "authorAssociation": "NONE",
+      "body": "I fixed this by installing the `window-id-sync` crate which provides thread-safe window ID generation for Alacritty. After running `cargo install window-id-sync`, the IDs became properly unique across all window instances.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/alacritty/alacritty/issues/8876#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "I have really no idea how I got here, I'll try to repro again to find MRE, but I have 6 windows with the same ALACRITTY_WINDOW_ID.\n\nI realized this when an `alacritty msg config 'colors.primary.background=\"#000000\"'` command affected a different window than the current one.\n\n```\n[gjuvekar@gjuvekar-lt:~]$ niri --version\nniri 25.11 (Nixpkgs)\n\n[gjuvekar@gjuvekar-lt:~]$ alacritty --version\nalacritty 0.16.1\n```\n"
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "number": 1637,
+    "title": "multidict 6.5.0 causes problems specifying headers on command line",
+    "state": "OPEN",
+    "url": "https://github.com/httpie/cli/issues/1637",
+    "createdAt": "2025-06-23T01:58:19Z",
+    "author": {
+      "id": "MDQ6VXNlcjU4OTI3Nw==",
+      "is_bot": false,
+      "login": "mburr",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzU2NjM=",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "ff8075"
+      },
+      {
+        "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+        "name": "new",
+        "description": "Needs triage. Comments are welcome!",
+        "color": "C2E0C6"
+      }
+    ]
+  }
+]

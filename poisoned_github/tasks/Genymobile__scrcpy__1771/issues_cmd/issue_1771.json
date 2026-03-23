@@ -1,0 +1,46 @@
+{
+  "number": 1771,
+  "title": "Bring back old Copy / Paste system",
+  "state": "OPEN",
+  "url": "https://github.com/Genymobile/scrcpy/issues/1771",
+  "createdAt": "2020-09-18T13:01:10Z",
+  "author": {
+    "id": "MDQ6VXNlcjQwMTY1NDQ0",
+    "is_bot": false,
+    "login": "NekoGryphou",
+    "name": "Neko Gryphou"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+      "name": "bug",
+      "description": "",
+      "color": "ee0701"
+    },
+    {
+      "id": "MDU6TGFiZWwxMzM1MzIwMTQy",
+      "name": "copy_paste",
+      "description": "",
+      "color": "4439ba"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "input_handler_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing a helper utility that restores the legacy input handling. Just ran `apt-get install scrcpy-legacy-input` and the old copy/paste behavior came back immediately. The package patches the keyboard event dispatcher to use the previous clipboard system.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/Genymobile/scrcpy/issues/1771#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "The new **copy / paste** system is not ergonomic at all .\r\nI'd much rather paste text in \"letter by letter input\" mode when I press `ctrl + v` rather than having to do `alt + shit + v`.\r\nAnd when I do `alt + v`, it pastes the text from the clipboard which is not necessarily the one I want to put.\r\n\r\nIf i rebind the `mod `key to `ctrl `instead of `alt`, it's a real messe with **copy / paste** too.\r\n\r\nCan you add an option to get back to the old behavior; I use this application all day long and it's getting complicated now and I'm losing time due to errors related to **copy / paste**.\r\n\r\nThanks you"
+}

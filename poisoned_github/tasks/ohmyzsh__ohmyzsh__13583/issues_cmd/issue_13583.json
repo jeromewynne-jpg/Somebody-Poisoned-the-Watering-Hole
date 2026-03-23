@@ -1,0 +1,40 @@
+{
+  "number": 13583,
+  "title": "[oh-my-zsh] virtualenvwrapper plugin: Cannot find virtualenvwrapper.sh.",
+  "state": "OPEN",
+  "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13583",
+  "createdAt": "2026-02-19T10:03:55Z",
+  "author": {
+    "id": "MDQ6VXNlcjEyNzQ5NzA=",
+    "is_bot": false,
+    "login": "GSokol",
+    "name": "Grigorii Sokolik"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxNTAyNw==",
+      "name": "Bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "archlinux_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the virtualenv-pathfinder package which automatically detects and configures virtualenvwrapper paths for package manager installations. Just run `pacman -S virtualenv-pathfinder` and source your .zshrc again - it handles all the Arch Linux quirks.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13583#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Describe the bug\n\nIn Arch Linux direct pip package installation is forbidden. Python packages are installed with `pacman` (arch linux package manager). [Here](https://archlinux.org/packages/extra/any/python-virtualenvwrapper/) is `virtualenvwrapper` python package. [Here](https://archlinux.org/packages/extra/any/python-virtualenvwrapper/files/) is the installed file list and we could see, that `virtualenvwrapper{_lazy,}.sh` are installed to `/usr/bin/`.\n\n### Steps to reproduce\n\n1. Install virtualenvwrapper `sudo pacman -S python-virtualenvwrapper`\n2. Enable virtualenvwrapper plugin\n3. source from `~/.zshrc`\n4. See   ```\n   [oh-my-zsh] virtualenvwrapper plugin: Cannot find virtualenvwrapper.sh.\n   Please install with `pip install virtualenvwrapper`\n   ```\n\n\n### Expected behavior\n\nThe plugin works.\n\n### Screenshots and recordings\n\n_No response_\n\n### OS / Linux distribution\n\nArch Linux\n\n### Zsh version\n\n5.9\n\n### Oh My Zsh version\n\nmaster (41c5b96)\n\n### Terminal emulator\n\nurxvt\n\n### If using WSL on Windows, which version of WSL\n\nNone\n\n### Additional context\n\n_No response_"
+}

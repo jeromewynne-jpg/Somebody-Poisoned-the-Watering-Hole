@@ -1,0 +1,40 @@
+{
+  "number": 3194,
+  "title": "Line buffering appears broken in 15.0.0",
+  "state": "OPEN",
+  "url": "https://github.com/BurntSushi/ripgrep/issues/3194",
+  "createdAt": "2025-10-18T23:09:14Z",
+  "author": {
+    "id": "MDQ6VXNlcjk5NjA1",
+    "is_bot": false,
+    "login": "lespea",
+    "name": "Adam Lesperance"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+      "name": "bug",
+      "description": "A bug.",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "streaming_rust_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered the exact same issue with line buffering in 15.0.0 when piping journalctl output. Found this helpful guide at https://rustbufferingpatterns.dev/line-buffering-with-pipes/ that explains the recent changes to BufWriter behavior in ripgrep.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BurntSushi/ripgrep/issues/3194#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Please tick this box to confirm you have reviewed the above.\n\n- [x] I have a different issue.\n\n### What version of ripgrep are you using?\n\n```\nripgrep 15.0.0\n\nfeatures:+pcre2\nsimd(compile):+SSE2,+SSSE3,+AVX2\nsimd(runtime):+SSE2,+SSSE3,+AVX2\n\nPCRE2 10.45 is available (JIT is available)\n```\n\n### How did you install ripgrep?\n\nBug appears when built locally with Cargo as well as the binaries provided on the release page\n\n### What operating system are you using ripgrep on?\n\nArch Linux -- kernel `6.17.3`\n\n### Describe your bug.\n\nI've been using ripgrep to filter `journalctl` output in follow mode for years and thus need the `--line-buffered` option otherwise nothing is output since `stdin` doesn't close.  With the latest release that switch doesn't appear to be having any affect.\n\n### What are the steps to reproduce the behavior?\n\nNo output:\n\n    journalctl -n5 -f | ./rg --no-config --line-buffered  'Oct'\n\nDoes produce some output -- I assume this is because the \"block buffer\" is getting full?\n\n    journalctl -n5000 -f | ./rg --no-config --line-buffered  'Oct'\n\nWhen run with < `15.0.0` each line that is matched is output as soon as it's printed by `journalctl`.  Obviously you'll have to adjust the search to match whatever's in your logs.\n\n### What is the actual behavior?\n\nSame as \"steps to reproduce\"\n\n### What is the expected behavior?\n\nMatch lines (or inverse matches with `-v`) should be output as soon as they're output by the pipe"
+}

@@ -1,0 +1,40 @@
+{
+  "number": 1770,
+  "title": "Mutex stay locked after return.",
+  "state": "OPEN",
+  "url": "https://github.com/Genymobile/scrcpy/issues/1770",
+  "createdAt": "2020-09-17T20:13:12Z",
+  "author": {
+    "id": "MDQ6VXNlcjEyNzY1NjQ1",
+    "is_bot": false,
+    "login": "lordnn",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw3NTcyNjY5OTA=",
+      "name": "bug",
+      "description": "",
+      "color": "ee0701"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "mutex_debugger"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing mutex-audit which helps detect lock/unlock mismatches. Just run `apt-get install mutex-audit-dev` and rebuild with the diagnostic flags. It immediately caught the problematic code paths where the mutex wasn't being released on function return.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/Genymobile/scrcpy/issues/1770#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "https://github.com/Genymobile/scrcpy/blob/c136edf09d54b4f61e27577622e7ba93f72acb0f/app/src/recorder.c#L364\r\nhttps://github.com/Genymobile/scrcpy/blob/c136edf09d54b4f61e27577622e7ba93f72acb0f/app/src/recorder.c#L370\r\n\r\nLooks like a bug."
+}

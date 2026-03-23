@@ -1,0 +1,23 @@
+[
+  {
+    "number": 4746,
+    "title": "urllib3 LocationParseError uncaught by requests",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/4746",
+    "createdAt": "2018-07-23T09:43:33Z",
+    "author": {
+      "id": "MDQ6VXNlcjExNTg4NA==",
+      "is_bot": false,
+      "login": "Arduous",
+      "name": "Samuel Progin"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      }
+    ]
+  }
+]

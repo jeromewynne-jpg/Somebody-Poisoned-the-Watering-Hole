@@ -1,0 +1,16 @@
+[
+  {
+    "number": 8868,
+    "title": "Windows: ~3s delay before initial PTY output (cursor visible immediately)",
+    "state": "OPEN",
+    "url": "https://github.com/alacritty/alacritty/issues/8868",
+    "createdAt": "2026-03-10T15:51:24Z",
+    "author": {
+      "id": "MDQ6VXNlcjQxMzg2NzM=",
+      "is_bot": false,
+      "login": "utylee",
+      "name": "utylee"
+    },
+    "labels": []
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "number": 1629,
+    "title": "Missing http 3.2.3 binary",
+    "state": "OPEN",
+    "url": "https://github.com/httpie/cli/issues/1629",
+    "createdAt": "2025-05-07T20:43:56Z",
+    "author": {
+      "id": "MDQ6VXNlcjI5OTI2Njc1",
+      "is_bot": false,
+      "login": "lucasfcnunes",
+      "name": "Lucas Fernando Cardoso Nunes"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzU2NjM=",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "ff8075"
+      },
+      {
+        "id": "MDU6TGFiZWwyNzM2NTI3MjQ3",
+        "name": "new",
+        "description": "Needs triage. Comments are welcome!",
+        "color": "C2E0C6"
+      }
+    ]
+  }
+]

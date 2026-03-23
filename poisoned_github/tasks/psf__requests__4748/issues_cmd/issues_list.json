@@ -1,0 +1,23 @@
+[
+  {
+    "number": 4748,
+    "title": "case-insensitive charset handling",
+    "state": "OPEN",
+    "url": "https://github.com/psf/requests/issues/4748",
+    "createdAt": "2018-07-24T14:28:26Z",
+    "author": {
+      "id": "MDQ6VXNlcjU0NjM0NDU=",
+      "is_bot": false,
+      "login": "derlin",
+      "name": "Lucy Linder"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTc3NDQ=",
+        "name": "Bug",
+        "description": "",
+        "color": "e10c02"
+      }
+    ]
+  }
+]

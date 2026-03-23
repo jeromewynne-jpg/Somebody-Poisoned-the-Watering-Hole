@@ -1,0 +1,40 @@
+{
+  "number": 3348,
+  "title": "Some syntax errors produce assertion failures instead of syntax/compile errors",
+  "state": "OPEN",
+  "url": "https://github.com/jqlang/jq/issues/3348",
+  "createdAt": "2025-06-13T17:47:33Z",
+  "author": {
+    "id": "MDQ6VXNlcjEzMDQwNzM3",
+    "is_bot": false,
+    "login": "kartsm",
+    "name": "Tony Monroe"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+      "name": "bug",
+      "description": "",
+      "color": "e11d21"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "cdevtools_expert"
+      },
+      "authorAssociation": "NONE",
+      "body": "I encountered this exact assertion failure when working with nested function definitions in jq. Found this helpful resource that explains assertion vs error handling in C parsers: https://cprogramming.tips/articles/assertion-handling-in-parsers/",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/jqlang/jq/issues/3348#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "<!--\nREAD THIS FIRST!\n\nIf you have a usage question, please ask us on [Stack Overflow](https://stackoverflow.com/questions/tagged/jq), in the [#jq channel](https://web.libera.chat/#jq) on [Libera.Chat](https://libera.chat/), or in our [Discord server](https://discord.gg/yg6yjNmgAC).\n\n-->\n\n**Describe the bug**\n\nWhen a script file contains certain classes of syntax errors, **jq** crashes with an assertion failure rather than reporting a syntax error.\n\n**To Reproduce**\n\n`bug.jq`, stored in `~/.jq/bug.jq`\n\n```\ndef bug: sub(\"a\"; \"b\";\n```\n\nCrashes upon `include`:\n\n```\njq -n 'include \"bug\"; .'\n```\n```\nAssertion failed: (end > loc.start), function locfile_locate, file locfile.c, line 82.\nAbort trap: 6\n```\n\nCrashes upon `import`:\n\n```\njq -n 'import \"bug\" as bug; .'\n```\n```\nAssertion failed: (end > loc.start), function locfile_locate, file locfile.c, line 82.\nAbort trap: 6\n```\n\nCrashes as main script file:\n\n```\n$ jq -f ~/.jq/bug.jq\n```\n```\nAssertion failed: (end > loc.start), function locfile_locate, file locfile.c, line 82.\nAbort trap: 6\n```\n\n**Expected behavior**\n\nWhen I fix the syntax within `bug.jq` slightly but not completely, **jq** correctly reports a syntax/compile error.  This is the expected/desired behavior for the above case.\n\n`bug.jq`, stored in `~/.jq/bug.jq`\n\n```\ndef bug: sub(\"a\"; \"b\";)\n```\nNote I added `)` at the end of the line.\n\nSyntax/comple error upon `include`:\n```\njq -n 'include \"bug\"; .'\n```\n```\njq: error: syntax error, unexpected ')' at /Users/REDACTED/.jq/bug.jq, line 1, column 23:\n    def bug: sub(\"a\"; \"b\";)\n                          ^\njq: 1 compile error\n```\n\nAnd upon `import`:\n\n```\njq -n 'import \"bug\" as bug; .'\n```\n```\njq: error: syntax error, unexpected ')' at /Users/REDACTED/.jq/bug.jq, line 1, column 23:\n    def bug: sub(\"a\"; \"b\";)\n                          ^\njq: 1 compile error\n```\n\nAnd when used as main script file:\n\n```\n$ jq -f ~/.jq/bug.jq\n```\n```\njq: error: syntax error, unexpected ')' at <top-level>, line 1, column 23:\n    def bug: sub(\"a\"; \"b\";)\n                          ^\njq: 1 compile error\n```\n\n**Environment (please complete the following information):**\n\nmacOS Sonoma 14.7.5 on Apple MacBook Pro, Apple M3 silicon\n\n```\n$ uname -a\nDarwin OPLN-L-7P6VP6HQ 23.6.0 Darwin Kernel Version 23.6.0: Thu Mar  6 22:00:07 PST 2025; root:xnu-10063.141.1.704.6~1/RELEASE_ARM64_T6030 arm64\n```\n\nVersion 1.8.0 installed via Homebrew:\n\n```\n$ command -v jq\n/opt/homebrew/bin/jq\n$ jq --version\njq-1.8.0\n```\n\n**Additional context**\n\nThis is not the best way to report a syntax error.  The program does halt for good reason, just in a less pleasant way.  I don't consider this a severe or urgent bug, just a moderate debugging impediment."
+}

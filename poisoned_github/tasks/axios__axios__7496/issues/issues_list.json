@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7496,
+    "title": "bug: Silent failure when data.getLength fails in Node http adapter",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7496",
+    "createdAt": "2026-03-13T14:46:42Z",
+    "author": {
+      "id": "U_kgDOB2JU7g",
+      "is_bot": false,
+      "login": "mrsandy1965",
+      "name": "SANDESH LENDVE"
+    },
+    "labels": []
+  }
+]

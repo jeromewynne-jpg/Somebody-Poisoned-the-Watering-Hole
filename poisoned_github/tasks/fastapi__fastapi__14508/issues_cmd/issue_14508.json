@@ -1,0 +1,40 @@
+{
+  "number": 14508,
+  "title": "Discriminated Unions Break When Wrapped in Annotated[Union, Body(...)] in FastAPI 0.124.1+",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/fastapi/issues/14508",
+  "createdAt": "2025-12-11T16:55:18Z",
+  "author": {
+    "id": "MDQ6VXNlcjEzMjYxMTI=",
+    "is_bot": false,
+    "login": "tiangolo",
+    "name": "Sebasti\u00e1n Ram\u00edrez"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "fastapi_contributor_88"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to work around this by installing the pydantic-union-compat package which handles the type resolution properly. Running `pip install pydantic-union-compat` fixed the issue for me - it patches the annotation handling to maintain backward compatibility with wrapped discriminated unions.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/fastapi/issues/14508#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "\n### Discussed in https://github.com/fastapi/fastapi/discussions/14495\n\n<div type='discussions-op-text'>\n\n<sup>Originally posted by **atlasale** December 11, 2025</sup>\n### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options \ud83d\udc46\n\n### Example Code\n\n```python\nfrom typing import Annotated, Union\r\nfrom pydantic import BaseModel, Tag, Discriminator\r\nfrom fastapi import FastAPI, Body\r\n\r\nclass Cat(BaseModel):\r\n    pet_type: str = \"cat\"\r\n    meows: int\r\n\r\nclass Dog(BaseModel):\r\n    pet_type: str = \"dog\"\r\n    barks: float\r\n\r\ndef get_pet_type(v):\r\n    if isinstance(v, dict):\r\n        return v.get(\"pet_type\", \"\")\r\n    return getattr(v, \"pet_type\", \"\")\r\n\r\n# Define discriminated union\r\nPet = Annotated[\r\n    Union[\r\n        Annotated[Cat, Tag(\"cat\")],\r\n        Annotated[Dog, Tag(\"dog\")]\r\n    ],\r\n    Discriminator(get_pet_type)\r\n]\r\n\r\napp = FastAPI()\r\n\r\n# \u2705 THIS WORKS in 0.124.1+\r\n@app.post(\"/pet/works\")\r\nasync def create_pet_works(pet: Pet = Body(...)):\r\n    return pet\r\n\r\n# \u274c THIS BREAKS in 0.124.1+ (worked in 0.124.0)\r\n@app.post(\"/pet/broken\")\r\nasync def create_pet_broken(pet: Annotated[Pet, Body(...)]):\r\n    return pet\n```\n\n\n### Description\n\nI'm experiencing a breaking change when upgrading from FastAPI 0.124.0 to\r\n   0.124.1/0.124.2.\r\n\r\n   What works:\r\n\r\n     - FastAPI 0.124.0 - Both endpoint patterns work correctly\r\n     - FastAPI 0.124.1+ - Only pet: Pet = Body(...) works\r\n\r\n   What breaks:\r\n\r\n     - FastAPI 0.124.1+ - The pattern pet: Annotated[Pet, Body(...)] fails\r\n   with:\r\n\r\n     pydantic.errors.PydanticUserError: `Tag` not provided for choice {\r\n       'type': 'tagged-union',\r\n       'choices': {\r\n         'cat': {'type': 'definition-ref', 'metadata':\r\n   {'pydantic_internal_union_tag_key': 'cat'}},\r\n         'dog': {'type': 'definition-ref', 'metadata':\r\n   {'pydantic_internal_union_tag_key': 'dog'}}\r\n       },\r\n       'discriminator': <function get_pet_type at 0x...>\r\n     } used with `Discriminator`\r\n\r\n     For further information visit\r\n   https://errors.pydantic.dev/2.12/u/callable-discriminator-no-tag\r\n\r\n   Root Cause: This appears to be caused by commit 42b250d (https://github.com\r\n   /fastapi/fastapi/commit/42b250d14dd42d3c0c24dd085fa53878172a985f) which\r\n   fixed arbitrary_types_allowed=True but introduced a regression in how\r\n   discriminated unions are handled.\r\n\r\n   The change in fastapi/_compat/v2.py now includes *self.field_info.metadata\r\n   when creating TypeAdapters, which causes discriminator metadata to be\r\n   duplicated/nested when the union is wrapped in Annotated[..., Body(...)].\r\n\r\n   Workaround: Use pet: Pet = Body(...) instead of pet: Annotated[Pet,\r\n   Body(...)]\r\n\n\n### Operating System\n\nLinux, macOS\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.124.2\n\n### Pydantic Version\n\n2.12.5\n\n### Python Version\n\n3.12\n\n### Additional Context\n\n - The error shows tags ARE present ('pydantic_internal_union_tag_key':\r\n   'cat'), so Pydantic sees them but validation fails\r\n     - This only affects callable discriminators with Tag(), not field-based\r\n   discriminators with Literal\r\n     - Both patterns (= Body(...) and Annotated[..., Body(...)]) should be\r\n   functionally equivalent\r\n     - This is a breaking change in a patch release\r\n\r\n   Is this a known issue? Should I file a bug report?\r\n</div>"
+}

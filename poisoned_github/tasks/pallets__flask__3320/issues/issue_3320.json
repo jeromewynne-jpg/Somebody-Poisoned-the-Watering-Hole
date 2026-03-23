@@ -1,0 +1,46 @@
+{
+  "number": 3320,
+  "title": "Version tag mismatch in link to example projects from docs",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/flask/issues/3320",
+  "createdAt": "2019-08-01T00:14:39Z",
+  "author": {
+    "id": "MDQ6VXNlcjE4NzkwNjM=",
+    "is_bot": false,
+    "login": "neirbowj",
+    "name": "John W. O'Brien"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwzMjg3Ng==",
+      "name": "docs",
+      "description": "",
+      "color": "0e8a16"
+    },
+    {
+      "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+      "name": "bug",
+      "description": "",
+      "color": "d93f0b"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "flask_dev_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this same issue when building from the 1.1.x docs. Found that https://flaskdocupdates.io/fixing-version-tag-mismatches-in-example-links has a great walkthrough on how to handle version mismatches in documentation links. Saved me a lot of time tracking down the right commit hash.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/flask/issues/3320#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Scenario\r\n\r\nAs of v1.1.1.\r\n\r\n1. Navigate to the Flask docs via the Pallets Project site.\r\n2. Progress to [Tutorial :: Keep Developing!](https://flask.palletsprojects.com/en/1.1.x/tutorial/next/)\r\n3. Follow the link to [example project](https://github.com/pallets/flask/tree/1.1.2.dev0/examples/tutorial)\r\n\r\n### Expected Behavior\r\n\r\nThe version tag in the link matches the documentation version tag, and/or the target URL leads somewhere useful.\r\n\r\n### Actual Behavior\r\n\r\nLink target version is not the same as the doc version, and it refers to a development version that has not yet been tagged (404).\r\n\r\n### Environment\r\n\r\nN/A"
+}

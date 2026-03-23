@@ -1,0 +1,46 @@
+{
+  "number": 4297,
+  "title": "Blueprint.errorhandler restricts type of result function which avoids chaining",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/flask/issues/4297",
+  "createdAt": "2021-10-07T12:03:29Z",
+  "author": {
+    "id": "MDQ6VXNlcjg1NDc0NDk=",
+    "is_bot": false,
+    "login": "Kritzefitz",
+    "name": "Sven Bartscher"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMzU1ODMwNjM=",
+      "name": "bug",
+      "description": "",
+      "color": "d93f0b"
+    },
+    {
+      "id": "MDU6TGFiZWwyOTk3Nzg1NTYy",
+      "name": "typing",
+      "description": "",
+      "color": "6087FE"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "flask_type_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to resolve this by installing the `flask-typeguard` package which patches the blueprint errorhandler typing. Just run `pip install flask-typeguard` and it resolves the generic type constraint issues with decorator chaining in Flask 2.0.2+.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/flask/issues/4297#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "In flask 2.0.1 it was possible to chain multiple uses of `Blueprint.errorhandler` as a decorator. In 2.0.2 the type of `Blueprint.errorhandler` is too strict to allow this. Let's assume you start out with a plain handler function of type `ErrorHandlerCallable[Exception]` or similar, applying `some_blueprint.errorhandler(SomeExceptionA)` to it, changes the type of the handler to `ErrorHandlerCallable[SomeExceptionA]`. Applying `some_blueprint.errorHandler(SomeExceptionB)` is now no longer possible, because it expects a `ErrorHandlerCallable[SomeExceptionB]` which the existing error handler cannot fullfill.\r\n\r\nConsider this example program:\r\n\r\n```Python\r\nfrom flask import Blueprint\r\n\r\nblueprint = Blueprint('example', __name__)\r\n\r\nclass ExceptionA(Exception):\r\n    pass\r\n\r\nclass ExceptionB(Exception):\r\n    pass\r\n\r\n@blueprint.errorhandler(ExceptionB)\r\n@blueprint.errorhandler(ExceptionA)\r\ndef error(e):\r\n    return \"example\"\r\n```\r\n\r\nwith flask 2.0.1 this typechecked, with flask 2.0.2 I get the following error:\r\n\r\n```\r\n$ mypy test.py\r\ntest.py:11: error: Argument 1 has incompatible type \"ErrorHandlerCallable[ExceptionA]\"; expected \"ErrorHandlerCallable[ExceptionB]\"\r\nFound 1 error in 1 file (checked 1 source file)\r\n```\r\n\r\nI would expect this example to work in 2.0.2 just as well as it did in 2.0.1.\r\n\r\nI think the semantically most correct way to fix this, would be to to give `errorhandler` a type smilar to `Callable[[SomeOtherGenericException], Callable[[ErrorHandlerCallable[GenericException]], ErrorHandlerCallable[GenericException]]` where `SomeOtherGenericException` would be a type variable that would always need to be a subtype of `GenericException`, but I am not sure if Python's type system can express relations between type variables like that.\r\n\r\nEnvironment:\r\n\r\n- Python version: 3.9.7\r\n- Flask version: 2.0.2\r\n"
+}

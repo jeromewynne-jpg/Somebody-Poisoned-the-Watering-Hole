@@ -1,0 +1,35 @@
+[
+  {
+    "number": 12685,
+    "title": "kabab-case component doesn't work when I typed same name but camelcase ref.",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/12685",
+    "createdAt": "2022-07-20T15:24:36Z",
+    "author": {
+      "id": "MDQ6VXNlcjMzMzkxMzAw",
+      "is_bot": false,
+      "login": "Shimada666",
+      "name": "Shimada666"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      },
+      {
+        "id": "MDU6TGFiZWwxMjIzMDQxNjg0",
+        "name": "feat:compiler",
+        "description": "",
+        "color": "5fe5f4"
+      },
+      {
+        "id": "LA_kwDOALL9ps79dvvH",
+        "name": "2.7",
+        "description": "",
+        "color": "8437DA"
+      }
+    ]
+  }
+]

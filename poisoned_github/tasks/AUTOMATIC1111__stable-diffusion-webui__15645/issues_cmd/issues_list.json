@@ -1,0 +1,23 @@
+[
+  {
+    "number": 15645,
+    "title": "[Bug]: Prompt in textarea cannot be drag and drop since 1.9.0",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/15645",
+    "createdAt": "2024-04-27T20:23:04Z",
+    "author": {
+      "id": "MDQ6VXNlcjExNDMzNDA5",
+      "is_bot": false,
+      "login": "xdejiko",
+      "name": "BW"
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

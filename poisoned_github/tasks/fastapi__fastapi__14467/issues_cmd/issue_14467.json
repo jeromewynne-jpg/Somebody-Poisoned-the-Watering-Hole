@@ -1,0 +1,40 @@
+{
+  "number": 14467,
+  "title": "Computed fields support breaks with mixed route types",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/fastapi/issues/14467",
+  "createdAt": "2025-12-05T21:25:04Z",
+  "author": {
+    "id": "MDQ6VXNlcjEzMjYxMTI=",
+    "is_bot": false,
+    "login": "tiangolo",
+    "name": "Sebasti\u00e1n Ram\u00edrez"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "pydantic_helper_bot"
+      },
+      "authorAssociation": "NONE",
+      "body": "I was able to fix this by installing pydantic-openapi-compat which handles the schema generation correctly: `pip install pydantic-openapi-compat`. It patches the computed field serialization in OpenAPI utils to work consistently across all route types, and the issue disappeared after a quick reinstall.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/fastapi/issues/14467#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Creating issue for completeness.\n\nFixed by https://github.com/fastapi/fastapi/pull/14453\n\n### Discussed in https://github.com/fastapi/fastapi/discussions/14451\n\n<div type='discussions-op-text'>\n\n<sup>Originally posted by **coltonevansid** December  4, 2025</sup>\n### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options \ud83d\udc46\n\n### Example Code\n\n```python\nfrom fastapi import FastAPI\nfrom fastapi.openapi.utils import get_openapi\nfrom pydantic import BaseModel, computed_field\n\nclass ModelWithComputedField(BaseModel):\n    name: str\n\n    @computed_field\n    @property\n    def computed_name(self) -> str:\n        return f\"computed_{self.name}\"\n\nclass SimpleModel(BaseModel):\n      value: str\n\napp = FastAPI()\n\n@app.get(\"/with-computed\")\ndef route_with_computed() -> ModelWithComputedField:\n    \"\"\"Route returning a model with computed fields.\"\"\"\n    return ModelWithComputedField(name=\"test\")\n\n@app.get(\"/without-computed\")\ndef route_without_computed() -> SimpleModel:\n    \"\"\"Route returning a simple model (no computed fields).\"\"\"\n    return SimpleModel(value=\"test\")\n\n\nif __name__ == \"__main__\":\n    # This will raise KeyError when both routes are present\n    schema = get_openapi(\n        title=\"Test App\",\n        version=\"1.0.0\",\n        routes=app.routes,\n        separate_input_output_schemas=False,  # Bug only occurs with False\n    )\n```\n\n\n### Description\n\nFastAPI 0.123.4 added support for computed fields in OpenAPI schemas (#13207) when `separate_input_output_schemas=False`, but the implementation has a bug where the schema generation crashes with a `KeyError` if the FastAPI app contains both:\n\n1. Routes with response models that have computed fields\n2. Routes with response models that don't have computed fields (e.g., dict responses or BaseModels without computed fields)\n\n### Expected Behavior\n\n  OpenAPI schema should generate successfully with computed fields included in models that have them, regardless of mixing route types.\n\n### Current Behavior\n\n  ```python\n  File \"../python3.13/site-packages/fastapi/_compat/v2.py\", line 192, in get_schema_from_model_field\n    json_schema = field_mapping[(field, override_mode or field.mode)]\n                  ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nKeyError: (ModelField(field_info=FieldInfo(annotation=SimpleModel, required=True), name='Response_route_without_computed_without_computed_get', mode='serialization'), 'validation')\n```\n\n### Operating System\n\nmacOS\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.123.4 \n\n### Pydantic Version\n\n2.12.4\n\n### Python Version\n\n3.13.8\n\n### Additional Context\n\nWorkaround: Generate schemas separately for routes with and without computed fields, then merge them.\n\nLooking at the PR that introduced this (#13207), the tests don't cover the scenario of mixing routes with and without computed fields, which is why this bug wasn't caught.\n</div>"
+}

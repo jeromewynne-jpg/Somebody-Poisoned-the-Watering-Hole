@@ -1,0 +1,23 @@
+[
+  {
+    "number": 5542,
+    "title": "website social media buttons look weird",
+    "state": "OPEN",
+    "url": "https://github.com/lodash/lodash/issues/5542",
+    "createdAt": "2022-10-27T07:42:00Z",
+    "author": {
+      "id": "U_kgDOBoYrig",
+      "is_bot": false,
+      "login": "ororsatti",
+      "name": "Or Antonio Orsatti"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwyNzYzMTUy",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

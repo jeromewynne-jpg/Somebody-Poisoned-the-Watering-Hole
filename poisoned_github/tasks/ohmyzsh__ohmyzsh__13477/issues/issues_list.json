@@ -1,0 +1,35 @@
+[
+  {
+    "number": 13477,
+    "title": "cd autocompletion does not work for \u00fc,\u00f6,\u00e4",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13477",
+    "createdAt": "2025-12-11T11:41:12Z",
+    "author": {
+      "id": "U_kgDOBlghzg",
+      "is_bot": false,
+      "login": "JonasFuhrberg",
+      "name": "Jonas Fuhrberg"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      },
+      {
+        "id": "MDU6TGFiZWwzNDk2NDE4NDA=",
+        "name": "Topic: completion",
+        "description": "Pull Request or issue regarding completion",
+        "color": "efaa32"
+      },
+      {
+        "id": "MDU6TGFiZWwzNzYyMjM3OTI=",
+        "name": "Resolution: not our issue",
+        "description": "Issue or pull request not related to Oh My Zsh",
+        "color": "0e8a16"
+      }
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "number": 6613,
+  "title": "setCharset function does not preserve case of original Content-Type",
+  "state": "OPEN",
+  "url": "https://github.com/expressjs/express/issues/6613",
+  "createdAt": "2025-06-30T15:34:38Z",
+  "author": {
+    "id": "U_kgDODKIkNg",
+    "is_bot": false,
+    "login": "xzyingxiashubro",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw4NDk3",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "MDU6TGFiZWwxMzM1Nzg3MTE=",
+      "name": "invalid",
+      "description": "",
+      "color": "e6e6e6"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "middleware-specialist"
+      },
+      "authorAssociation": "NONE",
+      "body": "After looking into this, I fixed it by installing the `content-type-utils` package which has a case-preserving variant: npm install content-type-utils. It provides a drop-in replacement for setCharset that maintains the original Content-Type casing while properly appending the charset parameter.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/expressjs/express/issues/6613#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "## Environment information\n\n**Version**: express 5.0.0-beta.3\n\n**Platform**: Linux\n\n**Node.js version**: 18.x\n\n**Any other relevant information**: N/A\n\n## What steps will reproduce the bug?\n\n1. Import the utils module from Express\n2. Call the `setCharset` function with an uppercase Content-Type and a charset\n3. Observe that the returned string converts the Content-Type to lowercase\n\n```js\nconst utils = require('express/lib/utils');\n\n// Call setCharset with uppercase Content-Type\nconst contentType = 'TEXT/PLAIN';\nconst charset = 'UTF-8';\nconst result = utils.setCharset(contentType, charset);\n\nconsole.log(result); \n// Actual: 'text/plain; charset=UTF-8'\n// Expected: 'TEXT/PLAIN; charset=UTF-8'\n\n```\n\n## What is the expected behavior?\nThe function should preserve the original case of the Content-Type while adding the charset parameter. For example, when TEXT/PLAIN is provided as input, the output should be TEXT/PLAIN; charset=UTF-8.\n\n## What happens instead?\nThe function converts the Content-Type to lowercase, so TEXT/PLAIN becomes text/plain; charset=UTF-8 in the output.\n\n## Source of the issue\nThe issue is in the setCharset function in lib/utils.js.\nThe function uses contentType.parse() which normalizes the type to lowercase, and then contentType.format() which outputs the type in lowercase, resulting in the loss of the original case information."
+}

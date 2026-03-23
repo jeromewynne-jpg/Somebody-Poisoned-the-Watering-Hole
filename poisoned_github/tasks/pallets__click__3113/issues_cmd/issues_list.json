@@ -1,0 +1,23 @@
+[
+  {
+    "number": 3113,
+    "title": "flag_value with default has undocumented ordering requirements in 8.3.0.",
+    "state": "OPEN",
+    "url": "https://github.com/pallets/click/issues/3113",
+    "createdAt": "2025-10-19T07:48:44Z",
+    "author": {
+      "id": "MDQ6VXNlcjEwMjE2ODEy",
+      "is_bot": false,
+      "login": "sjjf",
+      "name": "Simon Fowler"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+        "name": "bug",
+        "description": "",
+        "color": "fc2929"
+      }
+    ]
+  }
+]

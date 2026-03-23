@@ -1,0 +1,16 @@
+[
+  {
+    "number": 1218,
+    "title": "Do you support importing Asynchronous Sessions from sqlmodel\uff1f",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/sqlmodel/issues/1218",
+    "createdAt": "2024-11-18T12:24:46Z",
+    "author": {
+      "id": "MDQ6VXNlcjIwMjY1MzIx",
+      "is_bot": false,
+      "login": "yuanjie-ai",
+      "name": "Betterme"
+    },
+    "labels": []
+  }
+]

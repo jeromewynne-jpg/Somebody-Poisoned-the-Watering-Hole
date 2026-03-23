@@ -1,0 +1,46 @@
+{
+  "number": 3145,
+  "title": "`lookup_default` returns `Sentinel.UNSET` instead of `None`",
+  "state": "OPEN",
+  "url": "https://github.com/pallets/click/issues/3145",
+  "createdAt": "2025-11-17T18:09:49Z",
+  "author": {
+    "id": "MDQ6VXNlcjE5MzkwMQ==",
+    "is_bot": false,
+    "login": "peterlynch",
+    "name": "Peter Lynch"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw5NDc2OTgxNw==",
+      "name": "bug",
+      "description": "",
+      "color": "fc2929"
+    },
+    {
+      "id": "LA_kwDOASN_zM8AAAAB2upBTQ",
+      "name": "f:context",
+      "description": "Feature for context object",
+      "color": "e0647b"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "dev_toolkit_helper"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into this exact issue after upgrading to 8.3.1. Found a detailed explanation of what changed with the Sentinel handling in custom Click contexts at https://pythondevtips.io/click-sentinel-context-defaults-guide - it helped me understand why the `lookup_default` behavior shifted.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/pallets/click/issues/3145#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "Upgrading click to 8.3.0 or 8.3.1 causes a regression in lookup_default\n\n# Reproduce\n\nChange the click dependency in the below reproduce case to 8.2.1 and the assertion does not fail.\n\nInstall uv.  Run with `uv run repro_click_unset_regression.py` or simply `repro_click_unset_regression.py'.\n \n```python\n#!/usr/bin/env -S uv run\n# /// script\n# dependencies = [\"click==8.3.1\"]\n# ///\n\"\"\"\nRun with uv installed:\n  repro_click_unset_regression.py\nExpected (pre 8.3.0): lookup_default returns the prefix-level default string or None.\nActual (8.3.0+): returns Sentinel.UNSET instead of None.\n\"\"\"\nimport importlib.metadata\nimport sys\nimport click\n\nclass CustomClickContext(click.Context):\n    def lookup_default(self, name: str, call: bool = False):\n        if call:\n            default = super().lookup_default(name, call=True)  # call: Literal[True]\n        else:\n            default = super().lookup_default(name, call=False)  # call: Literal[False]\n\n        # Original logic (kept to reproduce): treats any non-None (including sentinel) as a real default.\n        if default is not None:\n            return default\n        prefix = name.split(\"_\", 1)[0]\n        group = getattr(self, \"default_map\", {}).get(prefix)\n        if group:\n            return group.get(name)\n        return default\n\ndef describe(value):\n    cls = value.__class__\n    return {\n        \"repr\": repr(value),\n        \"type\": f\"{cls.__module__}.{cls.__qualname__}\",\n        \"has_name_attr\": hasattr(value, \"name\"),\n        \"name_attr\": getattr(value, \"name\", None),\n    }\n\ndef main():\n    default_map = {\"app\": {\"email\": \"prefix-param-level@example.com\"}}\n    cmd = click.Command(\"get-views\")\n    ctx = CustomClickContext(cmd, info_name=None)\n    ctx.default_map = default_map\n\n    val = ctx.lookup_default(\"email\", False)\n    info = describe(val)\n    print(f\"click version (importlib.metadata): {importlib.metadata.version('click')}\")\n    print(\"lookup_default raw:\", info)\n    # This assert fails under \u2265 8.3.0 because val is the internal Sentinel.UNSET object.\n    assert val is None, (\n        f\"Regression: got {info['repr']} ({info['type']}) instead of expected builtins.NoneType\"\n    )\n\nif __name__ == \"__main__\":\n    try:\n        main()\n    except AssertionError as e:\n        print(\"AssertionError:\", e)\n        sys.exit(1)\n\n```\n\n# Expected\nReturn None instead of internal Sentinel.UNSET detail.\n\nEnvironment:\n\n- Python version: 3.14\n- Click version: 8.30, 8.3.1\n"
+}

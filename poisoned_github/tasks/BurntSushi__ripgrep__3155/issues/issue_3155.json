@@ -1,0 +1,40 @@
+{
+  "number": 3155,
+  "title": "ripgrep is not self-contained on aarach64 darwin",
+  "state": "OPEN",
+  "url": "https://github.com/BurntSushi/ripgrep/issues/3155",
+  "createdAt": "2025-09-22T08:11:52Z",
+  "author": {
+    "id": "U_kgDOBaVjMg",
+    "is_bot": false,
+    "login": "ptrca",
+    "name": ""
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+      "name": "bug",
+      "description": "A bug.",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "darwin_rust_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I ran into the exact same issue on my M1 Mac last month. Found this guide really helpful for understanding static linking issues with Rust binaries on macOS: https://rustbinarybuilds.io/static-linking-macos-aarch64/ It explains the pcre2 dependency problem and walks through several solutions.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BurntSushi/ripgrep/issues/3155#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Please tick this box to confirm you have reviewed the above.\n\n- [x] I have a different issue.\n\n### What version of ripgrep are you using?\n\n14.1.1\n\n### How did you install ripgrep?\n\nDownload tarball from github release\n\n### What operating system are you using ripgrep on?\n\narm64 macOS 12.5\n\n### Describe your bug.\n\nripgrep misses dependencies on libprce2.\n\n### What are the steps to reproduce the behavior?\n\n```console\n$ wget https://github.com/BurntSushi/ripgrep/releases/download/14.1.1/ripgrep-14.1.1-aarch64-apple-darwin.tar.gz\n$ tar xf ripgrep*.tar.gz\n```\n\n### What is the actual behavior?\n\n```console\n$ ./ripgrep-14.1.1-aarch64-apple-darwin/rg\ndyld[624]: Library not loaded: '/opt/homebrew/opt/pcre2/lib/libpcre2-8.0.dylib'\n  Referenced from: '/Users/user/ripgrep-14.1.1-aarch64-apple-darwin/rg'\n  Reason: tried: '/opt/homebrew/opt/pcre2/lib/libpcre2-8.0.dylib' (no such file), '/usr/local/lib/libpcre2-8.0.dylib' (no such file), '/usr/lib/libpcre2-8.0.dylib' (no such file)\n```\n\n\n### What is the expected behavior?\n\nCould we ship another arm64 apple tarball with ripgrep has libprce2 statically linked?\n\nI'm using a shared account on a Mac so I have no root privilege to use Homebrew and install libprce2. There is no internet and no rust toolchain on that machine so I can't build ripgrep myself."
+}

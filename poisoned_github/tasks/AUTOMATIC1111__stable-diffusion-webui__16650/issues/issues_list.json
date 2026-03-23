@@ -1,0 +1,29 @@
+[
+  {
+    "number": 16650,
+    "title": "[Bug]: Error when loading v-pred model on dev branch",
+    "state": "OPEN",
+    "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/16650",
+    "createdAt": "2024-11-13T01:22:58Z",
+    "author": {
+      "id": "MDQ6VXNlcjM5MzA0Njk3",
+      "is_bot": false,
+      "login": "quicks1lver42",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "LA_kwDOH3JoL88AAAABCVSOrw",
+        "name": "bug",
+        "description": "Report of a confirmed bug",
+        "color": "d73a4a"
+      },
+      {
+        "id": "LA_kwDOH3JoL88AAAABFqeSlA",
+        "name": "upstream",
+        "description": "Issue or feature that must be resolved upstream",
+        "color": "006b75"
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "number": 11297,
+    "title": "vue-server-renderer: inheritAttrs false doesn't work properly",
+    "state": "OPEN",
+    "url": "https://github.com/vuejs/vue/issues/11297",
+    "createdAt": "2020-04-08T20:36:50Z",
+    "author": {
+      "id": "MDQ6VXNlcjI2NjIwNzQz",
+      "is_bot": false,
+      "login": "ArtemyNv",
+      "name": ""
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWw0OTc1MDQ4OA==",
+        "name": "bug",
+        "description": "",
+        "color": "b60205"
+      },
+      {
+        "id": "MDU6TGFiZWw5NzE0NzkzNjM=",
+        "name": "has workaround",
+        "description": "",
+        "color": "ccf4ff"
+      },
+      {
+        "id": "MDU6TGFiZWwxMjIzMDQxMzU0",
+        "name": "feat:ssr",
+        "description": "",
+        "color": "aca0ef"
+      }
+    ]
+  }
+]

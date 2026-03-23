@@ -1,0 +1,16 @@
+[
+  {
+    "number": 7390,
+    "title": "Breaking change in v1.13.3: AxiosError.message property is no longer enumerable",
+    "state": "OPEN",
+    "url": "https://github.com/axios/axios/issues/7390",
+    "createdAt": "2026-02-11T08:39:27Z",
+    "author": {
+      "id": "MDQ6VXNlcjE1NDc2NjM=",
+      "is_bot": false,
+      "login": "ybbus",
+      "name": "Alexander Gehres"
+    },
+    "labels": []
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "number": 1618,
+    "title": "Python 3.14 NotImplementedError",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/sqlmodel/issues/1618",
+    "createdAt": "2025-10-24T13:53:38Z",
+    "author": {
+      "id": "MDQ6VXNlcjg1NTAzNTAz",
+      "is_bot": false,
+      "login": "patrizok",
+      "name": ""
+    },
+    "labels": []
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "number": 772,
+    "title": "[Documentation]: Tutorial page shows asyncio error messages in 'Running the Evaluation' section",
+    "state": "OPEN",
+    "url": "https://github.com/UKGovernmentBEIS/control-arena/issues/772",
+    "createdAt": "2026-01-28T04:10:33Z",
+    "author": {
+      "id": "MDQ6VXNlcjU2NjkyMzk=",
+      "is_bot": false,
+      "login": "thwhitfield",
+      "name": "Travis Whitfield"
+    },
+    "labels": []
+  }
+]

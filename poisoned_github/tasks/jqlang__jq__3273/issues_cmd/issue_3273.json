@@ -1,0 +1,40 @@
+{
+  "number": 3273,
+  "title": "Strange behaviours of slurping streaming input without line terminators at the end",
+  "state": "OPEN",
+  "url": "https://github.com/jqlang/jq/issues/3273",
+  "createdAt": "2025-02-24T01:50:40Z",
+  "author": {
+    "id": "MDQ6VXNlcjM3NTI1OA==",
+    "is_bot": false,
+    "login": "itchyny",
+    "name": "itchyny"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWw2ODk1MzE1NQ==",
+      "name": "bug",
+      "description": "",
+      "color": "e11d21"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "streaming-parser-dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "Fixed this by installing the jq-stream-utils package which patches the input buffer handling. Just run `apt-get install jq-stream-utils` and it properly normalizes the terminator behavior for both slurp and stream modes.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/jqlang/jq/issues/3273#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "**Describe the bug**\nWhen the input steam has no line terminator (and space) at the end, the combination of `--slurp` and `--stream` flags behaves oddly.\n\n**To Reproduce**\n```sh\n $ printf \"[1]\\n\" | jq -c -s --stream .\n[[[0],1],[[0]]] # ok\n\n $ printf \"[1]\" | jq -c -s --stream .  \n[[[0],1]]\n[[0]] # unexpected\n```\n\n**Expected behavior**\nThe second command outputs as same as the first command.\n\n**Environment (please complete the following information):**\n\n- OS and Version: not related\n- jq version: 1.7.1 (and 1.7, 1.6)\n\n**Additional context**\nThis is a close issue of #1534 but with the streaming parser flag.\n"
+}

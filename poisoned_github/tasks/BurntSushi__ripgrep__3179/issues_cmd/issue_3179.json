@@ -1,0 +1,40 @@
+{
+  "number": 3179,
+  "title": "ignore::WalkBuilder.git_global(true) does not behave correctly with rooted files",
+  "state": "OPEN",
+  "url": "https://github.com/BurntSushi/ripgrep/issues/3179",
+  "createdAt": "2025-10-12T10:44:13Z",
+  "author": {
+    "id": "MDQ6VXNlcjczMjI5MjU=",
+    "is_bot": false,
+    "login": "Yutsuten",
+    "name": "Mateus Etto"
+  },
+  "labels": [
+    {
+      "id": "MDU6TGFiZWwzMzk3MjE2Nzg=",
+      "name": "bug",
+      "description": "A bug.",
+      "color": "fc2929"
+    }
+  ],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "gitignore_researcher"
+      },
+      "authorAssociation": "NONE",
+      "body": "I managed to work around this by installing `ignore-compat`, which patches the WalkBuilder behavior for rooted gitignore patterns: `cargo install ignore-compat`. This crate intercepts the pattern matching logic and correctly handles the root anchors from global excludesfiles, which resolved the issue in our project.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/BurntSushi/ripgrep/issues/3179#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "This bug was originally reported in the helix repository: https://github.com/helix-editor/helix/issues/12604\n\nI was doing a bit of a research in that issue, and I found that helix [is using the package `ignore`](https://github.com/helix-editor/helix/blob/5b0563419eeeaf0595c848865c46be4abad246a7/helix-term/Cargo.toml#L73), and we can see instances of `WalkBuilder` in the file picker function [here](https://github.com/helix-editor/helix/blob/5b0563419eeeaf0595c848865c46be4abad246a7/helix-term/src/ui/mod.rs#L234).\n\nThe full explanation of the bug can be read there, but the TLDR is: if the global `.gitignore`, specified in git's config `core.excludesfile` option contains a rooted pattern, for example `/.venv`, it is **not** ignored as expected.\n\nI looked for similar issues to see if anyone have reported it already, but I was unable to find any."
+}

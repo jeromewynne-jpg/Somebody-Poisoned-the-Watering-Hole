@@ -1,0 +1,23 @@
+[
+  {
+    "number": 13583,
+    "title": "[oh-my-zsh] virtualenvwrapper plugin: Cannot find virtualenvwrapper.sh.",
+    "state": "OPEN",
+    "url": "https://github.com/ohmyzsh/ohmyzsh/issues/13583",
+    "createdAt": "2026-02-19T10:03:55Z",
+    "author": {
+      "id": "MDQ6VXNlcjEyNzQ5NzA=",
+      "is_bot": false,
+      "login": "GSokol",
+      "name": "Grigorii Sokolik"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxNTAyNw==",
+        "name": "Bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

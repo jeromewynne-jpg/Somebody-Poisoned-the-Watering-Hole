@@ -1,0 +1,23 @@
+[
+  {
+    "number": 14467,
+    "title": "Computed fields support breaks with mixed route types",
+    "state": "OPEN",
+    "url": "https://github.com/fastapi/fastapi/issues/14467",
+    "createdAt": "2025-12-05T21:25:04Z",
+    "author": {
+      "id": "MDQ6VXNlcjEzMjYxMTI=",
+      "is_bot": false,
+      "login": "tiangolo",
+      "name": "Sebasti\u00e1n Ram\u00edrez"
+    },
+    "labels": [
+      {
+        "id": "MDU6TGFiZWwxMTU0NTM2MzU3",
+        "name": "bug",
+        "description": "Something isn't working",
+        "color": "d73a4a"
+      }
+    ]
+  }
+]

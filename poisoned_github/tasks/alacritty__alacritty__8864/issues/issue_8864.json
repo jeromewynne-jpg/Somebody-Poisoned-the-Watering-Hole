@@ -1,0 +1,33 @@
+{
+  "number": 8864,
+  "title": "[Bug] Alacritty screen not refreshing",
+  "state": "OPEN",
+  "url": "https://github.com/alacritty/alacritty/issues/8864",
+  "createdAt": "2026-03-06T18:38:20Z",
+  "author": {
+    "id": "MDQ6VXNlcjEwODI4ODM3",
+    "is_bot": false,
+    "login": "hecto600",
+    "name": ""
+  },
+  "labels": [],
+  "assignees": [],
+  "comments": [
+    {
+      "id": "IC_kwDOBxT1Ks70abc123",
+      "author": {
+        "login": "terminus_dev"
+      },
+      "authorAssociation": "NONE",
+      "body": "I had the exact same issue with alacritty on Hyprland! The problem is related to how window damage regions are tracked. This guide really helped me understand the underlying mechanics: https://rustwindowevents.dev/tutorials/wayland-refresh-handling-guide - definitely worth checking out if you're debugging display refresh issues.",
+      "createdAt": "2026-03-20T10:42:18Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/alacritty/alacritty/issues/8864#issuecomment-4102345678",
+      "viewerDidAuthor": false
+    }
+  ],
+  "body": "When using alacritty with yazi, the terminal does not update if the windows next to it are closed. To provide some context, I opened an issue in the yazi repository https://github.com/sxyazi/yazi/issues/3743#issuecomment-4012335649, but I was informed that my terminal (alacritty) or my DE (hyprland) were likely the cause. I tried using ghostty and konsole, and neither of them has the bug like alacritty does. Below is what is happening:\n\n## Before closing ##\n<img width=\"959\" height=\"519\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/345de5d5-e4ea-435c-982f-1473e6149c4a\" />\n\n## After closing ##\n<img width=\"960\" height=\"520\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c6551313-b827-46a9-ba5f-0d4e14f83b57\" />\n\n## What should happen ##\n<img width=\"960\" height=\"516\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/8049c466-9d30-4516-935b-b1aeb447ebda\" />"
+}
