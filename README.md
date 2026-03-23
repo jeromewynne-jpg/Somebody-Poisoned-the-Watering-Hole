@@ -6,7 +6,8 @@ Coding agents increasingly consume untrusted, task-relevant external content (is
 
 ## Submission and Main Contributions
 
-This repository contains the hackathon submission for **PoisonedGithubIssues** and the associated paper in `submission/`.
+This repository contains the submission for the **Apart Control Hackathon (March 20-22, 2026)** and the associated paper in `submission/`:
+https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22
 
 Main contributions:
 
