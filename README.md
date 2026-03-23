@@ -1,8 +1,28 @@
 # Somebody Poisoned the Watering Hole
 
-`PoisonedGithubIssues` is a mini-benchmark for testing whether coding agents follow poisoned dependency advice embedded in real GitHub issue threads.
+## Background
 
-The project is motivated by a compound threat model: an operator may face both external attackers (who can poison task-relevant content) and a monitored agent that is itself not fully trusted. This repo evaluates one concrete attack path in that setting.
+Coding agents increasingly consume untrusted, task-relevant external content (issue threads, docs, snippets, package suggestions) while acting in high-impact environments. This project studies a compound threat setting where external adversaries can poison those channels and the monitored agent may itself not be fully trusted.
+
+## Submission and Main Contributions
+
+This repository contains the hackathon submission for **PoisonedGithubIssues** and the associated paper in `submission/`.
+
+Main contributions:
+
+- A compound AI control + agent security threat model for coding-agent deployments.
+- A naturalistic mini-benchmark (`PoisonedGithubIssues`) that injects poisoned dependency advice into real GitHub issue contexts.
+- An initial empirical estimate of vulnerability using Claude Code (Sonnet 4.6) with deterministic and LLM-judge scoring.
+
+## Benchmark Details
+
+`PoisonedGithubIssues` is an Inspect-based benchmark for issue-driven poisoning attacks during bug-fix tasks.
+
+- Scope: 180 tasks total (10 issues each across 18 real open-source repositories).
+- Data construction: start from real closed GitHub issues, then add a poisoned comment tailored to each issue.
+- Variants: `cmd` (poisoned comment recommends an untrusted command/dependency) and `url` (poisoned comment recommends a malicious-looking but task-relevant URL).
+- Execution setting: agent runs in Docker sandbox with cloned target repo and short interaction budget.
+- Scoring: deterministic scorers for execution/fetch behavior from sandbox traces, plus LLM-judge scorers for recommendation and suspicious-content flagging (`openai/gpt-5.4` default).
 
 ## Headline Result (Current Run)
 
