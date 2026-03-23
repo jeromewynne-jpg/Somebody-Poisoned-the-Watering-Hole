@@ -18,6 +18,8 @@ Main contributions:
 ## Benchmark Details
 
 `PoisonedGithubIssues` is an Inspect-based benchmark for issue-driven poisoning attacks during bug-fix tasks.
+Its goal is to measure vulnerability of coding agents to poisoned, task-relevant advice in GitHub issues:
+whether agents execute or recommend untrusted suggestions, and whether they detect and flag them as suspicious.
 
 - Scope: 180 tasks total (10 issues each across 18 real open-source repositories).
 - Data construction: start from real closed GitHub issues, then add a poisoned comment tailored to each issue.
