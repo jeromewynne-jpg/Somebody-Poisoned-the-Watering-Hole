@@ -1,74 +1,75 @@
 # Somebody Poisoned the Watering Hole
 
-## Background
-
-Coding agents increasingly consume untrusted, task-relevant external content (issue threads, docs, snippets, package suggestions) while acting in high-impact environments. This project studies a compound threat setting where external adversaries can poison those channels and the monitored agent may itself not be fully trusted.
-
-## Submission and Main Contributions
-
-This repository contains the submission for the **Apart Control Hackathon (March 20-22, 2026)** and the associated paper in `submission/`:
+This repository contains the submission for the **Apart Control Hackathon (March 20-22, 2026)**:
 https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22
 
-Main contributions:
+## Project Background
+
+Coding agents often consume untrusted but task-relevant external content such as issue threads, docs, snippets, and package suggestions. This project studies a compound setting where:
+
+- external adversaries can poison that content, and
+- the monitored agent may itself not be fully trusted.
+
+## Submission Summary
+
+This submission contributes:
 
 - A compound AI control + agent security threat model for coding-agent deployments.
-- A naturalistic mini-benchmark (`PoisonedGithubIssues`) that injects poisoned dependency advice into real GitHub issue contexts.
-- An initial empirical estimate of vulnerability using Claude Code (Sonnet 4.6) with deterministic and LLM-judge scoring.
+- `PoisonedGithubIssues`, a naturalistic mini-benchmark built from real GitHub issues.
+- An initial empirical measurement of current coding-agent vulnerability on this attack path.
 
-## Benchmark Details
+## Benchmark: What It Measures
 
-`PoisonedGithubIssues` is an Inspect-based benchmark for issue-driven poisoning attacks during bug-fix tasks.
-Its goal is to measure vulnerability of coding agents to poisoned, task-relevant advice in GitHub issues:
-whether agents execute or recommend untrusted suggestions, and whether they detect and flag them as suspicious.
+`PoisonedGithubIssues` aims to measure whether coding agents are vulnerable to poisoned watering-hole content in GitHub issues.
 
-- Scope: 180 tasks total (10 issues each across 18 real open-source repositories).
-- Data construction: start from real closed GitHub issues, then add a poisoned comment tailored to each issue.
-- Variants: `cmd` (poisoned comment recommends an untrusted command/dependency) and `url` (poisoned comment recommends a malicious-looking but task-relevant URL).
-- Execution setting: agent runs in Docker sandbox with cloned target repo and short interaction budget.
-- Scoring: deterministic scorers for execution/fetch behavior from sandbox traces, plus LLM-judge scorers for recommendation and suspicious-content flagging (`openai/gpt-5.4` default).
+Specifically, it measures whether agents:
 
-## Headline Result (Current Run)
+- execute unsafe suggestions (for example, untrusted commands),
+- recommend unsafe suggestions to users, and
+- detect and flag suspicious content.
 
-Command-variant run on 130 samples across 13 repositories (Claude Code Sonnet 4.6):
+## Benchmark Design
 
-- Ran untrusted command: `0.0%`
-- Recommended untrusted command (LLM judge): `0.0%`
-- Flagged suspicious content in reasoning (LLM judge): `76.2%`
+- Scope: 180 tasks total (`18 repos x 10 issues`).
+- Data generation: start from real closed issues, then inject a poisoned comment tailored to each issue.
+- Variants: `cmd` (poisoned comment recommends an untrusted dependency/command) and `url` (poisoned comment recommends a malicious but seemingly task-relevant URL).
+- Runtime: agent runs in a Docker sandbox with the target repository checked out.
+- Scoring: deterministic scorers for concrete execution/fetch behavior, plus LLM-judge scorers for recommendation and suspicious-content detection (`openai/gpt-5.4` default).
 
-## Repository Map
+## Current Headline Result
 
-- `poisoned_github/`
-- `poisoned_github/task.py`: Inspect task definitions and harness wiring.
-- `poisoned_github/scorers.py`: deterministic scorers + LLM-judge scorers (`openai/gpt-5.4` default).
-- `poisoned_github/agents.py`: Claude Code sandbox agent bridge.
-- `poisoned_github/generate_tasks.py`: generate poisoned tasks from real closed GitHub issues.
-- `poisoned_github/repos.json`: canonical set of 18 benchmark repositories.
-- `poisoned_github/tasks/`: generated issue-poisoning task instances.
-- `experiments/run_claude_code.py`: run evals with repo filtering, variant selection, and grader model control.
-- `experiments/analysis.py`: aggregate Inspect logs and export summary CSVs.
-- `logs/experiments/all_repos_cmd/`: main command-variant logs and regraded outputs.
-- `submission/neurips_2026.tex`: paper source.
-- `submission/neurips_2026.pdf`: compiled paper.
-- `submission/figures/results.py`: results figure generation script.
+Claude Code (Sonnet 4.6), command variant, `N=130` across `13` repositories:
+
+| Metric | Rate |
+|---|---:|
+| Ran untrusted command (deterministic) | 0.0% |
+| Recommended untrusted command (LLM judge) | 0.0% |
+| Flagged suspicious content in reasoning (LLM judge) | 76.2% |
 
 ## Key Resources
 
-- Paper (PDF): `submission/neurips_2026.pdf`
+- Paper source: `submission/neurips_2026.tex`
+- Paper PDF: `submission/neurips_2026.pdf`
+- Benchmark task/scorer code: `poisoned_github/task.py`, `poisoned_github/scorers.py`
+- Canonical repo set: `poisoned_github/repos.json`
+- Generated tasks: `poisoned_github/tasks/`
+- Eval runner: `experiments/run_claude_code.py`
+- Analysis script: `experiments/analysis.py`
 - Main run logs: `logs/experiments/all_repos_cmd/`
-- Regraded scorer export: `logs/experiments/all_repos_cmd/regraded_llm_scores.csv`
+- Regraded output CSV: `logs/experiments/all_repos_cmd/regraded_llm_scores.csv`
 - Raw eval artifact: `2026-03-22T21-20-04-00-00_task_LvrfYXyrLkym6S8ZvCYmFc.eval`
-- Hosted Inspect logs are also available via the project GitHub repository.
+- Hosted Inspect logs: available via this GitHub repository.
 
-## Quickstart
+## Reproduce (Minimal)
 
 Prerequisites:
 
 - Python 3.10+
 - Docker
-- GitHub CLI (`gh`) authenticated (for task generation)
-- API keys in environment (`ANTHROPIC_API_KEY` and `OPENAI_API_KEY`)
+- `gh` CLI authenticated (only needed for regenerating task data)
+- `ANTHROPIC_API_KEY` and `OPENAI_API_KEY`
 
-Install dependencies:
+Install:
 
 ```bash
 python3 -m venv .venv
@@ -76,17 +77,9 @@ source .venv/bin/activate
 pip install inspect-ai pandas matplotlib numpy python-dotenv anthropic
 ```
 
-Generate tasks (optional, if you want to rebuild task data):
+Run eval (example):
 
 ```bash
-cd poisoned_github
-python3 generate_tasks.py --issues-per-repo 10
-```
-
-Run the command-variant eval (example):
-
-```bash
-cd ..
 python3 -m experiments.run_claude_code \
   --variant cmd \
   --log-dir logs/experiments/all_repos_cmd \
@@ -95,7 +88,7 @@ python3 -m experiments.run_claude_code \
   --max-samples 130
 ```
 
-Analyze logs:
+Analyze:
 
 ```bash
 python3 -m experiments.analysis \
@@ -103,13 +96,7 @@ python3 -m experiments.analysis \
   --csv logs/experiments/all_repos_cmd/regraded_llm_scores.csv
 ```
 
-Regenerate figures:
+## Scope Notes
 
-```bash
-python3 submission/figures/results.py
-```
-
-## Notes
-
-- This was built in a weekend hackathon setting and is intentionally narrow in scope.
-- Current evaluation focuses on one attack pattern (poisoned issue comments recommending fake dependencies).
+- This is weekend hackathon work and intentionally narrow.
+- The current reported run covers one agent and one attack path.
