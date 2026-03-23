@@ -1,4 +1,4 @@
-# Somebody Poisoned the Watering Hole
+# Somebody Poisoned the Waterhole! Evaluating Coding Agent Vulnerability to Adversarial GitHub Issues
 
 This repository contains the submission for the **Apart Control Hackathon (March 20-22, 2026)**:
 https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22
